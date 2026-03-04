@@ -1,5 +1,6 @@
 ---
-alwaysApply: true
+name: working-docs
+description: Use the `_working/` directory as a place to write notes as you go, and a scratch space for your work.
 ---
 
 The `_working/` directory is a scratch space purely for your use.
