@@ -41,6 +41,7 @@ description: Interact with an Obsidian vault via the Obsidian CLI. Use when the 
 
 - This skill may be installed into another project. Do not assume any repo-local layout.
 - Always ask for or discover the vault path or vault target from the runtime environment.
+- On WSL, `obsidian` may not be available on `$PATH`. If so, invoke the Windows CLI entrypoint directly, for example `"/mnt/c/Program Files/Obsidian/Obsidian.com" vaults`.
 
 ## Additional resources
 
