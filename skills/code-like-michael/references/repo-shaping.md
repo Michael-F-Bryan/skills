@@ -2,6 +2,10 @@
 
 Use this when creating a new repo, splitting an existing one, or deciding where new code belongs.
 
+## Default Stance: Modular Monolith
+
+Prefer one delivery unit with clear internal boundaries. Split into separate services or repos only when execution mode, ownership, lifecycle, or operational boundary makes it necessary. Do not over-split into many packages/crates/apps just because boundaries are visible—keep them visible inside one unit until the split is justified.
+
 ## Default Topology
 
 Choose the smallest repo shape that still makes real boundaries obvious.
