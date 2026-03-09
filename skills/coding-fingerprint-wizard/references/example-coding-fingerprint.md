@@ -5,12 +5,12 @@ This is what a finished coding fingerprint can look like after running the wizar
 ```markdown
 ---
 name: coding-fingerprint-boundary-first-pragmatist
-description: Apply a boundary-first, explicit coding fingerprint when planning, implementing, reviewing, or refactoring code. This style favours domain-owned names, early validation, narrow interfaces, behaviour-first tests, and incremental refactors over speculative abstraction.
+description: Apply a boundary-first, explicit coding fingerprint when planning, implementing, reviewing, refactoring, or shaping a repository. This style favours domain-owned names, explicit repo boundaries, early validation, narrow interfaces, behaviour-first tests, and incremental refactors over speculative abstraction.
 ---
 
 # Coding Fingerprint: Boundary-First Pragmatist
 
-This coding fingerprint is pragmatic, explicit, and boundary-aware. It pushes validation to the edges, keeps core logic small and readable, and prefers domain-owned names over generic helpers. Abstractions are introduced reluctantly, usually after duplication reveals a stable seam. Tests focus on observable behaviour through realistic inputs rather than mocked internals. The overall effect is code that feels deliberate, reviewable, and hard to misunderstand.
+This coding fingerprint is pragmatic, explicit, and boundary-aware. It pushes validation to the edges, keeps the main flow and repo shape legible, and prefers domain-owned names over generic helpers. Abstractions are introduced reluctantly, usually after duplication reveals a stable seam, while mechanical repetition is pushed into generation and drift checks. Tests focus on observable behaviour through realistic inputs rather than mocked internals. The overall effect is code and repository structure that feel deliberate, reviewable, and hard to misunderstand.
 
 ## Calibration Axes
 
@@ -51,12 +51,35 @@ Tests aim at behaviour, not implementation detail. Preferred seams are real inpu
 
 Comments are sparse. They explain a non-obvious constraint, trade-off, or invariant, not line-by-line mechanics. Structure and names should carry most of the load.
 
+## Repo-Shaping Defaults
+
+- preferred repo shape: start compact, then split by executable surface and ownership boundary once the seams are real
+- executable surfaces: one obvious `main`, `run`, `serve`, command, or worker bootstrap per delivery surface
+- when to split crates/packages/apps: when reusable core, codegen, tests, release tooling, or infra have distinct workflows
+- source-of-truth artefacts: schemas, generated code, error-code registries, and contract files should have one human-owned source
+- default CI checks: build, tests, lint/format, and drift/regeneration checks
+- documentation defaults: concise README first, then architecture/ADR/spec docs when the repo has durable decisions or external consumers
+
 ## Architectural Tendencies
 
 - preferred layering: functional core with imperative shell
 - dependency direction: infrastructure depends on domain, not the reverse
 - integration style: thin adapters around external systems
 - migration/refactor posture: incremental, reversible steps with proof after each step
+
+## Dependency And DI Posture
+
+- dependency posture: adopt focused dependencies that buy clear leverage; avoid incidental dependency complexity
+- dependency red flags: native-link churn, feature-flag sprawl, and frameworks that dictate the whole app architecture
+- preferred DI style: explicit parameter passing, builders, and tiny interfaces at real seams
+- avoid: DI containers, service locators, and repository layers without real variation pressure
+
+## Contracts, Docs, And CI
+
+- contracts treated as product surfaces: generated code, schemas, diagnostics catalogues, and policy-backed boundaries
+- docs posture: practical and boundary-aware rather than verbose by default
+- CI/CD posture: fast feedback first, then docs/release/deploy automation where the repo has real consumers
+- drift-check expectations: if humans would otherwise forget to regenerate it, add a failing check
 
 ## Signature Patterns
 
@@ -89,6 +112,7 @@ If a change feels wrong in this style, check for:
 
 - validation buried deep in business logic
 - a new abstraction with only one weak caller
+- repo shape that hides execution boundaries under one broad package
 - names that describe mechanism instead of domain meaning
 - tests coupled to private helpers or call counts
 - retries or logging added without a clear boundary reason
@@ -98,9 +122,11 @@ If a change feels wrong in this style, check for:
 Before returning code in this fingerprint, ask:
 
 - [ ] Are the names precise and domain-owned?
+- [ ] Is the repo or module shape aligned to real responsibilities?
 - [ ] Did I validate input at the boundary instead of deeper in the flow?
 - [ ] Did I keep the core logic smaller and cleaner than the outer orchestration?
 - [ ] Did I avoid extracting an abstraction before the seam was obvious?
+- [ ] Did I add drift checks for generated or user-facing contract surfaces?
 - [ ] Do the tests verify behaviour through realistic inputs?
 - [ ] Did I avoid generic helper gravity wells?
 
@@ -116,6 +142,7 @@ If you see these, the output has drifted:
 6. Comments narrate obvious code instead of clarifying constraints
 7. Error messages are vague, title-cased, or inconsistent
 8. Refactors combine behavioural change and structural cleanup without separation
+9. Generated, documented, or schema-backed outputs can drift silently
 ```
 
 ## Why This Example Works

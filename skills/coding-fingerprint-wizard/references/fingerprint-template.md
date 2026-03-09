@@ -5,7 +5,7 @@ Use this template for the final generated skill.
 ```markdown
 ---
 name: coding-fingerprint-[name]
-description: Apply [Name]'s coding fingerprint when planning, implementing, reviewing, or refactoring code. This style favours [brief summary of principles and coding behaviour].
+description: Apply [Name]'s coding fingerprint when planning, implementing, reviewing, refactoring, or shaping a repository. This style favours [brief summary of principles, repo-shaping defaults, and coding behaviour].
 ---
 
 # Coding Fingerprint: [Name]
@@ -44,12 +44,35 @@ description: Apply [Name]'s coding fingerprint when planning, implementing, revi
 ### Comments And Documentation
 [When comments appear, what they explain, what is left implicit.]
 
+## Repo-Shaping Defaults
+
+- preferred repo shape:
+- executable surfaces:
+- when to split crates/packages/apps:
+- source-of-truth artefacts:
+- default CI checks:
+- documentation defaults:
+
 ## Architectural Tendencies
 
 - preferred layering:
 - dependency direction:
 - integration style:
 - migration/refactor posture:
+
+## Dependency And DI Posture
+
+- dependency posture:
+- dependency red flags:
+- preferred DI style:
+- avoid:
+
+## Contracts, Docs, And CI
+
+- contracts treated as product surfaces:
+- docs posture:
+- CI/CD posture:
+- drift-check expectations:
 
 ## Signature Patterns
 
@@ -75,6 +98,7 @@ If a change feels wrong in this style, check for:
 
 - boundary validation in the wrong place
 - abstraction introduced before duplication proves the need
+- repo shape that hides real ownership boundaries
 - vague or non-domain naming
 - tests that assert internals instead of behaviour
 - framework concerns leaking into domain logic
@@ -84,10 +108,13 @@ If a change feels wrong in this style, check for:
 Before returning code in this fingerprint, ask:
 
 - [ ] Are names domain-owned and specific?
+- [ ] Is the repo or module shape aligned to real responsibilities?
 - [ ] Are boundaries placed where this person usually places them?
 - [ ] Is validation happening at the expected edge?
 - [ ] Did I choose the same level of abstraction they usually choose?
+- [ ] Did I choose the same level of framework/platform directness they usually choose?
 - [ ] Do the tests express behaviour the way they would?
+- [ ] Can docs, schemas, diagnostics, or generated code drift without a failing check?
 - [ ] Did I avoid patterns this fingerprint rejects?
 
 ## Anti-Patterns
@@ -101,5 +128,6 @@ If you see these, the output has drifted:
 
 - Keep the summary behavioural, not flattering
 - Every section should help another agent make a code choice
+- The repo-shaping and CI/docs sections should help another agent make a project-shape choice
 - Anti-patterns should be specific enough to reject plausible bad output
 - If a section cannot be grounded in evidence, omit or weaken it rather than bluffing

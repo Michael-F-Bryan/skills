@@ -1,10 +1,10 @@
 # Boundary Playbook
 
-Use this playbook when deciding module splits, validation placement, abstraction level, and test shape.
+Use this when deciding module splits, validation placement, abstraction level, and test shape.
 
-## 1. Classify The Boundary
+## 1. Classify The Boundary First
 
-Pick the closest match first.
+Do not write code until you know which boundary you are dealing with.
 
 ### Integrity Boundary
 
@@ -21,7 +21,8 @@ Examples:
 Default move:
 - validate immediately
 - return a specific boundary error
-- do not push this deeper into domain code
+- reject dangerous or ambiguous defaults early
+- do not push this deeper into domain logic
 
 ### Diagnostic Boundary
 
@@ -30,12 +31,12 @@ Examples:
 - compiler
 - linter
 - static analysis pass
-- document or content validation pipeline
+- document validation pipeline
 
 Default move:
 - preserve enough structure to continue
 - accumulate diagnostics
-- stop only when continuing would destroy diagnostic value
+- stop only when continued execution would destroy diagnostic value
 
 ### Hard Framework Boundary
 
@@ -44,15 +45,16 @@ Examples:
 - GraphQL resolver
 - SQL/query generator
 - OpenAPI generator
+- Temporal workflow
 - Terraform
-- managed auth platform
+- managed auth or storage platform
 
 Default move:
-- use the framework directly at the edge
+- use the tool directly at the edge
 - add a local wrapper only when semantics or policy diverge
-- avoid purity facades that just rename the tool
+- do not build a purity facade that only renames the tool
 
-## 2. Choose The Module Split
+## 2. Shape The Module Around The Boundary
 
 Prefer this shape:
 
@@ -71,27 +73,26 @@ Good signs:
 Bad signs:
 - you need to jump across five files to understand execution order
 - packages are named after patterns instead of responsibilities
-- orchestration is hidden in constructors and interfaces
+- orchestration is hidden in constructors, registries, or interfaces
 
 ## 3. Decide Whether To Wrap
 
 Wrap the boundary when:
 - third-party types would leak awkward semantics inward
-- you need stable serialisation, hashing, or equality rules
-- the boundary needs local policy, error mapping, or validation
-- the seam is small and meaningful enough to name directly
+- you need stable serialisation, hashing, equality, or policy
+- you need contextual error mapping or validation
+- the seam is small and meaningful enough to name
 
 Do not wrap when:
 - the wrapper only renames the framework
-- the platform already is the boundary
+- the platform already is the honest boundary
 - the wrapped API is simpler than the facade you are about to invent
-
-### Rule Of Thumb
 
 Write this:
 - `decodeCreateUserRequest()`
 - `RequestID`
 - `HashedRegex`
+- `Strictness`
 - `writeServiceError()`
 
 Not this:
@@ -110,33 +111,47 @@ Keep paths separate when:
 Centralise when:
 - the repeated logic is semantically identical
 - the concern is globally cross-cutting
+- lifecycle ownership is shared
 - the repetition is mechanical enough for generation
 
-### Shortcut
+Shortcut:
+- if two functions only look similar because both decode JSON, do not unify them yet
+- if three commands all need the same request ID, shutdown, or tracing wiring, centralise it
+- if the repeated shape comes from a grammar, schema, or protocol, generate it
 
-If two functions only look similar because both happen to decode JSON, do not unify them yet.
+## 5. Decide How Strict To Be
 
-If three packages all need the same request ID propagation or shutdown wiring, centralise it.
+Use this rule:
+- strict at ingress
+- contextual in the core
 
-## 5. Pick The Test Shape
+Meaning:
+- reject malformed config/auth/request state early
+- keep going in analysis-heavy code when better diagnostics are the product
+- make any leniency explicit in API shape, policy, or type names
+
+Avoid:
+- silent best-effort parsing at important machine boundaries
+- applying one error strategy everywhere in the repo
+
+## 6. Pick The Test Shape
 
 Choose the cheapest real seam that proves behaviour.
 
-### Prefer
-
+Prefer:
 - fixture tests for file/content-driven workflows
 - request-path tests for handlers
 - snapshot tests for structured output or diagnostics
-- DB/container tests for query or migration boundaries
+- DB/container tests for persistence and migration boundaries
+- workflow harnesses when the framework is the real orchestration seam
 - drift tests for generated code, docs, schemas, and diagnostics catalogues
 
-### Avoid
-
+Avoid:
 - mocks for boundaries that are already cheap to exercise
 - tests that only prove call order
 - interfaces invented just so a unit test can exist
 
-## 6. Comment Only For Meaning
+## 7. Comment Only For Meaning
 
 Good comment targets:
 - invariants
@@ -149,11 +164,12 @@ Bad comment targets:
 - line-by-line narration
 - restating types or control flow
 
-## 7. Pre-Return Questions
+## 8. Pre-Return Questions
 
 Ask before returning code:
 
 - Is the flow obvious from one composition root?
+- Did I shape modules around real boundaries rather than patterns?
 - Did I validate at the right boundary for this kind of problem?
 - Did I keep third-party types out of local logic once local semantics started?
 - Did I avoid introducing an abstraction whose only job is deduplication?

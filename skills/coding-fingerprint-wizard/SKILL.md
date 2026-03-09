@@ -1,154 +1,126 @@
 ---
 name: coding-fingerprint-wizard
-description: Analyse several example projects to synthesise a reusable coding fingerprint. Use when the user wants to capture a person's coding style, engineering principles, architectural tendencies, or implementation habits so agents can reproduce them consistently.
+description: Analyse several example projects to synthesise a reusable coding fingerprint. Use when the user wants to capture a person's coding style, engineering principles, project-shaping preferences, architectural tendencies, or implementation habits so agents can reproduce them consistently.
 ---
 
 # Coding Fingerprint Wizard
 
 Create a reusable coding fingerprint from example projects.
 
-The goal is not to infer formatter trivia or generic "clean code" advice. The goal is to identify the decisions that make a person's code recognisable: how they shape modules, where they validate, what they test, what they refuse to abstract, and which trade-offs they make repeatedly.
-
-## What This Produces
+The goal is not to infer formatter trivia or generic "clean code" advice. The goal is to identify the decisions that make a person's work recognisable: how they shape modules and repositories, where they validate, what they test, what they document, how they use frameworks, what they refuse to abstract, and which trade-offs they make repeatedly.
 
 The output is a `coding-fingerprint-[name]/SKILL.md` file that another agent can apply when planning, writing, reviewing, or refactoring code.
 
-## Core Model: Double Diamond
+## When To Apply
 
-This skill uses a diverge-converge workflow:
+Use this skill when the user wants to capture a person's:
 
-1. **Discover**: spread out, gather evidence, inspect multiple projects and lenses in parallel
-2. **Define**: converge on the durable patterns that actually survive across contexts
-3. **Develop**: diverge again by stress-testing the draft fingerprint against counterexamples and edge cases
-4. **Deliver**: converge into a final, reusable coding fingerprint skill
+- coding style
+- engineering principles
+- repo-shaping preferences
+- architectural tendencies
+- testing and validation habits
+- abstraction thresholds
 
-Treat this as a strict operating model, not a metaphor.
+Do not use it for superficial style analysis, formatter imitation, or one-project hero worship.
 
-## Coordinator Rules
+## Operating Model
+
+Treat this as a strict diverge-converge workflow:
+
+1. **Prepare**: define the sample set and its caveats
+2. **Discover**: gather project-level evidence in parallel
+3. **Define**: converge on durable cross-project patterns
+4. **Develop**: challenge the draft fingerprint for overfitting and weak inference
+5. **Deliver**: generate the reusable fingerprint skill
+6. **Validate**: check whether another agent can actually use it
+
+Do not collapse early. Breadth comes before synthesis, and challenge comes before canonisation.
+
+## Coordinator Default
 
 The top-level agent is a coordinator.
 
-- Spawn sub-agents for the detailed analysis
-- Run parallel sub-agents where the work is independent
-- Enforce the artefact contracts in `references/analysis-worksheet.md`
-- Decide when the evidence is broad enough to converge
-- Resolve conflicts between sub-agent outputs
+- Spawn sub-agents for detailed analysis.
+- Run parallel sub-agents where the work is independent.
+- Use `references/analysis-worksheet.md` as the source of truth for artefact contracts.
+- Decide when the evidence is broad enough to converge.
+- Resolve conflicts between worker outputs.
 
-Do not let the coordinator do the full analysis itself unless it is reconciling disagreements or repairing a failed handoff.
+Do not let the coordinator do the full analysis itself unless it is reconciling disagreements, repairing a failed handoff, or validating the final result.
 
-## Before You Begin
+## Sample Quality
 
-Use samples that reflect the person's real engineering style.
+Prefer 2-5 samples with real authorship signal.
 
-**Good samples:**
-- 2-5 projects with meaningful authorship signal
-- Code with tests, docs, commit history, or review context when available
-- Projects from roughly the same era and responsibility level
-- Code the person would still endorse
+Strong samples usually have:
 
-**Avoid:**
-- Heavily templated or generated repositories
-- One-off experiments with little behavioural signal
-- Team code where authorship is unclear
-- Samples dominated by a framework's generated structure
+- meaningful code rather than generated scaffolding
+- tests, docs, commit history, or review context
+- similar era and responsibility level
+- code the subject would still endorse
 
-If the sample set mixes very different contexts, note that explicitly and treat context-specific patterns as weaker evidence.
+Weak samples usually include:
 
-## Workspace
+- heavily templated repositories
+- one-off experiments with little behavioural signal
+- team code with unclear authorship
+- repos dominated by framework defaults
 
-Use `_working/coding-fingerprint/` for all intermediate artefacts.
+If the sample set mixes very different contexts, record that explicitly and treat context-specific patterns as weaker evidence.
 
-Required files:
-- `sample-inventory.md`
-- `cross-project-patterns.md`
-- `coding-principles.md`
-- `fingerprint-spectrum.md`
-- `drift-risks.md`
-- `counterexamples.md`
-- `validation-notes.md`
+## Read Order
 
-Per-project files:
-- `project-profile-<slug>.md`
+1. Start with `SKILL.md`.
+2. Read [references/REFERENCE.md](references/REFERENCE.md) to choose the next file deliberately.
+3. Read [references/analysis-worksheet.md](references/analysis-worksheet.md) before creating or checking any `_working/coding-fingerprint/` artefact.
+4. Read [references/fingerprint-template.md](references/fingerprint-template.md) only when Phase 4 begins.
+5. Read [references/example-coding-fingerprint.md](references/example-coding-fingerprint.md) only if the output shape is unclear or you are calibrating the result.
 
-Read `references/analysis-worksheet.md` before starting Phase 1.
+## Phase Gates
 
-## Workflow
+### Phase 0: Prepare
 
-### Phase 0: Prepare Inputs
-
-Create `sample-inventory.md`.
-
-For each sample project, record:
-- path or identifier
-- primary language and stack
-- why it belongs in the set
-- known authorship confidence
-- available evidence: code, tests, commits, docs, PRs, issues
-- important context that may distort the fingerprint
-
-Do not start synthesis until the inventory exists.
+Create the sample inventory before any synthesis work. Record scope, samples, evidence quality, and caveats in `_working/coding-fingerprint/` using the worksheet contract.
 
 ### Phase 1: Discover
 
 Run sub-agents in parallel.
 
-Default pattern:
-- One sub-agent per project for a project profile
-- Optional extra sub-agents by lens if the projects are large: testing, architecture, review style, or error handling
+Default shape:
 
-Each discovery sub-agent must produce a structured artefact, not loose notes. Use `project-profile-<slug>.md` and follow the worksheet exactly.
+- one worker per project for `project-profile-<slug>.md`
+- optional lens workers for testing, architecture, review style, or error handling when the projects are large
 
-Focus on signals such as:
-- naming and vocabulary
-- function and module shape
-- abstractions and boundaries
-- data modelling
-- error handling and validation
-- tests and verification
-- comments and documentation
-- refactor habits
-- architecture and dependency choices
-- review heuristics and avoidances
-
-The goal of this phase is breadth. Prefer collecting too much evidence over collapsing to conclusions early.
+The goal here is breadth. Collect evidence first; do not collapse to principles early.
 
 ### Phase 2: Define
 
-Run a synthesis sub-agent after the project profiles exist.
+Run a synthesis worker after the project profiles exist.
 
-It must create:
-- `cross-project-patterns.md`
-- `coding-principles.md`
-- `fingerprint-spectrum.md`
+Only promote a pattern if it appears across projects or is supported by strong surrounding evidence. Separate:
 
-This is the first convergence point. Separate:
 - durable fingerprint traits
-- context-specific project choices
-- contradictory signals
-- open questions that need more evidence
+- context-specific choices
+- contradictions
+- open questions
 
-Do not promote a pattern into the fingerprint unless it appears across projects or is supported by strong surrounding evidence.
+Treat repo-shaping as first-class output. A good fingerprint should help another agent choose module boundaries, repo layout, contract surfaces, CI defaults, and dependency posture.
 
 ### Phase 3: Develop
 
-Run challenge sub-agents to stress-test the draft fingerprint.
+Stress-test the draft fingerprint before it becomes canonical.
 
-At minimum, cover:
-- overfitting: which traits only appear in one project
-- avoidances: what the author consistently does not do
-- reproducibility: whether independent agents infer similar rules
-- predictive power: whether the fingerprint implies plausible implementation choices
+At minimum, challenge:
 
-Outputs:
-- `drift-risks.md`
-- `counterexamples.md`
-- `validation-notes.md`
-
-This is the second divergence. The aim is to break a weak fingerprint before it becomes canonical.
+- overfitting to one project
+- avoidances and things the author consistently does not do
+- reproducibility across independent analysers
+- predictive power on plausible implementation choices
 
 ### Phase 4: Deliver
 
-Generate the final skill using `references/fingerprint-template.md`.
+Generate the final fingerprint skill using [references/fingerprint-template.md](references/fingerprint-template.md).
 
 Save it as:
 
@@ -157,68 +129,55 @@ coding-fingerprint-[name]/
 └── SKILL.md
 ```
 
-The generated fingerprint must include:
-- a one-paragraph summary
-- calibration axes
-- core coding behaviours
-- architectural tendencies
-- testing and error-handling preferences
-- signature patterns
-- anti-patterns and avoidances
-- a pre-flight checklist
-
 ### Phase 5: Validate
 
-Use a fresh sub-agent that has access only to:
-- the generated fingerprint skill
-- a small, representative coding task
+Use a fresh sub-agent with access only to the generated fingerprint and a small representative task. Compare its choices back to the source projects.
 
-Ask it to propose or critique a change in the inferred style, then compare that output back to the source projects.
+Refine the fingerprint if it sounds generic, contradicts evidence, overfits one codebase, captures style without principles, or cannot be applied reliably by another agent.
 
-Refine the fingerprint if any of these are true:
-- it sounds like generic senior-engineer advice
-- it contradicts the project evidence
-- it overfits to one codebase
-- it captures style but not principles
-- another agent cannot reliably apply it
-
-## Fingerprint Heuristics
+## Signal Quality
 
 Prefer high-signal patterns over surface polish.
 
-**Strong signals:**
+Strong signals:
+
 - where validation lives
 - how boundaries are drawn
-- how tests express intent
+- how repositories are split once boundaries appear
 - what gets abstracted versus duplicated
+- what gets generated versus handwritten
+- how tests express intent
 - preferred error semantics
+- docs, CI, and drift-check habits around important contracts
 - naming choices that reveal domain modelling
-- the shape of refactors and incremental changes
 
-**Weak signals:**
+Weak signals:
+
 - formatter output
 - language defaults with no visible choice
 - isolated clever code
 - framework boilerplate
 
-## Anti-Patterns
+## Failure Modes
 
-Avoid these failures:
+Avoid:
 
-- reducing the fingerprint to style-guide clichés
+- reducing the fingerprint to style-guide cliches
 - treating one impressive project as the whole person
 - confusing ecosystem constraints with personal preference
 - inferring principles without citing evidence
 - producing a fingerprint that another agent cannot operationalise
-- skipping the challenge phase because the synthesis "looks right"
+- skipping the challenge phase because the synthesis looks right
 
-## Output Quality Bar
+## Quality Bar
 
 The final fingerprint is good only if it helps another agent answer questions like:
 
 - How would this person split the module?
+- How would this person shape the repository or workspace?
 - Where would they validate input?
 - What would they test first?
+- What docs, schemas, or CI checks would they expect to exist?
 - Which abstraction would they reject as premature?
 - What code smell would they flag immediately?
 
@@ -226,7 +185,8 @@ If the skill cannot answer those questions, the fingerprint is still too vague.
 
 ## Additional Resources
 
-- Artefact contracts and sub-agent deliverables: [references/analysis-worksheet.md](references/analysis-worksheet.md)
+- Reference router: [references/REFERENCE.md](references/REFERENCE.md)
+- Artefact contracts and worker deliverables: [references/analysis-worksheet.md](references/analysis-worksheet.md)
 - Final output template: [references/fingerprint-template.md](references/fingerprint-template.md)
 - Worked example: [references/example-coding-fingerprint.md](references/example-coding-fingerprint.md)
 
@@ -234,4 +194,3 @@ If the skill cannot answer those questions, the fingerprint is still too vague.
 
 - Use `working-docs` when you need scratch notes outside this workflow
 - Use `test-driven-development` when validating the generated fingerprint against an implementation task
-
