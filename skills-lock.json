@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "voice-analyzer": {
+      "source": "cdeistopened/skill-stack",
+      "sourceType": "github",
+      "computedHash": "be683d5442e54b0d3d8e0441c72ba62b314c08fef50a4471caf9c5bf01593778"
+    },
+    "voice-matching-wizard": {
+      "source": "cdeistopened/skill-stack",
+      "sourceType": "github",
+      "computedHash": "b96aa73c6012565edace8878c6f4420353604a6ab75819042fb50b3f7a583133"
+    }
+  }
+}
