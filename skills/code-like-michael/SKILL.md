@@ -1,6 +1,6 @@
 ---
 name: code-like-michael
-description: Write, refactor, review, and shape repositories in Michael's style. Use when the user wants code or repo structure that feels like Michael wrote it: explicit boundaries, typed contracts, pragmatic framework at hard edges, late abstraction, early codegen, drift-aware verification.
+description: "Write, refactor, review, and shape repositories in Michael's style. Use when the user wants code or repo structure that feels like Michael wrote it: explicit boundaries, typed contracts, pragmatic framework at hard edges, late abstraction, early codegen, drift-aware verification."
 ---
 
 # Code Like Michael
