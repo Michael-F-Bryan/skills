@@ -84,19 +84,38 @@ Avoid:
 
 ## Data Modelling
 
-Encode meaning in the model; avoid loose bags of fields.
+Domain modelling and interaction design are central to this style. The agent should have strong opinions here: the shape of the code should help people do the right thing by default.
 
-Prefer:
-- domain types over primitive strings/ints where semantics matter
-- making invalid states unrepresentable where practical
-- explicit enums/unions for closed sets
-- boundary DTOs separate from core domain types when policies differ
-- narrow interfaces owned by the consuming domain
+**Core idea**
 
-Avoid:
-- `map[string]any` / `dict[str, Any]` / `serde_json::Value` as long-lived internal shapes
-- passing transport-shaped structs deep into the core
-- generic "metadata" or "options" bags when the shape is already known
+The model should make the system easier to *discover* (types carry meaning; better autocomplete, docs, and signatures) and harder to *misuse* (invalid states excluded where practical; operations only when preconditions hold). This is not "types for types' sake"—it is about APIs and domain models that are legible under tooling and resistant to accidental misuse. Types are executable documentation, not just for the compiler.
+
+**Key principles**
+
+- **Correctness through construction:** Prefer construction paths that return a *fully usable* value or fail immediately. Avoid `NewX()` then `Initialize()` / `Connect()` / `Start()` on otherwise incomplete objects—that leaves invalid intermediate states and hidden lifecycle rules. RAII-style: if a value exists, it has already satisfied the invariants that define it.
+- **Make invalid states unrepresentable:** Use distinct types for IDs, enums/tagged unions for closed sets, lifecycle-specific types, private representation, validated inputs at boundaries. Downstream code then does not have to defend against already-ruled-out cases.
+- **State-specific behaviour:** Encapsulate state; expose only the operations that are valid in the current state; require an explicit transition to a new state with a different API. Avoid "god objects" with methods that are only valid in certain phases. Each lifecycle phase gets its own type or narrow interface (e.g. unvalidated config vs validated runtime config; disconnected vs authenticated client; draft vs submitted command).
+- **Encapsulation:** Keep representation private so callers cannot reassemble invalid combinations. Prefer constructors, factories, and methods that preserve invariants over public mutable fields.
+- **Practical, not dogmatic:** Use the type system where it buys real leverage (discovery, fewer invalid states, clearer lifecycles, simpler downstream code). No maximalist type-level programming. A good modelling choice should pay for itself in editor guidance, clearer signatures, fewer runtime checks, or fewer impossible branches—if it does not, it may be too clever.
+
+**Rules of thumb**
+
+- Prefer named domain types over raw primitives when the value has real semantics.
+- Prefer enums, tagged unions, and explicit variants over stringly-typed mode fields.
+- Prefer constructors and factory functions that return fully usable objects or fail immediately.
+- Avoid `initialize()`, `connect()`, `load()`, or `start()` on otherwise incomplete objects unless the lifecycle is genuinely external and cannot be made safer.
+- Prefer lifecycle-specific types or objects when different phases allow different operations.
+- Keep internal representation private when exposing it would let callers bypass invariants.
+- Use the type system to improve autocomplete, editor guidance, and generated docs, not just correctness.
+- Do not collapse multiple distinct workflows into one "options bag" API just to save a few type definitions.
+- Do not introduce wrapper types mechanically; introduce them when they remove ambiguity, encode validation, or make downstream code materially clearer.
+- In dynamic languages, apply the same principles with validation, frozen data structures, factory functions, and narrower public APIs.
+
+**Prefer:** domain types over primitive strings/ints where semantics matter; making invalid states unrepresentable where practical; explicit enums/unions for closed sets; boundary DTOs separate from core domain types when policies differ; narrow interfaces owned by the consuming domain.
+
+**Avoid:** `map[string]any` / `dict[str, Any]` / `serde_json::Value` as long-lived internal shapes; passing transport-shaped structs deep into the core; generic "metadata" or "options" bags when the shape is already known.
+
+For the full narrative and write-this-not-that code examples, see [references/data-modelling.md](references/data-modelling.md).
 
 ## Abstraction Threshold
 
@@ -242,6 +261,7 @@ Before returning code, check:
 
 ## Additional Resources
 
-- For concrete "write this instead of that" examples, read [references/write-this-not-that.md](references/write-this-not-that.md)
+- For data modelling philosophy, construction, state-specific APIs, and write-this-not-that examples, read [references/data-modelling.md](references/data-modelling.md)
+- For concrete "write this instead of that" examples (repo shape, composition, naming, boundaries, validation, abstraction, DI, errors, tests), read [references/write-this-not-that.md](references/write-this-not-that.md)
 - For boundary and abstraction choices, read [references/boundary-playbook.md](references/boundary-playbook.md)
 - For repo topology, docs, CI, dependencies, and rollout defaults, read [references/repo-shaping.md](references/repo-shaping.md)
