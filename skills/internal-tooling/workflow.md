@@ -1,4 +1,4 @@
-# Internal Toolking Workflow
+# Internal Tooling Workflow
 
 Use this when turning an automation request into durable internal tooling.
 

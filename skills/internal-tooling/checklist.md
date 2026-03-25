@@ -1,4 +1,4 @@
-# Internal Toolking Checklist
+# Internal Tooling Checklist
 
 Use this checklist before claiming an internal tooling change is complete.
 

@@ -1,186 +1,344 @@
-# Project Structure for Internal Tooling
+# Project Structure
 
-This guide defines the default layout for an agent-owned internal tooling project.
+This file describes the recommended shape for internal tooling built as part of the repo’s CLI.
 
-## Setup (Always `uv`)
+Treat this as a **default starting point**, not a rigid filesystem law.
+Start compact. Split things by responsibility once the seams are real.
 
-Use `uv` for environment, dependency, and execution workflow.
+## Goals
 
-Recommended commands:
+We want internal tooling that is:
 
-```bash
-uv sync
-uv run <agent-name> --help
-uv run pytest -q
-```
+- easy to discover
+- easy to review
+- easy to test
+- safe to evolve
+- explicit about dependencies
+- not polluted by hidden config reads or global state
 
-Rules:
+## Baseline Layout
 
-- Do not introduce alternate package managers unless explicitly required.
-- Run tools through `uv run ...` to keep execution consistent.
-- Keep dependencies minimal and task-driven.
-
-## Default Repository Layout
+A typical Python internal tooling package might look like this:
 
 ```text
-<repo>/
-  pyproject.toml
-  README.md
-  <agent_name>/
-    __init__.py
-    __main__.py
-    cli/
-      __init__.py
-      main.py
-      options.py
-      <domain_a>.py
-      <domain_b>.py
-    <domain_a>/
-      __init__.py
-      service.py
-    <domain_b>/
-      __init__.py
-      service.py
-    infra/
-      __init__.py
-      clients.py
-      storage.py
-    models/
-      __init__.py
-      options.py
-      results.py
-  tests/
-    cli/
-    domains/
-    fixtures/
+your_package/
+├── __main__.py
+├── cli/
+│   ├── __init__.py
+│   ├── app.py
+│   ├── common_options.py
+│   └── commands/
+│       ├── __init__.py
+│       ├── sync.py
+│       ├── report.py
+│       └── backfill.py
+├── domain/
+│   ├── __init__.py
+│   ├── sync.py
+│   ├── report.py
+│   └── backfill.py
+├── infra/
+│   ├── __init__.py
+│   ├── api_client.py
+│   ├── db.py
+│   └── filesystem.py
+├── models/
+│   ├── __init__.py
+│   └── types.py
+└── tests/
+    ├── cli/
+    ├── domain/
+    └── infra/
 ```
 
-## Entrypoint Convention
+Not every tool needs every directory.
 
-Use `<repo>/<agent_name>/__main__.py` as the runtime entrypoint.
+For a smaller tool, this flatter structure is perfectly acceptable:
 
-Responsibilities:
+```text
+your_package/
+├── __main__.py
+├── cli.py
+├── sync.py
+├── report.py
+├── api_client.py
+└── tests/
+```
 
-1. Walk up the filesystem tree from current working directory to root.
-2. Load each `.env` file found during the walk.
-3. Call `main()` from `<agent_name>.cli.main`.
+Prefer the smaller version until the codebase gives you a real reason to split.
 
-Conceptual implementation:
+## Responsibilities
+
+### `__main__.py`
+
+Use this as the composition root for local execution.
+
+Good places for:
+
+- process startup
+- loading environment variables from `.env` files
+- invoking the CLI app
+- top-level exception handling
+- minimal bootstrapping
+
+Avoid putting real business logic here.
+
+### `cli/`
+
+This layer defines the command-line interface.
+
+Good places for:
+
+- command names
+- options and arguments
+- help text
+- user-facing validation that is specific to CLI usage
+- wiring dependencies together
+- translating domain results into terminal output
+
+Avoid putting business rules here.
+
+A command handler should mostly do three things:
+
+1. parse CLI input
+2. construct dependencies
+3. call domain code
+
+### `cli/common_options.py`
+
+Use this for shared Click/Typer option bundles when the reuse is real.
+
+Examples:
+
+- `--base-url`
+- `--token`
+- `--timeout`
+- `--json`
+- `--dry-run`
+
+Do not create abstraction soup for one or two commands.
+Shared options should exist because they reduce duplication and keep behaviour consistent.
+
+### `cli/commands/`
+
+Use one module per command or per tightly related command group.
+
+This keeps command handlers easy to scan and helps avoid a single giant CLI file.
+
+### `domain/`
+
+This layer contains the actual behaviour.
+
+Good places for:
+
+- orchestration logic
+- validation that is independent of the terminal
+- transformation logic
+- policy decisions
+- idempotency behaviour
+- domain-specific error types
+
+This is where the code should remain useful even if the CLI disappeared and a REST API or worker process called into the same logic.
+
+### `infra/`
+
+This layer contains adapters to external systems.
+
+Examples:
+
+- API clients
+- database access
+- file storage access
+- queue producers
+- clock abstractions
+- wrappers around third-party libraries
+
+Keep this boring and explicit.
+The job of `infra/` is not to be clever. The job is to isolate side effects.
+
+### `models/`
+
+Only introduce this when shared types genuinely exist.
+
+Examples:
+
+- request/response objects
+- value objects
+- typed identifiers
+- enums
+- validated configuration objects
+
+Do not create a `models/` package just because it feels proper.
+
+## Config and Environment Rules
+
+### Allowed places to read environment variables
+
+Environment and process configuration should only be read at the boundary, such as:
+
+- `__main__.py`
+- CLI option defaults
+- explicit configuration-loading helpers used by the CLI layer
+
+### Disallowed places to read environment variables
+
+Do not read environment variables inside:
+
+- domain modules
+- reusable library code
+- random helper functions
+- deep infra functions called by unrelated contexts
+
+Hidden config reads make code harder to test, harder to reuse, and harder to reason about.
+
+Pass config in explicitly.
+
+## Dependency Passing
+
+Dependencies should be created at the edge and passed inward.
+
+Good:
 
 ```python
-from pathlib import Path
-from dotenv import load_dotenv
-
-from myagent.cli.main import main as cli_main
-
-
-def _load_env_files_recursively() -> None:
-    current = Path.cwd().resolve()
-    for directory in [current, *current.parents]:
-        env_file = directory / ".env"
-        if env_file.exists():
-            load_dotenv(env_file, override=False)
-
-
-def run() -> None:
-    _load_env_files_recursively()
-    cli_main()
-
-
-def main() -> None:
-    run()
-
-
-if __name__ == "__main__":
-    main()
+@click.command()
+@click.option("--base-url", required=True)
+@click.option("--token", required=True)
+def sync(base_url: str, token: str) -> None:
+    client = ApiClient(base_url=base_url, token=token)
+    result = domain.sync_everything(client)
+    render_result(result)
 ```
 
-## Script Entry in `pyproject.toml`
+Bad:
 
-Expose the CLI via `<agent_name>.__main__:main`:
-
-```toml
-[project.scripts]
-<agent-name> = "<agent_name>.__main__:main"
+```python
+def sync_everything() -> None:
+    token = os.environ["API_TOKEN"]
+    client = ApiClient(base_url=os.environ["BASE_URL"], token=token)
+    ...
 ```
 
-## What Goes Where
+Prefer explicit parameters over hidden process state.
 
-- `cli/`: click groups/commands, argument parsing, option decorators, boundary wiring.
-- `<domain_*>/`: business logic and use-case flows grouped by domain.
-- `infra/`: external integrations (APIs, DB, filesystem, queues).
-- `models/`: typed contracts used at boundaries (options/result payloads).
-- `tests/cli/`: command parsing/wiring behavior.
-- `tests/domains/`: business rules and workflows.
+## Output Design
 
-Avoid:
+For each command, decide whether the output is:
 
-- placing business logic in `cli/`
-- raw environment reads outside `__main__.py`, CLI option wiring, or option helper layer
-- `scripts/` for reusable operational tasks that should be CLI commands
-  - see calibration example: [Example 1: Repeatable Backfill Task](examples.md#example-1-repeatable-backfill-task)
+- human-readable
+- machine-readable
+- both
 
-## CLI Organization
+### Recommended conventions
 
-Use one monolithic executable surface:
+- Human-oriented logs and progress go to `stderr`
+- Structured data goes to `stdout`
+- Add a stable `--json` mode when automation is likely
+- Do not mix logs into JSON output
+- Make exit codes meaningful
 
-- `uv run <agent-name> ...`
+### Example exit code expectations
 
-Pattern:
+- `0` → success
+- non-zero → failure
+- distinguish usage errors from operational failures when practical
 
-- `cli/main.py` defines top-level `click.group`.
-- Each domain command module registers with the main group.
-- Shared flags and option bundles live in `cli/options.py`.
+The exact scheme can vary, but callers should not have to guess.
 
-Example command shape:
+## Destructive Command Safety
 
-```text
-uv run jake users sync
-uv run jake reports unresolved-failures --since 7d
-uv run jake db migrate
-```
+Commands that mutate or delete should usually support one or more of:
 
-## Dependency and Config Boundaries
+- `--dry-run`
+- explicit confirmation flags such as `--yes`
+- scoped filters that reduce blast radius
+- clear summaries of intended actions before execution
 
-- Parse/load env only in `__main__.py`, CLI wiring, or option helper layer.
-- Convert flags/env to typed option objects once at the boundary.
-- Construct clients in CLI or dedicated wiring helpers.
-- Pass concrete dependencies into domain functions explicitly.
+If a command is risky to rerun or hard to reverse, design for caution.
 
-This keeps domain code deterministic and testable.
+## Testing Strategy
 
-Do not read env vars in domain/infra modules.
+### CLI tests
 
-## How to Decide File Placement
+Test:
 
-Use this decision order:
+- argument parsing
+- help text for important commands
+- wiring and delegation
+- output formatting
+- exit codes
 
-1. Is this parsing/wiring/entrypoint? -> `cli/`
-2. Is this domain behavior/rules? -> `<domain_*>/`
-3. Is this third-party IO or side effects? -> `infra/`
-4. Is this shared typed payload/option/result object? -> `models/`
-5. Is this only test data/helpers? -> `tests/fixtures/`
+Do not make CLI tests carry the whole burden of behavioural verification.
 
-If a file spans multiple categories, split it at the seam.
+### Domain tests
+
+Test:
+
+- happy path behaviour
+- edge cases
+- invalid inputs
+- failure modes
+- idempotency and retry semantics where relevant
+
+This is where most meaningful tests should live.
+
+### Infra tests
+
+Test:
+
+- serialisation and deserialisation
+- boundary conditions
+- integration with external contracts where feasible
+- adapter behaviour, not vendor internals
 
 ## Growth Rules
 
-- Start compact, then split by responsibility as commands grow.
-- Introduce shared abstractions only after repeated semantic sameness.
-- Keep one obvious composition root per executable surface.
-- Prefer additive subcommands over new executables.
+Start with the smallest structure that remains clear.
 
-## Testing and Verification
+Split modules when:
 
-Minimum expectations for each new command:
+- files are becoming hard to scan
+- concepts are mixing
+- unrelated responsibilities are cohabiting
+- tests are awkward because concerns are tangled
 
-1. Domain behavior test for business logic path.
-2. CLI wiring test for option parsing/injection.
-3. Help discoverability check:
-   - `uv run <agent-name> --help`
-   - `uv run <agent-name> <command> --help`
+Do not split solely because “proper architecture” says you should.
 
-For substantial changes, also run repo-standard lint/type/test checks through `uv run`.
+## Command Surface Hygiene
 
-For implementation sequence and lifecycle usage, see [../workflow.md](../workflow.md).
-For the completion gate, use [../checklist.md](../checklist.md).
+Every new command increases the maintenance burden.
+
+Before adding a command, ask:
+
+- Is this distinct enough from existing commands?
+- Could this be a subcommand or mode of an existing command?
+- Does it have a clear owner and purpose?
+- Will somebody understand why it exists six months from now?
+
+Prefer a coherent CLI over a junk drawer of unrelated verbs.
+
+## Example Mapping
+
+### Good fit for this structure
+
+- `tool report generate`
+- `tool records backfill`
+- `tool files sync`
+- `tool users deactivate`
+
+### Probably not worth formalising yet
+
+- a one-off SQL investigation
+- a temporary local file inspection
+- a short exploratory API call during discovery
+
+## Summary
+
+Use this structure to keep the repo’s operational tooling:
+
+- explicit
+- testable
+- composable
+- stable at the edges
+- simple in the middle
+
+Structure is here to support clarity, not ceremony.

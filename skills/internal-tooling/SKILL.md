@@ -1,9 +1,9 @@
 ---
-name: internal-toolking
+name: internal-tooling
 description: Build reusable automation as first-class CLI subcommands instead of throwaway scripts. Use when an agent considers writing a script, automating repeated tasks, adding operational tooling, or wiring commands that run as `uv run <agent-name> ...`.
 ---
 
-# Internal Toolking
+# Internal Tooling
 
 Build automation as productized CLI commands, not one-off scripts.
 
@@ -30,15 +30,15 @@ Stop reading once you can name the next concrete file/command change.
 
 ## Routing Table
 
-| Task intent | Primary doc | Section to open |
-|---|---|---|
-| Decide CLI vs one-off | [references/decision-gate.md](references/decision-gate.md) | `## Scoring Rubric` |
-| Name command surface | [references/decision-gate.md](references/decision-gate.md) | `## Naming Guidance` |
-| Implement command wiring | [references/click-patterns.md](references/click-patterns.md) | `## 2) Shared Option Decorators`, `## 3) Thin Command, Rich Domain Module` |
-| Place files and boundary logic | [references/project-structure.md](references/project-structure.md) | `## What Goes Where`, `## Dependency and Config Boundaries` |
-| Verify command quality | [checklist.md](checklist.md) | `## Verification` |
-| Resolve ambiguity with examples | [references/examples.md](references/examples.md) | `## Example 1: Repeatable Backfill Task` to `## Example 4: Agent Dialogue and Tool Choice` |
-| Follow full lifecycle | [workflow.md](workflow.md) | `## Lifecycle` |
+| Task intent                     | Primary doc                                                        | Section to open                                                                            |
+| ------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| Decide CLI vs one-off           | [references/decision-gate.md](references/decision-gate.md)         | `## Scoring Rubric`                                                                        |
+| Name command surface            | [references/decision-gate.md](references/decision-gate.md)         | `## Naming Guidance`                                                                       |
+| Implement command wiring        | [references/click-patterns.md](references/click-patterns.md)       | `## 2) Shared Option Decorators`, `## 3) Thin Command, Rich Domain Module`                 |
+| Place files and boundary logic  | [references/project-structure.md](references/project-structure.md) | `## What Goes Where`, `## Dependency and Config Boundaries`                                |
+| Verify command quality          | [checklist.md](checklist.md)                                       | `## Verification`                                                                          |
+| Resolve ambiguity with examples | [references/examples.md](references/examples.md)                   | `## Example 1: Repeatable Backfill Task` to `## Example 4: Agent Dialogue and Tool Choice` |
+| Follow full lifecycle           | [workflow.md](workflow.md)                                         | `## Lifecycle`                                                                             |
 
 ## Non-Negotiable Boundaries
 

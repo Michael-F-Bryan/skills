@@ -1,187 +1,314 @@
-# Prompted Examples (Bad vs Good)
+# Examples
 
-These examples are intended to shape behavior, not just syntax.
-Primary decisioning source: [decision-gate.md](decision-gate.md).
-Primary implementation workflow: [../workflow.md](../workflow.md).
+These examples show how to apply the internal-tooling guidance in practice.
 
----
+They are intentionally concrete.
+The goal is to make the desired judgement calls easy to imitate.
 
-## Example 1: Repeatable Backfill Task
+## Example 1: Repeated Backfill Task → Build A CLI Command
 
-### Prompt
+### Scenario
 
-> We need to backfill missing claim statuses for the last 60 days. I will probably run this a few times while validating.
+You need to backfill missing metadata for records in a remote system.
 
-### Bad Example
+The task:
+
+- queries many records
+- filters them by conditions
+- updates external state
+- needs retries
+- will probably be run again
+- benefits from a dry run and a stable interface
+
+### Bad approach
+
+Create an ad hoc script in `scripts/fix_stuff.py` that:
+
+- reads env vars internally
+- contains query logic, retry logic, and mutation logic in one file
+- has no dry-run mode
+- is not wired into the repo’s main CLI
+- is copied around when someone needs it again
+
+### Better approach
+
+Add a named command such as:
+
+```bash
+tool records backfill-metadata --source legacy --limit 500 --dry-run
+tool records backfill-metadata --source legacy --limit 500 --yes
+```
+
+### Why this should be a command
+
+Because the task:
+
+- mutates external state
+- has enough complexity that correctness matters
+- benefits from validation and safety controls
+- is likely to be reused
+- is worth documenting and testing
+
+### Good structure
+
+```text
+your_package/
+├── cli/commands/backfill.py
+├── domain/backfill.py
+└── infra/api_client.py
+```
+
+The command handler:
+
+- parses options
+- constructs the client
+- calls `domain.backfill_metadata(...)`
+- renders a plan or result
+
+The domain code:
+
+- computes what needs to change
+- applies the changes
+- handles retries or per-record failure policies
+- returns structured results
+
+## Example 2: One-Off Read-Only Investigation → Keep It One-Off
+
+### Scenario
+
+You are investigating an incident and want to know how many rows in a local database match a condition.
+
+This is:
+
+- read-only
+- local to the investigation
+- unlikely to be reused
+- not worth adding help text or tests for
+
+### Good approach
+
+Run the SQL query directly, or put it in a short temporary notebook or shell snippet.
+
+Example:
+
+```bash
+psql "$DATABASE_URL" -c "
+  select count(*)
+  from jobs
+  where status = 'stalled'
+"
+```
+
+### Why this should stay one-off
+
+Because it is:
+
+- read-only
+- low-risk
+- ephemeral
+- faster to inspect than to formalise
+
+Do **not** create a permanent CLI command just because a command is possible.
+
+## Example 3: Temporary Exploration That Graduates Into Tooling
+
+### Scenario
+
+You are exploring a third-party API to understand its pagination model.
+
+At first, this is discovery work.
+
+### Good first step
+
+Use a shell command or scratch script:
+
+```bash
+curl -H "Authorization: Bearer $TOKEN" \
+  "https://api.example.com/v1/items?page=1"
+```
+
+### When to promote it
+
+Promote it into a CLI command once the task starts to include:
+
+- pagination
+- filtering
+- stable output requirements
+- repeated use
+- retries
+- sharing with others
+
+### Example promoted command
+
+```bash
+tool items list --status active --page-size 100 --json
+```
+
+### Lesson
+
+Exploration is not a failure.
+Premature formalisation is also not a virtue.
+
+Start light, then formalise once the seam is real.
+
+## Example 4: Hidden Env Reads → Bad
+
+### Bad code
 
 ```python
-# scripts/backfill_claim_status.py
-import os
-import requests
-
-token = os.getenv("API_TOKEN")
-base = os.getenv("API_BASE_URL")
-
-for claim_id in open("claim_ids.txt").read().splitlines():
-    requests.post(f"{base}/claims/{claim_id}/backfill", headers={"Authorization": token})
+def sync_users() -> None:
+    token = os.environ["API_TOKEN"]
+    base_url = os.environ["API_BASE_URL"]
+    client = ApiClient(base_url=base_url, token=token)
+    ...
 ```
 
-### Why It's Bad
+### Why this is bad
 
-- Commits reusable automation as a throwaway script.
-- Reads env vars directly in script logic.
-- No CLI help surface, no standard options, no guardrails.
-- No typed options or dependency injection.
+The function:
 
-### Good Example
+- cannot be reused cleanly
+- is awkward to test
+- hides its dependencies
+- ties domain behaviour to process state
 
-```text
-Agent plan:
-1) Add `uv run jake claims backfill-status` command.
-2) Add shared `@api_options` decorator used across claims commands.
-3) Put backfill flow in `jake/claims/backfill.py`.
-4) Add tests for date-range behavior and dry-run mode.
-
-Tool calls (abbreviated):
-- Edit `jake/cli/options.py` (add `ApiOptions`, `api_options` decorator)
-- Edit `jake/cli/claims.py` (new `backfill-status` command)
-- Add `jake/claims/backfill.py`
-- Add tests in `tests/claims/test_backfill.py`
-```
-
-### Why It's Good
-
-- Productizes repeatable work in discoverable CLI.
-- Reuses shared options and setup.
-- Keeps command thin and business logic in library.
-- Supports reliable reruns and ongoing maintenance.
-- Related: [Click Patterns - Shared Option Decorators](click-patterns.md#2-shared-option-decorators), [Project Structure - What Goes Where](project-structure.md#what-goes-where)
-
----
-
-## Example 2: One-Off Read-Only Inspection
-
-### Prompt
-
-> Can you quickly check whether there are any orphaned temp files in `/tmp/openclaw-cache` right now?
-
-### Bad Example
-
-```text
-Agent adds `uv run jake cache audit-tmp` command immediately, with tests and docs.
-```
-
-### Why It's Bad
-
-- Over-engineers a truly one-off, low-risk question.
-- Adds long-term code surface for a short-lived inspection.
-
-### Good Example
-
-```text
-Agent uses shell/exec directly:
-`ls -lah /tmp/openclaw-cache`
-`du -sh /tmp/openclaw-cache/*`
-
-Then reports findings and asks whether this should become a recurring check.
-```
-
-### Why It's Good
-
-- Uses direct shell for genuinely ad hoc read-only work.
-- Preserves CLI surface area for reusable automation.
-- Includes follow-up decision point for future CLI conversion.
-- Related: [Decision Gate - Scoring Rubric](decision-gate.md#scoring-rubric)
-
----
-
-## Example 3: Hidden Env Reads in Domain Logic
-
-### Prompt
-
-> Add a command to sync users from the identity provider.
-
-### Bad Example
+### Better code
 
 ```python
-# jake/users/sync.py
-import os
-import requests
-
-def run_sync():
-    base_url = os.getenv("IDP_URL")
-    token = os.getenv("IDP_TOKEN")
-    return requests.get(f"{base_url}/users", headers={"Authorization": token}).json()
+def sync_users(client: ApiClient) -> SyncResult:
+    ...
 ```
 
-### Why It's Bad
-
-- Core logic depends on process environment.
-- Harder to test and reuse.
-- Violates boundary: config should enter through CLI wiring.
-
-### Good Example
+And in the CLI layer:
 
 ```python
-# jake/users/sync.py
-def run_sync(*, idp_client: IdpClient) -> SyncResult:
-    users = idp_client.fetch_users()
-    return reconcile_users(users)
+@click.command()
+@click.option("--base-url", required=True)
+@click.option("--token", required=True, envvar="API_TOKEN")
+def sync(base_url: str, token: str) -> None:
+    client = ApiClient(base_url=base_url, token=token)
+    result = sync_users(client)
+    render_result(result)
 ```
 
-```text
-# CLI handler (conceptual)
-@idp_options
-def sync_users(idp_options: IdpOptions):
-    client: IdpClient = idp_options.client()
-    result = run_sync(idp_client=client)
-    print_summary(result)
+### Lesson
+
+Read config at the boundary.
+Pass dependencies inward.
+
+## Example 5: Reporting Command With Stable Output
+
+### Scenario
+
+A support workflow needs a report that people will read interactively, but automation may also consume it later.
+
+### Good command design
+
+```bash
+tool report stale-jobs
+tool report stale-jobs --json
 ```
 
-### Why It's Good
+### Why this is good
 
-- Keeps environment/config handling at the CLI edge.
-- Injects explicit dependencies.
-- Enables focused tests on business behavior.
-- Related: [Click Patterns - Dependency Injection Boundary](click-patterns.md#4-dependency-injection-boundary), [Project Structure - Dependency and Config Boundaries](project-structure.md#dependency-and-config-boundaries)
+Because the command has:
 
----
+- a clear name
+- stable arguments
+- an obvious human mode
+- an obvious machine mode
+- a reusable interface for future workflows
 
-## Example 4: Agent Dialogue and Tool Choice
+### Implementation shape
 
-### Prompt
+The command handler should:
 
-> I need a weekly report command for unresolved ingestion failures.
+- parse CLI flags
+- call the report generator
+- emit formatted text or JSON
 
-### Bad Example (Dialogue)
+The report logic should:
 
-```text
-User: I need a weekly report command for unresolved ingestion failures.
-Agent: I'll just write `scripts/report_failures.py` quickly.
-Agent tool call: write script, run script, paste output.
+- query the required sources
+- compute the results
+- return structured data
+
+The formatting layer should decide how to present that data.
+
+## Example 6: Destructive Operation With Safety Controls
+
+### Scenario
+
+You need to deactivate a set of users in an external system.
+
+This is risky because it mutates shared external state.
+
+### Bad approach
+
+```bash
+python scripts/deactivate_users.py users.csv
 ```
 
-### Why It's Bad
+No dry run. No confirmation. No stable interface. No clear behaviour contract.
 
-- Ignores explicit request for a reusable command.
-- Produces unstructured output and non-discoverable workflow.
+### Better approach
 
-### Good Example (Dialogue)
-
-```text
-User: I need a weekly report command for unresolved ingestion failures.
-Agent: I'll add `uv run openclaw reports unresolved-failures --since 7d`.
-Agent: I'll keep command wiring in CLI, and report logic in domain modules.
-Agent tool calls:
-  - update CLI group with new `reports` subcommand
-  - add shared datastore options decorator if needed
-  - add `openclaw/reports/` module and tests
-  - run `uv run openclaw reports unresolved-failures --help`
+```bash
+tool users deactivate --input users.csv --dry-run
+tool users deactivate --input users.csv --yes
 ```
 
-### Why It's Good
+### Why this is better
 
-- Implements durable operator workflow.
-- Keeps command discoverable and self-documenting.
-- Follows thin-wrapper CLI architecture and testing discipline.
-- Related: [Project Structure - CLI Organization](project-structure.md#cli-organization), [Checklist](../checklist.md)
+Because the command makes it clear:
+
+- what the operation is
+- what data it acts on
+- how to preview changes
+- how to explicitly approve execution
+
+### Expected behaviour
+
+- `--dry-run` prints what would happen and exits successfully without mutation
+- `--yes` is required for actual execution
+- logs and warnings go to `stderr`
+- machine-readable results should be available if automation is likely
+
+## Example 7: Command That Should Stay A Library Function
+
+### Scenario
+
+You need a reusable parser or transformation function that multiple commands might call.
+
+Example: parse a vendor-specific export file into a normalised internal representation.
+
+### Good approach
+
+Create a library or domain function:
+
+```python
+def parse_vendor_export(src: str) -> ParsedExport:
+    ...
+```
+
+Then let commands call it as needed.
+
+### Why this should not automatically become a command
+
+Because not every reusable function needs terminal surface area.
+
+A function should become a command only when there is a meaningful operational task to expose.
+
+### Lesson
+
+“Reusable” and “user-facing CLI” are not the same thing.
+
+## Summary
+
+Use these examples to keep the judgement call straight:
+
+- repeated, risky, shared, stateful work → usually a CLI command
+- ad hoc, read-only, local investigation → usually one-off
+- discovery can start light and grow into tooling
+- config belongs at the boundary
+- library functions do not need to become commands unless there is a real operational interface to expose
