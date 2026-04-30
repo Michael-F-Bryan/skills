@@ -1,1 +1,4 @@
 _working/
+.venv/
+__pycache__/
+*.py[cod]

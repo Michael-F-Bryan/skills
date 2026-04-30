@@ -1,0 +1,6 @@
+[project]
+name = "clockify-api"
+version = "0.0.0"
+description = "Scripts to support the Clockify API skill"
+requires-python = ">=3.14"
+dependencies = []
