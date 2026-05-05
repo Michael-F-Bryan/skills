@@ -1,267 +1,178 @@
 ---
 name: code-like-michael
-description: "Write, refactor, review, and shape repositories in Michael's style. Use when the user wants code or repo structure that feels like Michael wrote it: explicit boundaries, typed contracts, pragmatic framework at hard edges, late abstraction, early codegen, drift-aware verification."
+description: Apply Michael's coding fingerprint when planning, implementing, reviewing, refactoring, or shaping a repository. This style favors linear orchestration, explicit boundaries, typed contracts at hard edges, seam-driven abstraction, and drift-aware verification.
 ---
 
-# Code Like Michael
+# Coding Fingerprint: Michael
 
-Treat this skill as binding unless the repository already has stronger local conventions.
+Michael-style code optimizes for readability under change: top-level flow stays linear, key decisions are hoisted into explicit variants/types, and traversal mechanics are pushed downward into focused executors. Boundaries are typed and explicit, frameworks stay at hard edges, abstractions appear only under real seam pressure, and outcome semantics remain truthful so operations and failures are legible.
 
-The goal is not "clean code" in the abstract. The goal is to produce code and repo shape that make ownership, execution order, contracts, and operational behaviour obvious.
+## Calibration Axes
 
-## Non-Negotiables
+- Local Pragmatism / Global Consistency: 4
+- Duplication Tolerance / Abstraction Bias: 2
+- Explicitness / Compression: 5
+- Early Validation / Late Validation: 4
+- Test-First Bias / Implementation-First Bias: 2
+- Domain Purity / Framework Affinity: 2
 
-Always prefer:
-- visible composition roots
-- responsibility-shaped modules, crates, or packages
-- typed contracts at important boundaries
-- local wrappers only where semantics begin
-- handwritten abstraction only after the seam is stable
-- generation and drift checks for mechanical repetition
-- realistic seam tests over mock theatre
+## Core Behaviours
 
-Do not optimise for:
-- abstract symmetry
-- service/repository scaffolding by default
-- purity facades over real platform boundaries
-- deduplication before semantic sameness is proven
-- hiding unfinished work behind generic abstractions
+### Naming And Vocabulary
 
-## Agent Default
+Use responsibility-shaped names that expose domain intent and boundary semantics. Prefer names like `StageResult`, `ClassifierActivity`, or `StoreDocument` over generic holders like `Manager`, `Processor`, or `Utils`.
 
-If you are unsure what Michael would do, choose the option that (in order):
+Avoid vague mode strings and implicit lifecycle names. If a closed set exists, model it explicitly as enum/tagged variants.
 
-1. keeps the top-level flow easier to read
-2. makes the boundary contract more explicit
-3. avoids introducing a new abstraction layer
-4. tests the real seam that can fail
-5. makes docs, schemas, diagnostics, or generated output harder to drift
+### Function And Module Shape
 
-When trading off reduction of duplication vs clearer flow vs stronger data model vs fewer layers vs quicker delivery: prefer clearer flow and stronger data model over deduplication; prefer fewer layers over new abstractions; prefer real seams and drift checks over mock coverage.
+Keep top-level orchestration linear and declarative:
+- establish dependencies
+- guard early
+- call stage/executor functions in order
+- return explicit result
 
-## Repo-Shaping Rules
+Push mechanics downward: retries, batching, pagination, streaming, resume indexes, and loop bookkeeping belong in lower-level helpers/executors. Do not mix traversal mechanics with top-level business decisions.
 
-Use these defaults when creating or restructuring a repository:
+Prefer early returns over deep nesting. Hoist major branching into explicit types/variants when that removes repeated `kind`/mode switching in orchestration.
 
-- Prefer a modular monolith: one delivery unit with clear internal boundaries. Split into separate services or repos only when execution mode, ownership, lifecycle, or operational boundary makes it necessary.
-- Start compact, but split early when there are distinct execution modes, ownership boundaries, or tooling surfaces.
-- Keep one obvious composition root per executable surface: `main`, `run`, `serve`, CLI command, worker bootstrap, or router setup.
-- Separate reusable core from shells early.
-- Add a dedicated repo-tooling surface once generation, release, docs, or compatibility workflows exist. In Rust this often means `xtask`; in app repos it may mean `tools/`, `scripts/`, or a dedicated package.
-- Keep apps, libs, infra, generated contracts, and docs legible as separate concerns inside one repo when they belong to one delivery unit.
+Extraction triggers for splitting orchestration:
+- repeated edits in the same orchestrator across unrelated concerns for 2+ PRs
+- stage-branch growth where intent is no longer skimmable at a glance (for example, 4+ stage branches with inline mechanics)
+- ownership spread where one orchestrator coordinates behavior owned by 3+ modules/teams
+When these appear, split by stage/executor seams before adding new branches.
 
-Avoid:
-- one giant package mixing runtime, release, codegen, tests, and infra concerns
-- microservice-style fragmentation before there are real responsibility boundaries
-- repo shapes named after patterns instead of responsibilities
+### Abstractions And Boundaries
 
-For repo-level guidance, read [references/repo-shaping.md](references/repo-shaping.md).
+Use explicit composition roots and manual parameter passing. Add interfaces/seams only where external variability or ownership demands them.
 
-## Boundary Rule
+Abstraction threshold:
+- tolerate first duplication
+- inspect second repetition
+- extract on third only if behavior is semantically identical
 
-Choose strictness by boundary type, not by slogan.
+Do not add service/repository layering by default. Do not add wrappers that still require concrete-client reach-through.
+If you define a wrapper seam, make it contract-complete for required operations; do not rely on `hasattr`/reflection/probing to access hidden concrete clients.
 
-- Fail early at integrity boundaries: config, auth, IDs, request shape, transport status, schema input, unsafe defaults.
-- Continue with structure when downstream diagnostics are the product: parsers, compilers, analysis pipelines, validation/reporting flows.
+### Data Modelling
 
-Any tolerance should be explicit in types, policy, or API shape. Do not rely on silent best effort.
+Use typed boundary models and domain types to keep invalid states out of the core. Avoid long-lived `dict[str, Any]` or stringly state-machine fields for known shapes.
 
-## Code-Shaping Rules
+Prefer type-directed dispatch over repeated `kind`/mode switching. If a branch is fundamental and recurring, represent it as variants/types.
 
-Prefer:
-- thin orchestration at the top
-- medium-sized flow functions when they make execution order obvious
-- smaller helpers for detailed rules
-- stage-shaped or boundary-shaped modules
-- explicit structs, enums, and named boundary types
-- stable, contextual, lowercase errors; wrap with context at meaningful boundaries only, not every line; reserve panics/assertions for actual invariants
+Edge exception budget: dynamic shape handling is acceptable only at unavoidable protocol edges, must be localized, and must be followed by conversion into typed models before entering core orchestration.
+Edge exceptions must carry an explicit promotion trigger (new consumer, recurring bug, or second conversion site) that forces promotion to a typed contract.
 
-Avoid:
-- deep constructor chains that hide startup order
-- generic `utils`, `common`, `manager`, or `processor` modules
-- reflection-heavy or magical conversion code
-- framework or protocol types leaking inward once local semantics begin
+### Error Handling And Validation
 
-## Data Modelling
+Validate aggressively at integrity boundaries (config, IDs, request shape, auth, transport contracts). Keep transport/protocol error normalization at adapters.
 
-Domain modelling and interaction design are central to this style. The agent should have strong opinions here: the shape of the code should help people do the right thing by default.
+Never swallow broad exceptions while returning success/completed status. Encode partial/degraded/failure outcomes explicitly when tolerance is required, and preserve truthful run status semantics.
 
-**Core idea**
+### Tests And Verification
 
-The model should make the system easier to *discover* (types carry meaning; better autocomplete, docs, and signatures) and harder to *misuse* (invalid states excluded where practical; operations only when preconditions hold). This is not "types for types' sake"—it is about APIs and domain models that are legible under tooling and resistant to accidental misuse. Types are executable documentation, not just for the compiler.
+Prioritize behavior at real seams and regression risk over call choreography. Verify contract truth (status, errors, boundary payloads, generated/drift surfaces) rather than just invocation order.
 
-**Key principles**
+Testing process preference is medium confidence from current corpus. Treat this as a practical guideline, not dogma: choose the lightest test that still proves boundary behavior and failure truth.
 
-- **Correctness through construction:** Prefer construction paths that return a *fully usable* value or fail immediately. Avoid `NewX()` then `Initialize()` / `Connect()` / `Start()` on otherwise incomplete objects—that leaves invalid intermediate states and hidden lifecycle rules. RAII-style: if a value exists, it has already satisfied the invariants that define it.
-- **Make invalid states unrepresentable:** Use distinct types for IDs, enums/tagged unions for closed sets, lifecycle-specific types, private representation, validated inputs at boundaries. Downstream code then does not have to defend against already-ruled-out cases.
-- **State-specific behaviour:** Encapsulate state; expose only the operations that are valid in the current state; require an explicit transition to a new state with a different API. Avoid "god objects" with methods that are only valid in certain phases. Each lifecycle phase gets its own type or narrow interface (e.g. unvalidated config vs validated runtime config; disconnected vs authenticated client; draft vs submitted command).
-- **Encapsulation:** Keep representation private so callers cannot reassemble invalid combinations. Prefer constructors, factories, and methods that preserve invariants over public mutable fields.
-- **Practical, not dogmatic:** Use the type system where it buys real leverage (discovery, fewer invalid states, clearer lifecycles, simpler downstream code). No maximalist type-level programming. A good modelling choice should pay for itself in editor guidance, clearer signatures, fewer runtime checks, or fewer impossible branches—if it does not, it may be too clever.
+### Comments And Documentation
 
-**Rules of thumb**
+Keep comments for policy and boundary rationale, especially when handling edge exceptions or intentional compromises. Keep docs practical and decision-bearing; avoid narrative padding.
 
-- Prefer named domain types over raw primitives when the value has real semantics.
-- Prefer enums, tagged unions, and explicit variants over stringly-typed mode fields.
-- Prefer constructors and factory functions that return fully usable objects or fail immediately.
-- Avoid `initialize()`, `connect()`, `load()`, or `start()` on otherwise incomplete objects unless the lifecycle is genuinely external and cannot be made safer.
-- Prefer lifecycle-specific types or objects when different phases allow different operations.
-- Keep internal representation private when exposing it would let callers bypass invariants.
-- Use the type system to improve autocomplete, editor guidance, and generated docs, not just correctness.
-- Do not collapse multiple distinct workflows into one "options bag" API just to save a few type definitions.
-- Do not introduce wrapper types mechanically; introduce them when they remove ambiguity, encode validation, or make downstream code materially clearer.
-- In dynamic languages, apply the same principles with validation, frozen data structures, factory functions, and narrower public APIs.
+## Repo-Shaping Defaults
 
-**Prefer:** domain types over primitive strings/ints where semantics matter; making invalid states unrepresentable where practical; explicit enums/unions for closed sets; boundary DTOs separate from core domain types when policies differ; narrow interfaces owned by the consuming domain.
+- preferred repo shape: modular monolith with explicit bounded modules and clear execution surfaces
+- executable surfaces: one obvious composition root per app/CLI/worker/workflow surface
+- when to split crates/packages/apps: split when execution mode, ownership, lifecycle, or operational boundaries diverge
+- source-of-truth artefacts: typed contracts, schemas, generated interfaces, diagnostics surfaces
+- default CI checks: build/test/lint plus regeneration or drift checks for contract artifacts
+- documentation defaults: concise README plus boundary/architecture notes where decisions are durable
 
-**Avoid:** `map[string]any` / `dict[str, Any]` / `serde_json::Value` as long-lived internal shapes; passing transport-shaped structs deep into the core; generic "metadata" or "options" bags when the shape is already known.
+## Architectural Tendencies
 
-For the full narrative and write-this-not-that code examples, see [references/data-modelling.md](references/data-modelling.md).
+- preferred layering: thin composition root, stage/domain modules, edge adapters
+- dependency direction: edges depend inward; inner flow stays framework-light
+- integration style: direct at hard boundaries, wrapped only when local semantics begin
+- migration/refactor posture: small, reviewable steps with behavior changes separated from broad reshaping where possible
 
-## Abstraction Threshold
+## Dependency And DI Posture
 
-Do not introduce a handwritten abstraction until one of these is true:
-
-- the repeated shape is semantically identical
-- the concern is globally cross-cutting
-- the boundary genuinely varies
-- lifecycle or concurrency ownership needs a seam
-
-Do introduce generation early when repetition is mechanical:
-
-- grammar-driven syntax trees
-- schema-driven models
-- generated diagnostics or code tables
-- API contracts and clients
-
-Default rule:
-- tolerate the first duplication
-- inspect the second
-- abstract on the third only if the behaviour is truly the same
-
-Introduce abstraction decisively once lifecycle ownership, policy reuse, or stable semantic sameness is clear—not before, but not never.
-
-## Framework, Dependencies, And DI
-
-Michael is not anti-framework. He is anti-fake-boundary.
-
-Use frameworks, code generators, and managed platforms directly when they are the honest outer boundary:
-- routers
-- GraphQL
-- SQL/query generation
-- OpenAPI
-- Temporal/workflow engines
-- Terraform
-- managed auth/storage platforms
-
-Wrap them only where local policy or semantics begin.
-
-Prefer:
-- explicit parameter passing
-- builders
-- tiny interfaces at IO seams
-- focused dependencies with a clear job
-
-Avoid:
-- DI containers
-- deep trait graphs
-- repository/service layers with no real second implementation
-- dependency sprawl that adds complexity without leverage
+- dependency posture: explicit constructor/builder args with focused dependencies
+- dependency red flags: deep dependency graphs, omnivore facades, and wrappers that leak concrete implementation
+- preferred DI style: manual wiring at composition roots
+- avoid: container-heavy DI and interface proliferation not tied to a real seam
 
 ## Contracts, Docs, And CI
 
-Treat these as product surfaces:
-- generated code
-- schemas
-- diagnostics catalogues
-- user-facing docs
-- release metadata
-- DB policies and migrations
+- contracts treated as product surfaces: APIs, schemas, generated contracts, diagnostics/status surfaces
+- docs posture: concise, practical, and tied to real boundaries or operations
+- CI/CD posture: fast feedback first; include drift checks where regeneration is expected
+- drift-check expectations: if humans can forget to regenerate or update contract surfaces, CI should fail loudly
 
-Default moves:
-- commit important contract artefacts when the repo expects them
-- add drift checks for anything humans would otherwise forget to regenerate
-- keep README concise and practical
-- add architecture/ADR/spec docs when decisions are durable or externally significant
-- build CI around fast feedback: build, tests, lint/format, and regeneration/drift checks first
-- add docs publishing, release automation, or deploy steps when the repo has real consumers or a live service
+## Signature Patterns
 
-## Testing Rule
+- Pattern: Linear orchestration with downward delegation of mechanics.
+  Why it matters: Keeps review and operations centered on intent, not loop bookkeeping.
+  Evidence: Solarbutt entrypoints are short/explicit; Lyric anti-sample marks mechanic-heavy mega-orchestrators as major drift.
 
-Bias toward strong verification, not ritualised TDD.
+- Pattern: Boundary-typed modeling with edge-local conversion.
+  Why it matters: Prevents runtime repair logic from spreading through the core.
+  Evidence: Solarbutt keeps protocol shaping in adapters; Lyric anti-sample flags `Union[Typed, dict]` coercion and stringly workflow states.
 
-Prefer:
-- request-path tests
-- fixture tests
-- parser or snapshot tests
-- DB/container/integration tests
-- corpus tests
-- generated-artefact drift checks
+- Pattern: Seam-driven abstraction with explicit composition roots.
+  Why it matters: Reduces fake layers while still isolating real IO/auth/runtime boundaries.
+  Evidence: Narrow auth/client seams in solarbutt; anti-sample rejects god facades and concrete reach-through.
 
-Use mocks or tiny fakes only when the seam is already real and the full boundary is too expensive.
+- Pattern: Truthful outcome semantics and explicit failure signaling.
+  Why it matters: Operational correctness depends on status contracts matching reality.
+  Evidence: Anti-sample classifies swallowed errors plus success status as critical drift.
 
-Do not invent an interface just so a unit test can exist.
+## Avoidances
 
-## Operational Concerns
+- avoids: orchestration that interleaves business decisions with retries, batching, pagination, or resume loops.
+  because: it obscures intent and increases drift risk in high-churn execution paths.
 
-Treat observability, migrations, and rollout as first-class.
+- avoids: weak boundary contracts (`dict` unions, stringly state machines, ad-hoc reflection probes).
+  because: they force hidden runtime patching and erode model guarantees.
 
-Prefer:
-- explicit metrics, traces, and logs at important boundaries and lifecycle edges—not buried in magic middleware
-- additive DB migrations
-- visible lifecycle ownership
-- deterministic failure modes in orchestration and workflow code
+- avoids: framework-shaped facades owning unrelated concerns.
+  because: they collapse boundaries and create brittle change hotspots.
 
-## Review Hygiene
+## Review Instincts
 
-Prefer:
-- small, reviewable diffs
-- refactors separated from behavioural changes in distinct commits or PRs
-- generated artefacts committed when reproducibility depends on them
-- TODOs that make incompleteness visible instead of hiding it behind abstraction
+If a change feels wrong in this style, check for:
 
-## Defaults By Language
+- top-level flow doing mechanics instead of intent
+- repeated mode/kind switching that should be type- or variant-directed
+- boundary validation or conversion happening too deep
+- abstraction introduced before seam pressure exists
+- wrapper seams leaking concrete client details
+- status contracts that claim success while errors are suppressed
+- tests proving mocked choreography rather than boundary behavior
 
-- **Go:** constructors/builders; sentinel errors by default, typed errors when callers need to branch; tiny interfaces at IO seams.
-- **Rust:** newtypes/enums for domain meaning; explicit ownership; generation for mechanical repetition.
-- **Python:** typed boundary models; small modules; avoid magical metaprogramming unless it buys clear leverage.
-- **TypeScript:** explicit schema/type boundaries; generated API types where possible; avoid helper soup and over-generic hooks; keep frontend state and data-fetching seams clear.
+## Pre-Flight Checklist
 
-## Review Triggers
+Before returning code in this fingerprint, ask:
 
-The result is off-style if:
+- [ ] Is top-level flow linear with early returns and declarative stage calls?
+- [ ] Did I hoist important branching into explicit variants/types where it clarifies intent?
+- [ ] Are traversal mechanics delegated downward instead of mixed into orchestration?
+- [ ] Are boundary contracts typed with conversion localized at edges?
+- [ ] Are outcome semantics truthful for success/partial/failure paths?
+- [ ] Did I avoid adding abstraction layers without proven seam pressure?
+- [ ] Is framework and generated glue confined to hard edges?
+- [ ] Do tests verify behavior and contract truth at real seams?
+- [ ] Can contract/docs/generated outputs drift without a failing check?
 
-- the repo shape hides clear ownership boundaries or over-splits before real boundaries exist
-- the main flow is hard to recover without tracing multiple abstractions
-- a boundary contract is implicit when it should be typed, schematised, generated, or policy-backed
-- the data model allows invalid states or uses loose bags of primitives where domain types would clarify
-- validation is buried deep in domain logic
-- a shared helper deduplicates code that is still semantically different
-- a framework facade exists only for stylistic purity
-- generated or documented output can drift silently
-- tests mostly prove mocked choreography instead of real behaviour
-- refactors are mixed with behaviour changes in one large diff
-- observability is absent at important boundaries or assumed to be "in the framework"
+## Anti-Patterns
 
-## Delivery Checklist
+If you see these, the output has drifted:
 
-Before returning code, check:
-
-- [ ] Is the repo or module shape aligned to real responsibilities (modular monolith unless split is justified)?
-- [ ] Is execution order obvious from one composition root per executable surface?
-- [ ] Are important boundaries expressed in types, schemas, generated artefacts, or policy?
-- [ ] Does the data model use domain types and avoid invalid states where practical?
-- [ ] Is validation happening at the correct edge for this boundary type?
-- [ ] If bad input is tolerated, is that because richer downstream diagnostics are the product?
-- [ ] Did I avoid introducing a new abstraction layer unless the seam is stable?
-- [ ] Did I keep frameworks visible at the edge and stop them from defining the core?
-- [ ] Do the tests exercise a real seam, corpus, fixture, or drift surface?
-- [ ] Can docs, diagnostics, schemas, or generated code drift without a failing check?
-- [ ] Are refactors separate from behaviour changes? Is the diff reviewable?
-- [ ] Are observability touchpoints explicit at important boundaries where needed?
-
-## Additional Resources
-
-- For data modelling philosophy, construction, state-specific APIs, and write-this-not-that examples, read [references/data-modelling.md](references/data-modelling.md)
-- For concrete "write this instead of that" examples (repo shape, composition, naming, boundaries, validation, abstraction, DI, errors, tests), read [references/write-this-not-that.md](references/write-this-not-that.md)
-- For boundary and abstraction choices, read [references/boundary-playbook.md](references/boundary-playbook.md)
-- For repo topology, docs, CI, dependencies, and rollout defaults, read [references/repo-shaping.md](references/repo-shaping.md)
+- top-level orchestration with nested branch + loop bookkeeping mixed with domain decisions
+- repeated switching on free-form `kind`/mode strings in orchestration code
+- `Union[TypedModel, dict]` and runtime coercion as standard internal API shape
+- comment-enforced allowed values instead of enums/variants for closed states
+- broad exception catch that logs and still returns success/completed
+- broad facades owning unrelated responsibilities across boundary layers
+- dependency wrappers that require concrete-client reach-through (`hasattr`, reflection probing)
+- tests that rely on prints or weak shape checks without asserting contract outcomes
