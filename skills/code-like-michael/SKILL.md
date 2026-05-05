@@ -126,6 +126,8 @@ When this skill is active, follow this sequence:
 3. **Implement concretely** with minimal necessary abstraction.
 4. **Run a style self-audit** using the checklist below before presenting.
 
+Prefer surgical changes. Do not reformat, rename, repartition modules, or introduce new architecture unless it directly supports the requested change.
+
 ## Pre-Response Self-Audit Checklist
 
 Before returning code, verify:
