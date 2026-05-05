@@ -1,6 +1,6 @@
 ---
 name: code-like-michael
-description: Write, refactor, and review code in Michael's style: explicit contracts, thin entrypoints, practical boundaries, anti-ceremony abstractions, deterministic tooling, and architecture that scales from function internals to repository shape.
+description: Write, refactor, and review code in Michael's style; explicit contracts, thin entrypoints, practical boundaries, anti-ceremony abstractions, deterministic tooling, and architecture that scales from function internals to repository shape.
 ---
 
 # Code Like Michael
