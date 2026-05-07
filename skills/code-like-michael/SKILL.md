@@ -5,7 +5,7 @@ description: Write, refactor, and review code in Michael's style; explicit contr
 
 # Code Like Michael
 
-This skill is an execution policy for agents. It converts labeled examples in `references/examples/` into concrete coding decisions.
+This skill is an execution policy for agents. It converts labelled examples in `references/examples/` into concrete coding decisions.
 
 If you are writing code, changing architecture, reviewing PRs, or proposing refactors in this repo, apply this skill.
 
@@ -13,11 +13,11 @@ If you are writing code, changing architecture, reviewing PRs, or proposing refa
 
 Treat these files as source-of-truth calibration:
 
-- `references/examples/` (labeled examples; highest authority)
+- `references/examples/` (labelled examples; highest authority)
 - `references/dimensions.md` (20 dimensions)
 - `references/annotations-rubric.md` (anchor definitions)
 
-When uncertain, prefer consistency with labeled examples over generic best practices.
+When uncertain, prefer consistency with labelled examples over generic best practices.
 
 ## Style North Star
 
@@ -52,7 +52,7 @@ The same philosophy applies across languages, but tactics differ.
 
 - Prefer iterator pipelines for straightforward transformations.
 - Prefer typed errors over `String` errors for domain flows.
-- Keep `main` thin; use `clap` derive-based CLI modeling.
+- Keep `main` thin; use `clap` derive-based CLI modelling.
 - Prefer domain newtypes/enums over raw primitives for constrained values.
 - Avoid excess `let mut`; mutate only where it pays for clarity/perf.
 
@@ -73,7 +73,7 @@ The same philosophy applies across languages, but tactics differ.
 
 ### TypeScript
 
-- Centralize config in one typed loader; avoid distributed `process.env` reads.
+- Centralise config in one typed loader; avoid distributed `process.env` reads.
 - Prefer explicit domain types/unions at boundaries.
 - Avoid throwing raw strings.
 - Keep CLIs and handlers as orchestration shells, not business-logic dumps.
@@ -83,7 +83,7 @@ The same philosophy applies across languages, but tactics differ.
 
 Use this as a quick execution map while coding.
 
-1. **Transformation Style**: favor declarative transforms when linear and clear.
+1. **Transformation Style**: favour declarative transforms when linear and clear.
 2. **Control Flow Shape**: guard clauses first; flatten branch trees.
 3. **Mutation Budget**: immutable by default, mutation only where local and useful.
 4. **Error Semantics**: preserve cause + context; avoid generic failure labels.
@@ -93,12 +93,12 @@ Use this as a quick execution map while coding.
 8. **Commenting**: explain "why/constraint/tradeoff", never narrate obvious mechanics.
 9. **Module Cohesion**: one module, one reason to change.
 10. **Dependency Directionality**: avoid layering theater and direction violations.
-11. **Boundary Surface Area**: minimal public API; rich internal domain modeling.
+11. **Boundary Surface Area**: minimal public API; rich internal domain modelling.
 12. **Cross-Cutting Placement**: keep logs/metrics/auth at deliberate seams.
 13. **Testability**: inject unstable dependencies (clock, network, random, env).
 14. **Concurrency Discipline**: prefer well-known primitives/libraries over bespoke concurrency scaffolding.
 15. **Entry-Point Architecture**: thin CLI/service entrypoints that delegate.
-16. **Repo Topology**: organize by feature/responsibility, not generic buckets.
+16. **Repo Topology**: organise by feature/responsibility, not generic buckets.
 17. **Config Strategy**: one typed config load path near startup.
 18. **IO Isolation**: separate pure domain logic from transport/storage.
 19. **Tooling Contract**: explicit, reproducible scripts and pinned toolchain versions.
@@ -116,6 +116,10 @@ Flag these unless a clear task-specific reason exists:
 - Entry-point files containing domain/business logic
 - Comments that duplicate the code line-by-line
 - Hard-coded network/time dependencies in logic that should be testable
+- Solving a generic nearby problem instead of the actual local problem
+- Tests that assert mocked choreography rather than observable behaviour
+- Speculative options, unused helpers, or "future-proofing" left behind
+- Bypassing existing config/logging/tracing/auth/IO seams instead of using them
 
 ## Implementation Workflow (Agent)
 
@@ -124,7 +128,14 @@ When this skill is active, follow this sequence:
 1. **Classify the change** across micro/meso/macro dimensions.
 2. **Design boundaries first**: identify domain types, seams, and entrypoint responsibilities.
 3. **Implement concretely** with minimal necessary abstraction.
-4. **Run a style self-audit** using the checklist below before presenting.
+4. **Reshape first-pass output as a draft**, not an artefact to preserve. Apply this default sequence until the code looks deliberately authored for this repository:
+   1. delete excess structure
+   2. recover local domain names
+   3. move validation to the correct boundary
+   4. preserve cause and context in errors
+   5. test the real seam, not its scaffolding
+   6. confirm every remaining file has a reason to exist
+5. **Run a style self-audit** using the checklist below before presenting.
 
 Prefer surgical changes. Do not reformat, rename, repartition modules, or introduce new architecture unless it directly supports the requested change.
 
@@ -151,7 +162,7 @@ If two style goals conflict, choose the option that:
 
 ## Review Mode Guidance
 
-When reviewing code, prioritize findings in this order:
+When reviewing code, prioritise findings in this order:
 
 1. Broken/weak boundaries (contracts, validation, domain typing)
 2. Architecture drift (fat entrypoints, mixed responsibilities, leaky surfaces)
