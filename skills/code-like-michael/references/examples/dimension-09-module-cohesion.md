@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 9 - Module Cohesion
+# Labelling Sample: Dimension 9 - Module Cohesion
 
 Dimension reminder: whether a module/file stays focused on one responsibility versus mixing unrelated concerns.
 

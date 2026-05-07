@@ -48,7 +48,7 @@ After each workflow step, persist the step output.
 
 If the step changed tracked repository files, commit and push immediately with a step-scoped commit message.
 
-If the step produced only temporary analysis artifacts, do not commit them unless the workflow is running on a dedicated maintenance branch that preserves intermediate state.
+If the step produced only temporary analysis artefacts, do not commit them unless the workflow is running on a dedicated maintenance branch that preserves intermediate state.
 
 ## Change thresholds
 

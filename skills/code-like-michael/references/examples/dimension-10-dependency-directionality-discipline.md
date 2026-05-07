@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 10 - Dependency Directionality Discipline
+# Labelling Sample: Dimension 10 - Dependency Directionality Discipline
 
 Dimension reminder: consistency of dependency flow (for example, core/domain inward and adapters outward) with minimal layering violations.
 

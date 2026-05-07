@@ -73,7 +73,7 @@ A short checklist to run before finalising content. If the answer is "no" or "vi
 | Avoid                               | Prefer                                                        |
 | ----------------------------------- | ------------------------------------------------------------- |
 | "Obviously", "Clearly"              | Direct claim or "Something to keep in mind"                   |
-| "leverage", "utilize", "ideate"     | "use", "reuse", "call"                                        |
+| "leverage", "utilise", "ideate"     | "use", "reuse", "call"                                        |
 | "In this article we'll cover..."    | Context or problem in first line; headings show structure     |
 | "Key takeaway", "Bottom line:"      | "The key insight", or weave into paragraph                    |
 | "Happy coding!", "Subscribe!"       | Thematic or minimal close; "let me know on the issue tracker" |

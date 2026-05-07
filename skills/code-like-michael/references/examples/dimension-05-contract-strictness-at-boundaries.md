@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 5 - Contract Strictness at Boundaries
+# Labelling Sample: Dimension 5 - Contract Strictness at Boundaries
 
 Dimension reminder: how explicit and strict a file is about validating inputs/outputs and enforcing invariants at boundaries.
 

@@ -79,7 +79,7 @@ Use this reference for vocabulary level, formality, contractions, jargon, favour
 | **quite** | *"There's quite a lot going on here"*; *"quite simple"*, *"quite easy"*, *"quite a bit"* |
 | **gist** | *"you get the gist"*; *"that's the general gist"* |
 | **unpack** | *"let's unpack it a bit"*; *"Unpack Approach"* |
-| **Here's the thing** | *"But here's the thing that took me embarrassingly long to realize"* |
+| **Here's the thing** | *"But here's the thing that took me embarrassingly long to realise"* |
 | **Let's** | *"Let's unpack it"*, *"Let's look at"*, *"Let's see"*, *"Let's step back"*, *"Let's be honest"* |
 | **just** (emphasis) | *"just a case of"*, *"just need to"*, *"just because"*, *"we just need"* |
 | **under the hood** | *"how they work under the hood"*; *"coded under the hood"* |

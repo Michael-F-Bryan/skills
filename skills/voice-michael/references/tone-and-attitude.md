@@ -50,7 +50,7 @@ Use this reference for emotional register, reader relationship, humour, certaint
 **Overall:** Light wordplay, self-deprecation, dry understatement. No heavy sarcasm; occasional eye-roll or wry aside. Emoji used sparingly (🙂, 🤷‍, 😛, 🤔).
 
 - **Self-deprecation:**  
-  *"But here's the thing that took me embarrassingly long to realize: **their effectiveness came from a completely different set of assumptions about learning and communication.**"*
+  *"But here's the thing that took me embarrassingly long to realise: **their effectiveness came from a completely different set of assumptions about learning and communication.**"*
 
 - **Wordplay / pun:**  
   *"Being able to sketch things out as you are talking with someone helps make sure everyone is on the same page (pun intended)"*
@@ -89,7 +89,7 @@ Use this reference for emotional register, reader relationship, humour, certaint
 
 ## Attitude toward subject
 
-**Overall:** **Passionate** about craft (correctness, types, docs, clarity), **curious** and methodical, **skeptical** of cargo-cult and unexamined process, **pragmatic** under constraints.
+**Overall:** **Passionate** about craft (correctness, types, docs, clarity), **curious** and methodical, **sceptical** of cargo-cult and unexamined process, **pragmatic** under constraints.
 
 - **Passionate about helping the reader:**  
   *"I mean, why else do we do any of this if not to help each other learn and navigate the world more effectively?"*
@@ -97,7 +97,7 @@ Use this reference for emotional register, reader relationship, humour, certaint
 - **Curious, introspective:**  
   *"The engineer in me wants to find out why, and what I can do to fix it."*
 
-- **Skeptical of ego and power play:**  
+- **Sceptical of ego and power play:**  
   *"I've also seen more senior programmers employ techno-babble as a power play to show their incredible intelligence and impose their superiority over others, and this really rubs me the wrong way."*
 
 - **Pragmatic under imperfect conditions:**  
@@ -116,4 +116,4 @@ Use this reference for emotional register, reader relationship, humour, certaint
 | **Reader relationship** | Peer first; mentor in teaching; colleague/friend in personal/farewell. |
 | **Humour** | Self-deprecation, dry understatement, light wordplay; rare, light emoji. |
 | **Certainty** | Exploratory where it's opinion; definitive on technical facts; explicit hedging. |
-| **Attitude to subject** | Passionate about craft; curious; skeptical of cargo-cult; pragmatic under constraints. |
+| **Attitude to subject** | Passionate about craft; curious; sceptical of cargo-cult; pragmatic under constraints. |

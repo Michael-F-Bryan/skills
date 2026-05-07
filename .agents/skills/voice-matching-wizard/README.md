@@ -53,7 +53,7 @@ Once created, combine your voice skill with:
 ## Tips
 
 - More samples = better results
-- Analyze similar content types together (newsletters with newsletters)
+- Analyse similar content types together (newsletters with newsletters)
 - Look for unconscious patterns the writer may not know they have
 - Update the skill as your voice evolves
 

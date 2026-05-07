@@ -1,6 +1,6 @@
-# Labeling Sample: Dimension 15 - Entry-Point Architecture
+# Labelling Sample: Dimension 15 - Entry-Point Architecture
 
-Dimension reminder: how execution is organized through entrypoints (CLI/service/worker), and whether entrypoints stay thin by delegating business logic to domain/application modules.
+Dimension reminder: how execution is organised through entrypoints (CLI/service/worker), and whether entrypoints stay thin by delegating business logic to domain/application modules.
 
 ---
 

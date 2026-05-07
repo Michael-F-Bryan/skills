@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 7 - Local Abstraction Threshold
+# Labelling Sample: Dimension 7 - Local Abstraction Threshold
 
 Dimension reminder: tendency to extract helpers deliberately versus keeping too much logic inline (or over-extracting prematurely).
 
@@ -6,13 +6,13 @@ Dimension reminder: tendency to extract helpers deliberately versus keeping too 
 
 ```rust
 pub fn render_account_badge(first: &str, last: &str, plan: &str, is_active: bool) -> String {
-    let display_name = format!("{} {}", capitalize(first), capitalize(last));
+    let display_name = format!("{} {}", capitalise(first), capitalise(last));
     let plan_label = plan.trim().to_uppercase();
     let status_label = if is_active { "ACTIVE" } else { "PAUSED" };
     format!("{display_name} [{plan_label}] {status_label}")
 }
 
-fn capitalize(input: &str) -> String {
+fn capitalise(input: &str) -> String {
     let mut chars = input.chars();
     match chars.next() {
         Some(first) => first.to_uppercase().collect::<String>() + chars.as_str(),
@@ -24,7 +24,7 @@ fn capitalize(input: &str) -> String {
 - Score (1-5): 5
 - Confidence (`low|medium|high`): high
 - Evidence:
-  - I feel like this is a good threshold for extracting the `capitalize()` helper
+  - I feel like this is a good threshold for extracting the `capitalise()` helper
 
 ---
 
@@ -85,12 +85,12 @@ def serialize_user(user: dict) -> dict:
 ---
 
 ```ts
-function normalize(input: string): string {
+function normalise(input: string): string {
   return input.trim().toLowerCase();
 }
 
 function buildKey(namespace: string, id: string): string {
-  return `${normalize(namespace)}:${normalize(id)}`;
+  return `${normalise(namespace)}:${normalise(id)}`;
 }
 
 export function upsertCacheRecord(namespace: string, id: string, value: string): { key: string; value: string } {

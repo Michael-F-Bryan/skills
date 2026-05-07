@@ -21,7 +21,7 @@ Use this when turning an automation request into durable internal tooling.
 
 - Choose command shape (`uv run <agent-name> <group> <command>`).
 - Define typed option bundles and dependency boundaries.
-- Decide output/error behavior (human-readable, stable when needed for automation).
+- Decide output/error behaviour (human-readable, stable when needed for automation).
 
 ### 4) Implementation
 
@@ -33,7 +33,7 @@ Use this when turning an automation request into durable internal tooling.
 ### 5) Verification
 
 - Run the checklist in [checklist.md](checklist.md).
-- Confirm command discoverability (`--help`) and behavior tests.
+- Confirm command discoverability (`--help`) and behaviour tests.
 
 ### 6) Adoption
 
@@ -44,7 +44,7 @@ Use this when turning an automation request into durable internal tooling.
 
 - Track repeated one-offs and convert to CLI when thresholds are crossed.
 - Keep docs aligned with actual command surface.
-- Prefer additive command evolution over breaking behavior changes.
+- Prefer additive command evolution over breaking behaviour changes.
 
 ### 8) Deprecation
 

@@ -8,7 +8,7 @@ description: >-
 
 # Handoff iteration loop
 
-Multi-agent pattern inspired by [Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps) (Anthropic): **separate generation from evaluation**, **structured artefacts** across iterations, **skeptical external QA**, **contracts before heavy work**, **simplify the harness** when the task no longer needs every role — and **real dev-team shape**: **discovery / Q&A → goals → sprints → loop**, with **Git commits as the implementor goes**.
+Multi-agent pattern inspired by [Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps) (Anthropic): **separate generation from evaluation**, **structured artefacts** across iterations, **sceptical external QA**, **contracts before heavy work**, **simplify the harness** when the task no longer needs every role — and **real dev-team shape**: **discovery / Q&A → goals → sprints → loop**, with **Git commits as the implementor goes**.
 
 ## Progressive disclosure — load only what you need
 
@@ -49,4 +49,4 @@ Coordinator → Planner writes _working/{TOPIC}/iter{N}.1-planner.md
 
 ## Veritas reference templates
 
-MUL-55 Grafana temp dashboard: `_working/mul55-dash/iter6.1-planner.md` (contract + protocol), `_working/mul55-dash/iter6.3-reviewer.md` (skeptical PASS table), `_working/HANDOVER-mul55-cost-dashboard.md` (index line pattern).
+MUL-55 Grafana temp dashboard: `_working/mul55-dash/iter6.1-planner.md` (contract + protocol), `_working/mul55-dash/iter6.3-reviewer.md` (sceptical PASS table), `_working/HANDOVER-mul55-cost-dashboard.md` (index line pattern).

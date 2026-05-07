@@ -19,7 +19,7 @@ Use this checklist before claiming an internal tooling change is complete.
 
 ## Verification
 
-- Domain behavior tests added/updated.
+- Domain behaviour tests added/updated.
 - CLI wiring tests added/updated.
 - Help discoverability checked:
   - `uv run <agent-name> --help`

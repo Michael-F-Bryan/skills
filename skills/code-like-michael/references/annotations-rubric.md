@@ -2,7 +2,7 @@
 
 This rubric operationalizes the 20 dimensions from `dimensions.md`.
 
-## Labeling Contract
+## Labelling Contract
 
 - Unit: one source file
 - Output per dimension: `score` (1-5), `confidence` (`low|medium|high`), `evidence` (1-3 short notes)
@@ -66,7 +66,7 @@ This rubric operationalizes the 20 dimensions from `dimensions.md`.
 
 ### 7) Local Abstraction Threshold
 - `1`: extraction is erratic or too-late (large tangled local blocks)
-- `3`: partially consistent extraction behavior
+- `3`: partially consistent extraction behaviour
 - `5`: consistent extraction policy based on complexity/reuse pressure
 
 ### 8) Commenting Philosophy
@@ -91,7 +91,7 @@ This rubric operationalizes the 20 dimensions from `dimensions.md`.
 
 ### 12) Cross-Cutting Concern Placement
 - `1`: logging/metrics/auth/retries scattered through domain logic
-- `3`: partially centralized with leakage
+- `3`: partially centralised with leakage
 - `5`: consistent placement at intended boundaries/adapters
 
 ### 13) Testability by Construction
@@ -116,8 +116,8 @@ This rubric operationalizes the 20 dimensions from `dimensions.md`.
 
 ### 17) Configuration and Environment Strategy
 - `1`: ad hoc env/config reads across codebase, minimal validation
-- `3`: some centralization, partial schema/defaults
-- `5`: centralized typed config, validated at startup with explicit defaults
+- `3`: some centralisation, partial schema/defaults
+- `5`: centralised typed config, validated at startup with explicit defaults
 
 ### 18) Data Boundary and IO Isolation
 - `1`: IO/persistence concerns mixed directly into core domain paths
@@ -142,7 +142,7 @@ Use these cues as supporting evidence, not strict requirements.
 
 ## Rust Cues
 
-- Transformation Style: iterator chains (`map`, `filter`, `fold`, `collect`) favored for pure transforms
+- Transformation Style: iterator chains (`map`, `filter`, `fold`, `collect`) favoured for pure transforms
 - Error Explicitness: `Result<T, E>`, `thiserror`/typed errors, `?` with context where useful
 - Mutation Budget: `let` over `let mut` unless clear need
 - Concurrency Discipline: explicit ownership, channel/task boundaries, cancellation strategy
@@ -170,4 +170,4 @@ Use these cues as supporting evidence, not strict requirements.
 - Boundary Surface Area: narrow exported types/functions; avoid accidental barrel bloat
 - Error Explicitness: typed error contracts or discriminated-union style failure paths
 - Testability by Construction: dependency seams and side-effect isolation
-- Config Strategy: centralized typed env/config module with startup validation
+- Config Strategy: centralised typed env/config module with startup validation

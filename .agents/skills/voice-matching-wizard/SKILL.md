@@ -1,6 +1,6 @@
 ---
 name: voice-matching-wizard
-description: Transform writing samples into a codified voice style that can be replicated consistently. This wizard guides you through analyzing samples, extracting patterns, and generating a custom voice skill.
+description: Transform writing samples into a codified voice style that can be replicated consistently. This wizard guides you through analysing samples, extracting patterns, and generating a custom voice skill.
 tier: light-setup
 setup_time: 15-20 minutes
 requires: 2-5 writing samples (500+ words each)
@@ -13,12 +13,12 @@ Create a voice skill that captures the patterns, rhythms, and sensibilities of a
 
 ## What This Does
 
-Voice matching is the art of identifying what makes writing *recognizable*. Not just the obvious markers—vocabulary, sentence length—but the deeper patterns: how ideas unfold, where the writer pauses, what they leave unsaid.
+Voice matching is the art of identifying what makes writing *recognisable*. Not just the obvious markers—vocabulary, sentence length—but the deeper patterns: how ideas unfold, where the writer pauses, what they leave unsaid.
 
 This wizard walks you through the process of:
 1. Gathering representative samples
 2. Extracting patterns across multiple dimensions
-3. Synthesizing a usable voice profile
+3. Synthesising a usable voice profile
 4. Generating a working skill file
 
 The output is a `voice-[name].skill.md` you can use alongside other skills (like `anti-ai-writing`) for consistent, authentic content.
@@ -113,7 +113,7 @@ Collect 2-5 writing samples. Paste each one into a separate document, or note wh
 
 ## Phase 2: Extract Patterns
 
-Analyze each sample across these dimensions:
+Analyse each sample across these dimensions:
 
 ### 2.1 Sentence Architecture
 
@@ -142,7 +142,7 @@ Analyze each sample across these dimensions:
 | **Strong language** | Profanity level/style if any |
 
 **Identify:**
-- Favorite words (appears 3+ times across samples)
+- Favourite words (appears 3+ times across samples)
 - Avoided words (never appears despite opportunity)
 - Signature phrases
 
@@ -152,9 +152,9 @@ Analyze each sample across these dimensions:
 |---------|------------------|
 | **Emotional register** | Warm? Cool? Intense? Measured? |
 | **Reader relationship** | Peer? Mentor? Friend? Expert? |
-| **Humor style** | Sarcasm? Wordplay? Self-deprecation? None? |
+| **Humour style** | Sarcasm? Wordplay? Self-deprecation? None? |
 | **Certainty level** | Definitive or exploratory? |
-| **Attitude toward subject** | Passionate? Skeptical? Curious? |
+| **Attitude toward subject** | Passionate? Sceptical? Curious? |
 
 ### 2.4 Structural Moves
 
@@ -167,7 +167,7 @@ Analyze each sample across these dimensions:
 
 ### 2.5 Distinctive Techniques
 
-What makes this voice *recognizable*?
+What makes this voice *recognisable*?
 
 - Rhetorical devices (questions, analogies, callbacks)
 - Signature moves unique to this writer
@@ -184,13 +184,13 @@ Just as important:
 
 ---
 
-## Phase 3: Synthesize
+## Phase 3: Synthesise
 
 ### The Voice in One Paragraph
 
 Write a single paragraph capturing the essence:
 
-> "[Name]'s voice is [primary characteristics]. They write like [relationship to reader], using [key techniques]. Their tone is [tone], with [humor style if applicable]. Sentences tend to be [structure]. They favor [word choice] and avoid [avoidances]. The overall effect is [feeling/impact]."
+> "[Name]'s voice is [primary characteristics]. They write like [relationship to reader], using [key techniques]. Their tone is [tone], with [humour style if applicable]. Sentences tend to be [structure]. They favour [word choice] and avoid [avoidances]. The overall effect is [feeling/impact]."
 
 ### Voice Spectrum
 
@@ -213,7 +213,7 @@ Using your analysis, create `voice-[name].skill.md` with this structure:
 ```markdown
 ---
 name: voice-[name]
-description: Write in [Name]'s distinctive voice. [One sentence characterization]. Use with anti-ai-writing for authentic content.
+description: Write in [Name]'s distinctive voice. [One sentence characterisation]. Use with anti-ai-writing for authentic content.
 ---
 
 # Voice: [Name]
@@ -303,7 +303,7 @@ Test your voice skill:
 
 ### The Energy Transfer Principle
 
-The best writing is a transfer of energy from writer to reader. When analyzing samples, notice how the writer transfers energy:
+The best writing is a transfer of energy from writer to reader. When analysing samples, notice how the writer transfers energy:
 - Do they write conversations or speeches?
 - Do they speak WITH their audience or AT them?
 - Where do they use specific, concrete language vs. abstract ideas?

@@ -57,12 +57,12 @@ Once initial questions are answered, encourage the user to dump all the context 
 - Background on the project/problem
 - Related team discussions or shared documents
 - Why alternative solutions aren't being used
-- Organizational context (team dynamics, past incidents, politics)
+- Organisational context (team dynamics, past incidents, politics)
 - Timeline pressures or constraints
 - Technical architecture or dependencies
 - Stakeholder concerns
 
-Advise them not to worry about organizing it - just get it all out. Offer multiple ways to provide context:
+Advise them not to worry about organising it - just get it all out. Offer multiple ways to provide context:
 - Info dump stream-of-consciousness
 - Point to team channels or threads to read
 - Link to shared documents
@@ -133,16 +133,16 @@ Ask if this structure works, or if they want to adjust it.
 
 Create the initial document structure with placeholder text for all sections.
 
-**If access to artifacts is available:**
-Use `create_file` to create an artifact. This gives both the agent and the user a scaffold to work from.
+**If access to artefacts is available:**
+Use `create_file` to create an artefact. This gives both the agent and the user a scaffold to work from.
 
 Inform them that the initial structure with placeholders for all sections will be created.
 
-Create artifact with all section headers and brief placeholder text like "[To be written]" or "[Content here]".
+Create artefact with all section headers and brief placeholder text like "[To be written]" or "[Content here]".
 
 Provide the scaffold link and indicate it's time to fill in each section.
 
-**If no access to artifacts:**
+**If no access to artefacts:**
 Create a markdown file in the working directory. Name it appropriately (e.g., `decision-doc.md`, `technical-spec.md`).
 
 Inform them that the initial structure with placeholders for all sections will be created.
@@ -191,12 +191,12 @@ Use `str_replace` to replace the placeholder text for this section with the actu
 
 Announce the [SECTION NAME] section will be drafted now based on what they've selected.
 
-**If using artifacts:**
-After drafting, provide a link to the artifact.
+**If using artefacts:**
+After drafting, provide a link to the artefact.
 
 Ask them to read through it and indicate what to change. Note that being specific helps learning for the next sections.
 
-**If using a file (no artifacts):**
+**If using a file (no artefacts):**
 After drafting, confirm completion.
 
 Inform them the [SECTION NAME] section has been drafted in [filename]. Ask them to read through it and indicate what to change. Note that being specific helps learning for the next sections.
@@ -208,7 +208,7 @@ Provide a note: Instead of editing the doc directly, ask them to indicate what t
 
 As user provides feedback:
 - Use `str_replace` to make edits (never reprint the whole doc)
-- **If using artifacts:** Provide link to artifact after each edit
+- **If using artefacts:** Provide link to artefact after each edit
 - **If using files:** Just confirm edits are complete
 - If user edits doc directly and asks to read it: mentally note the changes they made and keep them in mind for future sections (this shows their preferences)
 
@@ -266,7 +266,7 @@ Announce that these questions will be tested with a fresh agent instance (no con
 
 For each question, invoke a sub-agent with just the document content and the question.
 
-Summarize what the reader agent got right/wrong for each question.
+Summarise what the reader agent got right/wrong for each question.
 
 ### Step 3: Run Additional Checks
 
@@ -274,7 +274,7 @@ Announce additional checks will be performed.
 
 Invoke sub-agent to check for ambiguity, false assumptions, contradictions.
 
-Summarize any issues found.
+Summarise any issues found.
 
 ### Step 4: Report and Fix
 
@@ -353,7 +353,7 @@ Announce document completion. Provide a few final tips:
 
 **Tone:**
 - Be direct and procedural
-- Explain rationale briefly when it affects user behavior
+- Explain rationale briefly when it affects user behaviour
 - Don't try to "sell" the approach - just execute it
 
 **Handling Deviations:**
@@ -365,11 +365,11 @@ Announce document completion. Provide a few final tips:
 - Throughout, if context is missing on something mentioned, proactively ask
 - Don't let gaps accumulate - address them as they come up
 
-**Artifact Management:**
+**Artefact Management:**
 - Use `create_file` for drafting full sections
 - Use `str_replace` for all edits
-- Provide artifact link after every change
-- Never use artifacts for brainstorming lists - that's just conversation
+- Provide artefact link after every change
+- Never use artefacts for brainstorming lists - that's just conversation
 
 **Quality over Speed:**
 - Don't rush through stages

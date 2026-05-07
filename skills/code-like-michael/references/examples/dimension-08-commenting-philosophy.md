@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 8 - Commenting Philosophy
+# Labelling Sample: Dimension 8 - Commenting Philosophy
 
 Dimension reminder: preference for comments that explain intent/constraints/tradeoffs versus comments that restate obvious mechanics.
 
@@ -23,7 +23,7 @@ package metrics
 
 // This function returns sum.
 func Sum(vals []int) int {
-	// initialize result
+	// initialise result
 	result := 0
 	// loop over values
 	for _, v := range vals {

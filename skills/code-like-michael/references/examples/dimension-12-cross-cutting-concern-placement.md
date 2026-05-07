@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 12 - Cross-Cutting Concern Placement
+# Labelling Sample: Dimension 12 - Cross-Cutting Concern Placement
 
 Dimension reminder: whether logging/metrics/auth/retries are handled consistently at boundaries or scattered through core logic.
 
@@ -74,14 +74,14 @@ export async function createInvoice(customerId: string, amountCents: number): Pr
   if (amountCents <= 0) throw new Error("amount must be positive");
 
   // auth, retry, and metrics are all mixed inline here
-  if (!process.env.API_TOKEN) throw new Error("not authorized");
+  if (!process.env.API_TOKEN) throw new Error("not authorised");
   let attempts = 0;
   while (attempts < 3) {
     attempts++;
     try {
       const res = await fetch("https://api.example.com/invoices", {
         method: "POST",
-        headers: { Authorization: `Bearer ${process.env.API_TOKEN}` },
+        headers: { Authorisation: `Bearer ${process.env.API_TOKEN}` },
         body: JSON.stringify({ customerId, amountCents }),
       });
       if (!res.ok) continue;

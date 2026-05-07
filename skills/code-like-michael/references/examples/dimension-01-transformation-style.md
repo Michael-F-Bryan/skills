@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 1 - Transformation Style
+# Labelling Sample: Dimension 1 - Transformation Style
 
 Dimension reminder: preference for declarative transformation pipelines/combinators vs imperative mutation loops for transform-heavy logic.
 
@@ -45,17 +45,17 @@ pub struct User {
 
 ```rust
 pub fn cleaned_prices(values: &[f64]) -> Vec<i64> {
-    let mut normalized = Vec::new();
+    let mut normalised = Vec::new();
 
     for value in values {
         if value.is_finite() {
-            normalized.push((value * 100.0).round() as i64);
+            normalised.push((value * 100.0).round() as i64);
         }
     }
 
-    normalized.sort_unstable();
-    normalized.dedup();
-    normalized
+    normalised.sort_unstable();
+    normalised.dedup();
+    normalised
 }
 ```
 

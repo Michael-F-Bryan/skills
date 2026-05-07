@@ -28,7 +28,7 @@ Common for explanations and instructions.
 
 Frequent in technical or conceptual explanations, often with multiple clauses.
 
-- *"Eventually, I realized that what felt natural to me - the way I naturally think through problems, acknowledge uncertainty, and build understanding - was apparently unusual in technical writing."*
+- *"Eventually, I realised that what felt natural to me - the way I naturally think through problems, acknowledge uncertainty, and build understanding - was apparently unusual in technical writing."*
 - *"When you know something is going to be difficult, **warn readers before they encounter it:**"*
 
 **Summary:** Average sentence length sits in the medium range. Long sentences carry detail and qualification; short ones mark rhythm breaks and emphasis.
@@ -65,7 +65,7 @@ Frequent in technical or conceptual explanations, often with multiple clauses.
 **Em dashes, commas, and parentheses** are used more than semicolons; punctuation supports asides and lists.
 
 - **Em dashes:** For asides, clarification, or an extra thought.  
-  *"Eventually, I realized that what felt natural to me - the way I naturally think through problems, acknowledge uncertainty, and build understanding - was apparently unusual in technical writing."*
+  *"Eventually, I realised that what felt natural to me - the way I naturally think through problems, acknowledge uncertainty, and build understanding - was apparently unusual in technical writing."*
 - **Semicolons:** Rare; when present, they link closely related clauses.
 - **Parentheses:** For examples, abbreviations, or short asides.  
   *"(e.g. traits, enums, macros)"* *"(i.e. we need to deal with mutation)"* *"(see the section on techno-babble)"*

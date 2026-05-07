@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 16 - Repository Topology Style
+# Labelling Sample: Dimension 16 - Repository Topology Style
 
 Dimension reminder: coherence and intentionality of repo structure (modular monolith/service split/package conventions) versus ad hoc layout.
 

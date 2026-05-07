@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 18 - Data Boundary and IO Isolation
+# Labelling Sample: Dimension 18 - Data Boundary and IO Isolation
 
 Dimension reminder: separation of pure/domain logic from IO/persistence/transport concerns.
 

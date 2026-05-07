@@ -123,7 +123,7 @@ At first, this is discovery work.
 Use a shell command or scratch script:
 
 ```bash
-curl -H "Authorization: Bearer $TOKEN" \
+curl -H "Authorisation: Bearer $TOKEN" \
   "https://api.example.com/v1/items?page=1"
 ```
 

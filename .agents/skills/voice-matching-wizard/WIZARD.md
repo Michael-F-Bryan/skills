@@ -105,19 +105,19 @@ Looking at your writing, I notice these patterns:
 
 ### Word Choice
 - [Vocabulary level]
-- [Favorite words/phrases]
+- [Favourite words/phrases]
 - [What you avoid]
 
 ### Tone & Attitude
 - [Emotional register]
 - [Reader relationship]
-- [Humor style]
+- [Humour style]
 
 ### Distinctive Moves
 - [Opening patterns]
 - [Transitions]
 - [Closing patterns]
-- [What makes this voice recognizable]
+- [What makes this voice recognisable]
 
 **Does this capture your voice?** What would you adjust?
 

@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 13 - Testability by Construction
+# Labelling Sample: Dimension 13 - Testability by Construction
 
 Dimension reminder: how strongly code is shaped for deterministic, isolated tests via explicit seams and dependency injection (without unnecessary abstraction).
 
@@ -116,7 +116,7 @@ class MetricsReporter:
 - Score (1-5): 4
 - Confidence (`low|medium|high`): medium
 - Evidence:
-  - I like that we're pulling the metric emission out into a method on the `MetricsReporter` type - that allows the metric to be standardized, which in turn means our alerting and dashboards can rely on always having access to certain fields
+  - I like that we're pulling the metric emission out into a method on the `MetricsReporter` type - that allows the metric to be standardised, which in turn means our alerting and dashboards can rely on always having access to certain fields
   - I probably wouldn't hard-code the request posting logic though, the `MetricsReporter` should probably store an otel metrics provider and submit the metrics through that - that way we aren't hard-coding that metrics are done by sending a HTTP request to a hard-coded URl
 
 ---

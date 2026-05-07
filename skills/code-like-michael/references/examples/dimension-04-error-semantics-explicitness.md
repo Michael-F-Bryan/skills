@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 4 - Error Semantics Explicitness
+# Labelling Sample: Dimension 4 - Error Semantics Explicitness
 
 Dimension reminder: how explicit, typed, and context-rich error handling is versus opaque, generic, or implicit failure paths.
 
@@ -109,7 +109,7 @@ def load_profile(path: str) -> dict:
 - Evidence:
   - There's no point doing all the `p.exists()` and `p.is_file()` checks because `read_text()` will rais the exceptions anyway, plus it opens us up to TOCTOU bugs
   - I'd just let the `json.JSONDecodeError` bubble up - it's useful enough already
-  - The `isinstance(payload, dict)` is good, although in a real codebase I'd want to use pydantic to deserialize into a properly typed `Profile` model
+  - The `isinstance(payload, dict)` is good, although in a real codebase I'd want to use pydantic to deserialise into a properly typed `Profile` model
 
 ---
 

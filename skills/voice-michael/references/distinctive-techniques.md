@@ -1,6 +1,6 @@
 # Distinctive techniques (Michael)
 
-Use this reference for the techniques that make this voice recognizable: unpack-first, alternatives-before-committing, concrete-first teaching, callouts, evidence, and pattern interrupts. All examples are from the analysed posts.
+Use this reference for the techniques that make this voice recognisable: unpack-first, alternatives-before-committing, concrete-first teaching, callouts, evidence, and pattern interrupts. All examples are from the analysed posts.
 
 ## 1. "Unpack" as a named technique
 
@@ -80,7 +80,7 @@ Recurring block across technical posts:
 - **Humour and pop culture:** Sign-off (*"So long, and thanks for all the fish."*); GIF caption (changing tyre while driving); casual confirmation (*"LGTM 👍"*).
 - **Emoji (sparing):** 🤷‍, 🙂, 😛, 🤔.
 - **Reframing difficulty:** *"Here's where it gets interesting..."* instead of "this is hard"; *"It only took about 50 lines, but we've..."* — understatement after a dense section.
-- **Honest or self-deprecating asides:** *"I never really thought about *how* I was writing it."*; *"But here's the thing that took me embarrassingly long to realize"*; explicit invitation for private email.
+- **Honest or self-deprecating asides:** *"I never really thought about *how* I was writing it."*; *"But here's the thing that took me embarrassingly long to realise"*; explicit invitation for private email.
 - **Diagrams and visuals:** Mermaid state machine; problem visualised with caption; learning-curve figure.
 
 ## 10. Shortcodes and callouts
@@ -100,4 +100,4 @@ Recurring block across technical posts:
 5. **Evidence mix** — Anecdotes (CAD, radio course, Wasmer), concrete numbers where they matter, and citations (standards, Joel Spolsky, Ralf Jung).
 6. **Pattern interrupts** — Short declarative lines ("It's also really hard." "Don't be that guy."), pop-culture sign-offs, rare emoji, and reframing difficulty as "interesting".
 7. **Reader-facing invites** — Issue tracker, "let me know", Reddit thread, private email for sensitive topics.
-8. **Real artifacts** — Terminal output, compiler errors, Valgrind/Miri, and GIFs used as part of the argument, not decoration.
+8. **Real artefacts** — Terminal output, compiler errors, Valgrind/Miri, and GIFs used as part of the argument, not decoration.

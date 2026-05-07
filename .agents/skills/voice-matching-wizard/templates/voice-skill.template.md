@@ -1,6 +1,6 @@
 ---
 name: voice-[name]
-description: Write in [Name]'s distinctive voice. [One sentence characterization]. Use with anti-ai-writing for authentic content.
+description: Write in [Name]'s distinctive voice. [One sentence characterisation]. Use with anti-ai-writing for authentic content.
 ---
 
 # Voice: [Name]
@@ -42,7 +42,7 @@ description: Write in [Name]'s distinctive voice. [One sentence characterization
 
 **Contractions:** [always/sometimes/never]
 
-**Favorite words:**
+**Favourite words:**
 - [word 1]
 - [word 2]
 - [word 3]
@@ -58,7 +58,7 @@ description: Write in [Name]'s distinctive voice. [One sentence characterization
 
 **Reader relationship:** [peer/mentor/friend/expert/other]
 
-**Humor:** [type and frequency]
+**Humour:** [type and frequency]
 
 **Certainty:** [definitive/exploratory/mixed]
 

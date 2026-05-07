@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 2 - Control Flow Shape
+# Labelling Sample: Dimension 2 - Control Flow Shape
 
 Dimension reminder: preference for straight-line control flow with guard clauses/early exits versus deep nesting and branch pyramids.
 

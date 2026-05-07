@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 20 - Evolution Posture
+# Labelling Sample: Dimension 20 - Evolution Posture
 
 Dimension reminder: bias toward stable contracts with explicit migration/deprecation strategy versus unmanaged breaking churn.
 

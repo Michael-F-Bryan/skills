@@ -12,7 +12,7 @@ Use this reference for phrases never used, structures avoided, topics skipped, a
 
 ### Corporate / buzzword verbs and nouns
 
-**Never:** "leverage" (as verb), "utilize/utilise", "paradigm", "synergy", "ideate/ideation", "circle back", "reach out", "touch base", "bandwidth" (for personal capacity), "disrupt/disruption", "game-changer", "revolutionary". When **disclaiming** productivity or life-hack framing, avoid repeating the buzzphrase (e.g. "life optimisation"); prefer "no life-hack angle", "no optimisation advice", or "just the observation that..." without naming the avoided category.
+**Never:** "leverage" (as verb), "utilise/utilise", "paradigm", "synergy", "ideate/ideation", "circle back", "reach out", "touch base", "bandwidth" (for personal capacity), "disrupt/disruption", "game-changer", "revolutionary". When **disclaiming** productivity or life-hack framing, avoid repeating the buzzphrase (e.g. "life optimisation"); prefer "no life-hack angle", "no optimisation advice", or "just the observation that..." without naming the avoided category.
 
 **Use instead:** "use", "reuse", "rely on", "call", "contact", "talk", "time".
 
@@ -134,7 +134,7 @@ Use this reference for phrases never used, structures avoided, topics skipped, a
 |----------|----------------------|---------------------------|
 | Openers | "In this article we'll cover...", "Have you ever wondered...?" | Context, problem, or direct statement |
 | Certainty | "Obviously", "Clearly", "It goes without saying" | Direct claim or "Something to keep in mind" |
-| Verbs | "leverage", "utilize", "ideate" | "use", "reuse", "call", "think about" |
+| Verbs | "leverage", "utilise", "ideate" | "use", "reuse", "call", "think about" |
 | Structure | Listicle titles, FAQ blocks, "Key takeaways" box, announced roadmap | Direct headings, See Also, inline links |
 | Sign-off | "Happy coding!", "Subscribe!", "Cheers!" | Thematic or minimal; issue tracker when relevant |
 | Formality | Academic, legal, marketing, influencer, tweet-style | Professional-conversational, technical-readable |

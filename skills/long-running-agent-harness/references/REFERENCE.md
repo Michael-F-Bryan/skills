@@ -1,12 +1,12 @@
 # Long-running agent harness – reference
 
-Templates and conventions for harness artifacts. Use when creating or refreshing the harness in a new project.
+Templates and conventions for harness artefacts. Use when creating or refreshing the harness in a new project.
 
 **Flow**: Design doc (human + AI) → Initializer runs once (reads design doc, creates feature list, runbook, backlog, progress) → Coding agent runs in a loop. At milestones (e.g. end of a work-unit group), pause for human check-in; when satisfied, re-run Initializer then continue until all features pass. The top-level agent spawns sub-agents (using whatever mechanism Cursor provides) and passes the relevant prompt each time (no copying into `.cursor/rules/`).
 
 ## Directory layout (canonical)
 
-All harness artifacts live in **`_working/`**. Paths are relative to project root.
+All harness artefacts live in **`_working/`**. Paths are relative to project root.
 
 ```
 <project-root>/
@@ -21,7 +21,7 @@ All harness artifacts live in **`_working/`**. Paths are relative to project roo
 
 ---
 
-## Artifact templates
+## Artefact templates
 
 Initializer writes these into `_working/`. Template content (same filenames in this folder):
 
@@ -48,5 +48,5 @@ The top-level agent uses these when spawning sub-agents; it passes the relevant 
 | File | Use as |
 |------|--------|
 | [initializer-prompt.md](initializer-prompt.md) | Prompt for the Initializer sub-agent. Reads `_working/design.md`; writes `_working/feature_list.yaml`, `_working/agent-runbook.md`, `_working/implementation-backlog.md`, `_working/agent-progress.md`, optionally `_working/init_<app>.sh`. Does not implement features or create project scaffolding. |
-| [coding-prompt.md](coding-prompt.md) | Prompt for each Coding sub-agent session. Reads/writes `_working/` artifacts; verifies using the runbook only. At milestones, the top-level agent pauses the loop, checks in with the human, then re-runs the Initializer and resumes the loop. |
+| [coding-prompt.md](coding-prompt.md) | Prompt for each Coding sub-agent session. Reads/writes `_working/` artefacts; verifies using the runbook only. At milestones, the top-level agent pauses the loop, checks in with the human, then re-runs the Initializer and resumes the loop. |
 

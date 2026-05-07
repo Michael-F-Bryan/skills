@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 3 - Mutation Budget
+# Labelling Sample: Dimension 3 - Mutation Budget
 
 Dimension reminder: tolerance for mutable state and reassignment in local scope versus immutable-by-default style with narrow mutation windows.
 
@@ -157,8 +157,8 @@ def format_lines(lines: list[str]) -> list[str]:
         value = raw.strip()
         if not value:
             continue
-        normalized = value.lower().replace(" ", "_")
-        out.append(normalized)
+        normalised = value.lower().replace(" ", "_")
+        out.append(normalised)
     return out
 ```
 

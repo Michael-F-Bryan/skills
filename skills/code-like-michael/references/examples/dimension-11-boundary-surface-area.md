@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 11 - Boundary Surface Area
+# Labelling Sample: Dimension 11 - Boundary Surface Area
 
 Dimension reminder: preference for narrow, intentional interfaces/contracts versus broad exposed APIs and leaky internals.
 

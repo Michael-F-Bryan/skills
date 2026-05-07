@@ -1,6 +1,6 @@
-# Labeling Sample: Dimension 17 - Configuration and Environment Strategy
+# Labelling Sample: Dimension 17 - Configuration and Environment Strategy
 
-Dimension reminder: how explicit, typed, centralized, and validated configuration handling is versus ad hoc environment/config reads spread across the codebase.
+Dimension reminder: how explicit, typed, centralised, and validated configuration handling is versus ad hoc environment/config reads spread across the codebase.
 
 ---
 
@@ -39,7 +39,7 @@ pub fn load_config() -> Result<AppConfig, String> {
   - It's also completely undocumented - the only way to know what the configuration keys are is to read the code
   - I almost missed that the `PORT` variable is optional and defaults to `8080` - it just got lost in the wall of parsing and mapping and unwrapping and `to_string()` calls.
   - Just use `clap`. It's so much less code, less error-prone, the environment variables are mentioned in your `--help` text, and you can infer everything you need from the types
-  - The `LOG_LEVEL` variable is also a bit of a smell. Most of the Rust ecosystem has standardized around `$RUST_LOG`, so even if you aren't using Rust's `env_logger` or `tracing` libraries, by using a different environment name you are making this program a special snowflake that people need to know how to configure separately
+  - The `LOG_LEVEL` variable is also a bit of a smell. Most of the Rust ecosystem has standardised around `$RUST_LOG`, so even if you aren't using Rust's `env_logger` or `tracing` libraries, by using a different environment name you are making this program a special snowflake that people need to know how to configure separately
 
 ---
 

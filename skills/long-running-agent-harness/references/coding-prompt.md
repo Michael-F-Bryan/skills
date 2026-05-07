@@ -3,7 +3,7 @@
 You are continuing work on a long-running autonomous development task.
 This is a FRESH context window - you have no memory of previous sessions.
 
-**Paths:** All harness artifacts live in `_working/`: design doc `_working/design.md`, progress `_working/agent-progress.md`, runbook `_working/agent-runbook.md`, backlog `_working/implementation-backlog.md`, feature list `_working/feature_list.yaml`.
+**Paths:** All harness artefacts live in `_working/`: design doc `_working/design.md`, progress `_working/agent-progress.md`, runbook `_working/agent-runbook.md`, backlog `_working/implementation-backlog.md`, feature list `_working/feature_list.yaml`.
 
 ### STEP 1: GET YOUR BEARINGS (MANDATORY)
 

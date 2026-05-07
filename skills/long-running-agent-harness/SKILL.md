@@ -25,7 +25,7 @@ The top-level agent invokes the Initializer and each Coding session as **sub-age
 
 - **Goal**: One design doc that defines scope, acceptance criteria, and enough context for the feature list and runbook.
 - **Process**: Human and AI iterate (in chat or a shared doc). AI suggests structure and content; human refines. Optionally use the **doc-coauthoring** skill for the design doc.
-- **Output**: Design doc at `_working/design.md`. This is the **input** to the Initializer (which creates the feature list and other harness artifacts).
+- **Output**: Design doc at `_working/design.md`. This is the **input** to the Initializer (which creates the feature list and other harness artefacts).
 
 ## Two-phase execution (Initializer + Coding agent)
 
@@ -35,7 +35,7 @@ Run the Initializer prompt (e.g. via sub-agent). It:
 
 1. Reads the design doc and any existing context.
 2. Creates or refreshes in `_working/`: `agent-runbook.md`, `implementation-backlog.md`, `agent-progress.md`, `feature_list.yaml`, and optionally `init_<app\>.sh`.
-3. Does **not** implement features. Output: list of artifacts and the recommended first coding target.
+3. Does **not** implement features. Output: list of artefacts and the recommended first coding target.
 
 ### Coding agent (every session, until done)
 
@@ -52,9 +52,9 @@ Run the Coding agent prompt (e.g. via sub-agent). Each session:
 
 **Milestone check-in**: At important points (e.g. end of a logical work-unit group, or when the design doc defines a milestone), **pause** the coding loop. Check in with the human: summarise progress, show what’s done and what’s next. The human may revise the plan, adjust the current implementation, or change priorities. When the human is satisfied, **re-run the Initializer** (to refresh backlog and progress from any plan changes), then **resume the Coding agent loop** until the next milestone or completion.
 
-## Artifact layout
+## Artefact layout
 
-All harness artifacts live under **`_working/`** (scratch space for the agent; see workspace rules).
+All harness artefacts live under **`_working/`** (scratch space for the agent; see workspace rules).
 
 | Location | Purpose | Who updates |
 |----------|---------|-------------|
@@ -96,5 +96,5 @@ The feature list is **YAML only**; when updating `passes`, preserve the rest of 
 
 ## Reference
 
-- Directory layout, artifact templates, and prompt bodies for sub-agents: [references/REFERENCE.md](references/REFERENCE.md).
+- Directory layout, artefact templates, and prompt bodies for sub-agents: [references/REFERENCE.md](references/REFERENCE.md).
 - Anthropic: [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).

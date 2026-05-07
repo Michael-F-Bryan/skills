@@ -82,7 +82,7 @@ Use these as models for tone, structure, and rhythm.
 ### Unpack / signposting
 
 - *"There's quite a lot going on here, so let's unpack it a bit."*
-- *"But here's the thing that took me embarrassingly long to realize: **their effectiveness came from a completely different set of assumptions about learning and communication.**"*
+- *"But here's the thing that took me embarrassingly long to realise: **their effectiveness came from a completely different set of assumptions about learning and communication.**"*
 - *"When you need to explain something complex, resist the urge to build it up piece by piece. Instead, show the complete solution first, then systematically break it down."*
 
 ### Certainty and hedging
@@ -112,7 +112,7 @@ Use these as models for tone, structure, and rhythm.
 ### Personal / reflective
 
 - *"So yeah, it was a hard decision to leave because I loved my teammates and the project, but I'm confident it was the right one."*
-- *"Eventually, I realized that what felt natural to me - the way I naturally think through problems, acknowledge uncertainty, and build understanding - was apparently unusual in technical writing."*
+- *"Eventually, I realised that what felt natural to me - the way I naturally think through problems, acknowledge uncertainty, and build understanding - was apparently unusual in technical writing."*
 - *"Yes I know the irony in using a `static` variable to workaround another library's zealous use of `static` variables, but sometimes you've got to break a couple eggs to make an omelette 🤷‍"*
 
 ---

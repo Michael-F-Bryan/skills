@@ -1,15 +1,15 @@
 ---
-name: voice-analyzer
-description: Analyze writing samples to create a codified voice style guide. This skill extracts patterns, techniques, and characteristics from example writing and generates a reusable voice skill that can be used with anti-ai-writing for consistent, authentic content creation. Use when establishing a new voice style from scratch.
+name: voice-analyser
+description: Analyse writing samples to create a codified voice style guide. This skill extracts patterns, techniques, and characteristics from example writing and generates a reusable voice skill that can be used with anti-ai-writing for consistent, authentic content creation. Use when establishing a new voice style from scratch.
 ---
 
-# Voice Analyzer
+# Voice Analyser
 
 Transform writing samples into a codified voice style that can be replicated consistently.
 
 ## Purpose
 
-This skill analyzes 3-5 samples of writing to extract the patterns, techniques, and characteristics that define a distinctive voice. The output is a complete voice skill that can be used alongside `anti-ai-writing` to produce content in that voice.
+This skill analyses 3-5 samples of writing to extract the patterns, techniques, and characteristics that define a distinctive voice. The output is a complete voice skill that can be used alongside `anti-ai-writing` to produce content in that voice.
 
 **Core Philosophy:** Every distinctive writer has patterns - conscious or unconscious. By identifying and codifying these patterns, we can replicate voice authentically without losing what makes it human.
 
@@ -18,7 +18,7 @@ This skill analyzes 3-5 samples of writing to extract the patterns, techniques, 
 - Establishing your own writing voice for consistent content
 - Codifying a brand voice for team use
 - Creating voice guides for ghostwriting clients
-- Analyzing competitors or inspirations to understand their approach
+- Analysing competitors or inspirations to understand their approach
 - Building a library of voice styles for different contexts
 
 **Requires:** 3-5 writing samples of 500+ words each (more samples = better analysis)
@@ -54,7 +54,7 @@ This skill analyzes 3-5 samples of writing to extract the patterns, techniques, 
 
 ### Phase 2: Extract Voice Characteristics
 
-Analyze the samples across these dimensions:
+Analyse the samples across these dimensions:
 
 #### 2.1 Sentence Structure
 
@@ -88,7 +88,7 @@ Analyze the samples across these dimensions:
 - Does the writer use jargon, slang, or technical terms?
 
 **Patterns to identify:**
-- Favorite words (appears 3+ times across samples)
+- Favourite words (appears 3+ times across samples)
 - Avoided words (never appears despite opportunity)
 - Contractions (always, never, sometimes)
 - Profanity or strong language (level and style)
@@ -108,13 +108,13 @@ Analyze the samples across these dimensions:
 **Questions to answer:**
 - What's the overall emotional register?
 - How does the writer relate to the reader?
-- Is there humor? What kind?
+- Is there humour? What kind?
 - What's the confidence level?
 
 **Patterns to identify:**
 - Dominant tone (playful, serious, irreverent, warm, etc.)
 - Relationship to reader (peer, mentor, friend, expert)
-- Humor style (sarcasm, wordplay, self-deprecation, observational)
+- Humour style (sarcasm, wordplay, self-deprecation, observational)
 - Certainty level (definitive vs. exploratory)
 
 **Document findings as:**
@@ -122,7 +122,7 @@ Analyze the samples across these dimensions:
 ## Tone & Attitude
 - Primary tone: [describe]
 - Reader relationship: [describe]
-- Humor: [type and frequency]
+- Humour: [type and frequency]
 - Certainty: [definitive/exploratory/mixed]
 ```
 
@@ -138,7 +138,7 @@ Analyze the samples across these dimensions:
 - Opening hooks (story, question, bold claim, etc.)
 - Transition style (seamless, signposted, abrupt)
 - Closing patterns (call to action, question, summary, callback)
-- Section/paragraph organization
+- Section/paragraph organisation
 
 **Document findings as:**
 ```markdown
@@ -155,7 +155,7 @@ Analyze the samples across these dimensions:
 - What rhetorical devices appear repeatedly?
 - Are there signature moves unique to this writer?
 - How does the writer handle examples and evidence?
-- What makes this voice recognizable?
+- What makes this voice recognisable?
 
 **Patterns to identify:**
 - Rhetorical devices (questions, lists, analogies, callbacks)
@@ -191,7 +191,7 @@ Analyze the samples across these dimensions:
 
 ---
 
-### Phase 3: Synthesize the Voice Profile
+### Phase 3: Synthesise the Voice Profile
 
 Combine findings into a coherent voice description:
 
@@ -199,10 +199,10 @@ Combine findings into a coherent voice description:
 
 Write a single paragraph that captures the essence:
 
-> "[Name]'s voice is [primary characteristics]. They write like [relationship to reader], using [key techniques]. Their tone is [tone], with [humor style if applicable]. Sentences tend to be [structure]. They favor [word choice] and avoid [avoidances]. The overall effect is [feeling/impact]."
+> "[Name]'s voice is [primary characteristics]. They write like [relationship to reader], using [key techniques]. Their tone is [tone], with [humour style if applicable]. Sentences tend to be [structure]. They favour [word choice] and avoid [avoidances]. The overall effect is [feeling/impact]."
 
 **Example:**
-> "Mike's voice is direct and confident, with an undercurrent of irreverent humor. He writes like a smart friend who's figured something out and can't wait to share it. His tone is casual but authoritative - he'll drop an f-bomb but back it up with data. Sentences are short and punchy, often fragments. He favors concrete specifics over vague claims and avoids corporate jargon entirely. The overall effect is someone talking straight to you, cutting through the BS."
+> "Mike's voice is direct and confident, with an undercurrent of irreverent humour. He writes like a smart friend who's figured something out and can't wait to share it. His tone is casual but authoritative - he'll drop an f-bomb but back it up with data. Sentences are short and punchy, often fragments. He favours concrete specifics over vague claims and avoids corporate jargon entirely. The overall effect is someone talking straight to you, cutting through the BS."
 
 #### The Voice Spectrum
 
@@ -344,7 +344,7 @@ See `references/example-analysis.md` for a complete worked example showing:
 - 10+ samples: Comprehensive voice capture
 
 ### Same Context Matters
-- Analyze newsletters separately from tweets
+- Analyse newsletters separately from tweets
 - Blog posts separate from documentation
 - Different contexts may need different voice skills
 
@@ -354,7 +354,7 @@ See `references/example-analysis.md` for a complete worked example showing:
 - Note structures that repeat across all samples
 
 ### Validate with the Source
-- If analyzing someone else's voice, have them review
+- If analysing someone else's voice, have them review
 - Ask: "Does this sound like how you think about your writing?"
 - Refine based on feedback
 

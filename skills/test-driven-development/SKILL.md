@@ -19,14 +19,14 @@ Write the test first. Watch it fail. Write minimal code to pass.
 - New features
 - Bug fixes
 - Refactoring
-- Behavior changes
+- Behaviour changes
 
 **Exceptions (ask your human partner):**
 - Throwaway prototypes
 - Generated code
 - Configuration files
 
-Thinking "skip TDD just this once"? Stop. That's rationalization.
+Thinking "skip TDD just this once"? Stop. That's rationalisation.
 
 ## The Iron Law
 
@@ -125,7 +125,7 @@ Confirm:
 - Failure message is expected
 - Fails because feature missing (not typos)
 
-**Test passes?** You're testing existing behavior. Fix test.
+**Test passes?** You're testing existing behaviour. Fix test.
 
 **Test errors?** Fix error, re-run until it fails correctly.
 
@@ -186,7 +186,7 @@ After green only:
 - Improve names
 - Extract helpers
 
-Keep tests green. Don't add behavior.
+Keep tests green. Don't add behaviour.
 
 ### Repeat
 
@@ -206,7 +206,7 @@ Next failing test for next feature.
 
 Tests written after code pass immediately. Passing immediately proves nothing:
 - Might test wrong thing
-- Might test implementation, not behavior
+- Might test implementation, not behaviour
 - Might miss edge cases you forgot
 - You never saw it catch the bug
 
@@ -235,7 +235,7 @@ The "waste" is keeping code you can't trust. Working code without real tests is 
 TDD IS pragmatic:
 - Finds bugs before commit (faster than debugging after)
 - Prevents regressions (tests catch breaks immediately)
-- Documents behavior (tests show how to use code)
+- Documents behaviour (tests show how to use code)
 - Enables refactoring (change freely, tests catch breaks)
 
 "Pragmatic" shortcuts = debugging in production = slower.
@@ -273,7 +273,7 @@ Tests-first force edge case discovery before implementing. Tests-after verify yo
 - Test passes immediately
 - Can't explain why test failed
 - Tests added "later"
-- Rationalizing "just this once"
+- Rationalising "just this once"
 - "I already manually tested it"
 - "Tests after achieve the same purpose"
 - "It's about spirit not ritual"

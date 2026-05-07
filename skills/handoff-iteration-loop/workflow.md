@@ -1,6 +1,6 @@
 # Workflow and inter-agent contracts
 
-Design influences: [Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps) — **generator vs evaluator**, **file-based handoffs**, **negotiated “done”**, **skeptical QA**, **stress-test harness components** (remove one role at a time when safe), **match harness cost to task difficulty**. Also mirror **real teams**: discovery before build, **sprints** as the unit of planning, **Git** as the unit of change.
+Design influences: [Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps) — **generator vs evaluator**, **file-based handoffs**, **negotiated “done”**, **sceptical QA**, **stress-test harness components** (remove one role at a time when safe), **match harness cost to task difficulty**. Also mirror **real teams**: discovery before build, **sprints** as the unit of planning, **Git** as the unit of change.
 
 ## Phases (scale to scope)
 
@@ -88,7 +88,7 @@ If any item above fails, open `iter{N+1}` with copied steering and a revised pro
 
 ## Harness self-test matrix (quick regression checks)
 
-Use these checks after editing the skill to ensure behavior still matches intent:
+Use these checks after editing the skill to ensure behaviour still matches intent:
 
 1. **Vague multi-session request**
    - Expected: Discovery first (`GOALS.md`) before `iter1.1-planner.md`.

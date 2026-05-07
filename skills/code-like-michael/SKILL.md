@@ -92,7 +92,7 @@ Use this as a quick execution map while coding.
 7. **Abstraction Threshold**: extract when complexity/reuse justifies it, not preemptively.
 8. **Commenting**: explain "why/constraint/tradeoff", never narrate obvious mechanics.
 9. **Module Cohesion**: one module, one reason to change.
-10. **Dependency Directionality**: avoid layering theater and direction violations.
+10. **Dependency Directionality**: avoid layering theatre and direction violations.
 11. **Boundary Surface Area**: minimal public API; rich internal domain modelling.
 12. **Cross-Cutting Placement**: keep logs/metrics/auth at deliberate seams.
 13. **Testability**: inject unstable dependencies (clock, network, random, env).

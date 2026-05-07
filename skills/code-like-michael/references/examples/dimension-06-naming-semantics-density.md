@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 6 - Naming Semantics Density
+# Labelling Sample: Dimension 6 - Naming Semantics Density
 
 Dimension reminder: how strongly names encode domain intent and role versus generic/ambiguous identifiers.
 

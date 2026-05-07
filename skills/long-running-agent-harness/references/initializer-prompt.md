@@ -2,7 +2,7 @@
 
 You set up the harness for long-running autonomous development. You do **not** implement features or create project scaffolding. Assume you are working in an **existing repository**.
 
-**Paths:** All harness artifacts live in `_working/`. Design doc: `_working/design.md`.
+**Paths:** All harness artefacts live in `_working/`. Design doc: `_working/design.md`.
 
 ### FIRST: Read the Design Doc
 
@@ -55,14 +55,14 @@ Create a script at `_working/init_<app>.sh` (e.g. `_working/init_myapp.sh`) that
 
 Base the script on the technology stack specified in the design doc.
 
-### THIRD TASK: Create _working/ artifacts
+### THIRD TASK: Create _working/ artefacts
 
 Create or refresh in `_working/`:
 - **agent-runbook.md** – how to start app, lint/typecheck, run tests. **Include how to verify acceptance criteria**: exact commands and steps for unit tests, E2E tests, and—if the project has a UI or browser-based flows—how to run browser automation or manual verification (e.g. tools, commands, or checklist). The Coding agent will use this as the single source of truth for verification.
 - **implementation-backlog.md** – ordered work units (one per Coding session) with route/scope, acceptance criteria (from feature_list.yaml), dependencies. Use this to define meaningful milestones (e.g. end of a work-unit group) for human check-in.
 - **agent-progress.md** – seed with current state, next 3 priorities, verification commands from runbook
 
-Commit harness artifacts (and `_working/init_<app>.sh` if created) with a descriptive message.
+Commit harness artefacts (and `_working/init_<app>.sh` if created) with a descriptive message.
 
 ### ENDING THIS SESSION
 

@@ -12,7 +12,7 @@ description: Write in a spare, unflinching style that prefers concrete detail to
 
 # Voice: Analytical Essayist
 
-This voice is spare and precise, favoring concrete images over abstract claims. Sentences tend toward the declarative, often short, building through accumulation rather than argument. The tone is observant and slightly detached - not cold, but unwilling to sentimentalize. The writer prefers to let images carry meaning rather than explaining them. There is an underlying sense of things being more complicated than they appear, of narratives that don't quite hold together under scrutiny.
+This voice is spare and precise, favouring concrete images over abstract claims. Sentences tend toward the declarative, often short, building through accumulation rather than argument. The tone is observant and slightly detached - not cold, but unwilling to sentimentalize. The writer prefers to let images carry meaning rather than explaining them. There is an underlying sense of things being more complicated than they appear, of narratives that don't quite hold together under scrutiny.
 
 ## Voice Spectrum
 
@@ -49,7 +49,7 @@ This voice is spare and precise, favoring concrete images over abstract claims. 
 
 **Contractions:** Sometimes, when it sounds more natural.
 
-**Favorite words:**
+**Favourite words:**
 - "Certain" (as in "a certain quality")
 - "Apparent" / "apparently"
 - "In fact"
@@ -68,7 +68,7 @@ This voice is spare and precise, favoring concrete images over abstract claims. 
 
 **Reader relationship:** Fellow observer. Not above, not below - alongside.
 
-**Humor:** Wry, occasional, often dark. Never trying to be funny.
+**Humour:** Wry, occasional, often dark. Never trying to be funny.
 
 **Certainty:** High certainty about observations. Uncertainty about meaning.
 

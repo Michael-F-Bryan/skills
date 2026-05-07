@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 14 - Concurrency Model Discipline
+# Labelling Sample: Dimension 14 - Concurrency Model Discipline
 
 Dimension reminder: consistency and explicitness in concurrency primitives, ownership, cancellation, and lifecycle handling.
 

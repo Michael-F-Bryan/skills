@@ -1,6 +1,6 @@
 # Code Style Dimensions v1 (File-Level Labels, Multi-Scale Coverage)
 
-This framework is designed for **file-level labeling with repo rollups** while preserving signals from:
+This framework is designed for **file-level labelling with repo rollups** while preserving signals from:
 
 - **Micro scale**: expression-level and function-level coding choices
 - **Meso scale**: module and package boundaries
@@ -27,7 +27,7 @@ This avoids overfitting to only function internals while keeping file-level anno
    - Cons: harder to label consistently and can collapse orthogonality
 
 3. **Three-band independent dimensions (recommended)**
-   - Pros: explicit multi-scale coverage, easier to keep orthogonal, supports file-level labeling with robust rollups
+   - Pros: explicit multi-scale coverage, easier to keep orthogonal, supports file-level labelling with robust rollups
    - Cons: requires a little more guidance for macro inference from files
 
 ## Scoring Model
@@ -74,7 +74,7 @@ Each dimension has: **what it measures**, **high-end signal**, and **why orthogo
    - Orthogonal to performance posture: low mutation can still be performance-focused.
 
 4. **Error Semantics Explicitness**
-   - Measures: explicit typed/contextual error propagation vs opaque/generalized handling.
+   - Measures: explicit typed/contextual error propagation vs opaque/generalised handling.
    - High signal: context-rich errors, typed/result-driven handling.
    - Orthogonal to control flow shape: explicit errors can coexist with varied branching style.
 
@@ -91,7 +91,7 @@ Each dimension has: **what it measures**, **high-end signal**, and **why orthogo
 7. **Local Abstraction Threshold**
    - Measures: tendency to extract helpers early vs keep logic inline until pressure appears.
    - High signal: consistent extraction policy based on complexity/reuse signals.
-   - Orthogonal to module boundaries: local extraction is intra-file behavior.
+   - Orthogonal to module boundaries: local extraction is intra-file behaviour.
 
 8. **Commenting Philosophy**
    - Measures: explanatory strategy (why-focused comments vs mostly self-documenting code).
@@ -127,24 +127,24 @@ Each dimension has: **what it measures**, **high-end signal**, and **why orthogo
 
 14. **Concurrency Model Discipline**
    - Measures: consistency in concurrency primitives and ownership/cancellation patterns.
-   - High signal: explicit concurrency boundaries and predictable synchronization style.
+   - High signal: explicit concurrency boundaries and predictable synchronisation style.
    - Orthogonal to performance posture: disciplined concurrency may or may not be aggressive.
 
 ### Band C — Macro (Repository, Entry Points, Operations)
 
 15. **Entry-Point Architecture**
-   - Measures: how execution is organized through CLI/services/workers.
+   - Measures: how execution is organised through CLI/services/workers.
    - High signal: explicit command/subcommand shells that delegate to domain modules.
    - Orthogonal to folder topology: similar entry strategy can use different directories.
 
 16. **Repository Topology Style**
-   - Measures: structural organization pattern (modular monolith, service-split, package-centric).
+   - Measures: structural organisation pattern (modular monolith, service-split, package-centric).
    - High signal: repeatable, principle-driven folder/package conventions.
    - Orthogonal to dependency directionality: topology and dependency rules are distinct axes.
 
 17. **Configuration and Environment Strategy**
    - Measures: typed explicit config handling vs ad-hoc environment reads.
-   - High signal: centralized config schema, validated startup, explicit defaults.
+   - High signal: centralised config schema, validated startup, explicit defaults.
    - Orthogonal to entry-point architecture: any entry model can have good or poor config discipline.
 
 18. **Data Boundary and IO Isolation**

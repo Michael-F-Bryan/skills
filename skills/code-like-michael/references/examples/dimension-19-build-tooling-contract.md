@@ -1,4 +1,4 @@
-# Labeling Sample: Dimension 19 - Build/Tooling Contract
+# Labelling Sample: Dimension 19 - Build/Tooling Contract
 
 Dimension reminder: reproducibility and explicitness of build/test/lint/dev workflows.
 
