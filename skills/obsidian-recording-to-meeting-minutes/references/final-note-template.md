@@ -11,7 +11,7 @@ After any YAML frontmatter, the body should follow this order unless vault rules
 3. `## Chapters`
 4. `## Transcript`
 
-Do **not** add `## Raw transcript` to the note by default; keep raw ASR in scratch only.
+Include `## Transcript` at the bottom of the note, after chapters. Keep the polished, diarised transcript in the vault note. Keep any raw ASR or scratch-only evidence out of the note unless the user explicitly asks for it. Do **not** add `## Raw transcript`.
 
 ## Body template
 
