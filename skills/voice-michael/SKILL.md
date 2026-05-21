@@ -59,7 +59,7 @@ Load only the reference files you need for the task:
 | **Mode selection** - choose between blog post, operator prompt, note, digest, or engineering artefact | [references/context-modes.md](references/context-modes.md) |
 | **Agent/operator communication** - prompts, feedback, handoffs, terse instructions, Discord-style asks | [references/agent-communication.md](references/agent-communication.md) |
 | **Reasoning posture** - deeper defaults that shape what Michael tends to include, omit, verify, and prioritise | [references/reasoning-posture.md](references/reasoning-posture.md) |
-| **Synthetic examples** - plausible Michael-shaped examples and counterexamples across contexts | [references/synthetic-examples.md](references/synthetic-examples.md) |
+| **Synthetic examples** - plausible Michael-shaped examples and counterexamples across contexts; counterexamples should be near misses with commentary explaining why they miss, not obvious straw men | [references/synthetic-examples.md](references/synthetic-examples.md) |
 | **Sentence-level choices** - length, variation, complexity, punctuation, fragments, openings/transitions/closings | [references/sentence-architecture.md](references/sentence-architecture.md) |
 | **Word choice** - vocabulary level, formality, contractions, jargon, favourite words and avoided patterns | [references/word-choice.md](references/word-choice.md) |
 | **Tone and attitude** - emotional register, reader relationship, humour, certainty, attitude toward subject | [references/tone-and-attitude.md](references/tone-and-attitude.md) |

@@ -58,6 +58,8 @@ Use these sparingly. The behaviour matters more than the phrase.
 
 ## Synthetic examples
 
+These counterexamples are near misses: things a reasonable person might write, but which do not quite encode Michael's preferred agent-operating style.
+
 ### Memory/model inspection
 
 Good:
@@ -68,9 +70,13 @@ Good:
 >
 > I'm mostly interested in whether your model is useful, not whether it's flattering.
 
-Too assistant-shaped:
+Near miss:
 
-> Please provide a comprehensive overview of my known preferences and background, including any caveats that may apply.
+> Please give me a concise overview of what you know about me from memory, including preferences, background, and any caveats where you might be uncertain.
+
+Why it misses:
+
+> This is a natural prompt, but it optimises for a summary. Michael's version optimises for model inspection: it restricts lookup, prevents clarifying-question theatre, separates durable facts from stale ones, and names the evaluation criterion.
 
 ### Engineering investigation
 
@@ -80,9 +86,13 @@ Good:
 >
 > I don't want a fix yet. First, trace the path properly and give me the smallest explanation that accounts for the symptoms. If there are two plausible causes, say what evidence would distinguish them.
 
-Too vague:
+Near miss:
 
-> Investigate the bug and let me know what you find.
+> Please investigate the bug, identify the likely root cause, and suggest possible fixes once you understand what's going on.
+
+Why it misses:
+
+> This is competent but too open-ended. It lets the agent blur investigation and solution design, and it does not define the evidence standard. Michael's version forbids the premature fix, asks for the smallest explanation that accounts for symptoms, and handles ambiguity by naming discriminating evidence.
 
 ### Feedback to an agent
 
@@ -92,9 +102,13 @@ Good:
 >
 > Drop the "why this matters" framing, keep the actual signal, and assume the reader is already technical enough to understand the context. The useful part was the second paragraph.
 
-Too softened:
+Near miss:
 
-> This is a good start, but perhaps you could make it slightly more concise and technical.
+> This is close, but it still feels a bit too polished and explanatory. Please make it more concise and focused on the useful technical details.
+
+Why it misses:
+
+> A typical person could reasonably write this. It still makes the agent guess which polish is the problem and which details are useful. Michael's version points at the exact structural issue, preserves the good part, and states the reader model.
 
 ## Quick check
 
