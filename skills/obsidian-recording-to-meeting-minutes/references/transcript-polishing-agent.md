@@ -2,6 +2,16 @@
 
 Use this for each chunk-level transcript polish task.
 
+## Required skill
+
+The polishing specialist must load and follow `/transcript-polisher` for the actual editing method.
+Apply it in **strict Obsidian meeting-note mode**:
+
+- faithful cleanup over summarisation
+- fix ASR errors, punctuation, and sentence boundaries
+- remove only clear transcription noise
+- do not compress valid content for readability
+
 ## Purpose
 
 Turn one bounded diarised transcript chunk into polished, faithful markdown without loading the whole meeting into one context.
@@ -52,11 +62,11 @@ Write `agent-outputs/polished-chunk-NN.md`:
 
 ## Method
 
-1. Work only on the assigned chunk.
-2. Remove filler, false starts, duplicated fragments, and obvious ASR junk.
-3. Preserve meaning, ordering, hedging, numbers, constraints, decisions, and tone.
+1. Load `/transcript-polisher` first, then process only the assigned chunk.
+2. Follow strict Obsidian mode from that skill (faithful cleanup, no narrative rewriting).
+3. Preserve meaning, ordering, hedging, numbers, constraints, and tone.
 4. Fix domain terms only when high-confidence from context or secondary evidence.
-5. Use human speaker names only when supported by the attribution output; otherwise use `Speaker unknown` or a provisional label.
+5. Use human speaker names from speaker-attribution output; keep uncertainty explicit where attribution is weak.
 6. Add topic headings where the conversation naturally shifts.
 7. Include a short chunk summary for the minutes extractor.
 
@@ -72,3 +82,4 @@ Write `agent-outputs/polished-chunk-NN.md`:
 - Collapses speculative discussion into decisions.
 - Applies global speaker mappings without checking chunk caveats.
 - Removes timestamps or chapter structure.
+- Produces a shorter transcript by summarising instead of transcript cleanup.

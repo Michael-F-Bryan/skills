@@ -9,7 +9,7 @@ Identify likely human speakers for each chunk without bloating the coordinator c
 ## Values
 
 - Evidence beats confidence theatre.
-- Labels are chunk-local until proven otherwise.
+- Labels from merged diarisation are globally consistent by default.
 - User corrections and explicit transcript anchors beat style guesses.
 - Uncertainty is acceptable and should be visible.
 
@@ -23,6 +23,7 @@ Identify likely human speakers for each chunk without bloating the coordinator c
 
 - `manifest.json`
 - attendee list and roles, from frontmatter/user hints
+- human-written notes already present in the target note
 - diarised samples per chunk: speaker ID, timestamps, representative utterances
 - prior well-diarised notes with overlapping attendees, if available
 - any known user corrections or anchors
@@ -40,7 +41,7 @@ Write `agent-outputs/speaker-attribution.md`:
 
 ## Per-chunk mapping
 | Chunk | Diarised label | Proposed speaker | Confidence | Evidence | Caveats |
-|---|---|---|---|---|---|
+| ----- | -------------- | ---------------- | ---------- | -------- | ------- |
 
 ## Stray-turn risks
 - 00:19:09 likely [[Nikki]], despite cluster mapped mostly to [[Morgan]].
@@ -51,11 +52,12 @@ Write `agent-outputs/speaker-attribution.md`:
 
 ## Method
 
-1. Treat each recording/chunk independently.
-2. Start with strong anchors: explicit names, role in meeting, personal anecdotes, “our company” vs “your company”, direct replies, and user hints.
-3. Compare topic ownership and style using prior notes only as supporting evidence.
-4. Do not map a whole cluster if samples show mixed speakers; document stray-turn risks.
-5. Return unknown labels when confidence is weak.
+1. Start from attendee frontmatter and human-written notes in the target note.
+2. Treat merged diarisation labels as globally stable unless contradictory evidence appears.
+3. Use strong anchors: explicit names, role in meeting, personal anecdotes, “our company” vs “your company”, direct replies, and user hints.
+4. Compare topic ownership and style using prior notes as supporting evidence.
+5. Do not force full relabelling if samples show mixed speakers; document stray-turn risks.
+6. Return unknown labels when confidence is weak.
 
 ## Good output
 

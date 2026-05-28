@@ -5,6 +5,7 @@ Use this when preparing subagent inputs after `scribe` completes.
 ## Purpose
 
 Create bounded, file-based work packets so subagents can operate without loading the whole meeting.
+This file is the canonical reference for chunking and multi-recording handling.
 
 ## Manifest schema
 
@@ -22,11 +23,11 @@ Write `/tmp/<slug>/manifest.json`:
       "id": "rec01",
       "embed": "![[Recording 20260520105435.m4a]]",
       "audio_path": "/absolute/path/to/Vault/Attachments/Recording 20260520105435.m4a",
-      "scribe_json": "/tmp/slug/scribe/rec01.json",
+      "scribe_json": "/tmp/slug/scribe/merged.json",
       "filename_timestamp": "2026-05-20T10:54:35",
       "duration_seconds": 4915.76,
       "offset_seconds": 0,
-      "boundary_notes": "No overlap detected with previous chunk"
+      "boundary_notes": "Concatenated into merged stream in note order"
     }
   ],
   "chunks": [
@@ -41,6 +42,10 @@ Write `/tmp/<slug>/manifest.json`:
       "polished_output": "/tmp/slug/agent-outputs/polished-chunk-001.md"
     }
   ],
+  "speaker_mapping_policy": {
+    "base_assumption": "merged_diarisation_global_labels",
+    "notes": "Treat speaker IDs as globally consistent by default because diarisation ran once on merged audio; add caveats only when evidence is mixed."
+  },
   "secondary_transcripts": [],
   "agent_outputs": {
     "speaker_attribution": "/tmp/slug/agent-outputs/speaker-attribution.md",
@@ -52,11 +57,23 @@ Write `/tmp/<slug>/manifest.json`:
 
 ## Chunking rules
 
+- Concatenate all embedded recordings into one scratch file and run one transcription pass before chunking.
 - Default 20–45 minutes.
 - Prefer natural recording boundaries and topic breaks.
 - Split smaller when speaker attribution is difficult, density is high, or secondary comparison is needed.
 - Preserve 10–30 seconds of overlap text between adjacent text excerpts for continuity, but avoid duplicating overlap in final output.
 - Record continuous offsets separately from per-file timestamps.
+- Transcribe sequentially, not in parallel. `scribe` is memory-heavy and parallel workers can destabilise laptops.
+
+## Multi-recording handling
+
+When the note embeds multiple recordings:
+
+1. Extract all audio embeds from the note.
+2. Resolve each file path under the vault.
+3. Concatenate files in note order into `/tmp/<slug>/audio/merged.*`.
+4. Transcribe the merged stream once.
+5. Keep the original per-recording metadata in `recordings[]` for traceability.
 
 ## Extracting chunk files
 

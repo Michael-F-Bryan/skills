@@ -47,4 +47,4 @@ Repeat **Recording** bullets under Key details (or list each embed clearly). Ens
 
 ## Verification (structural)
 
-Automated checks in the parent skill’s verification snippet are **heuristics** (e.g. recording embed detection may miss unusual embed spellings). Always combine with a manual skim and QA audit output.
+Treat QA sub-agent review as the primary release gate. Structural checks are heuristics only (e.g. embed detection edge cases). Always combine structure checks with QA audit output and manual skim.

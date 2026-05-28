@@ -18,6 +18,7 @@ Audit the merged draft against source evidence and workflow requirements. The QA
 - Block unsupported decisions, actions, owners, deadlines, and confident speaker labels.
 - Confirm the final draft follows the skill architecture and vault conventions.
 - Return concrete fixes the coordinator can apply before writing to the vault.
+- Act as the primary verification gate instead of script-only structural checks.
 
 ## Inputs
 
@@ -53,8 +54,18 @@ Pass / Pass with fixes / Blocked
 - [ ] Speaker uncertainty reflected
 - [ ] Decisions/actions have timestamp evidence
 - [ ] Secondary transcript corrections applied conservatively
+- [ ] Transcript polishing is faithful cleanup (not summary rewrite)
+- [ ] Speaker mapping uses attendee/frontmatter/human-note evidence
 - [ ] Manual skim recommended windows: ...
 ```
+
+## Gate criteria
+
+Use these criteria when deciding verdict:
+
+- **Pass:** no material evidence issues, no structural blockers, no unsafe speaker assertions.
+- **Pass with fixes:** only minor edits needed; no core claim is unsupported.
+- **Blocked:** any unsupported decision/action/deadline, missing embed/frontmatter damage, major speaker misattribution risk, or transcript rewritten away from source meaning.
 
 ## Method
 
