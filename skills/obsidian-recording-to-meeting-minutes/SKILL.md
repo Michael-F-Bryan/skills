@@ -58,12 +58,13 @@ Do not paste full transcripts into unrelated chats or tools.
 
 1. **Read rules and source note**
    - Read `<vault>/AGENTS.md`.
-   - Read target note and preserve existing human-written notes + embeds.
+   - Read the target note and preserve the existing human-written notes + embeds.
 2. **Resolve recordings and concatenate**
    - Parse all `![[...m4a]]`, `![[...mp3]]`, `![[...wav]]`.
    - Concatenate in note order with `ffmpeg` into `/tmp/<slug>/audio/merged.*`.
+   - See `references/merged-audio-scribe-workflow.md` for the exact merged-audio pattern.
 3. **Transcribe once**
-   - Run `scribe --format json -o /tmp/<slug>/scribe/merged.json`.
+   - Run `scribe --format json -o /tmp/<slug>/scribe/merged.json` on the merged file, not each embed separately.
 4. **Build manifest and chunks**
    - Write `/tmp/<slug>/manifest.json` and chapter/chunk excerpt files.
 5. **Run specialist phases**
@@ -73,11 +74,13 @@ Do not paste full transcripts into unrelated chats or tools.
    - Minutes extraction (`references/minutes-extraction-agent.md`).
 6. **Merge and draft final note**
    - Merge specialist outputs using `references/final-note-template.md`.
+   - Keep the original audio embeds and the prep notes unless the user asks for a rewrite.
 7. **Run QA sub-agent gate**
    - Spawn the QA specialist with explicit pass/fix/block criteria from `references/qa-audit-agent.md`.
    - Apply blockers before writing to vault.
 8. **Write note + manual skim**
-   - Write final note, then re-read first chapter and one later chapter for fidelity and readability.
+   - Write the final note, then re-read the first chapter and one later chapter for fidelity and readability.
+   - Fix obvious ASR noise, but keep uncertain speaker labels uncertain.
 
 ## Speaker attribution rules
 
