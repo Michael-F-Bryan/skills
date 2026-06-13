@@ -163,6 +163,10 @@ Do not link every noun. Link things a future reader would navigate to.
 
 ## Workflow
 
+For the practical recent-email review pattern, including Graph mailbox selection, scratch index shape, and source promotion rules, see `references/session-email-review-workflow.md`.
+
+For requests about Michael's CSU emails, use the CSU Microsoft Graph path first (`csu-teams` token for `michael.bryan@csu-ses.com.au`) and explicitly probe role/shared mailboxes such as `deputycapability@csu-ses.com.au`. Use Himalaya/Gmail only as a labelled fallback or when the user asks for the personal mailbox.
+
 1. Group messages by thread/event.
 2. Apply the noteworthiness threshold.
 3. Search DUM-C for existing notes about the same event or person/date.
@@ -182,11 +186,13 @@ Do not link every noun. Link things a future reader would navigate to.
 4. **Invented actions.** Only create tasks that the email implies or the user asks for.
 5. **Overlinking.** Wikilinks should aid navigation, not make every sentence noisy.
 6. **Role-mailbox blind spots.** If Graph cannot read a shared mailbox directly, say so. Do not imply the pull was complete for role accounts.
+7. **Wrong mailbox, plausible notes.** Personal Gmail/Himalaya `Personal/SES` can contain SES-looking messages, but it is not the CSU mailbox. A run that skips `michael.bryan@csu-ses.com.au` via Graph has not satisfied a CSU-email review.
 
 ## Verification checklist
 
 Before reporting completion:
 
+- [ ] Email source matches the request: CSU Graph first for CSU mail; any Gmail/Himalaya fallback is labelled.
 - [ ] `~/Documents/Vault/AGENTS.md` was followed.
 - [ ] Notes are in `~/Documents/Vault/2 Areas/DUM-C` unless directed otherwise.
 - [ ] Each note maps to one event/thread, not one arbitrary email.
