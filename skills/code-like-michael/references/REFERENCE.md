@@ -6,6 +6,7 @@ Use this file to navigate the code-like-michael fingerprint resources.
 
 - `dimensions.md`: canonical 20-dimension taxonomy (micro/meso/macro)
 - `annotations-rubric.md`: scoring anchors and interpretation guidance
+- `testing-without-mock-theatre.md`: testing and mocking philosophy, seams, and anti-patterns
 - `examples/`: labelled ground-truth snippets (highest-priority calibration evidence)
 
 ## Ground-Truth Example Files by Dimension

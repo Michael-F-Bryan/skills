@@ -54,6 +54,31 @@ Unless the user explicitly asks otherwise, treat these as MUST-level defaults:
    - Prefer early returns and branch flattening.
 5. **No generic/opaque error handling when domain context matters.**
    - Keep cause + context; prefer typed or structured error paths.
+6. **Test real behaviour, not mocked choreography.**
+   - Prefer real implementations where cheap, then fakes/in-memory adapters, then local services or testcontainers, then spies, and only narrow mocks for genuinely awkward external boundaries.
+   - Heavy monkeypatching is usually design feedback: push side effects to the edges, inject dependencies explicitly, and keep the core behaviour real.
+   - Do not patch the code under test just to make a test pass. Test the public behaviour and observable outcome instead.
+
+## Testing and Mocking Defaults
+
+See `references/testing-without-mock-theatre.md` for the full testing philosophy.
+
+When writing or reviewing tests, default to these rules:
+
+1. **Replace only true external boundaries.**
+   - Databases, filesystems, networks, clocks, queues, hardware APIs, browser/runtime boundaries, and third-party services are fair seams.
+   - Core domain logic and the thing under test should usually stay real.
+2. **Prefer dependency injection over monkeypatching.**
+   - Favour constructors, parameters, typed seams, and in-memory implementations over mutating module globals or import state mid-test.
+3. **Never patch the code under test.**
+   - Patching internals of the subject under test turns the test into an implementation lock-in exercise.
+4. **Prefer observable outcomes over call choreography.**
+   - Assert on returned values, persisted state, emitted domain events, rendered output, or other real effects.
+   - Be suspicious of tests whose whole value is `assert_called_once_with(...)` on an internal collaborator.
+5. **Keep test concerns out of production code.**
+   - Reject test-only branches, test-only env vars, hidden global knobs, and "test mode" flags unless there is a strong operational reason.
+6. **Bias toward deterministic, hermetic, parallel-safe tests.**
+   - No shared global state, unbounded sleeps, real wall-clock assumptions, or ambient environment mutation without tight isolation.
 
 ## Language-Specific Defaults
 
@@ -92,7 +117,7 @@ The same philosophy applies across languages, but tactics differ.
 
 ## Internal CLI and Operator Tooling Defaults
 
-When the code is a CLI or internal operator tool, apply these additional defaults. This is the main update from the `20260617_143450_10d6ab11` session.
+When the code is a CLI or internal operator tool, apply these additional defaults.
 
 See `references/internal-cli-philosophy.md` for the full rationale and examples.
 
@@ -162,6 +187,9 @@ Flag these unless a clear task-specific reason exists:
 - Hard-coded network/time dependencies in logic that should be testable
 - Solving a generic nearby problem instead of the actual local problem
 - Tests that assert mocked choreography rather than observable behaviour
+- Heavy monkeypatching that papers over hidden dependencies instead of fixing the seam
+- Patching the code under test or mutating import/module globals halfway through a test
+- Test-only production branches, flags, env vars, or hidden knobs added just to make tests pass
 - Speculative options, unused helpers, or "future-proofing" left behind
 - Bypassing existing config/logging/tracing/auth/IO seams instead of using them
 
