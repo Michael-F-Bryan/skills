@@ -1,6 +1,6 @@
 ---
 name: code-like-michael
-description: Write, refactor, and review code in Michael's style; explicit contracts, thin entrypoints, practical boundaries, anti-ceremony abstractions, deterministic tooling, and architecture that scales from function internals to repository shape.
+description: "Use when writing, refactoring, or reviewing code that should match Michael's style: explicit contracts, thin entrypoints, practical boundaries, anti-ceremony abstractions, deterministic tooling, and operator-shaped CLIs."
 ---
 
 # Code Like Michael
@@ -8,6 +8,17 @@ description: Write, refactor, and review code in Michael's style; explicit contr
 This skill is an execution policy for agents. It converts labelled examples in `references/examples/` into concrete coding decisions.
 
 If you are writing code, changing architecture, reviewing PRs, or proposing refactors in this repo, apply this skill.
+
+## When to Use
+
+Use this skill when the work needs to feel deliberately authored in Michael's style, not merely correct:
+
+- new features or bug fixes where architecture choices matter
+- refactors that touch boundaries, config, IO, module layout, or CLI shape
+- review passes where you need to distinguish `works` from `fits this repo`
+- internal tools and utility CLIs that should feel operator-friendly rather than script-like
+
+Do not treat this as permission for decorative rewrites. Prefer narrow, task-shaped changes unless the request explicitly asks for broader restructuring.
 
 ## Ground Truth
 
@@ -79,6 +90,35 @@ The same philosophy applies across languages, but tactics differ.
 - Keep CLIs and handlers as orchestration shells, not business-logic dumps.
 - Create seams for external IO/time/randomness where tests benefit.
 
+## Internal CLI and Operator Tooling Defaults
+
+When the code is a CLI or internal operator tool, apply these additional defaults. This is the main update from the `20260617_143450_10d6ab11` session.
+
+See `references/internal-cli-philosophy.md` for the full rationale and examples.
+
+1. **Treat the CLI as a serious operator boundary.**
+   - It is not a thin wrapper around random functions.
+   - Its job is to make a messy system operable.
+2. **Shape commands around operator tasks, not the source tree.**
+   - Command paths should be guessable from the job to be done.
+   - Repeated snippets and tribal-knowledge workflows often want a first-class subcommand.
+3. **Keep entrypoints and handlers thin.**
+   - Process-wide setup, parse and validate arguments, assemble dependencies, dispatch, render result.
+   - Do not hide the system's main understanding inside the CLI shell.
+4. **Parse loose inputs early into typed objects.**
+   - Paths, URLs, request payloads, config, and option combinations should be normalised and validated at the boundary.
+5. **Teach through help text.**
+   - `--help` is part of the interface contract.
+   - Encode invariants, examples, caveats, and adjacent command hints where the operator will actually look.
+6. **Civilise awkward backends and protocols.**
+   - Normalise weird shapes, reject bad combinations up front, and expose a task-shaped command instead of leaking raw API ceremony.
+7. **Tell the truth.**
+   - No fake flags, no silent fallbacks, no misleading success, no accepting malformed input just to fail later.
+8. **Serve humans, scripts, and agents at the same time.**
+   - Human-readable defaults are good.
+   - Stable JSON or machine-readable output should exist where automation wants it.
+   - Keep progress and chatter off structured stdout.
+
 ## Dimension Application Rules
 
 Use this as a quick execution map while coding.
@@ -114,6 +154,10 @@ Flag these unless a clear task-specific reason exists:
 - Runtime env access from request handlers/domain functions
 - "Stringly typed" domain fields when constrained types are known
 - Entry-point files containing domain/business logic
+- CLI surfaces organised around package names instead of operator tasks
+- Help text omitting invariants, examples, or dangerous constraints.
+- Fake or placeholder flags that imply behaviour the tool does not implement
+- Mixing machine-readable stdout with human progress noise
 - Comments that duplicate the code line-by-line
 - Hard-coded network/time dependencies in logic that should be testable
 - Solving a generic nearby problem instead of the actual local problem
