@@ -1,6 +1,6 @@
 ---
 name: code-like-michael
-description: "Use when writing, refactoring, or reviewing code that should match Michael's style: explicit contracts, thin entrypoints, practical boundaries, anti-ceremony abstractions, deterministic tooling, and operator-shaped CLIs."
+description: "Default coding style for all implementation, refactoring, and code review unless the user specifies otherwise. Applies Michael's conventions: explicit contracts, thin entrypoints, practical boundaries, anti-ceremony abstractions, deterministic tooling, and operator-shaped CLIs. Use whenever writing or changing code, touching architecture, or reviewing PRs."
 ---
 
 # Code Like Michael
