@@ -1,6 +1,6 @@
 ---
 name: working-docs
-description: Use when a task has multiple phases, evidence sources, handoff risk, interruption risk, or intermediate findings that must affect later work.
+description: Use when a task has multiple phases, evidence sources, handoff risk, interruption risk, or intermediate findings that must affect later work. Sometimes referred to as the "working folder" or `_working/<topic>/`.
 ---
 
 # Working Docs
