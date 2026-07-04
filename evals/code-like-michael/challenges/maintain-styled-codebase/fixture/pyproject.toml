@@ -1,0 +1,25 @@
+[project]
+name = "newsletter"
+version = "0.1.0"
+description = "RSS newsletter monitor with relevance scoring and digest email"
+requires-python = ">=3.11"
+dependencies = [
+    "click>=8.1",
+    "feedparser>=6.0",
+]
+
+[project.scripts]
+newsletter = "newsletter.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["newsletter*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

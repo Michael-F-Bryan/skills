@@ -1,0 +1,10 @@
+{
+  "items": [
+    {"sku": "SKU-001", "name": "Widget", "quantity": 5, "supplier_id": "s1"},
+    {"sku": "SKU-002", "name": "Gadget", "quantity": 250, "supplier_id": "s2"},
+    {"sku": "SKU-003", "name": "Doohickey", "quantity": 1500},
+    {"name": "No SKU item", "quantity": 10},
+    {"sku": "SKU-004", "name": "Gizmo"},
+    null
+  ]
+}

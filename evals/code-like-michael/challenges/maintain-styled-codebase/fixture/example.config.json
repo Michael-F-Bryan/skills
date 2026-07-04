@@ -1,0 +1,18 @@
+{
+  "db_path": "newsletter.db",
+  "score_threshold": 0.3,
+  "plugin_dir": "filter_plugins",
+  "keywords": ["python", "sqlite", "rss"],
+  "feeds": [
+    {"name": "example", "url": "https://example.com/feed.xml"}
+  ],
+  "mail": {
+    "smtp_host": "smtp.example.com",
+    "smtp_port": 587,
+    "username": "monitor@example.com",
+    "password": "secret",
+    "from": "monitor@example.com",
+    "to": ["you@example.com"],
+    "use_tls": true
+  }
+}

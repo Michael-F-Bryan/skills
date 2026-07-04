@@ -42,7 +42,22 @@ Note: Sub-agents without `available_skills` context will false-negative. Include
 | Pass | Minimal delta, cohesive split, bug fixed with behaviour tests |
 | Fail | Drive-by rearchitecture, over-split tiny modules |
 
-### 5. Reshape pass
+### 5. Maintenance discipline
+
+| Score | Evidence |
+|-------|----------|
+| Pass | Smallest coherent change; anti-patterns inside edited functions repaired; healthy conventions matched; regression/behaviour tests added for every change |
+| Warn | Correct change but touched seams left bad, or tests missing with stated justification |
+| Fail | Zero new tests for changed behaviour, or file-wide renovation, or bad local patterns copied into new code |
+
+### 6. Verification honesty
+
+| Score | Evidence |
+|-------|----------|
+| Pass | Summary states what was run and the result; UNVERIFIED flagged when checks could not run |
+| Fail | Failing tests or unrun checks presented without prominent warning |
+
+### 7. Reshape pass
 
 | Score | Evidence |
 |-------|----------|
