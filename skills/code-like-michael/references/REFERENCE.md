@@ -31,3 +31,7 @@ Use this file to navigate the code-like-michael fingerprint resources.
 - `examples/dimension-18-data-boundary-and-io-isolation.md`
 - `examples/dimension-19-build-tooling-contract.md`
 - `examples/dimension-20-evolution-posture.md`
+
+## Additional calibration examples
+
+- `examples/greenfield-size-discipline.md`
