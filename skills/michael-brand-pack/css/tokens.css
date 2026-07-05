@@ -1,0 +1,88 @@
+:root {
+  /* Identity */
+  --on-name: "Operator Notes";
+
+  /* Light theme */
+  --on-bg: #f7f4ec;
+  --on-surface: #fffcf4;
+  --on-surface-alt: #ece6d8;
+  --on-text: #171717;
+  --on-text-secondary: #414853;
+  --on-text-muted: #5f6b7a;
+  --on-border: #b8b0a2;
+  --on-border-subtle: #d6cec0;
+  --on-accent: #245c7a;
+  --on-accent-strong: #007a8a;
+  --on-warning: #9a6700;
+  --on-error: #a33a2b;
+  --on-success: #3f6b46;
+  --on-info-bg: #e8f2f5;
+  --on-warning-bg: #fff1ce;
+  --on-error-bg: #f8dfda;
+  --on-success-bg: #e4f0e4;
+
+  /* Typography */
+  --on-font-sans: Atkinson Hyperlegible, Inter, IBM Plex Sans, Source Sans 3, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --on-font-mono: JetBrains Mono, IBM Plex Mono, Cascadia Code, Roboto Mono, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+
+  --on-text-xs: 0.875rem;     /* 14px */
+  --on-text-sm: 0.9375rem;    /* 15px */
+  --on-text-md: 1rem;         /* 16px */
+  --on-text-body: 1.0625rem;  /* 17px */
+  --on-text-lg: 1.125rem;     /* 18px */
+  --on-text-xl: 1.3125rem;    /* 21px */
+  --on-text-2xl: 1.625rem;    /* 26px */
+  --on-text-3xl: 2.25rem;     /* 36px */
+  --on-text-4xl: 2.75rem;     /* 44px */
+
+  --on-line-tight: 1.25;
+  --on-line-normal: 1.55;
+  --on-line-loose: 1.7;
+
+  /* Spacing */
+  --on-space-1: 0.25rem;
+  --on-space-2: 0.5rem;
+  --on-space-3: 0.75rem;
+  --on-space-4: 1rem;
+  --on-space-5: 1.5rem;
+  --on-space-6: 2rem;
+  --on-space-7: 3rem;
+  --on-space-8: 4rem;
+
+  /* Layout */
+  --on-width-prose: 820px;
+  --on-width-briefing: 1120px;
+  --on-width-wide: 1360px;
+
+  /* Radius */
+  --on-radius-sm: 4px;
+  --on-radius-md: 8px;
+  --on-radius-lg: 12px;
+
+  /* Borders */
+  --on-border-width: 1px;
+  --on-border-width-strong: 2px;
+
+  /* Shadows */
+  --on-shadow-popover: 0 16px 48px rgba(23, 23, 23, 0.18);
+}
+
+[data-theme="dark"] {
+  --on-bg: #111418;
+  --on-surface: #181d23;
+  --on-surface-alt: #202832;
+  --on-text: #f2efe7;
+  --on-text-secondary: #c9c2b6;
+  --on-text-muted: #9aa6b2;
+  --on-border: #5c6570;
+  --on-border-subtle: #343c46;
+  --on-accent: #62c6d6;
+  --on-accent-strong: #8fdde8;
+  --on-warning: #e0a93a;
+  --on-error: #e06b5f;
+  --on-success: #81c784;
+  --on-info-bg: #16313a;
+  --on-warning-bg: #3a2b0d;
+  --on-error-bg: #391c19;
+  --on-success-bg: #1f3525;
+}

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Example: Prototype Handoff Strategy</title>
+  <link rel="stylesheet" href="../css/operator-notes.css" />
+</head>
+<body>
+  <main class="on-page">
+    <article class="on-shell">
+      <header class="on-header">
+        <div class="on-eyebrow">Operator Notes · Decision Brief</div>
+        <h1>Prototype handoff strategy</h1>
+        <p class="on-purpose">Decide whether the prototype handoff mechanism should stay deliberately simple or include automatic recovery logic.</p>
+        <div class="on-status-strip" aria-label="Artefact metadata">
+          <span class="on-status on-status--recommended">Recommended</span>
+          <span class="on-meta-item"><b>Owner</b> Michael F. Bryan</span>
+          <span class="on-meta-item"><b>Updated</b> 5 July 2026</span>
+          <span class="on-meta-item"><b>Confidence</b> Medium — usage patterns are untested</span>
+          <span class="on-meta-item"><b>Scope</b> Prototype</span>
+        </div>
+      </header>
+
+      <section class="on-callout on-callout--read">
+        <span class="on-callout__label">Current read</span>
+        <p>The handoff design is sound for the happy path, but it has not earned complex recovery logic yet. A dumb, visible, predictable mechanism is the better first release.</p>
+      </section>
+
+      <section class="on-callout on-callout--recommendation">
+        <span class="on-callout__label">Recommendation</span>
+        <p>Ship the simple handoff. Make the state visible, log the transition that matters, and document the expected failure mode. Do not add automatic recovery until real failures justify it.</p>
+      </section>
+
+      <section>
+        <h2>Why it matters</h2>
+        <p>Prototype systems fail. The useful question is whether the failure is visible and recoverable. Clever recovery logic can make the user experience smoother, but it can also hide the state that operators need to debug the system.</p>
+      </section>
+
+      <section>
+        <h2>Options</h2>
+        <div class="on-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th>Upside</th>
+                <th>Downside</th>
+                <th>Read</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Simple visible handoff</td>
+                <td>Easy to explain, test, and debug.</td>
+                <td>Some failures require manual retry.</td>
+                <td>Best first version.</td>
+              </tr>
+              <tr>
+                <td>Automatic recovery</td>
+                <td>Potentially smoother user experience.</td>
+                <td>More hidden state; harder to reason about failure.</td>
+                <td>Good later, not now.</td>
+              </tr>
+              <tr>
+                <td>Full orchestration</td>
+                <td>Strong long-term model.</td>
+                <td>Too much design weight before usage data exists.</td>
+                <td>Premature.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="on-callout on-callout--risk">
+        <span class="on-callout__label">Risk</span>
+        <p>If handoff state is visible only in logs, operational failures will look like user error instead of system state.</p>
+        <p><strong>Mitigation:</strong> expose a compact state panel with the current phase, last transition, and retry action.</p>
+      </section>
+
+      <section class="on-callout on-callout--assumption">
+        <span class="on-callout__label">Assumption</span>
+        <p>Prototype users will tolerate manual retry if the system clearly explains what failed and what they can do next.</p>
+      </section>
+
+      <section>
+        <h2>Next move</h2>
+        <ol>
+          <li>Add visible handoff state to the UI.</li>
+          <li>Log the state transition that determines success or failure.</li>
+          <li>Document the expected failure mode in the handoff notes.</li>
+          <li>Review real failure data before designing recovery logic.</li>
+        </ol>
+      </section>
+
+      <footer class="on-footer">Michael F. Bryan · Michael-F-Bryan · Operator Notes</footer>
+    </article>
+  </main>
+</body>
+</html>

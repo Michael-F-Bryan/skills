@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Example: System Handoff Artefact</title>
+  <link rel="stylesheet" href="../css/operator-notes.css" />
+</head>
+<body>
+  <main class="on-page">
+    <div class="on-shell on-shell--wide">
+      <div class="on-layout-with-nav">
+        <nav class="on-side-nav" aria-label="Document navigation">
+          <strong>Sections</strong>
+          <a href="#read">Current read</a>
+          <a href="#shape">System shape</a>
+          <a href="#states">State model</a>
+          <a href="#risks">Risks</a>
+          <a href="#actions">Next move</a>
+        </nav>
+
+        <article>
+          <header class="on-header">
+            <div class="on-eyebrow">Operator Notes · System Handoff</div>
+            <h1>Agent handoff flow</h1>
+            <p class="on-purpose">Explain the whole system to another team member without burying them in edge cases.</p>
+            <div class="on-status-strip" aria-label="Artefact metadata">
+              <span class="on-status on-status--draft">Draft</span>
+              <span class="on-meta-item"><b>Owner</b> Michael F. Bryan</span>
+              <span class="on-meta-item"><b>Updated</b> 5 July 2026</span>
+              <span class="on-meta-item"><b>Confidence</b> Medium</span>
+              <span class="on-meta-item"><b>Audience</b> Technical / semi-technical</span>
+            </div>
+          </header>
+
+          <section id="read" class="on-callout on-callout--read">
+            <span class="on-callout__label">Current read</span>
+            <p>The handoff is intentionally simple. That is the point. The system should fail in obvious ways before it tries to recover in clever ways.</p>
+          </section>
+
+          <section class="on-callout on-callout--recommendation">
+            <span class="on-callout__label">Recommendation</span>
+            <p>Use this artefact to explain the main flow, state boundaries, and operator responsibilities. Keep advanced recovery behaviour out of the first briefing.</p>
+          </section>
+
+          <section id="shape">
+            <h2>System shape</h2>
+            <p>The system has three useful boundaries: user intent, agent execution, and workspace state. Most confusion comes from mixing those boundaries together.</p>
+            <pre><code>User intent → Agent plan → Tool execution → Workspace state → Handoff note</code></pre>
+          </section>
+
+          <section id="states">
+            <h2>State model</h2>
+            <div class="on-table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>State</th>
+                    <th>Meaning</th>
+                    <th>Operator read</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Draft</td>
+                    <td>The artefact is being assembled.</td>
+                    <td>Do not rely on it yet.</td>
+                  </tr>
+                  <tr>
+                    <td>Proposed</td>
+                    <td>The flow is coherent, but not accepted.</td>
+                    <td>Ready for review.</td>
+                  </tr>
+                  <tr>
+                    <td>Accepted</td>
+                    <td>The team has agreed this is the working model.</td>
+                    <td>Use as the current reference.</td>
+                  </tr>
+                  <tr>
+                    <td>Superseded</td>
+                    <td>A newer artefact has replaced it.</td>
+                    <td>Keep for history only.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="risks">
+            <h2>Risks</h2>
+            <div class="on-grid on-grid--two">
+              <div class="on-callout on-callout--risk">
+                <span class="on-callout__label">Risk</span>
+                <p>If the document explains every failure mode, the main flow becomes harder to understand.</p>
+              </div>
+              <div class="on-callout on-callout--assumption">
+                <span class="on-callout__label">Assumption</span>
+                <p>The first audience needs the working model more than the exhaustive edge-case catalogue.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="actions">
+            <h2>Next move</h2>
+            <ol>
+              <li>Confirm the happy-path flow with the team.</li>
+              <li>Add one diagram showing state boundaries.</li>
+              <li>Document only the predictable failure modes.</li>
+              <li>Defer recovery logic until the team can describe the simple version without help.</li>
+            </ol>
+          </section>
+
+          <footer class="on-footer">Michael F. Bryan · Michael-F-Bryan · Operator Notes</footer>
+        </article>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

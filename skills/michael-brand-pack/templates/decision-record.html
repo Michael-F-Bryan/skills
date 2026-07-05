@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Operator Notes Decision Record Template</title>
+  <link rel="stylesheet" href="../css/operator-notes.css" />
+</head>
+<body>
+  <main class="on-page">
+    <article class="on-shell">
+      <header class="on-header">
+        <div class="on-eyebrow">Operator Notes · Decision Record</div>
+        <h1><!-- Decision title --></h1>
+        <p class="on-purpose"><!-- What decision is being made and why now. --></p>
+        <div class="on-status-strip" aria-label="Decision metadata">
+          <span class="on-status on-status--proposed">Proposed</span>
+          <span class="on-meta-item"><b>Owner</b> Michael F. Bryan</span>
+          <span class="on-meta-item"><b>Updated</b> <!-- date --></span>
+          <span class="on-meta-item"><b>Confidence</b> <!-- High/Medium/Low + reason --></span>
+        </div>
+      </header>
+
+      <section class="on-callout on-callout--decision" aria-labelledby="decision">
+        <span class="on-callout__label" id="decision">Decision</span>
+        <p><!-- The decision in one or two sentences. --></p>
+      </section>
+
+      <section class="on-callout on-callout--recommendation" aria-labelledby="recommendation">
+        <span class="on-callout__label" id="recommendation">Recommendation</span>
+        <p><!-- Recommendation, if the decision is not yet accepted. --></p>
+      </section>
+
+      <section id="context">
+        <h2>Context</h2>
+        <p><!-- Situation leading to the decision. --></p>
+      </section>
+
+      <section id="options">
+        <h2>Options considered</h2>
+        <div class="on-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th>Upside</th>
+                <th>Downside</th>
+                <th>Decision read</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><!-- option --></td>
+                <td><!-- upside --></td>
+                <td><!-- downside --></td>
+                <td><!-- read --></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="trade-offs">
+        <h2>Trade-offs accepted</h2>
+        <ul>
+          <li><!-- Accepted trade-off. --></li>
+        </ul>
+      </section>
+
+      <section id="risks">
+        <h2>Risks</h2>
+        <div class="on-callout on-callout--risk">
+          <span class="on-callout__label">Risk</span>
+          <p><!-- Risk statement. --></p>
+          <p><strong>Mitigation:</strong> <!-- mitigation --></p>
+        </div>
+      </section>
+
+      <section id="follow-up">
+        <h2>Follow-up actions</h2>
+        <ol>
+          <li><!-- action --></li>
+        </ol>
+      </section>
+
+      <footer class="on-footer">
+        Michael F. Bryan · Michael-F-Bryan · Operator Notes
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
