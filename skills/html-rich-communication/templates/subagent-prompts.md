@@ -1,5 +1,7 @@
 # Sub-agent Prompt Templates
 
+Paths assume the working folder from **RELATED SKILL:** `working-docs`. Replace `<working-folder>`, `<skill-root>`, and `<audience>` before use.
+
 ## Collation agent
 
 ```text
@@ -11,8 +13,8 @@ Inputs: <paths, URLs, notes>
 
 Tasks:
 1. Read the inputs directly.
-2. Extract facts, claims, evidence, assumptions, open questions, and useful quotes.
-3. Save to <working-folder>/agents/source-notes.md.
+2. Extract facts, claims, evidence, assumptions, open questions, and useful quotes — tag each by type.
+3. Save to <working-folder>/source-notes.md.
 4. Include source paths/URLs beside claims.
 5. Do not design the page yet.
 ```
@@ -20,13 +22,14 @@ Tasks:
 ## Refinement agent
 
 ```text
-Use <working-folder>/agents/source-notes.md to create a concise audience-specific brief.
+Use <working-folder>/source-notes.md to create the refined argument.
 
-Save <working-folder>/agents/refined-brief.md with:
+Save <working-folder>/content-brief.md with:
 - audience/job lock;
 - one-sentence thesis;
 - top 3-5 points;
-- facts vs assumptions;
+- facts vs assumptions vs judgement (tagged);
+- material cut and why;
 - risks/caveats;
 - recommended next action;
 - what to hide behind progressive disclosure.
@@ -35,13 +38,15 @@ Save <working-folder>/agents/refined-brief.md with:
 ## Visual planning agent
 
 ```text
-Use <working-folder>/agents/refined-brief.md and plan the React artefact.
+Use <working-folder>/content-brief.md and plan the React artefact.
 
-Save <working-folder>/agents/visual-plan.md with:
+Save <working-folder>/visual-plan.md with:
 - page sections in order;
 - visual elements and why each helps the reader;
 - shadcn/ui or other React component choices;
-- mobile-first layout notes;
+- mobile-first layout and nav pattern (with anchor strategy);
+- evidence badge types where trust cues matter;
+- typography/fonts — bundled woff2 paths if not system stacks;
 - progressive disclosure plan;
 - image-generation slots, if any, including prompts and target paths under app/src/assets/ or app/public/;
 - chart/diagram library choices (npm packages to bundle, not CDN);
@@ -55,48 +60,54 @@ Do not scaffold or implement yet.
 Build the React artefact from the refined brief and visual plan, then bundle it.
 
 Inputs:
-- <working-folder>/agents/refined-brief.md
-- <working-folder>/agents/visual-plan.md
+- <working-folder>/content-brief.md
+- <working-folder>/visual-plan.md
 - Skill scripts at <skill-root>/scripts/
 
 Steps:
 1. If <working-folder>/app/ does not exist, run:
    cd <working-folder> && bash <skill-root>/scripts/init-artifact.sh app
+   If the script fails, stop and report — do not hand-scaffold around it.
 2. Implement in <working-folder>/app/src/ (App.tsx and components).
-3. Bundle from app root:
+3. Compare built UI to visual-plan.md; record any deltas in <working-folder>/README.md under "Plan fidelity".
+4. Bundle from app root:
    cd <working-folder>/app && bash <skill-root>/scripts/bundle-artifact.sh
-4. Copy deliverable:
+5. Copy deliverable:
    cp <working-folder>/app/bundle.html <working-folder>/final/bundle.html
-5. If a shareable link is needed, create a secret gist and give the user the GistPreview URL (see <skill-root>/references/secret-gist-publishing.md).
+6. If a shareable link is needed, create a secret gist (see <skill-root>/references/secret-gist-publishing.md).
 
 Hard constraints:
 - read the named inputs first;
-- write React source and bundle.html before commentary, notes, screenshots, or extra files;
+- write React source and bundle.html before commentary or optional files;
 - keep tool use narrow and avoid broad searches;
-- after bundling, write brief creator notes and verify final/bundle.html exists.
+- do not mark README verification complete — that is the review agent's job.
 
 Requirements:
 - React + TypeScript + Tailwind + shadcn/ui;
+- scroll-padding-top on html matching sticky header; scroll-mt on section targets;
 - if AGENTS.md names a project styling skill, read and follow it for visual design;
 - mobile-first responsive design;
 - progressive disclosure via Accordion/Collapsible/Tabs;
 - accessible labels/captions;
-- no runtime CDN dependencies — npm packages bundled at build time only.
+- no runtime CDN dependencies — npm packages and bundled fonts only.
 ```
 
 ## Browser review agent
 
 ```text
-Open <working-folder>/final/bundle.html in a browser and interact with it as <audience>.
+Verify <working-folder>/final/bundle.html as <audience> and write the review before any completion summary.
 
-Do not only inspect source. You must:
-- open the file in a browser;
-- test mobile and desktop-ish viewport sizes;
-- click nav links and record target landing behaviour;
-- open every disclosure control at mobile and desktop widths;
-- evaluate whether the first screen answers the reader's question;
-- identify audience-fit issues, comprehension gaps, visual problems, accessibility problems, and implementation bugs;
-- write the review files before spending time on optional screenshots or extra probes.
+Serve locally (python3 -m http.server in final/) — do not rely on file:// or source inspection alone.
 
-Save feedback to <working-folder>/reviews/browser-review.md.
+You must:
+- test mobile (~375px) and desktop viewports;
+- click every in-page nav link and record anchor landing (pass/fail) in a table;
+- open every accordion, tab, and filter at both widths;
+- evaluate whether the first screen answers the reader's primary question;
+- separate audience-fit issues from implementation bugs;
+- check self-containment (no runtime CDN fetches) and privacy posture.
+
+Use <skill-root>/references/browser-review-template.md for structure.
+Save to <working-folder>/reviews/browser-review.md.
+Update <working-folder>/README.md status checkboxes only after the review file is written.
 ```

@@ -1,37 +1,47 @@
 # Implementation Checklist
 
-## React source checklist (`app/`)
+Use at the end of step 6 (plan fidelity) and step 8 (verification). Nothing in `README.md` should be checked complete until the corresponding items pass.
 
-- [ ] Project scaffolded with `scripts/init-artifact.sh` inside `_working/<topic>/`.
-- [ ] Implementation follows `visual-plan.md` and refined brief.
-- [ ] Project styling skill from `AGENTS.md` applied when stipulated (overrides shadcn defaults).
-- [ ] Semantic heading hierarchy in JSX (h1 → h2 → h3).
-- [ ] First screen answers the primary reader question.
-- [ ] Mobile width around 375px is readable without sideways scrolling.
-- [ ] Disclosure/tabs/filters work with keyboard and without hover-only reliance.
-- [ ] Nav links land sections cleanly below sticky headers at mobile and desktop widths.
-- [ ] Mobile nav links are visible or have an obvious scroll/wrap affordance.
+## Plan fidelity (`visual-plan.md` → built)
+
+Before bundling, compare the visual plan to the React source:
+
+- [ ] Every planned section exists with the intended reader job (not just a heading).
+- [ ] Navigation matches the plan (pattern, labels, mobile behaviour).
+- [ ] Evidence badges/types from the plan are implemented where specified (**source fact**, **assumption**, **judgement**, **unknown**, **hard rule**, **anti-pattern**, **example**).
+- [ ] Typography/colours match the plan or a named project styling skill — not accidental shadcn defaults.
+- [ ] Fonts named in the plan are bundled under `app/public/` (woff2) with `@font-face` — not runtime CDN links, not “close enough” system stacks unless the plan was updated.
+- [ ] Charts/diagrams use the libraries named in the plan (npm, bundled).
+- [ ] Deliberate deviations are recorded in `README.md` under **Plan fidelity** with a one-line reason each.
+
+## React source (`app/`)
+
+- [ ] Project scaffolded with `scripts/init-artifact.sh` inside `_working/<topic>/` (no hand-authored standalone HTML).
+- [ ] `html { scroll-padding-top: … }` matches sticky header height; sections use matching `scroll-mt-*`.
+- [ ] Semantic heading hierarchy (h1 → h2 → h3).
+- [ ] First screen answers the primary reader question from the brief.
+- [ ] Mobile width ~375px readable without horizontal scroll.
+- [ ] Disclosure/tabs/filters work with keyboard; no hover-only reveals.
+- [ ] Mobile nav links are all visible or obviously scrollable/wrapped.
 - [ ] No critical meaning is colour-only.
-- [ ] Images and diagrams have useful captions or alt text.
-- [ ] Charts/diagrams use bundled npm packages, not runtime CDN loads.
-- [ ] Privacy posture is visible in notes and matches sharing method.
+- [ ] Images/diagrams have captions or alt text.
+- [ ] No runtime CDN dependencies in source or bundle.
 
-## Bundle checklist (`final/bundle.html`)
+## Bundle (`final/bundle.html`)
 
-- [ ] `bundle-artifact.sh` run from `app/` without errors.
-- [ ] `final/bundle.html` exists and matches latest source.
+- [ ] `bundle-artifact.sh` run from `app/` without manual workaround.
+- [ ] `cp app/bundle.html final/bundle.html` done after latest source edit.
+- [ ] File opens in browser as a self-contained page.
+- [ ] Bundle size reasonable; trim unused shadcn imports if bloated.
 - [ ] If shared via gist: secret (not `--public`); GistPreview URL verified and recorded in README.
-- [ ] File opens in browser as a self-contained page (no runtime CDN dependencies at load time).
-- [ ] Bundle size is reasonable; trim unused shadcn imports if bloated.
 
-## Browser verification scriptlet
+## Browser verification (required artefact)
 
-Use the browser tool when available. If only terminal is available, run a local static server and use whatever browser automation exists in that environment.
+- [ ] `reviews/browser-review.md` written using `references/browser-review-template.md`.
+- [ ] Tested at mobile (~375px) and desktop widths via browser (local HTTP server, not source inspection alone).
+- [ ] Every nav link clicked; anchor landing recorded in the review table.
+- [ ] Every accordion/tab/filter exercised at both widths.
+- [ ] Audience-fit issues separated from implementation bugs.
+- [ ] `README.md` status checkboxes updated **only after** the review file exists.
 
-Minimum reviewer actions:
-
-1. Open `final/bundle.html`.
-2. Resize or emulate mobile width.
-3. Click every nav link and disclosure control.
-4. Inspect first screen, key visual, risk/evidence section, and next-action block.
-5. Report audience-fit failures separately from implementation bugs.
+See `references/browser-review-template.md` for the review file shape.

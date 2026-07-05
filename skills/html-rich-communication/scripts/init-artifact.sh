@@ -23,12 +23,14 @@ else
   echo "✅ Using Vite $VITE_VERSION (Node 18 compatible)"
 fi
 
-# Detect OS and set sed syntax
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  SED_INPLACE="sed -i ''"
-else
-  SED_INPLACE="sed -i"
-fi
+# Portable in-place sed (macOS may ship BSD or GNU sed via Homebrew)
+sed_inplace() {
+  if sed --version >/dev/null 2>&1; then
+    sed -i "$@"
+  else
+    sed -i '' "$@"
+  fi
+}
 
 # Check if pnpm is installed
 if ! command -v pnpm &> /dev/null; then
@@ -62,8 +64,8 @@ pnpm create vite "$PROJECT_NAME" --template react-ts
 cd "$PROJECT_NAME"
 
 echo "🧹 Cleaning up Vite template..."
-$SED_INPLACE '/<link rel="icon".*vite\.svg/d' index.html
-$SED_INPLACE 's/<title>.*<\/title>/<title>'"$PROJECT_NAME"'<\/title>/' index.html
+sed_inplace '/<link rel="icon".*vite\.svg/d' index.html
+sed_inplace 's/<title>.*<\/title>/<title>'"$PROJECT_NAME"'<\/title>/' index.html
 
 echo "📦 Installing base dependencies..."
 pnpm install
@@ -217,8 +219,19 @@ cat > src/index.css << 'EOF'
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+    /* Match sticky header height; adjust if header changes */
+    scroll-padding-top: 5.5rem;
+  }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .scroll-mt-header {
+    scroll-margin-top: 5.5rem;
   }
 }
 EOF

@@ -20,6 +20,32 @@ fi
 echo "📦 Installing bundling dependencies..."
 pnpm add -D parcel @parcel/config-default parcel-resolver-tspaths html-inline
 
+# Parcel pulls native deps; pnpm 10+ blocks their postinstall until approved
+echo "🔧 Allowing Parcel native build dependencies..."
+node -e "
+const fs = require('fs');
+const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+const required = ['@parcel/watcher', '@swc/core', 'lmdb', 'msgpackr-extract'];
+pkg.pnpm = pkg.pnpm || {};
+const existing = pkg.pnpm.onlyBuiltDependencies || [];
+pkg.pnpm.onlyBuiltDependencies = [...new Set([...existing, ...required])];
+fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+"
+pnpm install
+
+# Ensure tsconfig paths exist for parcel-resolver-tspaths
+if [ -f "tsconfig.json" ]; then
+  node -e "
+const fs = require('fs');
+const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+const config = JSON.parse(fs.readFileSync('tsconfig.json', 'utf8'));
+config.compilerOptions = config.compilerOptions || {};
+if (!config.compilerOptions.baseUrl) config.compilerOptions.baseUrl = '.';
+if (!config.compilerOptions.paths) config.compilerOptions.paths = { '@/*': ['./src/*'] };
+fs.writeFileSync('tsconfig.json', JSON.stringify(config, null, 2) + '\n');
+"
+fi
+
 # Create Parcel config with tspaths resolver
 if [ ! -f ".parcelrc" ]; then
   echo "🔧 Creating Parcel configuration with path alias support..."
@@ -33,7 +59,7 @@ fi
 
 # Clean previous build
 echo "🧹 Cleaning previous build..."
-rm -rf dist bundle.html
+rm -rf dist bundle.html .parcel-cache
 
 # Build with Parcel
 echo "🔨 Building with Parcel..."
@@ -50,5 +76,7 @@ echo ""
 echo "✅ Bundle complete!"
 echo "📄 Output: bundle.html ($FILE_SIZE)"
 echo ""
-echo "You can now use this single HTML file as an artifact in Claude conversations."
-echo "To test locally: open bundle.html in your browser"
+echo "Copy to the working folder deliverable:"
+echo "  cp bundle.html ../final/bundle.html"
+echo ""
+echo "Then run browser verification (step 8) before reporting completion."
