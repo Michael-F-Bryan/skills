@@ -17,7 +17,7 @@ Use for long artefacts or mobile reading.
 
 Use when the surface must stay readable without discarding detail.
 
-- Native `<details>/<summary>`
+- shadcn Accordion, Collapsible, or Tabs (React pipeline)
 - Expandable evidence cards
 - Layered depth: Plain English → More detail → Implementation notes
 - Risk drawers
