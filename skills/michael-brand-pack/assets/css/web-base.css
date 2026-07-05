@@ -1,0 +1,232 @@
+@import url('./tokens.css');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light dark;
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--on-bg);
+  color: var(--on-text);
+  font-family: var(--on-font-sans);
+  font-size: var(--on-text-body);
+  line-height: var(--on-line-normal);
+  text-rendering: optimizeLegibility;
+}
+
+main, article {
+  display: block;
+}
+
+img, svg {
+  max-width: 100%;
+}
+
+a {
+  color: var(--on-accent);
+  text-decoration-thickness: 0.09em;
+  text-underline-offset: 0.16em;
+}
+
+a:hover {
+  color: var(--on-accent-strong);
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--on-accent-strong);
+  outline-offset: 3px;
+}
+
+p {
+  margin: 0 0 var(--on-space-4);
+}
+
+h1, h2, h3, h4 {
+  color: var(--on-text);
+  line-height: var(--on-line-tight);
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--on-space-4);
+}
+
+h1 {
+  font-size: clamp(2.15rem, 4vw, var(--on-text-4xl));
+  font-weight: 760;
+}
+
+h2 {
+  font-size: var(--on-text-2xl);
+  font-weight: 720;
+  margin-top: var(--on-space-7);
+}
+
+h3 {
+  font-size: var(--on-text-xl);
+  font-weight: 700;
+  margin-top: var(--on-space-5);
+}
+
+h4 {
+  font-size: var(--on-text-lg);
+  font-weight: 700;
+  margin-top: var(--on-space-4);
+}
+
+ul, ol {
+  margin-top: 0;
+  margin-bottom: var(--on-space-4);
+  padding-left: 1.5rem;
+}
+
+li + li {
+  margin-top: var(--on-space-1);
+}
+
+code, pre, kbd, samp {
+  font-family: var(--on-font-mono);
+}
+
+code {
+  font-size: 0.94em;
+  background: var(--on-surface-alt);
+  border: var(--on-border-width) solid var(--on-border-subtle);
+  border-radius: var(--on-radius-sm);
+  padding: 0.08rem 0.28rem;
+}
+
+pre {
+  background: var(--on-surface-alt);
+  border: var(--on-border-width) solid var(--on-border);
+  border-radius: var(--on-radius-md);
+  padding: var(--on-space-4);
+  overflow-x: auto;
+  font-size: var(--on-text-sm);
+  line-height: 1.5;
+}
+
+pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+blockquote {
+  margin: var(--on-space-5) 0;
+  padding: var(--on-space-3) var(--on-space-5);
+  border-left: 4px solid var(--on-accent);
+  background: var(--on-info-bg);
+  color: var(--on-text);
+}
+
+hr {
+  border: 0;
+  border-top: var(--on-border-width) solid var(--on-border);
+  margin: var(--on-space-7) 0;
+}
+
+.on-page {
+  min-height: 100vh;
+}
+
+.on-shell {
+  width: min(100% - 2rem, var(--on-width-briefing));
+  margin: 0 auto;
+  padding: var(--on-space-7) 0;
+}
+
+.on-shell--wide {
+  width: min(100% - 2rem, var(--on-width-wide));
+}
+
+.on-prose {
+  max-width: var(--on-width-prose);
+}
+
+.on-table-wrap {
+  overflow-x: auto;
+  margin: var(--on-space-5) 0;
+  border: var(--on-border-width) solid var(--on-border);
+  border-radius: var(--on-radius-md);
+  background: var(--on-surface);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--on-text-md);
+}
+
+caption {
+  text-align: left;
+  color: var(--on-text-secondary);
+  font-weight: 700;
+  padding: var(--on-space-3) var(--on-space-4);
+  border-bottom: var(--on-border-width) solid var(--on-border);
+}
+
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.75rem 1rem;
+  border-bottom: var(--on-border-width) solid var(--on-border-subtle);
+}
+
+th {
+  background: var(--on-surface-alt);
+  color: var(--on-text);
+  font-weight: 800;
+}
+
+tr:last-child td {
+  border-bottom: 0;
+}
+
+tr:hover td {
+  background: color-mix(in srgb, var(--on-surface-alt) 58%, transparent);
+}
+
+.on-muted { color: var(--on-text-muted); }
+.on-secondary { color: var(--on-text-secondary); }
+.on-accent { color: var(--on-accent); }
+.on-warning { color: var(--on-warning); }
+.on-error { color: var(--on-error); }
+.on-success { color: var(--on-success); }
+.on-no-margin { margin: 0; }
+
+@media (max-width: 860px) {
+  body {
+    font-size: var(--on-text-md);
+  }
+}
+
+@media print {
+  :root {
+    --on-bg: #ffffff;
+    --on-surface: #ffffff;
+    --on-surface-alt: #f3f0e8;
+    --on-text: #000000;
+    --on-text-secondary: #222222;
+    --on-text-muted: #333333;
+    --on-border: #777777;
+    --on-border-subtle: #aaaaaa;
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  .on-shell,
+  .on-shell--wide {
+    width: 100%;
+    padding: 0;
+  }
+}

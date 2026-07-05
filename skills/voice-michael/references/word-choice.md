@@ -93,6 +93,17 @@ Use this reference for vocabulary level, formality, contractions, jargon, favour
 
 ---
 
+## Operator-artifact vocabulary
+
+Prefer on decision and technical artefacts:
+
+- recommendation, decision, trade-off, risk, assumption, constraint, evidence
+- failure mode, next move, current read, operational impact, known / unknown
+
+See [operator-artifacts.md](operator-artifacts.md) for structure patterns.
+
+---
+
 ## Avoided words / patterns (word choice)
 
 - **Overly formal hedges:** Avoid *"it is noteworthy that"*, *"one should consider"*, *"it may be said that"*. Prefer *"It's worth noting"*, *"Something to keep in mind"*, or direct assertion.

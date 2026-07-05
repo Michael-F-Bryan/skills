@@ -1,12 +1,30 @@
-# Voice and Tone
+# Operator artefacts — voice and structure
 
-Operator Notes writing should be direct, grounded, technically competent, and low-drama.
+## Table of contents
 
-The voice should feel like an operator sharing working notes with enough clarity for executive scrutiny.
+- [Framing](#framing)
+- [Core rules](#core-rules)
+- [Recommendation pattern](#recommendation-pattern)
+- [Known / Judgement / Uncertainty](#known--judgement--uncertainty)
+- [Bluntness calibration](#bluntness-calibration)
+- [Heading vocabulary](#heading-vocabulary)
+- [Tone by artefact type](#tone-by-artifact-type)
+- [Progressive disclosure (content)](#progressive-disclosure-content)
+- [Related references](#related-references)
 
-## Core voice rules
+## Framing
 
-1. Lead with the read.
+Operator-grade writing should be direct, grounded, technically competent, and low-drama. It should feel like an operator sharing working notes with enough clarity for executive scrutiny.
+
+Core rule for decision-oriented artefacts:
+
+> Make the work legible. Make the next move obvious.
+
+For teaching explainers, soften the second line: legibility first; next move only when the reader job is decide or operate.
+
+## Core rules
+
+1. Lead with the read (decide) or thesis (learn).
 2. Separate facts, judgement, assumptions, and uncertainty.
 3. Be blunt about systems, not people.
 4. Prefer specific nouns and active recommendations.
@@ -15,19 +33,9 @@ The voice should feel like an operator sharing working notes with enough clarity
 7. Label uncertainty instead of hiding it.
 8. Avoid cleverness that makes the reader decode the structure.
 
-## Lead with the read
-
-Good:
-
-> The design is conceptually sound, but it hides important state. That is acceptable for the prototype. It becomes risky once multiple people need to debug it.
-
-Weak:
-
-> There are a few different considerations here, and some of them may become important later depending on how the system evolves.
-
 ## Recommendation pattern
 
-Use this pattern often:
+Use this pattern often on decide/operate artefacts:
 
 ```text
 Recommendation: Do X.
@@ -45,9 +53,9 @@ Trade-off: Users may need to retry manually during the prototype phase.
 Next move: Add visible handoff state and document the expected failure mode.
 ```
 
-## Fact / judgement / uncertainty split
+## Known / Judgement / Uncertainty
 
-Use this when the distinction matters.
+Use when the distinction matters:
 
 ```text
 Known:
@@ -81,7 +89,7 @@ Avoid:
 
 Be direct about the system. Do not grandstand at people.
 
-## Heading style
+## Heading vocabulary
 
 Prefer useful headings:
 
@@ -105,7 +113,7 @@ Occasional punch is fine when it clarifies:
 
 Avoid cute headings that make the reader decode the structure.
 
-## Tone by context
+## Tone by artifact type
 
 | Context | Tone |
 |---|---|
@@ -116,61 +124,22 @@ Avoid cute headings that make the reader decode the structure.
 | Public write-up | polished, readable, lightly personal |
 | CSU/mixed audience | plain English, explain acronyms, keep structure visible |
 | Sunfish engineering | technical, pragmatic, implementation-aware |
+| Mentoring explainer | thesis-first, patient, example-led |
 
-## Words to prefer
+## Progressive disclosure (content)
 
-- recommendation
-- decision
-- trade-off
-- risk
-- assumption
-- constraint
-- evidence
-- failure mode
-- next move
-- current read
-- operational impact
-- known / unknown
+Use accordion or `<details>` only when the panel carries enough substance. Minimum per panel:
 
-## Words to avoid or use carefully
+- 2–3 sentences of context, **or**
+- 3+ substantive bullets, **or**
+- A bad/good code pair with brief explanation
 
-- leverage
-- unlock
-- alignment
-- enablement
-- synergy
-- transformative
-- seamless
-- cutting-edge
-- revolutionary
-- paradigm
-- robust, unless explained
-- scalable, unless scoped
-- production-ready, unless tested
+If content fits a bullet list, keep it visible — do not hide a single sentence behind disclosure.
 
-## Sentence shape
+Each code example has **one canonical section**. Other sections link or deepen — do not repeat the same snippet in tabs, accordions, and compare blocks.
 
-Prefer compact sentences with clear subjects.
+## Related references
 
-Good:
-
-> The handoff works, but only when every step succeeds. The failure state is not visible to the user.
-
-Weak:
-
-> In cases where the handoff process does not complete as expected, it may be difficult for users to determine what has occurred.
-
-## Uncertainty language
-
-Use:
-
-- “Likely” when based on evidence but not confirmed.
-- “Assumption” when the argument depends on something unverified.
-- “Open question” when a decision needs more information.
-- “Confidence: High/Medium/Low” sparingly, with an explanation.
-
-Example:
-
-```text
-Confidence: Medium — the architecture is clear, but production traffic assumptions are still untested.
-```
+- Word-level preferences and gaps: [word-choice.md](word-choice.md)
+- Buzzwords and phrasing to avoid: [avoidances.md](avoidances.md)
+- Visual styling for HTML artefacts: attach a brand/design-system skill (e.g. michael-brand-pack) and html-rich-communication for build workflow

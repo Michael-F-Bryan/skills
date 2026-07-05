@@ -1,83 +1,42 @@
 # Michael Brand Pack
 
-**Operator Notes** is a professional artefact system for Michael F. Bryan / Michael-F-Bryan. It is designed for HTML artefacts, technical reports, project write-ups, decision briefs, architecture notes, incident reviews, and rich communication outputs.
+**Operator Notes** visual design system for Michael F. Bryan / Michael-F-Bryan branded surfaces — websites, email, documents, and (with html-rich) rich HTML artefacts.
 
-## Brand concept
+## Quick start
 
-> **Operator-grade communication:** field notes refined into decision briefs.
+1. Read [SKILL.md](SKILL.md) channel router.
+2. Load [references/tokens.md](references/tokens.md) for values.
+3. Apply [assets/css/tokens.css](assets/css/tokens.css) + [assets/css/web-base.css](assets/css/web-base.css) for web.
 
-## Core rule
+## Pairing
 
-> **Make the work legible. Make the next move obvious.**
+| This skill | Companion |
+|---|---|
+| Visual tokens, CSS, channel guides | [html-rich-communication](../html-rich-communication/SKILL.md) — HTML workflow and templates |
+| — | [voice-michael](../voice-michael/SKILL.md) — writing voice |
 
-## What this folder contains
+## Layout
 
 ```text
 michael-brand-pack/
 ├── SKILL.md
 ├── README.md
-├── docs/
-│   ├── brand-guide.md
-│   ├── voice-and-tone.md
-│   ├── accessibility.md
-│   └── component-patterns.md
-├── css/
-│   ├── tokens.css
-│   └── operator-notes.css
-├── templates/
-│   ├── briefing.html
-│   ├── decision-record.html
-│   └── technical-report.html
-├── examples/
-│   ├── system-handoff.html
-│   └── decision-brief.html
-├── components/
-│   ├── status-strip.html
-│   ├── current-read.html
-│   ├── recommendation.html
-│   ├── risk-block.html
-│   ├── trade-off-table.html
-│   └── next-actions.html
-└── diagrams/
-    └── diagram-style.md
+├── references/
+│   ├── visual-language.md
+│   ├── tokens.md
+│   ├── websites.md
+│   ├── email.md
+│   ├── documents.md
+│   └── html.md
+└── assets/
+    └── css/
+        ├── tokens.css
+        └── web-base.css
 ```
-
-## Intended feel
-
-The reader should feel:
-
-- “This person understands the system.”
-- “The important parts are visible.”
-- “The recommendation is clear.”
-- “The artefact is useful enough to forward.”
-- “I can act on this.”
-
-## Quick start
-
-Use `templates/briefing.html` for most artefacts.
-
-Use `templates/decision-record.html` for decisions, ADRs, technical recommendations, and trade-off analysis.
-
-Use `templates/technical-report.html` for deeper reports, investigations, system handoffs, or postmortems.
-
-The CSS files are split into:
-
-- `css/tokens.css` — colours, spacing, typography, radius, and status tokens.
-- `css/operator-notes.css` — complete layout and component styling.
-
-For standalone artefacts, either link both CSS files or paste them into a single `<style>` block.
 
 ## Default identity
 
-Preferred public identity:
-
 ```text
 Michael F. Bryan · Michael-F-Bryan
-```
-
-Optional system label:
-
-```text
 Operator Notes
-Field notes refined into decision briefs.
 ```

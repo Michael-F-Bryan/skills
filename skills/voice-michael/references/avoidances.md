@@ -12,7 +12,7 @@ Use this reference for phrases never used, structures avoided, topics skipped, a
 
 ### Corporate / buzzword verbs and nouns
 
-**Never:** "leverage" (as verb), "utilise/utilise", "paradigm", "synergy", "ideate/ideation", "circle back", "reach out", "touch base", "bandwidth" (for personal capacity), "disrupt/disruption", "game-changer", "revolutionary". When **disclaiming** productivity or life-hack framing, avoid repeating the buzzphrase (e.g. "life optimisation"); prefer "no life-hack angle", "no optimisation advice", or "just the observation that..." without naming the avoided category.
+**Never:** "leverage" (as verb), "utilise/utilise", "paradigm", "synergy", "ideate/ideation", "circle back", "reach out", "touch base", "bandwidth" (for personal capacity), "disrupt/disruption", "game-changer", "revolutionary", "unlock", "alignment", "enablement", "seamless", "cutting-edge", "transformative". Use **robust**, **scalable**, or **production-ready** only when scoped and explained. When **disclaiming** productivity or life-hack framing, avoid repeating the buzzphrase (e.g. "life optimisation"); prefer "no life-hack angle", "no optimisation advice", or "just the observation that..." without naming the avoided category.
 
 **Use instead:** "use", "reuse", "rely on", "call", "contact", "talk", "time".
 

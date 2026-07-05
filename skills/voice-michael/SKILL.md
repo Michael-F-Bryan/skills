@@ -1,6 +1,11 @@
 ---
 name: voice-michael
-description: Use when drafting, editing, or evaluating communication that should sound like Michael across public technical prose, internal notes, agent prompts, engineering feedback, and concise operational updates.
+description: >-
+  Use when drafting, editing, or evaluating communication that should sound like
+  Michael across public technical prose, internal notes, agent prompts, engineering
+  feedback, concise operational updates, decision briefs, technical reports, and
+  structured HTML artefacts. Includes structured-artifact writing patterns in
+  references/operator-artifacts.md.
 ---
 
 # Voice: Michael
@@ -69,5 +74,6 @@ Load only the reference files you need for the task:
 | **What to avoid** - phrases never used, structures avoided, topics and formality bands | [references/avoidances.md](references/avoidances.md) |
 | **Signature phrases and exemplars** - openings, transitions, closings, favourite phrases, quoted exemplary sentences | [references/phrases-and-examples.md](references/phrases-and-examples.md) |
 | **Quick check and violations** - The Michael Test checklist + anti-patterns | [references/checklist-and-antipatterns.md](references/checklist-and-antipatterns.md) |
+| **Operator artefacts** - decision briefs, ADRs, handoffs, mentoring explainers; recommendation pattern, known/judgement/uncertainty blocks | [references/operator-artifacts.md](references/operator-artifacts.md) |
 
 For authentic, human-sounding output, use this skill together with the **anti-ai-writing** skill. For assistant-facing or internal operational artefacts, also apply the mode and reasoning references so the output does not become generic blog prose.

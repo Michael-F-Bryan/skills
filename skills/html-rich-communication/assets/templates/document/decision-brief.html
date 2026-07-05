@@ -4,31 +4,31 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Example: Prototype Handoff Strategy</title>
-  <link rel="stylesheet" href="../css/operator-notes.css" />
+  <link rel="stylesheet" href="../../css/document-components.css" />
 </head>
 <body>
-  <main class="on-page">
-    <article class="on-shell">
-      <header class="on-header">
-        <div class="on-eyebrow">Operator Notes · Decision Brief</div>
+  <main class="doc-page">
+    <article class="doc-shell">
+      <header class="doc-header">
+        <div class="doc-eyebrow">Decision brief</div>
         <h1>Prototype handoff strategy</h1>
-        <p class="on-purpose">Decide whether the prototype handoff mechanism should stay deliberately simple or include automatic recovery logic.</p>
-        <div class="on-status-strip" aria-label="Artefact metadata">
-          <span class="on-status on-status--recommended">Recommended</span>
-          <span class="on-meta-item"><b>Owner</b> Michael F. Bryan</span>
-          <span class="on-meta-item"><b>Updated</b> 5 July 2026</span>
-          <span class="on-meta-item"><b>Confidence</b> Medium — usage patterns are untested</span>
-          <span class="on-meta-item"><b>Scope</b> Prototype</span>
+        <p class="doc-purpose">Decide whether the prototype handoff mechanism should stay deliberately simple or include automatic recovery logic.</p>
+        <div class="doc-status-strip" aria-label="Artefact metadata">
+          <span class="doc-status doc-status--recommended">Recommended</span>
+          <span class="doc-meta-item"><b>Owner</b> Michael F. Bryan</span>
+          <span class="doc-meta-item"><b>Updated</b> 5 July 2026</span>
+          <span class="doc-meta-item"><b>Confidence</b> Medium — usage patterns are untested</span>
+          <span class="doc-meta-item"><b>Scope</b> Prototype</span>
         </div>
       </header>
 
-      <section class="on-callout on-callout--read">
-        <span class="on-callout__label">Current read</span>
+      <section class="doc-callout doc-callout--read">
+        <span class="doc-callout__label">Current read</span>
         <p>The handoff design is sound for the happy path, but it has not earned complex recovery logic yet. A dumb, visible, predictable mechanism is the better first release.</p>
       </section>
 
-      <section class="on-callout on-callout--recommendation">
-        <span class="on-callout__label">Recommendation</span>
+      <section class="doc-callout doc-callout--recommendation">
+        <span class="doc-callout__label">Recommendation</span>
         <p>Ship the simple handoff. Make the state visible, log the transition that matters, and document the expected failure mode. Do not add automatic recovery until real failures justify it.</p>
       </section>
 
@@ -39,7 +39,7 @@
 
       <section>
         <h2>Options</h2>
-        <div class="on-table-wrap">
+        <div class="doc-table-wrap">
           <table>
             <thead>
               <tr>
@@ -73,14 +73,14 @@
         </div>
       </section>
 
-      <section class="on-callout on-callout--risk">
-        <span class="on-callout__label">Risk</span>
+      <section class="doc-callout doc-callout--risk">
+        <span class="doc-callout__label">Risk</span>
         <p>If handoff state is visible only in logs, operational failures will look like user error instead of system state.</p>
         <p><strong>Mitigation:</strong> expose a compact state panel with the current phase, last transition, and retry action.</p>
       </section>
 
-      <section class="on-callout on-callout--assumption">
-        <span class="on-callout__label">Assumption</span>
+      <section class="doc-callout doc-callout--assumption">
+        <span class="doc-callout__label">Assumption</span>
         <p>Prototype users will tolerate manual retry if the system clearly explains what failed and what they can do next.</p>
       </section>
 
@@ -94,7 +94,7 @@
         </ol>
       </section>
 
-      <footer class="on-footer">Michael F. Bryan · Michael-F-Bryan · Operator Notes</footer>
+      <footer class="doc-footer">Decision brief template</footer>
     </article>
   </main>
 </body>

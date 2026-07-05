@@ -315,6 +315,25 @@ cat > components.json << 'EOF'
 EOF
 
 echo "✅ Setup complete! You can now use Tailwind CSS and shadcn/ui in your project."
+
+# Copy html-rich document component CSS
+HTML_RICH_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+DOC_CSS="$HTML_RICH_ROOT/assets/css/document-components.css"
+if [ -f "$DOC_CSS" ]; then
+  mkdir -p src/styles
+  cp "$DOC_CSS" src/styles/document-components.css
+  echo "📄 Copied document-components.css to src/styles/"
+fi
+
+# Optional: copy brand skill CSS when BRAND_SKILL_DIR env or 2nd argument is set
+BRAND_DIR="${BRAND_SKILL_DIR:-$2}"
+if [ -n "$BRAND_DIR" ] && [ -d "$BRAND_DIR/assets/css" ]; then
+  cp "$BRAND_DIR/assets/css/tokens.css" src/styles/ 2>/dev/null || true
+  cp "$BRAND_DIR/assets/css/web-base.css" src/styles/ 2>/dev/null || true
+  echo "🎨 Copied brand CSS from $BRAND_DIR"
+  echo "   Import order in index.css: tokens.css → web-base.css → document-components.css → Tailwind"
+fi
+
 echo ""
 echo "📦 Included components (40+ total):"
 echo "  - accordion, alert, aspect-ratio, avatar, badge, breadcrumb"
