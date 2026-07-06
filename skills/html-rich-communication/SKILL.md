@@ -1,282 +1,177 @@
 ---
 name: html-rich-communication
 description: >-
-  Use when creating a rich HTML artefact, visual brief, explainer, report, review
-  aid, decision memo, dashboard-like page, or interactive document for a human
-  to inspect, understand, compare, or share complex information. When the user
-  has attached a visual brand or design-system skill, read and apply it for
-  tokens, CSS, and layout. When they have attached a voice or author-style
-  skill, read and apply it for tone and content structure. Do not invent brand
-  tokens or voice rules when those skills are present.
+  Use when creating rich communication artefacts: HTML pages, visual briefs,
+  explainers, decision memos, design reviews, PR/review aids, reports,
+  dashboards, prototypes, decks, or custom editing interfaces that help a human
+  inspect, understand, compare, decide, review, operate, learn, or export edits.
+  Use when a user asks for an HTML artefact, polished page, interactive report,
+  visual explanation, or shareable browser document.
 ---
 
 # HTML Rich Communication
 
 ## Core principle
 
-Use HTML when the reader's understanding depends on layout, hierarchy, diagrams, interaction, comparison, or progressive disclosure. The goal is not a prettier wall of text; the goal is to help a specific reader make sense of something complex and act on it.
+Rich artefacts help a specific reader do a specific cognitive job. HTML is useful because it keeps humans in the loop with dense, visual, shareable, and sometimes two-way communication. It is not a licence to make weak thinking look finished.
 
-Default to Markdown when a short, linear answer is clearer. Reach for this skill when the artefact must be scanned, navigated, compared, reviewed on mobile, shared, or interacted with.
+Default to Markdown when the answer is short, linear, and easiest to edit. Use HTML or another rich surface when understanding depends on layout, comparison, diagrams, interaction, review focus, progressive disclosure, or export.
+
+## Non-negotiables
+
+1. **No polished build before a communication contract.** If you cannot state the reader, question, action, trust blockers, and boundaries, you are not ready to design the surface.
+2. **No final-looking artefact before first feedback** for ambiguous, high-stakes, or audience-sensitive work. Produce a rough calibration artefact first unless the user explicitly asks for final-only and risk is low. Time-boxed asks should stop at first-feedback unless final-only is explicitly worth the risk.
+3. **No React by default.** Static single-file HTML is the default rich lane. Use React only when stateful interaction, complex components, charts, reuse, or maintainability justify it.
+4. **No mode contamination.** User-guide material does not dominate design reviews; reference tables do not masquerade as explanation; dashboards do not replace decisions.
+5. **No prominent number without provenance.** Classify as measured, code default, config default, inferred, requirement, target, forecast, assumption, or promise.
+6. **No repeated caveat boxes.** Every important caveat/risk/non-goal has one canonical home; other sections reference it tersely.
+7. **No completion claim without verification** appropriate to the lane and reader job.
 
 ## Workflow
 
-```text
-1. Lock the communication job
-2. Collate source material
-3. Refine the argument → content-brief.md
-4. Plan the visual/interaction surface → visual-plan.md
-5. Scaffold React app in _working/
-6. Implement the artefact (match the plan, or document why not)
-7. Bundle to a single HTML file
-8. Verify as the reader → reviews/browser-review.md
-9. Share (local file; secret gist + GistPreview when a link is needed)
+| Stage | Output | Purpose |
+|---|---|---|
+| 1. Communication contract | Contract block in working notes or first-feedback file | Lock reader, job, question, action, trust, boundaries |
+| 2. Mode routing | Selected artefact mode(s) | Pick shape before writing or building |
+| 3. Source slice | Source notes, parked material | Use only material needed for this reader job |
+| 4. Critique-first pass | Outline critique / hard questions | Attack framing before polish |
+| 5. First-feedback artefact | `first-feedback.md` or rough static HTML | Let human/AI reject structure cheaply |
+| 6. Calibration ledger | `feedback-ledger.md` when feedback exists | Map comments to fix/move/cut/reject |
+| 7. Content + visual plan | Brief, disposition table, visual plan | Decide visible/disclosed/linked/cut content |
+| 8. Implementation lane | Markdown, static HTML, React, deck, or editor | Build only the surface the job needs |
+| 9. Verification | Review evidence | Check function and audience fit |
+| 10. Share | Local file or secret gist | Deliver with privacy posture intact |
+
+Keep working artefacts under `_working/<topic>/` and confirm `_working/` is gitignored before writing.
+
+## 1. Communication contract
+
+Write this before implementation:
+
+```markdown
+## Communication contract
+
+- Reader:
+- Reader mode: decide / review / understand / operate / learn / compare / explore / edit-export
+- Primary question the first screen must answer:
+- Secondary questions:
+- Action after reading:
+- What must be believed/trusted:
+- What must not be implied:
+- Boundaries / non-goals likely to matter:
+- Content that belongs elsewhere:
+- Privacy posture:
 ```
 
-Keep the stages separate. Do not scaffold or implement until the audience, reader job, source material, content brief, and visual plan are explicit. Do not mark the task complete until `final/bundle.html` exists **and** `reviews/browser-review.md` records real browser checks.
+Use `references/communication-contract.md` for the full contract, reader gap model, and critique prompts.
 
-## 1. Lock the communication job
+## 2. Mode router
 
-Write a short artefact brief before creating the page:
+Choose the mode that matches the reader job, not the user's first noun. “Polished HTML” is not a mode; choose the reader job first, then decide whether the first output should be rough or final. If the reader's job is to decide, approve, fund, defer, or stop, do not lead with dashboard language; lead with the decision brief and push dashboard views to appendix only.
 
-- **Audience:** who will read it, what they know, and what they care about.
-- **Reader job:** decide, understand, verify, compare, operate, learn, or edit/export.
-- **Primary question:** the one question the first screen must answer.
-- **Reading context:** mobile/desktop, time pressure, meeting use, offline/private/public.
-- **Action:** the concrete next decision, review action, or exported result.
-- **Privacy posture:** local-only, secret-link, internal, or public.
+| Mode | Use when | Default shape |
+|---|---|---|
+| Decision brief | Reader must approve, choose, fund, defer, or stop | BLUF → recommendation → options → evidence → risks → decision block |
+| Design review | Reader must critique architecture/design | context → goals/non-goals → system shape → contracts → decisions/trade-offs → risks/open questions |
+| Technical explainer | Reader must understand how something works | mental model → path/diagram → annotated snippets → gotchas → FAQ |
+| User guide/operator doc | Reader must perform a task | prerequisites → steps → expected results → troubleshooting → doc tests |
+| Reference/pathfinder | Reader must look up facts or find the right page | indexed tables/cards → labels → links → examples |
+| Report/status/incident | Reader must absorb state and next action | headline → status/timeline → evidence → owners → follow-ups |
+| Code review/PR aid | Reader must review code safely | change summary → risk map → annotated diffs/modules → tests → focus areas |
+| Exploration fan-out | Reader is choosing direction | side-by-side options → trade-offs → selection prompt |
+| Prototype/design sandbox | Reader must feel or tune interaction | live example → controls → notes → copy/export selected params |
+| Custom editing interface | Reader manipulates data then returns it | purpose-built UI → constraints/warnings → copy/export output |
+| Deck | Reader needs meeting narrative | section slides → reader cues → appendix |
+| Dashboard/tool | Reader needs ongoing monitoring/exploration | filters/state → key metrics → drilldowns → export |
 
-Use `references/audience-patterns.md` when the audience matters or is mixed.
+Details and mode-specific checks: `references/artefact-modes.md`.
 
-## 2. Collate source material
+## 3. Source slice and content disposition
 
-Create a working folder per **RELATED SKILL:** `working-docs`. Save:
+Do not pour all source material into the artefact. For each major content block, assign one fate: core, supporting evidence, visible caveat, disclosure, appendix, linked separate artefact, or cut.
 
-```text
-_working/<topic>/
-  README.md                  # brief, status, plan-fidelity notes, share URLs
-  content-brief.md           # refined argument (step 3)
-  source-notes.md            # facts, excerpts, links, file paths
-  visual-plan.md             # layout, elements, interactions (step 4)
-  reviews/
-    browser-review.md        # reader verification evidence (step 8; required)
-  prompts/                   # optional: sub-agent prompts
-  agents/                    # optional: sub-agent outputs
-  app/                       # React project (scaffolded in step 5)
-  final/
-    bundle.html              # bundled self-contained artefact
+A useful section in the wrong artefact is still wrong. See `references/content-disposition.md`.
+
+## 4. First-feedback loop
+
+For ambiguous or high-stakes artefacts, create a rough first-feedback artefact before polished HTML. It should be easy to disagree with.
+
+Minimum contents: BLUF, reader model, assumptions ledger, anticipated hard questions, outline critique, proposed section order, content disposition, design-decision skeleton, metric provenance, evidence gaps, and reviewer prompts.
+
+Use `templates/first-feedback.md`; details in `references/first-feedback-loop.md`.
+
+## 5. Design decisions, risks, and metrics
+
+Use design decisions instead of defensive “why it is built this way” sections:
+
+```markdown
+### Decision: <plain name>
+
+- Selected direction:
+- Why:
+- Alternatives considered:
+- What this buys us:
+- Accepted risk / trade-off:
+- Validation state:
+- Revisit trigger:
 ```
 
-Read files and sources directly; do not rely on chat memory. If sub-agents are used, require named output files and read them back before trusting their summaries.
+Prominent numbers need provenance: type, source, validation state, implication, and visual treatment allowed. See `references/design-decisions.md`.
 
-Confirm `_working/` is gitignored before writing (`git check-ignore -v _working/<topic>/README.md`).
+## 6. Implementation router
 
-## 3. Refine before designing
+| Lane | Use when | Required output |
+|---|---|---|
+| Markdown | Short, linear, editable, or first-feedback draft | `.md` file and read-through check |
+| Static HTML | Shareable, visual, mostly read-only, light inline JS/SVG | self-contained `.html` served and browser-checked |
+| React app | Complex state, shadcn components, charts, reuse, heavy interaction | `app/` source plus bundled `final/bundle.html` |
+| Deck HTML | Meeting/sequential presentation | keyboard-nav HTML, first-slide answer, appendix |
+| Custom editor | Human edits/sorts/tunes and exports result | controls exercised, export copied and inspected |
 
-Save the output as `content-brief.md` before writing `visual-plan.md`. Produce a simplified brief:
+Static HTML is allowed and often preferred. The old React pipeline remains available for the React lane: `scripts/init-artifact.sh`, then `scripts/bundle-artifact.sh`. See `references/implementation-routing.md`.
 
-- lead with the answer/recommendation, not context archaeology;
-- cut material that does not help the reader's job — record major cuts and why;
-- separate facts, assumptions, judgement, risks, and open questions (tag each claim);
-- decide which details should be visible by default and which belong behind progressive disclosure;
-- make mobile-first structure explicit if the page may be read on a phone.
+## Brand and voice
 
-For decision support, prefer: **problem → judgement → options → evidence → risks → staged next move**.
+- If a visual brand/design skill is attached, read it before choosing colours, typography, or motifs.
+- If `michael-brand-pack` applies, use warm light document defaults for reports/review docs unless the artefact is a tool/dashboard/demo or the user explicitly accepts the trade-off.
+- If a voice/author-style skill is attached, use it for tone and content structure.
+- Do not invent brand tokens or voice rules when those skills exist.
 
-For technical review, prefer: **system shape → change surface → evidence → failure paths → tests → open risks**.
+## Verification
 
-## Brand and voice (when attached)
+Verification has two layers:
 
-Before building, check available skills:
+1. **Functional delivery:** links, anchors, controls, build/bundle, export buttons, no external runtime dependencies, responsive layout, accessibility basics.
+2. **Audience fit / deep quality:** first screen answers the primary question; headings have scent; uncertainty is visible without being paralysing; content is in the right artefact; the next move is obvious.
 
-- **Visual brand / design-system skill attached?** Read it; apply its tokens, CSS, and visual rules. Do not invent a parallel palette.
-- **Voice / author-style skill attached?** Read it; apply its tone and content-structure rules.
-- **Neither attached?** Use neutral, accessible defaults from `references/visual-elements.md` and `assets/css/document-components.css`.
+For final HTML, serve over local HTTP and write `reviews/browser-review.md`. For custom editors, copy/export the output and inspect it. For React, bundle to `final/bundle.html`. See `references/review-and-verification.md` and `references/browser-review-template.md`.
 
-Details: `references/styling-with-brand-skills.md`. Component patterns: `references/document-component-patterns.md`. Templates: `assets/templates/document/`.
+## Sharing
 
-## 4. Plan the visual surface
+Default: local path. When a browser link is needed, publish a **secret** gist and verify raw + GistPreview URLs before reporting. See `references/secret-gist-publishing.md`.
 
-Create `visual-plan.md` before scaffolding. Choose elements because they clarify the reader's task.
+## Common failures
 
-Start with the default stack:
+| Failure | Correction |
+|---|---|
+| Beautiful but wrong audience | Re-lock the communication contract; regenerate first-feedback before polishing |
+| User asked for dashboard but needs decision | Route by reader action, not requested surface |
+| React used because “HTML artefact” | Use static HTML unless interaction/maintainability justifies React |
+| UI guide material inside design review | Move to appendix or separate user guide via content disposition |
+| Caveat repeated everywhere | Give it one canonical home and reference it tersely |
+| Number looks validated but is a default | Add metric provenance and visual treatment consistent with evidence |
+| Custom editor has no export | Add copy/export; inspect exported result during verification |
+| Brand polish masks weak structure | Fix contract, headings, hierarchy, and evidence before visual polish |
 
-1. Hero thesis / reader decision.
-2. Question-based navigation or sticky section nav.
-3. 3–7 stacked cards for the main argument.
-4. One structure diagram or map.
-5. One staged path, decision gate, comparison, or risk/evidence visual.
-6. Progressive disclosure for evidence and caveats.
-7. One next-action block.
+## Reference index
 
-Mobile navigation needs deliberate design. A sticky horizontal chip nav is not automatically mobile-friendly: it can hide off-screen links, consume vertical space, and land anchors awkwardly under the sticky bar. Prefer wrapped question cards, a compact jump menu, bottom “next decision” links, or a visibly scrollable nav with tested anchor offsets.
-
-For decision artefacts, separate evidence types visibly: **source fact**, **assumption**, **judgement**, and **unknown**. This helps readers trust the recommendation without mistaking confident presentation for certainty.
-
-Record component choices in the visual plan: shadcn/ui primitives (Card, Tabs, Accordion/Collapsible, Badge, etc.), chart library if needed, and any generated images with target paths under `app/src/assets/` or `app/public/`.
-
-**Typography:** if the plan names fonts, specify bundled woff2 files under `app/public/fonts/` — not runtime CDN links (Google Fonts, etc.). System font stacks are fine when named explicitly in the plan.
-
-**Evidence typing:** when the artefact mixes facts, assumptions, and judgement, plan Badge (or equivalent) usage up front — e.g. **source fact**, **assumption**, **judgement**, **unknown**, **hard rule**, **anti-pattern**, **example** — and place them where readers need trust cues.
-
-If the repo's `AGENTS.md` names a project styling skill, note it in the visual plan and plan to apply its typography, colours, and layout rules during implementation. See `references/styling-with-brand-skills.md` when a brand skill is attached.
-
-Use `references/visual-elements.md` for the element palette and `references/chart-routing.md` when numbers or relationships need visualisation.
-
-## 5. Scaffold the React app
-
-Do **not** hand-author a standalone `.html` file. Scaffold a React project inside the working folder, then bundle it in step 7.
-
-From `_working/<topic>/`:
-
-```bash
-bash <skill-root>/scripts/init-artifact.sh app
-cd app
-```
-
-`<skill-root>` is the directory containing this skill's `SKILL.md` (e.g. `skills/html-rich-communication` in this repo).
-
-**Stack:** React 18 + TypeScript + Vite + Tailwind CSS + shadcn/ui (40+ components pre-installed)
-
-The init script creates `app/` with path aliases (`@/`), Radix/shadcn theming, scroll-padding defaults for anchor nav, and Node 18+ compatibility. Requires Node 18+ and pnpm (installed automatically if missing).
-
-If the script fails, fix the script or report the error — do not silently hand-scaffold a partial project and continue. A broken pipeline hides skill regressions.
-
-## 6. Implement the artefact
-
-Edit the generated React app to match `content-brief.md` and `visual-plan.md`. Primary entry: `app/src/App.tsx` and supporting components under `app/src/`.
-
-### Plan fidelity
-
-Before bundling, walk the visual plan section by section. Each planned element should exist for a reader reason. When you deviate — simpler diagram, dropped section, system fonts instead of named faces — add a **Plan fidelity** subsection to `README.md` listing each delta and why. Unexplained drift is a common failure mode.
-
-Use `references/implementation-checklist.md` (plan fidelity + React source sections).
-
-### Design guidelines
-
-**Project styling takes precedence.** Before choosing colours, typography, spacing, or component styling, read the repo's `AGENTS.md` (or equivalent agent instructions). If it names a default styling or design skill — or the user attached a brand / design-system skill — read and follow that skill for the visual language. Copy its `assets/css/tokens.css` and `web-base.css` when present; use this skill's `assets/css/document-components.css` for HTML layout patterns. The shadcn/Tailwind scaffold from `init-artifact.sh` is a technical baseline only; do not treat its default theme as the design system when a brand skill applies.
-
-If no brand or project styling skill is stipulated, use `assets/css/document-components.css` neutrals and avoid “AI slop”: excessive centered layouts, purple gradients, uniform rounded corners everywhere, and Inter as the default font. Match typography, spacing, and hierarchy to the audience and reading context.
-
-### Implementation conventions
-
-- **Layout:** semantic structure via components; responsive Tailwind with a 375px mobile sanity check.
-- **Progressive disclosure:** shadcn Accordion, Collapsible, or Tabs — not hover-only reveals.
-- **Navigation:** pair `scroll-padding-top` on `html` with matching `scroll-mt-*` on section targets; test every nav link (see step 8). Sticky header height and scroll padding must match.
-- **Charts/diagrams:** prefer npm packages (e.g. recharts, mermaid) bundled into the artefact — not runtime CDN loads.
-- **Print/PDF:** add print styles when the artefact may be saved as PDF.
-- **Images:** put assets in `app/src/assets/` or `app/public/`; they are inlined at bundle time.
-- **Fonts:** `@font-face` from bundled files only; never `<link>` to external font CDNs in `index.html`.
-
-### Image generation
-
-Use image generation when a static image communicates better than code-authored SVG: hero scenes, physical-world metaphors, field-style sketches, domain illustrations, or visual anchors.
-
-When using generated images, save under `app/src/assets/` or `app/public/` and record in the working README:
-
-- target path;
-- prompt;
-- aspect ratio;
-- caption/alt text;
-- role in the document;
-- fallback if generation fails.
-
-### Local preview (optional)
-
-During development, `pnpm dev` in `app/` is fine. Do not delay bundling and delivery while polishing in dev mode unless the user asks.
-
-## 7. Bundle to single HTML
-
-From `app/` (project root with `package.json` and `index.html`):
-
-```bash
-bash <skill-root>/scripts/bundle-artifact.sh
-```
-
-This produces `app/bundle.html` — a self-contained file with all JavaScript, CSS, and assets inlined via Parcel + html-inline. The script configures Parcel's native dependencies for pnpm 10+.
-
-Copy the deliverable to the working folder output:
-
-```bash
-cp bundle.html ../final/bundle.html
-```
-
-Run step 8 before reporting completion. If bundling fails, fix `bundle-artifact.sh` or the project config — manual Parcel invocations are a last resort, not the normal path. The React source in `app/` is the editable working copy; `final/bundle.html` is the deliverable.
-
-## 8. Verify as the reader
-
-Verification is a **required deliverable**, not an optional polish pass. Serve `final/bundle.html` over a local HTTP server (`python3 -m http.server` in `final/`) — do not rely on `file://` alone or source inspection.
-
-Write `_working/<topic>/reviews/browser-review.md` using `references/browser-review-template.md`. The review must include:
-
-- viewports tested (mobile ~375px and desktop);
-- whether the first screen answers the primary reader question;
-- a **nav anchor table** — every in-page link clicked, pass/fail on landing below the sticky header (target: heading within ~24px of `scroll-padding-top`);
-- every accordion, tab, and filter exercised at both widths;
-- audience-fit issues separated from implementation bugs;
-- a ship / caveats / do-not-ship verdict.
-
-Also check: no colour-only meaning; copy/export controls work; no runtime CDN fetches; privacy posture matches README; executive artefacts (when applicable) state scope, owner, review gate, and kill condition.
-
-Update `README.md` status checkboxes **only after** `browser-review.md` exists with evidence. List the working folder, read back `README.md`, `browser-review.md`, and confirm `final/bundle.html` before reporting completion.
-
-Use `references/implementation-checklist.md` (browser verification section).
-
-## 9. Share the artefact
-
-Default delivery is the local `final/bundle.html` path. When the user needs a link they can open in a browser — especially on mobile or outside the agent session — publish via **secret gist + GistPreview**:
-
-1. Create a secret gist with `gh gist create` (no `--public`).
-2. Build the rendered preview URL: `https://gistpreview.github.io/?<gist_id>/<filename>` ([GistPreview](https://gistpreview.github.io/)).
-3. Verify raw and preview URLs return `200` before reporting.
-4. Record gist id and both URLs in `_working/<topic>/README.md`.
-
-Renaming the upload to `index.html` simplifies the preview URL (filename can be omitted). See `references/secret-gist-publishing.md` for commands, verification curls, and what to do if a gist was created public by mistake.
-
-Only use public gists when the user explicitly wants discoverable sharing.
-
-## Common failure modes
-
-| Failure                                        | Correction                                                                                                                               |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| Beautiful but wrong audience                   | Re-lock audience/job and regenerate the brief before touching components.                                                                |
-| Markdown thinking inside HTML                  | Use layout, hierarchy, comparison, disclosure, and diagrams deliberately.                                                                |
-| Visual garnish                                 | Remove elements that do not answer a reader question.                                                                                    |
-| Visual plan drift                              | Walk plan vs built before bundling; record deltas in README **Plan fidelity** or implement what was planned.                             |
-| Verification theatre                           | Write `reviews/browser-review.md` with nav/disclosure evidence; do not claim browser verification from one or two clicks.                |
-| Anchor nav lands mid-viewport                  | Match `scroll-padding-top` on `html` to sticky header height; use matching `scroll-mt-*` on targets; re-test all links.                  |
-| Hand-authored HTML instead of React pipeline   | Scaffold with `init-artifact.sh`, implement in React, bundle with `bundle-artifact.sh`.                                                  |
-| Script failure → silent manual workaround      | Fix `init-artifact.sh` / `bundle-artifact.sh` or stop and report; partial hand-scaffolding hides pipeline regressions.                   |
-| Shipping source without bundle                 | Deliver `final/bundle.html`; keep `app/` as working source only.                                                                         |
-| SVG spaghetti                                  | Use simpler diagrams, Mermaid via npm if justified, or generated/static images.                                                          |
-| Mobile added last                              | Carry mobile-first constraints through brief, visual plan, and implementation.                                                           |
-| Hidden uncertainty                             | Use assumption ledgers, evidence chips, and known/unknown panels.                                                                        |
-| External font CDN                              | Bundle woff2 under `app/public/fonts/`; keep the artefact self-contained.                                                                |
-| Public-by-accident sharing                     | Default to local files or secret gists; use GistPreview for rendered links. See `references/secret-gist-publishing.md`.                  |
-| Ignoring project styling skill                 | Read `AGENTS.md`; follow the named styling/design skill before applying shadcn defaults.                                                 |
-| Sub-agent stalls before producing artefact     | Constrain prompts: read named inputs, write the main output first, cap tool calls, then bundle and verify.                               |
-| Mobile nav technically works but feels hidden  | Prefer wrapped navigation, question-card TOCs, or next-links; if using horizontal sticky nav, verify link visibility and anchor landing. |
-| Executive recommendation lacks authority shape | State what approval authorises: scope, owner, review gate, guardrails, and kill condition.                                               |
-| Bundle step skipped                            | Run `bundle-artifact.sh` from `app/` and copy to `final/bundle.html`.                                                                    |
-
-## Prompt pattern for sub-agents
-
-Use file-backed handoffs when quality matters:
-
-1. **Collation agent:** read sources, extract facts, save `source-notes.md`.
-2. **Refinement agent:** turn source notes into `content-brief.md`.
-3. **Visual planning agent:** choose layout, elements, disclosure, and component/chart choices → `visual-plan.md`.
-4. **React implementation agent:** scaffold if needed, implement from brief and visual plan, record plan fidelity, bundle to `final/bundle.html`.
-5. **Review agent:** browser-verify `final/bundle.html`, save `reviews/browser-review.md` before any completion summary.
-
-See `templates/subagent-prompts.md` for copyable prompts.
-
-## Reference
-
-- **Document components:** `references/document-component-patterns.md`, `assets/css/document-components.css`
-- **Brand / voice integration:** `references/styling-with-brand-skills.md`
-- **Templates:** `assets/templates/document/`
-- **shadcn/ui components:** https://ui.shadcn.com/docs/components
-- **Implementation checklist:** `references/implementation-checklist.md`
-- **Browser review template:** `references/browser-review-template.md`
-- **Secret gist sharing:** `references/secret-gist-publishing.md`
-- **Rendered preview:** https://gistpreview.github.io/
+- Contract: `references/communication-contract.md`
+- Modes: `references/artefact-modes.md`
+- First feedback: `references/first-feedback-loop.md`, `templates/first-feedback.md`
+- Content disposition: `references/content-disposition.md`
+- Design decisions and metric provenance: `references/design-decisions.md`
+- Implementation routing: `references/implementation-routing.md`
+- Review: `references/review-and-verification.md`, `references/browser-review-template.md`
+- Components: `references/document-component-patterns.md`, `assets/css/document-components.css`
+- Visual element palette: `references/visual-elements.md`
+- Secret gist publishing: `references/secret-gist-publishing.md`

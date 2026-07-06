@@ -1,17 +1,5 @@
 # Visual language
 
-## Table of contents
-
-- [Brand concept](#brand-concept)
-- [Pillars](#pillars)
-- [Visual mood](#visual-mood)
-- [Colour direction](#colour-direction)
-- [Typography direction](#typography-direction)
-- [Accessibility floor](#accessibility-floor)
-- [Diagram visuals](#diagram-visuals)
-- [Anti-patterns](#anti-patterns)
-- [Writing voice](#writing-voice)
-
 ## Brand concept
 
 **Operator-grade communication:** field notes refined into decision briefs.
@@ -30,6 +18,8 @@ Artefacts should feel useful, legible, structured, direct, evidence-aware, decis
 4. **Calm technical confidence** — sound like someone who has done the work.
 5. **Decisions over documentation** — help the reader act when the job is decide/operate.
 6. **Accessible by default** — refined does not mean faint.
+7. **Annotation over ornament** — labels, units, and caveats sit near the things they explain.
+8. **Memorable only when useful** — visual anchors are allowed when they improve orientation or recall.
 
 ## Visual mood
 
@@ -39,17 +29,33 @@ Avoid: SaaS landing page, academic PDF, cyberpunk terminal, Notion template, sta
 
 ## Colour direction
 
-Light theme is canonical for reports and documents. Dark theme is secondary for tools, dashboards, demos, and long-running screen work.
+Light theme is canonical for reports, decision briefs, design reviews, explainers, and print-friendly documents. Dark theme is secondary for tools, dashboards, demos, prototypes, and long-running screen work.
 
 Use colour for signal:
 
-- accent: links, selected states, key highlights
-- warning: risk/caution
-- error: blocker/failure
-- success: confirmed/done
-- neutral: structure and surfaces
+- accent: links, selected states, key highlights;
+- warning: risk/caution;
+- error: blocker/failure;
+- success: confirmed/done;
+- neutral: structure and surfaces.
 
-Do not spray colour around to make things “pop”. See [tokens.md](tokens.md) for hex values.
+Do not spray colour around to make things “pop”. Domain motifs are accents, not the governing system, unless the artefact is a demo/marketing surface.
+
+## Visual jobs
+
+Every major visual element should do one of these jobs:
+
+| Job | Meaning |
+|---|---|
+| orient | show current state, boundary, map, or section location |
+| compare | make options/trade-offs visible |
+| decide | surface recommendation, owner, gate, or next action |
+| warn | expose risk, caveat, validation state, or unknown |
+| remember | provide a restrained visual anchor |
+| teach | explain relationships or sequence |
+| operate | support action, checklist, or status |
+
+Remove visuals with no job.
 
 ## Typography direction
 
@@ -82,14 +88,13 @@ Diagrams show system shape, not decoration.
 
 - Labelled boxes, explicit boundaries, directional arrows.
 - Label arrows when the relationship is not obvious.
+- Put labels, units, and caveats near the relevant thing; avoid forced eye travel to legends.
 - Show ownership, state, and failure paths where relevant.
 - Avoid mystery icons, 3D/isometric decoration, unlabelled arrows, tiny text.
 - Prefer rectangular boxes, solid borders, low colour count.
 - Readable at 100% zoom; export cleanly to PDF.
 
 Preferred types: boundary diagram, system boundary, sequence, state, data flow, decision tree, timeline, risk map.
-
-For HTML artefact diagram patterns and Mermaid routing, use html-rich-communication with an attached brand skill for colours.
 
 ## Anti-patterns
 
@@ -103,6 +108,8 @@ For HTML artefact diagram patterns and Mermaid routing, use html-rich-communicat
 
 **Too generic:** default Tailwind palette, AI dashboard card grids, decorative icons, no visible decision structure.
 
+**Too polished for the thinking:** beautiful styling over unclear audience, missing risk, weak headings, or unverified claims.
+
 ## Writing voice
 
-Voice, tone, recommendation patterns, and artefact structure live in [voice-michael](../voice-michael/SKILL.md) — especially [references/operator-artifacts.md](../voice-michael/references/operator-artifacts.md). This skill covers visual look only.
+Voice, tone, recommendation patterns, and artefact structure live in `voice-michael`. This skill covers visual look and visual judgement.
