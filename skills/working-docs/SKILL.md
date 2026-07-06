@@ -1,6 +1,6 @@
 ---
 name: working-docs
-description: Use when a task has multiple phases, evidence sources, handoff risk, interruption risk, or intermediate findings that must affect later work. Record what you did in `_working/<topic>/` before finishing so another agent can continue. Sometimes referred to as the "working folder" or `_working/<topic>/`.
+description: Use when a task has multiple phases, evidence sources, handoff risk, interruption risk, or intermediate findings that must affect later work. Update `_working/<topic>/` continuously as you go so users see live progress and another agent can continue if the session ends. Sometimes referred to as the "working folder" or `_working/<topic>/`.
 ---
 
 # Working Docs
@@ -34,7 +34,7 @@ Put `_working/` as close to the files it refers to as possible — normally the 
 
 `README.md` is the entry point — the first thing you or another agent reads on resuming. Add further files only when they pull their weight.
 
-Persist the **work products** you generate — plans, prompts you write for sub-agents, drafts, the final report — as files in this folder, not just as notes about them. If a later step or another agent must use an artefact, it belongs on disk, not only in your reply.
+Persist the **work products** you generate — plans, prompts you write for sub-agents, drafts, the final report — as files in this folder **when you create them**, not at the end of the session. If a later step or another agent must use an artefact, it belongs on disk, not only in your reply or context.
 
 Keep `_working/` out of commits unless the user wants the artefacts tracked: confirm it is covered by `.gitignore` (add a `_working/` line if not) before creating files. If there is no enclosing repo, use the working directory root.
 
@@ -55,23 +55,22 @@ Avoid dumping raw output that isn't itself the evidence, duplicating the final a
 ## The loop
 
 - **Seed** `README.md` before deep work with the underlying need, principles to honour, and definition of done — these anchor every later judgement call.
-- **Capture** evidence, decisions, and the artefacts you produce (plans, prompts, drafts, reports) as files, while you still know why they matter.
+- **Write as you go** — after each meaningful unit of progress (a decision, a finding, a phase completed, a failed attempt), update `_working/<topic>/` immediately. The working directory is the **live record**: users read it to see progress; if the session crashes, compacts, or hands off, nothing important should exist only in context.
+- **Keep `README.md` current** — treat it as a running status line: what's done, what's in progress, what's next, which files to read first. Refresh it whenever that changes.
 - **Read back** before each phase change (drafting, changing direction, after a failed command, after sub-agents return, before the final response). When a captured fact settles a decision, **cite it instead of re-deriving from memory** — that citation is the proof the note mattered.
-- **Close out** before you finish — done, blocked, or paused. Update `_working/<topic>/` so another agent can step in and continue without re-discovering what you already learned. Do not rely on chat history for handoff; the working directory is the handoff surface.
 - **Resume** from `README.md` after any pause. The next agent (or you, post-compaction) should be able to continue from the folder alone.
 
-## Agent handoff
+## Write as you go
 
-When you use `_working/`, treat every session as potentially your last. **Before your final response, record what you did in the working directory.**
+Do not batch working-directory updates for the end of the session. **Update `_working/<topic>/` continuously as you work.**
 
-At minimum, update `README.md` with:
+After each meaningful step, persist to disk:
 
-- what you did this session
-- current state — done, in progress, or blocked
-- the exact next step
-- which files to read first
+- decisions and the evidence behind them
+- artefacts you produced (drafts, reports, prompts, evidence files)
+- changes to the plan, blockers, or next step
 
-Persist any artefact the next agent needs (drafts, reports, prompts, evidence) as files in the folder, not only in your reply. If you changed the plan, recorded a decision, or ruled out an approach, that belongs in the working directory too.
+Keep `README.md` current so a user glancing at the folder — or another agent stepping in mid-task — knows where things stand without reading chat history. Do not rely on chat history or context for handoff; the working directory is the handoff surface.
 
 ## Verifying and handing off
 
