@@ -1,6 +1,6 @@
 ---
 name: working-docs
-description: Use when a task has multiple phases, evidence sources, handoff risk, interruption risk, or intermediate findings that must affect later work. Sometimes referred to as the "working folder" or `_working/<topic>/`.
+description: Use when a task has multiple phases, evidence sources, handoff risk, interruption risk, or intermediate findings that must affect later work. Record what you did in `_working/<topic>/` before finishing so another agent can continue. Sometimes referred to as the "working folder" or `_working/<topic>/`.
 ---
 
 # Working Docs
@@ -57,7 +57,21 @@ Avoid dumping raw output that isn't itself the evidence, duplicating the final a
 - **Seed** `README.md` before deep work with the underlying need, principles to honour, and definition of done — these anchor every later judgement call.
 - **Capture** evidence, decisions, and the artefacts you produce (plans, prompts, drafts, reports) as files, while you still know why they matter.
 - **Read back** before each phase change (drafting, changing direction, after a failed command, after sub-agents return, before the final response). When a captured fact settles a decision, **cite it instead of re-deriving from memory** — that citation is the proof the note mattered.
-- **Resume** from `README.md` after any pause. Keep it ending with enough current state — what's done, in progress, blocked, the next step, and which files to read first — that the next agent (or you, post-compaction) can continue without restarting discovery.
+- **Close out** before you finish — done, blocked, or paused. Update `_working/<topic>/` so another agent can step in and continue without re-discovering what you already learned. Do not rely on chat history for handoff; the working directory is the handoff surface.
+- **Resume** from `README.md` after any pause. The next agent (or you, post-compaction) should be able to continue from the folder alone.
+
+## Agent handoff
+
+When you use `_working/`, treat every session as potentially your last. **Before your final response, record what you did in the working directory.**
+
+At minimum, update `README.md` with:
+
+- what you did this session
+- current state — done, in progress, or blocked
+- the exact next step
+- which files to read first
+
+Persist any artefact the next agent needs (drafts, reports, prompts, evidence) as files in the folder, not only in your reply. If you changed the plan, recorded a decision, or ruled out an approach, that belongs in the working directory too.
 
 ## Verifying and handing off
 
