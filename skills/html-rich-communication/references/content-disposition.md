@@ -14,6 +14,8 @@ Every major content block needs a fate. This prevents polished artefacts from be
 | linked separate artefact | Belongs in a user guide, reference, dashboard, or explainer elsewhere |
 | cut | Does not serve this reader job |
 
+For approval/funding decisions, logs, charts, site-by-site notes, code snippets, and broad dashboard views default to disclosure or appendix unless they change the recommended decision. An appendix is not a dashboard in disguise; keep the decision path dominant.
+
 ## Canonical caveat home
 
 Each caveat, warning, risk, or non-goal gets one canonical home. Elsewhere, use a terse reference.

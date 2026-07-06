@@ -42,6 +42,8 @@ Do not use React just because the output is HTML.
 
 The export is part of the product. For throwaway triage/sorting boards, prefer a single static HTML file with inline JS and a visible export/copy control. Do not scaffold React unless state or coordination is genuinely complex.
 
+Before building, write the export contract: format, ordering, fields, and one sample exported item. For throwaway editors, a three-line contract is enough: task, visible buckets/fields, export format.
+
 Required checks:
 
 - every control exercised;

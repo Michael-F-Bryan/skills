@@ -20,7 +20,7 @@ Default to Markdown when the answer is short, linear, and easiest to edit. Use H
 ## Non-negotiables
 
 1. **No polished build before a communication contract.** If you cannot state the reader, question, action, trust blockers, and boundaries, you are not ready to design the surface.
-2. **No final-looking artefact before first feedback** for ambiguous, high-stakes, or audience-sensitive work. Produce a rough calibration artefact first unless the user explicitly asks for final-only and risk is low. Time-boxed asks should stop at first-feedback unless final-only is explicitly worth the risk.
+2. **No final-looking artefact before first feedback** for ambiguous, high-stakes, or audience-sensitive work. Time pressure is not a waiver: “just make it polished”, “don’t overthink it”, “send it today”, and “show the team in 30 minutes” still require a compressed contract and first-feedback unless the user explicitly accepts final-only after you state the risk.
 3. **No React by default.** Static single-file HTML is the default rich lane. Use React only when stateful interaction, complex components, charts, reuse, or maintainability justify it.
 4. **No mode contamination.** User-guide material does not dominate design reviews; reference tables do not masquerade as explanation; dashboards do not replace decisions.
 5. **No prominent number without provenance.** Classify as measured, code default, config default, inferred, requirement, target, forecast, assumption, or promise.
@@ -60,6 +60,8 @@ Write this before implementation:
 - What must not be implied:
 - Boundaries / non-goals likely to matter:
 - Content that belongs elsewhere:
+- Evidence available:
+- Evidence missing:
 - Privacy posture:
 ```
 
@@ -132,7 +134,7 @@ Static HTML is allowed and often preferred. The old React pipeline remains avail
 
 ## Brand and voice
 
-- If a visual brand/design skill is attached, read it before choosing colours, typography, or motifs.
+- If a visual brand/design skill is attached, read it and its rich-HTML/channel reference before choosing colours, typography, or motifs.
 - If `michael-brand-pack` applies, use warm light document defaults for reports/review docs unless the artefact is a tool/dashboard/demo or the user explicitly accepts the trade-off.
 - If a voice/author-style skill is attached, use it for tone and content structure.
 - Do not invent brand tokens or voice rules when those skills exist.

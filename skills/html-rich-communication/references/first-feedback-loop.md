@@ -4,9 +4,13 @@ The first-feedback artefact exists to make the framing cheap to correct before v
 
 Use it for ambiguous, high-stakes, mixed-audience, design-review, executive, or source-heavy artefacts. Skip only for low-risk throwaways or when the user explicitly asks for final-only. Speed requests still need calibration when the reader's question, confidence, or document boundary is unclear.
 
+Senior design review, unvalidated safety-relevant defaults, or open-loop control are first-feedback triggers even when the user asks for a same-day polished page.
+
 ## Shape
 
 Use `templates/first-feedback.md` or a rough static HTML equivalent.
+
+For sub-hour requests, use a compressed 5–10 minute first-feedback draft: BLUF, reader/action, confidence, top evidence, top uncertainty, proposed next move, and what is being cut. Do not skip calibration because the user asked for polish quickly.
 
 Minimum sections:
 

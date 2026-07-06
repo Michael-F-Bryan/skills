@@ -8,6 +8,8 @@ Use when the reader must approve, choose, fund, defer, or stop.
 
 Required: takeaway title, recommendation, decision requested, options/trade-offs, evidence confidence, risks/mitigations, owner, review gate, guardrails, and kill/revisit condition.
 
+For approval/funding decisions, the first screen must state the recommendation, approval requested, cost/scope, owner, review gate, guardrails, and kill/revisit condition.
+
 ## Design review
 
 Use when the reader must critique architecture or design.
@@ -15,6 +17,8 @@ Use when the reader must critique architecture or design.
 Required: context and scope, goals and plausible non-goals, system shape/boundaries, interface contracts, design decisions with alternatives and accepted risks, validation state, and open questions.
 
 Move user-guide steps, UI best-practice notes, and reference tables out of the core unless they directly support the review.
+
+Normal authentication, generic form-label guidance, and operator how-to steps belong in appendix, linked user guide, or cut unless the design decision under review is security, authorisation, or UI interaction.
 
 ## Technical explainer
 
@@ -38,7 +42,7 @@ Required: strong labels and information scent, grouped tables/cards, examples ne
 
 Use when the reader must absorb state and next action.
 
-Required: current read, timeline or status summary, impact, owners and follow-ups, evidence on demand.
+Required: current read, confidence/evidence strength, timeline or status summary, impact, owners and follow-ups, next move, evidence on demand.
 
 ## Code review / PR aid
 
