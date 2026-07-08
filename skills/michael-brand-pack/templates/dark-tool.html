@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><!-- Tool title --></title>
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/web-base.css" />
+  <style>
+    .tool-header { display: flex; align-items: start; justify-content: space-between; gap: var(--on-space-4); border-bottom: var(--on-border-width) solid var(--on-border); padding-bottom: var(--on-space-4); margin-bottom: var(--on-space-5); }
+    .tool-kicker { color: var(--on-accent); font-size: var(--on-text-sm); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .tool-panel { border: var(--on-border-width) solid var(--on-border); border-radius: var(--on-radius-lg); background: var(--on-surface); padding: var(--on-space-4); }
+    .tool-grid { display: grid; grid-template-columns: minmax(260px, 360px) minmax(0, 1fr); gap: var(--on-space-4); }
+    .tool-control { display: grid; gap: .35rem; margin-bottom: var(--on-space-4); }
+    .tool-control label { font-weight: 800; }
+    .tool-control input, .tool-control select, .tool-control textarea { width: 100%; border: var(--on-border-width) solid var(--on-border); border-radius: var(--on-radius-md); background: var(--on-bg); color: var(--on-text); padding: .65rem .75rem; font: inherit; }
+    .tool-button { border: var(--on-border-width) solid var(--on-accent); border-radius: var(--on-radius-md); background: var(--on-accent); color: var(--on-bg); padding: .65rem .9rem; font-weight: 800; cursor: pointer; }
+    .tool-output { min-height: 12rem; white-space: pre-wrap; }
+    @media (max-width: 860px) { .tool-header, .tool-grid { display: block; } .tool-panel + .tool-panel { margin-top: var(--on-space-4); } }
+  </style>
+</head>
+<body data-theme="dark">
+  <main class="on-page">
+    <article class="on-shell on-shell--wide">
+      <header class="tool-header">
+        <div>
+          <div class="tool-kicker"><!-- Tool / sandbox / dashboard --></div>
+          <h1><!-- What the user can do here --></h1>
+          <p class="on-secondary"><!-- Scope, fidelity, and export contract. --></p>
+        </div>
+        <button class="tool-button" type="button" id="copy-output">Copy output</button>
+      </header>
+
+      <div class="tool-grid">
+        <aside class="tool-panel" aria-label="Controls">
+          <div class="tool-control">
+            <label for="input-one"><!-- Control label --></label>
+            <input id="input-one" value="" />
+          </div>
+          <div class="tool-control">
+            <label for="notes">Notes</label>
+            <textarea id="notes" rows="8"></textarea>
+          </div>
+        </aside>
+
+        <section class="tool-panel" aria-labelledby="output-title">
+          <h2 id="output-title">Output</h2>
+          <pre class="tool-output" id="output">Exercise controls, then copy/export the result.</pre>
+        </section>
+      </div>
+    </article>
+  </main>
+  <script>
+    const input = document.getElementById('input-one');
+    const notes = document.getElementById('notes');
+    const output = document.getElementById('output');
+    function render() {
+      output.textContent = JSON.stringify({ value: input.value, notes: notes.value }, null, 2);
+    }
+    input.addEventListener('input', render);
+    notes.addEventListener('input', render);
+    document.getElementById('copy-output').addEventListener('click', async () => {
+      await navigator.clipboard.writeText(output.textContent);
+    });
+    render();
+  </script>
+</body>
+</html>

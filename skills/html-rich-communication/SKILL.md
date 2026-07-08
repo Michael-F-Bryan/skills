@@ -15,7 +15,7 @@ description: >-
 
 Rich artefacts help a specific reader do a specific cognitive job. HTML is useful because it keeps humans in the loop with dense, visual, shareable, and sometimes two-way communication. It is not a licence to make weak thinking look finished.
 
-Default to Markdown when the answer is short, linear, and easiest to edit. Use HTML or another rich surface when understanding depends on layout, comparison, diagrams, interaction, review focus, progressive disclosure, or export.
+Default to Markdown when the answer is short, linear, and easiest to edit. Use HTML or another rich surface when understanding depends on layout, comparison, diagrams, interaction, review focus, progressive disclosure, or export. Treat the first screen as a working surface: it should orient, help choose, demonstrate, or produce output — not duplicate navigation.
 
 ## Non-negotiables
 
@@ -26,6 +26,7 @@ Default to Markdown when the answer is short, linear, and easiest to edit. Use H
 5. **No prominent number without provenance.** Classify as measured, code default, config default, inferred, requirement, target, forecast, assumption, or promise.
 6. **No repeated caveat boxes.** Every important caveat/risk/non-goal has one canonical home; other sections reference it tersely.
 7. **No completion claim without verification** appropriate to the lane and reader job.
+8. **No stateful interaction without export.** If the reader manipulates state — sorting, tagging, tuning, editing, filtering, or selecting — provide a copy/export path and inspect the exported output during verification.
 
 ## Workflow
 
@@ -86,7 +87,7 @@ Choose the mode that matches the reader job, not the user's first noun. “Polis
 | Deck | Reader needs meeting narrative | section slides → reader cues → appendix |
 | Dashboard/tool | Reader needs ongoing monitoring/exploration | filters/state → key metrics → drilldowns → export |
 
-Details and mode-specific checks: `references/artefact-modes.md`.
+Details and mode-specific checks: `references/artefact-modes.md`. First-screen and hero patterns: `references/html-effectiveness-patterns.md`.
 
 ## 3. Source slice and content disposition
 
@@ -120,7 +121,11 @@ Use design decisions instead of defensive “why it is built this way” section
 
 Prominent numbers need provenance: type, source, validation state, implication, and visual treatment allowed. See `references/design-decisions.md`.
 
-## 6. Implementation router
+## 6. Multi-artefact workflows
+
+For exploration, planning, implementation handoff, and review, prefer a small linked set of HTML artefacts when one page would blur jobs: exploration board → selected direction → implementation plan → verification/review aid → handoff index. See `references/html-effectiveness-patterns.md`.
+
+## 7. Implementation router
 
 | Lane | Use when | Required output |
 |---|---|---|
@@ -128,7 +133,7 @@ Prominent numbers need provenance: type, source, validation state, implication, 
 | Static HTML | Shareable, visual, mostly read-only, light inline JS/SVG | self-contained `.html` served and browser-checked |
 | React app | Complex state, shadcn components, charts, reuse, heavy interaction | `app/` source plus bundled `final/bundle.html` |
 | Deck HTML | Meeting/sequential presentation | keyboard-nav HTML, first-slide answer, appendix |
-| Custom editor | Human edits/sorts/tunes and exports result | controls exercised, export copied and inspected |
+| Custom editor | Human edits/sorts/tunes and exports result | export contract, controls exercised, export copied and inspected |
 
 Static HTML is allowed and often preferred. The old React pipeline remains available for the React lane: `scripts/init-artifact.sh`, then `scripts/bundle-artifact.sh`. See `references/implementation-routing.md`.
 
@@ -176,4 +181,5 @@ Default: local path. When a browser link is needed, publish a **secret** gist an
 - Review: `references/review-and-verification.md`, `references/browser-review-template.md`
 - Components: `references/document-component-patterns.md`, `assets/css/document-components.css`
 - Visual element palette: `references/visual-elements.md`
+- HTML effectiveness patterns: `references/html-effectiveness-patterns.md`
 - Secret gist publishing: `references/secret-gist-publishing.md`

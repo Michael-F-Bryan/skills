@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><!-- Artefact title --></title>
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/web-base.css" />
+  <style>
+    .brand-header { border-bottom: var(--on-border-width-strong) solid var(--on-border); padding-bottom: var(--on-space-5); margin-bottom: var(--on-space-6); }
+    .brand-eyebrow { color: var(--on-accent); font-size: var(--on-text-sm); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: var(--on-space-2); }
+    .brand-purpose { max-width: var(--on-width-prose); font-size: var(--on-text-lg); color: var(--on-text-secondary); }
+    .brand-meta { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: var(--on-space-4); }
+    .brand-chip { border: var(--on-border-width) solid var(--on-border); border-radius: 999px; padding: .25rem .65rem; background: var(--on-surface); font-size: var(--on-text-sm); color: var(--on-text-secondary); }
+    .brand-callout { border: var(--on-border-width-strong) solid var(--on-border); border-left: 6px solid var(--on-accent); background: var(--on-surface); border-radius: var(--on-radius-lg); padding: var(--on-space-5); margin: var(--on-space-5) 0; }
+    .brand-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--on-space-4); }
+    .brand-card { border: var(--on-border-width) solid var(--on-border); border-radius: var(--on-radius-md); background: var(--on-surface); padding: var(--on-space-4); }
+  </style>
+</head>
+<body>
+  <main class="on-page">
+    <article class="on-shell">
+      <header class="brand-header">
+        <div class="brand-eyebrow"><!-- Mode: decision brief / explainer / report / review --></div>
+        <h1><!-- First-screen answer, not a vague topic label --></h1>
+        <p class="brand-purpose"><!-- Primary question answered in one or two sentences. --></p>
+        <div class="brand-meta" aria-label="Artefact metadata">
+          <span class="brand-chip"><strong>Reader:</strong> <!-- audience --></span>
+          <span class="brand-chip"><strong>Updated:</strong> <!-- date --></span>
+          <span class="brand-chip"><strong>Confidence:</strong> <!-- confidence + reason --></span>
+        </div>
+      </header>
+
+      <section class="brand-callout" aria-labelledby="current-read">
+        <h2 id="current-read">Current read</h2>
+        <p><!-- BLUF / recommendation / what matters most. --></p>
+      </section>
+
+      <section>
+        <h2>What this changes</h2>
+        <div class="brand-grid">
+          <div class="brand-card"><h3><!-- point --></h3><p><!-- detail --></p></div>
+          <div class="brand-card"><h3><!-- point --></h3><p><!-- detail --></p></div>
+          <div class="brand-card"><h3><!-- point --></h3><p><!-- detail --></p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Evidence and uncertainty</h2>
+        <p><!-- Put measured/default/inferred/assumed provenance beside claims. --></p>
+      </section>
+
+      <section>
+        <h2>Next move</h2>
+        <ol>
+          <li><!-- concrete action --></li>
+          <li><!-- concrete action --></li>
+        </ol>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,25 +1,26 @@
 ---
 name: michael-brand-pack
 description: >-
-  Applies Michael F. Bryan's Operator Notes visual design system — warm
-  high-contrast palette, typography scale, spacing tokens, light/dark themes —
+  Applies Michael F. Bryan's visual design system — warm high-contrast palette,
+  typography scale, spacing tokens, light/dark themes, and artefact theming —
   across websites, email signatures, Word/Google Doc templates, slides, rich HTML
-  artefacts, and any branded surface. Use whenever the user mentions Operator
-  Notes styling, Michael F. Bryan brand colours, personal site theming, email
-  signatures, document templates, rich artefact styling, or "make it look like
-  Michael" — even without naming this skill.
+  artefacts, and any branded surface. Use whenever the user mentions Michael F.
+  Bryan brand colours, personal site theming, email signatures, document
+  templates, rich artefact styling, or "make it look like Michael" — even
+  without naming this skill.
 ---
 
 # Michael Brand Pack
 
-Visual design system for Operator Notes: **field notes refined into decision briefs**. This skill owns look and visual judgement. It does not replace writing voice or rich-communication workflow.
+Michael F. Bryan visual design system. This skill owns look and visual judgement. It does not replace writing voice or rich-communication workflow. Do not use “Operator Notes” as the conceptual frame for all artefacts; treat it, if used at all, as one possible surface label rather than the governing abstraction.
 
 ## Quick start
 
 1. Read `references/tokens.md` for values.
 2. Pick one channel below → read the matching reference.
-3. For web/rich HTML, apply `assets/css/tokens.css` plus `assets/css/web-base.css`.
-4. Check that styling makes the work legible and the next move obvious.
+3. Start from a template when useful: `templates/rich-html-document.html`, `templates/dark-tool.html`, `templates/email-signature.html`, or `templates/style-calibration.md`.
+4. For web/rich HTML, apply `assets/css/tokens.css` plus `assets/css/web-base.css`.
+5. Check that styling makes the work legible and the next move obvious.
 
 ## Channel router
 
@@ -28,8 +29,8 @@ Visual design system for Operator Notes: **field notes refined into decision bri
 | Personal site, app chrome, landing pages | `references/websites.md` | `tokens.css`, `web-base.css` |
 | Email signature, HTML email | `references/email.md` | Token values inline |
 | Word / Google Docs templates | `references/documents.md` | Token values as pt/hex mapping |
-| Rich HTML artefact: decision brief, explainer, design review, report, deck | `references/html.md` | Pair with `html-rich-communication` |
-| Full visual language, mood, diagrams | `references/visual-language.md` | All CSS assets |
+| Rich HTML artefact: decision brief, explainer, design review, report, deck | `references/html.md` | Pair with `html-rich-communication`; templates in `templates/` |
+| Full visual language, mood, diagrams | `references/visual-language.md` | All CSS assets and `templates/style-calibration.md` |
 
 ## Core visual rules
 
@@ -51,6 +52,17 @@ Visual design system for Operator Notes: **field notes refined into decision bri
 
 - Rich artefact workflow and verification → `html-rich-communication`
 - Writing voice and artefact tone → `voice-michael`
+
+## Template index
+
+| File | Use when |
+|---|---|
+| `templates/rich-html-document.html` | Warm light report, explainer, design review, decision brief shell |
+| `templates/dark-tool.html` | Tool, dashboard, sandbox, or long-running screen-work shell |
+| `templates/email-signature.html` | HTML email signature starting point; inline-safe styles |
+| `templates/style-calibration.md` | Quick proof before applying a mood that conflicts with brand defaults |
+
+Templates are starting points, not mandatory frames. Replace placeholder content and remove unused sections.
 
 ## Reference index
 

@@ -5,16 +5,18 @@ Rich HTML artefacts need two concerns kept separate:
 | Concern | Owner |
 |---|---|
 | Communication workflow, artefact mode, implementation lane, verification | `html-rich-communication` |
-| Operator Notes visual judgement, colours, typography, density, motif handling | `michael-brand-pack` |
+| Visual judgement, colours, typography, density, templates, motif handling | `michael-brand-pack` |
 | Writing voice and phrasing | `voice-michael` when attached |
 
-This reference adds Operator Notes rules for rich artefacts. It does not replace the html-rich workflow.
+This reference adds Michael Brand Pack rules for rich artefacts. It does not replace the html-rich workflow.
 
-## Operator Notes promise
+## Promise
 
-Field notes refined into decision briefs.
+Make the work legible. Make the next move obvious.
 
-The page should make the work legible and the next move obvious. Styling is evidence architecture: it exposes decisions, risks, owners, labels, units, and relationships.
+The page should expose decisions, risks, owners, labels, units, relationships, and confidence without making weak thinking look finished.
+
+`Operator Notes` is optional identity copy. Do not use it as the conceptual wrapper unless the user asks for that surface or it is clearly the artefact's intended label.
 
 ## Defaults
 
@@ -24,9 +26,17 @@ The page should make the work legible and the next move obvious. Styling is evid
 
 For Sunfish/ocean/robotics work, avoid defaulting to dark glowing cyberpunk. Use marine cues sparingly: boundary lines, muted blues/greens, small map/field-note motifs, or diagrams. Keep review documents readable at 100% zoom.
 
+## Templates
+
+| Template | Use when | Notes |
+|---|---|---|
+| `../templates/rich-html-document.html` | Warm light document, report, explainer, review artefact | Pair with `html-rich-communication`; remove unused sections |
+| `../templates/dark-tool.html` | Tool, dashboard, sandbox, demo, long-running screen work | Must include labels, focus states, export if stateful |
+| `../templates/style-calibration.md` | Requested mood conflicts with defaults | Use before polish; produce a quick proof/tile |
+
 ## Style-conflict calibration
 
-When the user asks for an aesthetic that conflicts with Operator Notes defaults, resolve it explicitly before polishing:
+When the user asks for an aesthetic that conflicts with brand defaults, resolve it explicitly before polishing:
 
 ```markdown
 ## Style calibration
@@ -77,7 +87,7 @@ Ban harmful decoration, not all memorability. A visual anchor is allowed when it
 
 When implementing branded web surfaces, copy or import:
 
-- `assets/css/tokens.css`
-- `assets/css/web-base.css`
+- `../assets/css/tokens.css`
+- `../assets/css/web-base.css`
 
 Use html-rich component CSS/patterns for document structure.
