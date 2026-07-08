@@ -1,12 +1,14 @@
 # Avoidances (Michael)
 
-Use this reference for phrases never used, structures avoided, topics skipped, and formality levels never hit. Contrast with [word-choice.md](word-choice.md) and [phrases-and-examples.md](phrases-and-examples.md) for what to use instead.
+Use this reference for phrases avoided in polished Michael-shaped prose, structures avoided, topics skipped, and formality levels that usually miss. Contrast with [word-choice.md](word-choice.md), [phrases-and-examples.md](phrases-and-examples.md), and [forum-help.md](forum-help.md) for context-specific exceptions.
+
+**Register matters.** The Rust user forum corpus shows that some “never” phrases in earlier blog-derived guidance do appear in conversational forum replies. Treat this file as strict for polished blog posts, operator artefacts, decision notes, and public docs; for forum/help replies, load [forum-help.md](forum-help.md) before applying these avoidances literally.
 
 ## 1. Phrases never used
 
 ### Filler and throat-clearing
 
-**Never:** "It's worth noting that...", "Needless to say...", "At the end of the day...", "When it comes to...", "First and foremost...", "Last but not least...", "Having said that...", "With that in mind...", "At this point in time...", "Going forward...".
+**Avoid in polished prose:** "It's worth noting that...", "Needless to say...", "At the end of the day...", "When it comes to...", "First and foremost...", "Last but not least...", "Having said that...", "With that in mind...", "At this point in time...", "Going forward...".
 
 **Use instead:** State the point directly or use "That said" sparingly when contrasting.
 
@@ -18,7 +20,7 @@ Use this reference for phrases never used, structures avoided, topics skipped, a
 
 ### Fake certainty and hedging
 
-**Never:** "Obviously...", "Clearly...", "Simply put...", "It goes without saying...", "As everyone knows...", "There's no denying that...", "It's important to note that..." (as throat-clearing).
+**Avoid as throat-clearing:** "Obviously...", "Clearly...", "Simply put...", "It goes without saying...", "As everyone knows...", "There's no denying that...", "It's important to note that...". In forum replies, `obviously`/`clearly` sometimes appear as local adjectives or literal claims; do not use them as fake certainty.
 
 **Use instead:** "You'll notice...", "Something to keep in mind...", or plain assertion. When something *is* important, state the important thing.
 
@@ -36,7 +38,7 @@ Use this reference for phrases never used, structures avoided, topics skipped, a
 
 ### Reader-address and sign-off
 
-**Never:** "Hey everyone!", "So...", "Okay so", "Folks" (uses "people"), "Happy coding!", "Cheers!", "Don't miss out!", "Get started today!", "Subscribe for more!". **Leading "So" as a discourse marker** — even when concluding: e.g. *"So that's why I prefer it."* is out; prefer *"That's why I prefer it."* or *"Hence I prefer it."*.
+**Avoid in polished prose:** "Hey everyone!", "So...", "Okay so", "Folks" (uses "people"), "Happy coding!", "Cheers!", "Don't miss out!", "Get started today!", "Subscribe for more!". **Leading "So" as a discourse marker** is usually out for polished writing; prefer *"That's why I prefer it."* or *"Hence I prefer it."*. In conversational forum replies, `So,` and `cheers` appear occasionally and can be natural when used sparingly.
 
 **Use instead:** Direct "you" and "we"; sign-offs are minimal or thematic (e.g. "So long, and thanks for all the fish").
 
@@ -112,11 +114,11 @@ Use this reference for phrases never used, structures avoided, topics skipped, a
 
 ## 4. Formality levels never hit
 
-**Never used:** Highly formal/academic ("It is evident that", "One may conclude", "Thus we observe..."); legal/contract ("The party of the first part...", "Herein..."); marketing/sales ("Don't miss out!", "Get started today!", "Limited time..."); influencer/casual ("Hey everyone!", "So...", "Okay so", "gonna", "wanna", "gotta" — uses "kinda" occasionally); tweet-style (fragments only; no consistent abbreviation or hashtag tone).
+**Usually misses:** Highly formal/academic ("It is evident that", "One may conclude", "Thus we observe..."); legal/contract ("The party of the first part...", "Herein..."); marketing/sales ("Don't miss out!", "Get started today!", "Limited time..."); influencer/casual ("Hey everyone!", "Okay so", "wanna", "gotta" — uses "kinda" occasionally; `gonna` is very rare and only fits a deliberately casual aside); tweet-style (fragments only; no consistent abbreviation or hashtag tone).
 
 ### Emphasis and punctuation
 
-**Avoided:** ALL CAPS for emphasis; repeated exclamation!!!; emoji in body (only sparing in farewell posts); "lol", "haha".
+**Avoided in polished prose:** ALL CAPS for emphasis; repeated exclamation!!!; emoji in body; "lol", "haha". In forum/help replies, occasional emoji shortcodes, `lol`, or `haha` can appear for warmth or self-correction, but they should stay rare and contextual.
 
 **Use instead:** Emphasis via word choice and structure; rare exclamation (e.g. "Don't be that guy.").
 

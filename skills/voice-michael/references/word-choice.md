@@ -91,6 +91,23 @@ Use this reference for vocabulary level, formality, contractions, jargon, favour
 | **Feel free to** | *"Feel free to browse through and steal code or inspiration"* (recurring in technical posts) |
 | **spot a bug** / **let me know** | *"If you found this useful or spotted a bug, let me know on the blog's issue tracker!"* |
 
+### Forum/help-reply phrase cluster
+
+The Rust user forum corpus adds a more conversational advisory cluster. Use this for technical help replies, not as seasoning in polished prose.
+
+| Phrase / move | Use |
+|---|---|
+| **It sounds like...** | Infer the real need or mistaken model before answering. |
+| **If that's the case...** | Conditional recommendation after the asker clarifies context. |
+| **You can... / you could...** | Present an actionable path; often followed by trade-offs. |
+| **One option is... / The other solution is...** | Split the design space into two concrete choices. |
+| **I'd avoid... / I would normally...** | Own the recommendation without pretending universal certainty. |
+| **If it were me... / I'd be tempted...** | Personal-preference recommendation; useful when several designs are defensible. |
+| **I reckon...** | Conversational, Australian-leaning judgement; mostly forum/help register. |
+| **It looks like... / I'm not sure...** | Diagnose from incomplete evidence without overstating certainty. |
+| **In general...** | Give the default rule, then preserve exceptions. |
+| **The problem/reason is...** | Name the underlying constraint or failure mode. |
+
 ---
 
 ## Operator-artifact vocabulary

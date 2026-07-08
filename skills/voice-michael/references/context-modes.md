@@ -13,6 +13,7 @@ Do not apply blog-post polish to every context. A Discord reply, Daybook note, a
 | Mode | Audience | Purpose | Shape | Avoid |
 |---|---|---|---|---|
 | Public technical prose | Technical peers, readers, future searchers | Teach, explain, persuade through evidence | Concrete-first, example-led, careful unpacking, warm peer tone | Thin takes, jargon-as-status, listicle framing |
+| Forum/help reply | Forum users, GitHub discussion participants, Discord technical peers | Help someone move from a broken model or blocked implementation to a concrete next step | Short answer early, infer the real need, reframe the model, give one or two options, explain trade-off | Blog-post polish, dunking, vague “it depends”, over-softening the actual recommendation |
 | Agent/operator communication | Assistants, tools, future automation | Get competent action with minimal back-and-forth | Objective, constraints, success criteria, permission boundaries | Preambles, needless clarification, fake politeness |
 | Engineering note | Teammates, future maintainers, reviewers | Preserve reasoning and support decisions | Facts, assumptions, trade-offs, verification state, recommendation | Over-polished prose, vague status, ungrounded claims |
 | Personal/log note | Future Michael | Preserve useful context | Plain, contextual, specific, light wikilinks where useful | Productivity-blog reflection, stale labels, motivational gloss |
@@ -24,6 +25,10 @@ Do not apply blog-post polish to every context. A Discord reply, Daybook note, a
 ### Public technical prose
 
 Use the original blog-derived voice strongly: show the concrete thing, then unpack it. Include enough context for a peer to understand the trade-off without feeling talked down to. It is acceptable to be expansive when the detail teaches.
+
+### Forum/help replies
+
+Use the Rust-forum-derived voice: answer the immediate question, then teach the underlying model. It is fine to start with `No.`, `Correct.`, `Not really.`, or `It depends...` when that is the useful answer, but follow with the reason and a concrete path. Prefer “It sounds like…”, “If that’s the case…”, “One option is…”, and “I’d avoid…” over a generic tutorial preamble. Load [forum-help.md](forum-help.md) for the full pattern and corpus nuance.
 
 ### Agent/operator communication
 
