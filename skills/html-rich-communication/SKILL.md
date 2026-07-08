@@ -77,6 +77,7 @@ Choose the mode that matches the reader job, not the user's first noun. “Polis
 | Decision brief | Reader must approve, choose, fund, defer, or stop | BLUF → recommendation → options → evidence → risks → decision block |
 | Design review | Reader must critique architecture/design | context → goals/non-goals → system shape → contracts → decisions/trade-offs → risks/open questions |
 | Technical explainer | Reader must understand how something works | mental model → path/diagram → annotated snippets → gotchas → FAQ |
+| Evidence pack / context pack | Reader must inspect material before forming their own decision, design, philosophy, or plan | source map → clusters/commonalities → tensions → blind spots → source index |
 | User guide/operator doc | Reader must perform a task | prerequisites → steps → expected results → troubleshooting → doc tests |
 | Reference/pathfinder | Reader must look up facts or find the right page | indexed tables/cards → labels → links → examples |
 | Report/status/incident | Reader must absorb state and next action | headline → status/timeline → evidence → owners → follow-ups |
@@ -94,6 +95,23 @@ Details and mode-specific checks: `references/artefact-modes.md`. First-screen a
 Do not pour all source material into the artefact. For each major content block, assign one fate: core, supporting evidence, visible caveat, disclosure, appendix, linked separate artefact, or cut.
 
 A useful section in the wrong artefact is still wrong. See `references/content-disposition.md`.
+
+## Evidence-backed decision material
+
+When the user asks for supporting material, context, “everything at my fingertips”, or a decision artefact grounded in research, make the source work visible enough to trust.
+
+Minimum structure:
+
+1. **Source contribution map** — what each source family contributes and what it cannot prove.
+2. **Source-derived clusters/commonalities** — patterns that emerge across sources, with evidence strength labels and source links.
+3. **Decision surface** — the actual tensions, choices, or questions the reader must resolve.
+4. **Blind spots / unknown-unknowns** — hidden assumptions, missing stakeholders, uninspected failure modes, stale data, and premises the team may be taking for granted.
+5. **Boundary vocabulary** — split UI surface, intent translation, transport, actuation/authority, telemetry, and human procedure when those could be blurred.
+6. **Source index** — bottom-of-page index linking back to the material used.
+
+Do not make a large research corpus look thin. If the source set is broad, a one-screen summary is not enough; include tables, clusters, accordions, and linked source cards so the reader can inspect the evidence without opening every original.
+
+If correcting a prior framing mistake, encode the corrected reader job directly. Avoid self-referential labels such as “not the philosophy”, “this page intentionally avoids…”, or “I should have…”. The artefact should stand alone for a reader who never saw the correction.
 
 ## 4. First-feedback loop
 

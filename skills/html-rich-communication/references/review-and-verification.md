@@ -28,6 +28,17 @@ For React, also build and bundle to `final/bundle.html`.
 - Does the artefact make the next move obvious?
 - Does it feel trustworthy without pretending certainty?
 
+For research-backed evidence or decision artefacts, also check:
+
+- Are source-derived clusters/commonalities visible, or is it only a shuffled summary?
+- Is there enough content for the claimed source set, with details on demand rather than a thin executive gloss?
+- Does each major cluster link back to source material or source families?
+- Is there a blind-spot / unknown-unknown analysis?
+- Are UI, intent, transport, authority, telemetry, and human-procedure concepts separated where relevant?
+- Are evidence strength, freshness, defaults, assumptions, and judgement visually distinguishable?
+- Is the source index at the bottom complete enough for auditability?
+- Does the copy avoid correction-history phrases such as “not the philosophy” or “this page intentionally avoids…”?
+
 ## Review artefact
 
 For final HTML, write `reviews/browser-review.md` using `references/browser-review-template.md`. Separate implementation bugs from audience-fit issues. Verdicts: ship, ship with caveats, do not ship.

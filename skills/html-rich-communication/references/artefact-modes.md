@@ -26,6 +26,12 @@ Use when the reader must understand how something works.
 
 Required: mental model, path/flow diagram, annotated code/config snippets, gotchas, FAQ or glossary.
 
+## Evidence pack / context pack
+
+Use when the reader must inspect source material before forming their own decision, design, philosophy, or plan.
+
+Required: first-screen reader job, source contribution map, source-derived clusters/commonalities, evidence strength/provenance labels, tensions/open questions, blind spots/unknown-unknowns, and bottom source index. Do not include a final recommendation unless the user explicitly asks for one.
+
 ## User guide / operator doc
 
 Use when the reader must perform a task.

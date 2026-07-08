@@ -51,6 +51,21 @@ When the user asks for an aesthetic that conflicts with brand defaults, resolve 
 
 Do not silently override the user's requested mood. Do not silently obey it either. State the trade-off, then produce a small first-feedback mock or style tile when mood is part of the job. Success is both: the artefact reads as the requested domain/mood **and** remains legible, structured, and review-appropriate.
 
+## Long-form artefact layout
+
+For dense reports, decision artefacts, evidence packs, and design reviews:
+
+- Put document navigation to the left of the body on desktop when the page has more than a few sections.
+- Include a rough reading-progress indicator in that rail when the artefact is long enough to skim over multiple sittings.
+- Collapse navigation behind a hamburger/details control on phone-sized viewports.
+- Keep the hero for orientation and the first reader question; do not duplicate the table of contents there when a persistent nav exists.
+- Put the source index at the bottom so auditability is available without interrupting the argument.
+- Use evidence-strength, provenance, freshness, risk, and confidence labels as quiet structural aids, not decorative badges.
+
+## Correction-proof phrasing
+
+A revised artefact must stand alone. Do not surface internal correction history in the design or copy: avoid labels such as “not the philosophy”, “not the recommendation”, “this page intentionally avoids…”, or “I should have…”. Use positive reader-job labels instead: “Evidence pack”, “Decision material”, “Review brief”, “Source map”, or “Open questions”.
+
 ## Visual jobs
 
 Every major visual element should do one of these jobs:
