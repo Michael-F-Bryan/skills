@@ -50,7 +50,7 @@ michael-brand-pack/
 
 ```text
 Michael F. Bryan · Michael-F-Bryan
-michael-f-bryan.com
+www.michaelfbryan.com
 ```
 
 Use `Operator Notes` only when the user or surface explicitly calls for that label.

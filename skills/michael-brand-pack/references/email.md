@@ -8,7 +8,7 @@ Email clients strip `@import`, variables, and many modern CSS features. Inline h
 
 ```text
 Michael F. Bryan
-Michael-F-Bryan · michael-f-bryan.com
+Michael-F-Bryan · www.michaelfbryan.com
 ```
 
 **HTML (inline styles only):**
@@ -17,7 +17,7 @@ Michael-F-Bryan · michael-f-bryan.com
 <div style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5; color: #171717;">
   <strong style="color: #171717;">Michael F. Bryan</strong><br />
   <span style="color: #414853;">Michael-F-Bryan · </span>
-  <a href="https://michael-f-bryan.com" style="color: #245c7a; text-decoration: underline;">michael-f-bryan.com</a>
+  <a href="https://www.michaelfbryan.com" style="color: #245c7a; text-decoration: underline;">www.michaelfbryan.com</a>
 </div>
 ```
 
