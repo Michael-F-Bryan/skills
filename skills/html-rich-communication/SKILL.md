@@ -1,203 +1,54 @@
 ---
 name: html-rich-communication
 description: >-
-  Use when creating rich communication artefacts: HTML pages, visual briefs,
-  explainers, decision memos, design reviews, PR/review aids, reports,
-  dashboards, prototypes, decks, or custom editing interfaces that help a human
-  inspect, understand, compare, decide, review, operate, learn, or export edits.
-  Use when a user asks for an HTML artefact, polished page, interactive report,
-  visual explanation, or shareable browser document.
+  Use when creating a shareable HTML explainer, brief, report, review aid, evidence pack, or other rich communication artefact for a human reader.
 ---
 
 # HTML Rich Communication
 
-## Core principle
+## Default: the ten-minute lane
 
-Rich artefacts help a specific reader do a specific cognitive job. HTML is useful because it keeps humans in the loop with dense, visual, shareable, and sometimes two-way communication. It is not a licence to make weak thinking look finished.
+The usual job is **conversion, not rediscovery**. If the answer, notes, or source material already exists, preserve its claims and turn it into a clearer reading experience. Do not reopen research unless a required claim is missing or stale.
 
-Default to Markdown when the answer is short, linear, and easiest to edit. Use HTML or another rich surface when understanding depends on layout, comparison, diagrams, interaction, review focus, progressive disclosure, or export. Treat the first screen as a working surface: it should orient, help choose, demonstrate, or produce output — not duplicate navigation.
+Use this lane for a read-only artefact with one audience and one cognitive job. Target **5–10 minutes from request to verified link**.
 
-## Non-negotiables
+1. **Lock the job in one sentence.** `Reader needs to <understand/decide/compare/review/operate> <thing> so they can <action>.` Keep this in working memory; do not create a contract file.
+2. **Choose one spine.** For explainers, default to one worked scenario. Introduce concepts only when the scenario needs them. For briefs, lead with the decision. For reports, lead with the finding.
+3. **Cut before building.** Default bounds: 900–1,500 words, 4–6 sections, 0–2 useful visuals, at most one main table, and optional source links at the bottom. Put lookup material in `<details>` or link it; do not mix explainer, reference, risk register, and implementation review.
+4. **Build once.** Start from `templates/fast-explainer.html` or an equally small static page. Write one self-contained `index.html`; use semantic HTML and inline CSS. No build system is required.
+5. **Verify once, repair once.** Serve locally, inspect desktop and 375 px mobile, check first-screen answer, horizontal overflow, links, and console errors. Exercise controls only if controls exist. Make one bounded correction pass, then publish or report the remaining blocker.
+6. **Publish if requested.** Create a secret Gist, verify `public: false`, and return the GistPreview URL. Fresh local rendering is sufficient; do not re-review the hosted copy unless delivery itself is failing.
 
-1. **No polished build before a communication contract.** If you cannot state the reader, question, action, trust blockers, and boundaries, you are not ready to design the surface.
-2. **No final-looking artefact before first feedback** for ambiguous, high-stakes, or audience-sensitive work. Time pressure is not a waiver: “just make it polished”, “don’t overthink it”, “send it today”, and “show the team in 30 minutes” still require a compressed contract and first-feedback unless the user explicitly accepts final-only after you state the risk.
-3. **No React by default.** Static single-file HTML is the default rich lane. Use React only when stateful interaction, complex components, charts, reuse, or maintainability justify it.
-4. **No mode contamination.** User-guide material does not dominate design reviews; reference tables do not masquerade as explanation; dashboards do not replace decisions.
-5. **No prominent number without provenance.** Classify as measured, code default, config default, inferred, requirement, target, forecast, assumption, or promise.
-6. **No repeated caveat boxes.** Every important caveat/risk/non-goal has one canonical home; other sections reference it tersely.
-7. **No completion claim without verification** appropriate to the lane and reader job.
-8. **No stateful interaction without export.** If the reader manipulates state — sorting, tagging, tuning, editing, filtering, or selecting — provide a copy/export path and inspect the exported output during verification.
+## Effectiveness contract
 
-## Workflow
+A good artefact:
 
-| Stage | Output | Purpose |
-|---|---|---|
-| 1. Communication contract | Contract block in working notes or first-feedback file | Lock reader, job, question, action, trust, boundaries |
-| 2. Mode routing | Selected artefact mode(s) | Pick shape before writing or building |
-| 3. Source slice | Source notes, parked material | Use only material needed for this reader job |
-| 4. Critique-first pass | Outline critique / hard questions | Attack framing before polish |
-| 5. First-feedback artefact | `first-feedback.md` or rough static HTML | Let human/AI reject structure cheaply |
-| 6. Calibration ledger | `feedback-ledger.md` when feedback exists | Map comments to fix/move/cut/reject |
-| 7. Content + visual plan | Brief, disposition table, visual plan | Decide visible/disclosed/linked/cut content |
-| 8. Implementation lane | Markdown, static HTML, React, deck, or editor | Build only the surface the job needs |
-| 9. Verification | Review evidence | Check function and audience fit |
-| 10. Share | Local file or secret gist | Deliver with privacy posture intact |
+- answers the primary question on the first screen;
+- reveals its argument through headings alone;
+- uses one concrete example or worked path when explaining a mechanism;
+- distinguishes fact, judgement, and uncertainty at the point of use;
+- labels prominent numbers as measured, default, target, estimate, or assumption, and gives each material caveat one canonical home;
+- uses visuals only when they make a relationship faster to grasp; and
+- treats mobile as a deliberate single-column reading surface.
 
-Keep working artefacts under `_working/<topic>/` and confirm `_working/` is gitignored before writing.
+## Fast-lane prohibitions
 
-## 1. Communication contract
+Do not add broad rediscovery, working documents, subagents, React, package installation, bespoke audit scripts, runtime Mermaid, screenshot matrices, or repeated review loops to an ordinary artefact run.
 
-Write this before implementation:
+Prefer HTML/CSS or inline SVG. Use Mermaid only when `mmdc` is already available, then render static SVG.
 
-```markdown
-## Communication contract
+## Extended lane
 
-- Reader:
-- Reader mode: decide / review / understand / operate / learn / compare / explore / edit-export
-- Primary question the first screen must answer:
-- Secondary questions:
-- Action after reading:
-- What must be believed/trusted:
-- What must not be implied:
-- Boundaries / non-goals likely to matter:
-- Content that belongs elsewhere:
-- Evidence available:
-- Evidence missing:
-- Privacy posture:
-```
+Load heavier references only when an observable condition requires them:
 
-Use `references/communication-contract.md` for the full contract, reader gap model, and critique prompts.
+- a missing reader, decision, or safety/privacy boundary would materially change the answer and cannot be inferred → ask at most one focused question; use `references/first-feedback-loop.md` only if the answer creates genuinely different artefact shapes;
+- large evidence corpus or decision pack → preserve a source-contribution map, trace clusters back to source families or notes, label freshness when time matters, expose decision tensions and blind spots, and include a source index; recommend only when requested; use `references/content-disposition.md`, `references/design-decisions.md`, and `references/review-and-verification.md` only where those checks apply;
+- stateful editor/dashboard/export → define the export shape first, including whether active filter/sort/tag state is serialised or deliberately omitted; then use `references/implementation-routing.md` and `references/review-and-verification.md`; verify that exported data and material view state match the visible interface;
+- justified React → use the React lane in `references/implementation-routing.md` and its bundled scripts;
+- publishing failure → use `references/secret-gist-publishing.md`.
 
-## 2. Mode router
+High stakes alone is not an extended-lane trigger. Polish, brand treatment, and an inferable audience are not extended-lane triggers either.
 
-Choose the mode that matches the reader job, not the user's first noun. “Polished HTML” is not a mode; choose the reader job first, then decide whether the first output should be rough or final. If the reader's job is to decide, approve, fund, defer, or stop, do not lead with dashboard language; lead with the decision brief and push dashboard views to appendix only.
+## Stop rule
 
-| Mode | Use when | Default shape |
-|---|---|---|
-| Decision brief | Reader must approve, choose, fund, defer, or stop | BLUF → recommendation → options → evidence → risks → decision block |
-| Design review | Reader must critique architecture/design | context → goals/non-goals → system shape → contracts → decisions/trade-offs → risks/open questions |
-| Technical explainer | Reader must understand how something works | mental model → path/diagram → annotated snippets → gotchas → FAQ |
-| Evidence pack / context pack | Reader must inspect material before forming their own decision, design, philosophy, or plan | source map → clusters/commonalities → tensions → blind spots → source index |
-| User guide/operator doc | Reader must perform a task | prerequisites → steps → expected results → troubleshooting → doc tests |
-| Reference/pathfinder | Reader must look up facts or find the right page | indexed tables/cards → labels → links → examples |
-| Report/status/incident | Reader must absorb state and next action | headline → status/timeline → evidence → owners → follow-ups |
-| Code review/PR aid | Reader must review code safely | change summary → risk map → annotated diffs/modules → tests → focus areas |
-| Exploration fan-out | Reader is choosing direction | side-by-side options → trade-offs → selection prompt |
-| Prototype/design sandbox | Reader must feel or tune interaction | live example → controls → notes → copy/export selected params |
-| Custom editing interface | Reader manipulates data then returns it | purpose-built UI → constraints/warnings → copy/export output |
-| Deck | Reader needs meeting narrative | section slides → reader cues → appendix |
-| Dashboard/tool | Reader needs ongoing monitoring/exploration | filters/state → key metrics → drilldowns → export |
-
-Details and mode-specific checks: `references/artefact-modes.md`. First-screen and hero patterns: `references/html-effectiveness-patterns.md`.
-
-## 3. Source slice and content disposition
-
-Do not pour all source material into the artefact. For each major content block, assign one fate: core, supporting evidence, visible caveat, disclosure, appendix, linked separate artefact, or cut.
-
-A useful section in the wrong artefact is still wrong. See `references/content-disposition.md`.
-
-## Evidence-backed decision material
-
-When the user asks for supporting material, context, “everything at my fingertips”, or a decision artefact grounded in research, make the source work visible enough to trust.
-
-Minimum structure:
-
-1. **Source contribution map** — what each source family contributes and what it cannot prove.
-2. **Source-derived clusters/commonalities** — patterns that emerge across sources, with evidence strength labels and source links.
-3. **Decision surface** — the actual tensions, choices, or questions the reader must resolve.
-4. **Blind spots / unknown-unknowns** — hidden assumptions, missing stakeholders, uninspected failure modes, stale data, and premises the team may be taking for granted.
-5. **Boundary vocabulary** — split UI surface, intent translation, transport, actuation/authority, telemetry, and human procedure when those could be blurred.
-6. **Source index** — bottom-of-page index linking back to the material used.
-
-Do not make a large research corpus look thin. If the source set is broad, a one-screen summary is not enough; include tables, clusters, accordions, and linked source cards so the reader can inspect the evidence without opening every original.
-
-If correcting a prior framing mistake, encode the corrected reader job directly. Avoid self-referential labels such as “not the philosophy”, “this page intentionally avoids…”, or “I should have…”. The artefact should stand alone for a reader who never saw the correction.
-
-## 4. First-feedback loop
-
-For ambiguous or high-stakes artefacts, create a rough first-feedback artefact before polished HTML. It should be easy to disagree with.
-
-Minimum contents: BLUF, reader model, assumptions ledger, anticipated hard questions, outline critique, proposed section order, content disposition, design-decision skeleton, metric provenance, evidence gaps, and reviewer prompts.
-
-Use `templates/first-feedback.md`; details in `references/first-feedback-loop.md`.
-
-## 5. Design decisions, risks, and metrics
-
-Use design decisions instead of defensive “why it is built this way” sections:
-
-```markdown
-### Decision: <plain name>
-
-- Selected direction:
-- Why:
-- Alternatives considered:
-- What this buys us:
-- Accepted risk / trade-off:
-- Validation state:
-- Revisit trigger:
-```
-
-Prominent numbers need provenance: type, source, validation state, implication, and visual treatment allowed. See `references/design-decisions.md`.
-
-## 6. Multi-artefact workflows
-
-For exploration, planning, implementation handoff, and review, prefer a small linked set of HTML artefacts when one page would blur jobs: exploration board → selected direction → implementation plan → verification/review aid → handoff index. See `references/html-effectiveness-patterns.md`.
-
-## 7. Implementation router
-
-| Lane | Use when | Required output |
-|---|---|---|
-| Markdown | Short, linear, editable, or first-feedback draft | `.md` file and read-through check |
-| Static HTML | Shareable, visual, mostly read-only, light inline JS/SVG | self-contained `.html` served and browser-checked |
-| React app | Complex state, shadcn components, charts, reuse, heavy interaction | `app/` source plus bundled `final/bundle.html` |
-| Deck HTML | Meeting/sequential presentation | keyboard-nav HTML, first-slide answer, appendix |
-| Custom editor | Human edits/sorts/tunes and exports result | export contract, controls exercised, export copied and inspected |
-
-Static HTML is allowed and often preferred. The old React pipeline remains available for the React lane: `scripts/init-artifact.sh`, then `scripts/bundle-artifact.sh`. See `references/implementation-routing.md`.
-
-## Brand and voice
-
-- If a visual brand/design skill is attached, read it and its rich-HTML/channel reference before choosing colours, typography, or motifs.
-- If `michael-brand-pack` applies, use warm light document defaults for reports/review docs unless the artefact is a tool/dashboard/demo or the user explicitly accepts the trade-off.
-- If a voice/author-style skill is attached, use it for tone and content structure.
-- Do not invent brand tokens or voice rules when those skills exist.
-
-## Verification
-
-Verification has two layers:
-
-1. **Functional delivery:** links, anchors, controls, build/bundle, export buttons, no external runtime dependencies, responsive layout, accessibility basics.
-2. **Audience fit / deep quality:** first screen answers the primary question; headings have scent; uncertainty is visible without being paralysing; content is in the right artefact; the next move is obvious.
-
-For final HTML, serve over local HTTP and write `reviews/browser-review.md`. For custom editors, copy/export the output and inspect it. For React, bundle to `final/bundle.html`. See `references/review-and-verification.md` and `references/browser-review-template.md`.
-
-## Sharing
-
-Default: local path. When a browser link is needed, publish a **secret** gist and verify raw + GistPreview URLs before reporting. See `references/secret-gist-publishing.md`.
-
-## Common failures
-
-| Failure | Correction |
-|---|---|
-| Beautiful but wrong audience | Re-lock the communication contract; regenerate first-feedback before polishing |
-| User asked for dashboard but needs decision | Route by reader action, not requested surface |
-| React used because “HTML artefact” | Use static HTML unless interaction/maintainability justifies React |
-| UI guide material inside design review | Move to appendix or separate user guide via content disposition |
-| Caveat repeated everywhere | Give it one canonical home and reference it tersely |
-| Number looks validated but is a default | Add metric provenance and visual treatment consistent with evidence |
-| Custom editor has no export | Add copy/export; inspect exported result during verification |
-| Brand polish masks weak structure | Fix contract, headings, hierarchy, and evidence before visual polish |
-
-## Reference index
-
-- Contract: `references/communication-contract.md`
-- Modes: `references/artefact-modes.md`
-- First feedback: `references/first-feedback-loop.md`, `templates/first-feedback.md`
-- Content disposition: `references/content-disposition.md`
-- Design decisions and metric provenance: `references/design-decisions.md`
-- Implementation routing: `references/implementation-routing.md`
-- Review: `references/review-and-verification.md`, `references/browser-review-template.md`
-- Components: `references/document-component-patterns.md`, `assets/css/document-components.css`
-- Visual element palette: `references/visual-elements.md`
-- HTML effectiveness patterns: `references/html-effectiveness-patterns.md`
-- Secret gist publishing: `references/secret-gist-publishing.md`
+Once the artefact answers the reader's question, works at desktop and phone width, has no material rendering error, and the requested link exists, stop. Extra process is not extra quality.

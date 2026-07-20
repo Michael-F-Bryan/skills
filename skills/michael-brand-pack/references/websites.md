@@ -28,7 +28,7 @@ Default light theme on `<body>`. Dark theme for tools and dashboards:
 
 Import both CSS files in order. Headings in `web-base.css` use token scale — verify at 100% zoom after any CSS reset (Tailwind preflight, etc.).
 
-When using html-rich React scaffold with a brand skill attached, read html-rich [references/styling-with-brand-skills.md](../../html-rich-communication/references/styling-with-brand-skills.md) for import order and heading overrides.
+When using React or Tailwind, ensure the brand token and web-base layers win over framework resets; reassert heading sizes after preflight if necessary. Do not add a separate visual-plan workflow.
 
 ## Identity
 

@@ -1,0 +1,53 @@
+{
+  "skill_name": "html-rich-communication",
+  "baseline_evidence": {
+    "fault_management_initial": {
+      "words": 4678,
+      "sections": 14,
+      "tables": 10,
+      "outcome": "rejected as verbose and poor on mobile"
+    },
+    "fault_management_revision": {
+      "words": 1154,
+      "sections": 5,
+      "outcome": "accepted direction after centring one worked example"
+    },
+    "mavlink_session": {
+      "messages": 170,
+      "elapsed_minutes": 57,
+      "outcome": "interrupted before delivery after multiple rebuild and verification loops"
+    }
+  },
+  "evals": [
+    {
+      "id": "convert-established-explanation",
+      "prompt": "Turn the MAVLink explanation you just wrote into a rich HTML communication artefact and give me the GistPreview link.",
+      "expected": "Use existing prose, one worked Coral Maker run, 900-1500 words, 4-6 sections, static HTML, one local desktop/mobile check, secret gist; no new broad research, context pack, dependency install, runtime Mermaid, custom audit harness, or hosted re-review."
+    },
+    {
+      "id": "teach-method-mobile-first",
+      "prompt": "Create a short mobile-first HTML explainer that teaches engineers practical fault management through one example.",
+      "expected": "Use one worked failure scenario and its source-of-truth analysis row; cut catalogues and architecture theory; no persistent navigation; finish in the ten-minute lane."
+    },
+    {
+      "id": "large-evidence-pack",
+      "prompt": "Synthesize these 40 research notes into an evidence pack the board can use for a funding decision.",
+      "expected": "Recognise a large, high-stakes decision corpus and enter the extended lane deliberately; trace clusters to source notes or families, label time-sensitive freshness, expose tensions and blind spots, include a source index, and avoid inventing a recommendation unless requested."
+    },
+    {
+      "id": "stateful-editor",
+      "prompt": "Build an HTML interface where reviewers can tag findings, filter them, and export the selected decisions as JSON.",
+      "expected": "Recognise stateful edit/export requirements, define the JSON export contract before implementation, state whether active filter/sort/tag state is serialised or intentionally omitted, and verify that exported decisions and material view state match the visible interface."
+    },
+    {
+      "id": "inferable-audience-under-pressure",
+      "prompt": "Turn the explanation you just gave our engineering team into polished HTML for tomorrow's review.",
+      "expected": "Infer the engineering audience and review purpose from the conversation, use the ten-minute lane, and do not create a first-feedback loop merely because the artefact matters or should be polished."
+    },
+    {
+      "id": "prominent-unvalidated-number",
+      "prompt": "Explain the pump command path in HTML. The code defaults to a 1000 ms pulse, but it has not been physically validated.",
+      "expected": "Keep the explainer in the fast lane while labelling 1000 ms as an unvalidated code default and giving that caveat one clear canonical home."
+    }
+  ]
+}

@@ -18,13 +18,16 @@ Verify in a browser over local HTTP. Check responsive layout, no accidental exte
 
 ## React app
 
-Use only when one or more are true:
+Start with static HTML and small inline JavaScript. Promote to React only when one or more are true:
 
-- complex state or many coordinated controls;
+- the same mutable state drives three or more independent views or control groups;
+- accessible drag/drop, keyboard interaction, undo/redo, or similarly stateful behaviour needs mature primitives;
 - shadcn/Radix components materially reduce risk;
 - bundled charts/diagrams need npm packages;
 - artefact is likely to be maintained or extended;
-- interaction is too complex for small inline JS.
+- a concrete failure in the static approach shows that small inline JavaScript is becoming brittle.
+
+Control count alone is not a reason to promote.
 
 From `_working/<topic>/`:
 
@@ -42,14 +45,14 @@ Do not use React just because the output is HTML.
 
 The export is part of the product. For throwaway triage/sorting boards, prefer a single static HTML file with inline JS and a visible export/copy control. Do not scaffold React unless state or coordination is genuinely complex.
 
-Before building, write the export contract: format, ordering, fields, and one sample exported item. For throwaway editors, a three-line contract is enough: task, visible buckets/fields, export format.
+Before building, write the export contract: format, ordering, fields, active selection, and whether filter/sort/tag state that affects the visible result is included or intentionally omitted. Include one sample exported item. For throwaway editors, a compact contract is enough: task, visible buckets/fields, material view state, export format.
 
 Required checks:
 
 - every control exercised;
 - validation/warnings visible;
 - copy/export button works;
-- exported Markdown/JSON/diff/prompt inspected and matched against the visible state.
+- exported Markdown/JSON/diff/prompt inspected and matched against the visible selection and material filter/sort/tag state.
 
 ## Deck HTML
 
