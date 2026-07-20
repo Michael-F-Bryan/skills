@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="<!-- One-sentence description -->">
+  <title><!-- Specific title --></title>
+  <style>
+    :root {
+      --bg: #f5f1e8;
+      --paper: #fffdf8;
+      --ink: #182026;
+      --muted: #52606b;
+      --rule: #b8b0a2;
+      --accent: #245c7a;
+      --accent-soft: #e6f0f3;
+      --warn: #8a4b08;
+      --warn-soft: #fff0d8;
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--bg); color: var(--ink); scroll-behavior: smooth; }
+    body { margin: 0; font-size: 17px; line-height: 1.62; }
+    main { width: min(920px, calc(100% - 32px)); margin: 0 auto; padding: 56px 0 72px; }
+    header { padding-bottom: 28px; border-bottom: 2px solid var(--rule); }
+    .eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 13px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+    h1, h2, h3 { line-height: 1.16; text-wrap: balance; }
+    h1 { margin: 0; max-width: 18ch; font-size: clamp(2.25rem, 6vw, 4.25rem); letter-spacing: -.035em; }
+    h2 { margin: 0 0 14px; font-size: clamp(1.55rem, 3vw, 2.25rem); }
+    h3 { margin: 0 0 6px; font-size: 1.08rem; }
+    .lede { max-width: 720px; margin: 18px 0 0; color: var(--muted); font-size: 1.12rem; }
+    .answer { margin: 24px 0 0; padding: 18px 20px; border: 1px solid var(--rule); border-left: 6px solid var(--accent); border-radius: 8px; background: var(--paper); }
+    section { padding-top: 52px; }
+    p, li { max-width: 76ch; }
+    .journey { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 22px 0; }
+    .step, .card { min-width: 0; padding: 18px; border: 1px solid var(--rule); border-radius: 8px; background: var(--paper); }
+    .step b { display: block; color: var(--accent); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+    .step p, .card p { margin: 6px 0 0; }
+    .callout { padding: 16px 18px; border-left: 5px solid var(--warn); background: var(--warn-soft); }
+    .provenance { margin: 10px 0 0; color: var(--muted); font-size: .92rem; }
+    code { padding: .08em .3em; border: 1px solid #c9c0b1; border-radius: 4px; background: #eee8dc; overflow-wrap: anywhere; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; }
+    details { margin-top: 14px; border: 1px solid var(--rule); border-radius: 8px; background: var(--paper); }
+    summary { min-height: 44px; padding: 12px 16px; cursor: pointer; font-weight: 750; }
+    details > div { padding: 0 16px 16px; }
+    .sources { color: var(--muted); font-size: .94rem; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      main { width: min(100% - 24px, 920px); padding-top: 32px; }
+      section { padding-top: 40px; }
+      .journey { grid-template-columns: 1fr; }
+    }
+    @media print { html { background: #fff; } main { width: auto; padding: 0; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow"><!-- Explainer / brief / report --></p>
+      <h1><!-- Answer-shaped title --></h1>
+      <p class="lede"><!-- What this is, for whom, and why it matters. --></p>
+      <div class="answer"><strong>Short answer:</strong> <!-- Primary question answered in no more than two sentences. --></div>
+    </header>
+
+    <section id="scenario">
+      <p class="eyebrow">01 · Worked example</p>
+      <h2><!-- Concrete scenario heading --></h2>
+      <p><!-- Establish the starting state and desired outcome. --></p>
+      <div class="journey" aria-label="Worked example stages">
+        <article class="step"><b>1 · Start</b><h3><!-- State --></h3><p><!-- Fact --></p></article>
+        <article class="step"><b>2 · Change</b><h3><!-- Mechanism --></h3><p><!-- Fact --></p></article>
+        <article class="step"><b>3 · Evidence</b><h3><!-- Outcome --></h3><p><!-- Fact --></p></article>
+      </div>
+    </section>
+
+    <section id="mechanism">
+      <p class="eyebrow">02 · How it works</p>
+      <h2><!-- Explain the model revealed by the scenario --></h2>
+      <p><!-- Add only concepts needed to understand the example. --></p>
+      <!-- Optional: one inline SVG or compact HTML/CSS diagram that adds information. -->
+    </section>
+
+    <section id="meaning">
+      <p class="eyebrow">03 · What it means</p>
+      <h2><!-- Consequence or boundary --></h2>
+      <div class="card"><h3><!-- Key distinction --></h3><p><!-- Why the reader should care. --></p></div>
+      <p class="callout"><strong>Important constraint:</strong> <!-- One canonical caveat. --></p>
+      <!-- Repeat beside any prominent number; remove when the artefact has none. -->
+      <p class="provenance"><strong>Evidence status:</strong> <!-- measured / code default / target / estimate / assumption · source · validation state --></p>
+    </section>
+
+    <!-- Remove this section if there is no useful lookup material. -->
+    <section id="reference">
+      <p class="eyebrow">Reference</p>
+      <h2>Details when you need them</h2>
+      <details><summary><!-- Specific lookup question --></summary><div><!-- Compact answer. --></div></details>
+      <div class="sources"><h3>Sources</h3><ul><!-- Authoritative links or paths only. --></ul></div>
+    </section>
+  </main>
+</body>
+</html>

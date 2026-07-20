@@ -39,6 +39,6 @@ For research-backed evidence or decision artefacts, also check:
 - Is the source index at the bottom complete enough for auditability?
 - Does the copy avoid correction-history phrases such as “not the philosophy” or “this page intentionally avoids…”?
 
-## Review artefact
+## Review evidence
 
-For final HTML, write `reviews/browser-review.md` using `references/browser-review-template.md`. Separate implementation bugs from audience-fit issues. Verdicts: ship, ship with caveats, do not ship.
+Record only material defects, repairs, and blockers in existing task notes or the final summary. Do not create a separate browser-review file unless the user needs a durable audit trail. Verdicts: ship, ship with caveats, do not ship.
