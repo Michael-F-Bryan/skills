@@ -70,6 +70,10 @@ Distinguish the ultimate decision from any concrete orientation target.
 
 For example, a named MVP may make an investigation tangible while the real decision is whether to adopt a technology for the foreseeable future. Questions and stopping criteria must serve the confirmed decision horizon rather than accidentally shrinking it to the example.
 
+Do not collapse the decision horizon, the use case likely to create value first, the first shared capability, and the context that will validate it into one apparently exclusive choice. One user group can benefit sooner while a shared foundation remains the first milestone. If an answer mixes these axes, separate them and ask one orthogonal follow-up before treating the milestone as resolved.
+
+For this distinction, outcome-to-interface allocation, architecture choices, and derived products, read `references/decision-separation-and-implementation-semantics.md`.
+
 ### Start the record
 
 Use the user-provided location. Otherwise, place the record near the work it governs—normally a repository working folder—without committing it unless requested. If no writable workspace exists, keep the structure in the conversation and say plainly that it is not a durable file.
@@ -77,6 +81,7 @@ Use the user-provided location. Otherwise, place the record near the work it gov
 Seed the record with:
 
 - status and timezone;
+- current phase, including whether it is active, paused, or complete;
 - source basis: paths, URLs, or evidence reviewed before the interview, plus the relevant facts relied on;
 - interview purpose and decision horizon;
 - authorised output and phase boundary;
@@ -164,6 +169,12 @@ Pick one lens by default: the one that best resolves the current frontier.
 | Lifecycle | What persists, accumulates, may be edited, resets, or survives restarts |
 | Data authority | Trusted source, exact semantics, corrections, provenance, and minimum fidelity |
 | Validation | Direct experience, team agreement, assumption, field evidence, or another owner |
+
+### Establish semantics before mechanisms
+
+In implementation-direction interviews, establish the required contract before asking the user to choose a queue, worker, workflow engine, service split, model, provider, or framework. Resolve durable hand-off, failure and retry guarantees, processing granularity, and genuine deployment boundaries first. Mechanisms should follow those semantics rather than laundering architectural taste into a requirement.
+
+When a required map, dashboard, score, or other derived product appears, continue below the screen label: establish its trusted source, correction and provenance rules, minimum fidelity, exact semantics, hidden acquisition requirements, lifecycle, and validation owner.
 
 ## Record each answer atomically
 
@@ -257,7 +268,19 @@ Do not defend the old line, finish its questionnaire, or explain why the detail 
 
 Treat corrections after an interview as timestamped amendments. Preserve the original answer, append the amendment verbatim, and update the calibrated direction and affected registers. Do not rewrite history to make the conversation appear consistent.
 
+If one reply both amends an earlier answer and answers the current question, record two atomic items: the amendment under the earlier question, then the current answer under its own question number.
+
 A statement such as “I want to direct this” is a control boundary. Stop synthesising unapproved decisions and return control through the next high-value question.
+
+### Pause, resume, and continue into another phase
+
+A pause is not completion. Record the pause direction verbatim, mark the phase **Paused**, remove the pending question, preserve unresolved decisions, and do not choose another question until the user explicitly resumes.
+
+If the user continues a completed interview into architecture, implementation, operations, or another decision class, preserve the earlier phase as complete and record the new authorisation as a distinct phase. Mark the overall interview active again, continue the numbering and registers, and do not silently broaden the outputs the user has authorised.
+
+When the user asks whether there is enough direction to start, distinguish unresolved human judgement from ordinary implementation discovery. Library choices, exact schemas, benchmarks, and provider details are not blockers unless they could materially redirect the outcome, trust model, authority boundary, architecture boundary, or acceptance criterion.
+
+For exact state transitions, readiness synthesis, amendments, and reader-facing records, read `references/phase-transitions-and-readiness.md`.
 
 ## Preserve uncertainty
 
@@ -335,3 +358,6 @@ The next question depends on the answer. It is not selected in advance.
 - **False closure:** turning uncertainty into a decision because the document wants an answer. Record a deferred decision.
 - **Deferred-decision loop:** naming a future owner and evidence, then asking the current interviewee to decide it anyway. Remove it from the current frontier.
 - **History laundering:** silently rewriting an earlier answer after a correction. Append an amendment.
+- **Collapsed decisions:** treating the value-leading use case, shared milestone, validation context, and decision horizon as one exclusive choice. Separate the axes.
+- **Mechanism-first interviewing:** asking the user to select infrastructure before establishing the required durability, failure, processing, and deployment semantics.
+- **False completion on pause:** marking an interview complete or retaining a stale pending question when the user has paused it.
