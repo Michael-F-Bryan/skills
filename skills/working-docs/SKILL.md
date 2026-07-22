@@ -36,7 +36,15 @@ Put `_working/` as close to the files it refers to as possible — normally the 
 
 Persist the **work products** you generate — plans, prompts you write for sub-agents, drafts, the final report — as files in this folder **when you create them**, not at the end of the session. If a later step or another agent must use an artefact, it belongs on disk, not only in your reply or context.
 
-Keep `_working/` out of commits unless the user wants the artefacts tracked: confirm it is covered by `.gitignore` (add a `_working/` line if not) before creating files. If there is no enclosing repo, use the working directory root.
+Keep `_working/` out of commits unless the user wants the artefacts tracked. From the repository root, check Git's **effective** ignore rules before creating files:
+
+```bash
+git check-ignore -q _working/
+```
+
+This checks repository `.gitignore` files, `.git/info/exclude`, and the user's global excludes file. If `_working/` is already ignored, make no ignore-related changes. If it is not ignored, add `_working/` to `.git/info/exclude` for local working state. Edit the tracked `.gitignore` only when the user explicitly wants a repository-wide policy change — never create a tracked diff merely to support working docs.
+
+If there is no enclosing repo, use the working directory root without setting up Git ignores.
 
 ## What to capture
 
