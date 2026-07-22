@@ -17,7 +17,7 @@ Use the shortest existing path, then verify the resulting Clockify state. Prefer
    cd ~/Documents/jake-tools
    uv run jake-tools clockify --help
    ```
-   Run the relevant subcommand's `--help`. For Jira reconciliation, use `clockify jira-sync`; for naming, use `clockify jira-name`.
+   Run the relevant subcommand's `--help`. For all active work assigned to Michael, use `clockify jira-sync`. When the request names one or more Jira keys, use repeatable `clockify jira-sync --issue KEY`; this scope ignores assignee.
 2. If no matching command exists, retrieve the API key at runtime from `op://Smart-Home/Clockify API Key for Cursor/API Key`. Never print or persist it.
 3. Resolve the user and workspace once, then reuse their IDs. Use explicit date ranges and exact IDs/keys.
 4. Read before mutation. For bulk work, produce a dry-run and select records by deterministic criteria.
@@ -28,7 +28,8 @@ Use the shortest existing path, then verify the resulting Clockify state. Prefer
 
 | Request | Default path |
 |---|---|
-| Jira tickets ↔ Clockify tasks/projects | `jake-tools clockify jira-sync --help` |
+| Michael's active assigned Jira work ↔ Clockify | `jake-tools clockify jira-sync --help` |
+| One or more named Jira issues ↔ Clockify | `jake-tools clockify jira-sync --issue KEY --dry-run --json` |
 | Jira-backed names | `jake-tools clockify jira-name --help` |
 | Recent entries or timer state | Direct API read |
 | One unsupported create/update | Direct API mutation plus re-read |
@@ -43,6 +44,7 @@ Use the shortest existing path, then verify the resulting Clockify state. Prefer
 - Do not repeatedly rediscover workspace, user, client, or project IDs in one task.
 - Do not download or inspect the full OpenAPI document for a routine operation with a known path.
 - Preserve existing fields required by Clockify update endpoints.
+- An empty default `jira-sync` plan only describes active Jira work assigned to `currentUser()`. It is not evidence that a named issue exists or is usable in Clockify; use `--issue KEY` for that question.
 
 ## Reporting
 

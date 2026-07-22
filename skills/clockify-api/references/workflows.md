@@ -33,6 +33,28 @@ cd ~/Documents/jake-tools
 uv run jake-tools clockify jira-name SF-353 "Vehicle Control Logic - Preliminary Architecture" --json
 ```
 
+## Reconciling named Jira issues
+
+Use exact issue scope whenever the request supplies a Jira key, including work
+assigned to someone other than Michael:
+
+```bash
+unset PYTHONPATH
+cd ~/Documents/jake-tools
+CLOCKIFY_API_KEY='op://Smart-Home/Clockify API Key for Cursor/API Key' \
+  op run -- uv run jake-tools clockify jira-sync \
+  --issue SF-304 --dry-run --json
+CLOCKIFY_API_KEY='op://Smart-Home/Clockify API Key for Cursor/API Key' \
+  op run -- uv run jake-tools clockify jira-sync \
+  --issue SF-304 --apply --json
+```
+
+`--issue` is repeatable. The command reads both active and completed Clockify
+tasks, detects duplicate Jira keys, and can create, rename, reactivate, or mark
+records done. Applied writes are verified through a fresh Clockify GET. Do not
+infer anything about a named issue from an empty default sync plan because that
+scope only includes active work assigned to `currentUser()`.
+
 ## Merging duplicate Jira-backed projects
 
 Clockify has no project-merge endpoint. Keep the correctly named project and archive the duplicate only after moving its data.
