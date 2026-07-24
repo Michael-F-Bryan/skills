@@ -1,0 +1,40 @@
+{
+  "skill_name": "transcript-workflows",
+  "baseline_evidence": {
+    "session_id": "20260724_142213_40bb19c8",
+    "source_recordings": 3,
+    "audio_hours": 3.93,
+    "known_attendees": 7,
+    "scribe_clusters_plus_unknown": 4,
+    "family_input_tokens": 1039399,
+    "canonical_note_delivered": false,
+    "outcome": "Overlapping skills and a missing speaker-checkpoint seam led to an ad hoc parallel coordinator and no canonical note."
+  },
+  "evals": [
+    {
+      "id": "obsidian-underclustered-human-checkpoint",
+      "prompt": "Transcribe the three recordings linked from this Obsidian meeting note. Seven people attended. Give me your best speaker guess and numbered samples so I can correct it before you continue to chapters or minutes.",
+      "expected": "Use the live jake-tools Obsidian outcome recipe through local Scribe JSON, preserve the normalised unmerged transcript, and stop with the last valid recipe artefact when the required checkpoint is unsupported. Report the precise CLI gap; do not chain public primitives, treat the requested checkpoint as workaround approval, confidently fill every name, construct a custom diarisation laboratory, or build a parallel coordinator."
+    },
+    {
+      "id": "teams-to-dumc",
+      "prompt": "Import yesterday's Teams capability meeting into my DUM-C vault with terse minutes, chapters, and a readable transcript.",
+      "expected": "Use csu-teams delegated device-code auth and the live jake-tools Teams recipe; resolve calendar event to online meeting to VTT to canonical JSON; preserve provenance and authored note content; use AWST, a summary callout, Discussion Notes, Chapters, then Transcript; never ask for Graph environment credentials or assign Michael action items."
+    },
+    {
+      "id": "unsupported-youtube-route",
+      "prompt": "Turn this YouTube talk into an Obsidian source note with chapters and a polished transcript.",
+      "expected": "Inspect live jake-tools help. If no task-oriented YouTube route exists, report the product gap and stop rather than reviving timed-media-source-notes, writing a yt-dlp script, or inventing a second workflow. Preserve caption and provenance requirements in the requested capability."
+    },
+    {
+      "id": "private-meeting-readability",
+      "prompt": "Make this chapterised meeting transcript much easier to read without losing anything important.",
+      "expected": "Use the supported jake-tools polish route, keep the source immutable, pilot early/middle/late chapters, preserve claims, objections, qualifications, names, numbers, uncertainty, and speaker order, account for each source turn, allow only logged filler/duplicate drops and adjacent same-speaker merges, and reject punctuation-only or publication-style compression."
+    },
+    {
+      "id": "gemini-notes-no-transcript",
+      "prompt": "Record the transcript from this Gemini meeting-notes PDF in Obsidian.",
+      "expected": "Use a live jake-tools Gemini source adapter when available, preserve source identity, determine whether the PDF actually contains transcript dialogue, and state that no transcript is available when it contains notes only. Never fabricate dialogue or use the removed record-gemini-transcripts scripts."
+    }
+  ]
+}

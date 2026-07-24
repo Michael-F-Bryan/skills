@@ -1,161 +1,112 @@
 ---
 name: jake-tools
-description: Use the jake-tools CLI as a swiss-army knife for agent tasks. Load when you need to run a daily report, transcribe Obsidian recordings, polish transcripts, or manage CSU Weekly Newsletter items. Also load when deciding whether a recurring pattern warrants a new jake-tools command.
+description: Use when operating or extending the jake-tools CLI for deterministic personal automation such as daily reports, AI monitoring, Clockify reconciliation, newsletters, or command discovery.
 ---
 
 # jake-tools
 
-`jake-tools` is an internal Python CLI built for agent-driven workflows. It is
-installed globally via `uv tool install` from a checkout of
-`https://github.com/Michael-F-Bryan/jake-tools` and is on `$PATH`. The install
-is editable, so source changes take effect immediately without reinstalling.
+`jake-tools` is Michael's internal Python CLI for agent-driven workflows. It is installed globally from `https://github.com/Michael-F-Bryan/jake-tools` and is available on `PATH`.
 
 ## Golden rule
 
-When in doubt, run `jake-tools --help` or `jake-tools <command> --help`. The
-CLI's own help is always more current than this skill.
+The live CLI help is authoritative:
 
-## Available commands
-
-```
-jake-tools daily-report    Run the deterministic daily-report coordinator.
-jake-tools newsletter      Read and update the CSU Weekly Newsletter list.
-jake-tools transcribe      Tools for transcribing audio files.
-jake-tools transcript      Transcript primitive toolbox (schema discovery and inspection).
+```bash
+unset PYTHONPATH
+jake-tools --help
+jake-tools <command> --help
 ```
 
----
+Do not copy internal pipeline logic into skills or ad hoc scripts merely because a command lacks a required seam. Report the product gap.
 
-### `daily-report`
+## Commands
 
-Runs a deterministic, multi-lane daily report for a target date.
+```text
+jake-tools ai-watch      Low-noise AI developments radar.
+jake-tools clockify      Clockify helpers and Jira reconciliation.
+jake-tools daily-report  Deterministic daily-report coordinator.
+jake-tools newsletter    CSU Weekly Newsletter operations.
+jake-tools transcribe    Audio transcription tasks.
+jake-tools transcript    Structured transcript workflows and primitives.
+```
+
+For any transcript acquisition, diarisation, polishing, chaptering, minutes, or meeting-note task, **REQUIRED SKILL:** `transcript-workflows`. This skill deliberately does not duplicate transcript policy.
+
+## `daily-report`
 
 ```bash
 jake-tools daily-report --date YYYY-MM-DD
 jake-tools daily-report --date YYYY-MM-DD --json
 ```
 
-Key flags:
+Key behaviour:
 
-| Flag | Default | Purpose |
-|---|---|---|
-| `--date YYYY-MM-DD` | **required** | Target local date |
-| `--provider TEXT` | `openrouter` | LLM provider for lane workers |
-| `--judgement-model TEXT` | `openrouter/auto` | Model for judgement-heavy lanes |
-| `--evidence-model TEXT` | `openrouter/auto` | Model for evidence-fed lanes |
-| `--json` | off | Emit machine-readable summary only |
+- all configured lanes run;
+- inbox triage is envelope-only unless separately authorised;
+- output stays under `_working/daily-report-YYYY-MM-DD/`;
+- a failed lane produces a non-zero exit;
+- key artefacts include `report.md`, `summary.json`, `manifest.json`, and lane evidence.
 
-**Behaviour:**
+Use live help for provider/model options.
 
-- All six lanes always run: session hindsight, memory candidates, skill review,
-  failure patterns, transcripts/DUM-C, and inbox triage.
-- Inbox triage is envelope-only (no message bodies, no mail mutation).
-- Read-only outside `_working/daily-report-YYYY-MM-DD/` in the working directory.
-- Exits `1` when any lane fails.
-- Key artefacts: `report.md`, `summary.json`, `manifest.json`,
-  `lane-events.jsonl`, plus `evidence/`, `subtasks/`, `prompts/`, `logs/`.
-
----
-
-### `transcribe`
-
-Audio-to-polished-note pipeline for Obsidian recordings.
-
-#### `transcribe obsidian-recording`
+## `ai-watch`
 
 ```bash
-jake-tools transcribe obsidian-recording NOTE.md
-jake-tools transcribe obsidian-recording --dry-run --json NOTE.md
+jake-tools ai-watch run --date today --json
+jake-tools ai-watch tune --date YYYY-MM-DD
 ```
 
-Rewrites the Obsidian note in-place (unless `--dry-run`). Output sections:
-`## Meeting Notes`, `## Chapters`, `## Transcript`.
+`run` performs collection, fetch, judgement, Obsidian sync, digest generation, and delivery. `tune` reapplies deterministic display and recency rules to an existing run without repeating model stages. Use live help for current limits and filters.
 
-| Flag | Purpose |
-|---|---|
-| `--dry-run` | Run without writing back to disk |
-| `--json` | Emit machine-readable JSON summary |
-| `--default-model TEXT` | Override LLM model |
-| `--provider TEXT` | Override LLM provider |
-
-#### `transcribe polish`
+## `clockify`
 
 ```bash
-jake-tools transcribe polish TRANSCRIPT.txt
+jake-tools clockify whoami
+jake-tools clockify jira-name SF-353 "Vehicle Control Logic - Preliminary Architecture" --json
+jake-tools clockify jira-sync --dry-run --json
+jake-tools clockify jira-sync --issue SF-304 --dry-run --json
+jake-tools clockify jira-sync --issue SF-304 --apply --json
 ```
 
-Polishes a raw transcript and writes the result to stdout. Accepts
-`--default-model` and `--provider`.
+`jira-sync` is dry-run by default. An apply may create, rename, reactivate, or complete records and must verify each changed object by re-reading Clockify.
 
----
+Sunfish naming:
 
-### `newsletter`
+- project name: Jira summary only;
+- task name: Jira key plus summary;
+- project note: `Jira: SF-123`.
 
-Read and mutate the CSU Weekly Newsletter SharePoint list via Microsoft Graph.
-Requires `az login` to the CSU tenant first.
+## `newsletter`
 
-#### `newsletter list`
+Requires CSU Microsoft Graph authentication.
 
 ```bash
-jake-tools newsletter list
 jake-tools newsletter list --limit 25 --body --json
+jake-tools newsletter add "Title" < /tmp/body.txt
+jake-tools newsletter edit ITEM_ID --title "New title" < /tmp/body.txt
 ```
 
-Read-only. Returns recent newsletter items (default: 10).
-
-#### `newsletter add`
-
-```bash
-jake-tools newsletter add "Training night update" < /tmp/body.txt
-jake-tools newsletter add "Title" --attach /tmp/image.png < /tmp/body.txt
-```
-
-Body is read from stdin (required). `--attach` can be supplied multiple times.
-
-#### `newsletter edit`
-
-```bash
-jake-tools newsletter edit ITEM_ID --title "New title" < /tmp/new-body.txt
-jake-tools newsletter edit ITEM_ID --attach /tmp/extra.png
-```
-
-Body from stdin is optional. `--attach` adds attachments without replacing
-existing ones. `--title` replaces the title.
-
----
+Inspect recent items before mutation and re-fetch created or edited items for verification. Use live help for attachments and current options.
 
 ## External dependencies
 
-| Tool | Required by |
+| Tool | Used by |
 |---|---|
-| `uv` | Dependency management and runner |
-| `hermes-agent` | LLM calls (editable path dep) |
-| `himalaya` | `daily-report` inbox lane |
-| `ffmpeg`, `scribe` | `transcribe obsidian-recording` audio pipeline |
-| `az` (Azure CLI) | `newsletter` commands (Graph token) |
+| `uv` | dependency management and development runner |
+| `hermes-agent` | bounded model stages |
+| `himalaya` | daily-report inbox lane |
+| `ffmpeg`, `scribe` | local audio workflows |
+| `az` or the configured device-code client | Microsoft Graph operations |
 
-If a required tool is missing, report the blocker. Do not skip preflight
-checks silently.
+If a required tool or command is absent, report the blocker rather than silently selecting another implementation.
 
----
+## Development
 
-## Boundaries
+When a repeated deterministic workflow belongs in `jake-tools`:
 
-- `daily-report` is read-only outside its dated work directory. Other commands
-  may write to Obsidian notes or SharePoint by design.
-- Do not commit secrets, tokens, or credentials.
-- Do not assume the entire repo is read-only because `daily-report` is.
-
----
-
-## Adding new commands
-
-If you notice you are doing the same multi-step task repeatedly — pulling data
-from an API, transforming files, triggering a pipeline — ask the user whether
-it is worth integrating that pattern into the `jake-tools` CLI.
-
-The repo convention is:
-- Keep CLI commands thin (in `src/jake_tools/cli/`).
-- Put orchestration and domain logic in package modules.
-- Use typed Pydantic models; avoid ad hoc dicts.
-- Run `uv run pre-commit run --all-files` before finishing (covers ruff, pyright, pytest, uv lock).
+- keep Click handlers thin;
+- put orchestration and domain logic in package modules;
+- use typed boundaries;
+- preserve immutable source evidence and version derived runs;
+- test behaviour at meaningful seams;
+- run `uv run pre-commit run --all-files` before completion.
