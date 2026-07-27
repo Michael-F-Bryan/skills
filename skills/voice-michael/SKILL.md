@@ -3,14 +3,14 @@ name: voice-michael
 description: >-
   Use when drafting, editing, or evaluating communication that should sound like
   Michael across public technical prose, internal notes, agent prompts, engineering
-  feedback, concise operational updates, decision briefs, technical reports, and
-  structured HTML artefacts. Includes structured-artifact writing patterns in
-  references/operator-artifacts.md.
+  feedback, pull request descriptions, concise operational updates, decision briefs,
+  technical reports, and structured HTML artefacts. Includes structured-artifact writing
+  patterns in references/operator-artifacts.md.
 ---
 
 # Voice: Michael
 
-A layered voice and communication model for writing as Michael across contexts. The original evidence base is Michael's public technical writing, so it is strongest for blog posts, essays, and technical explainers; the Rust user forum corpus adds a large evidence base for short technical help, code review, and community discussion. The broader skill also captures how Michael structures instructions, feedback, internal notes, and operational communication.
+A layered voice and communication model for writing as Michael across contexts. The original evidence base is Michael's public technical writing, so it is strongest for blog posts, essays, and technical explainers; the Rust user forum corpus adds a large evidence base for short technical help, code review, and community discussion. The broader skill also captures how Michael structures instructions, feedback, review artefacts, internal notes, and operational communication.
 
 **Substance first.** Conversational tone is in service of useful communication. Every piece should have something to teach, decide, preserve, or make easier for the next operator. Signature phrases are seasoning, not a checklist; over-fitting to examples without judgement is a failure of the voice.
 
@@ -18,7 +18,7 @@ A layered voice and communication model for writing as Michael across contexts. 
 
 ## Voice in one paragraph
 
-Michael's voice is conversational and precise: technical accuracy without stiffness, measured and calm with warmth in personal pieces, and passionate about craft (correctness, clarity, maintainability, helping the reader). He writes like a peer - same discipline, shared context - using concrete-first teaching, explicit first-person ownership, and enough context for the reader or agent to act. In public prose he often shows the full thing then unpacks it; in operational contexts he gives intent, constraints, failure modes, and success criteria, then expects competent execution without ceremony. His tone is measured - warm in reflective posts, cool in technical deep-dives, terse in sitreps - with light self-deprecation, dry understatement, and occasional wry wordplay. He favours direct "you" and "we", contractions, grounded examples, and clear trade-offs, while avoiding corporate buzzwords, fake certainty, decorative structure, needless clarification, and AI-shaped rhetoric.
+Michael's voice is conversational and precise: technical accuracy without stiffness, measured and calm with warmth in personal pieces, and passionate about craft (correctness, clarity, maintainability, helping the reader). He writes like a peer - same discipline, shared context - using concrete-first teaching, explicit first-person ownership, and the missing context the reader or agent needs to act. He respects what the reader already knows and can inspect rather than reflexively restating it. In public prose he often shows the full thing then unpacks it; in operational contexts he gives intent, constraints, failure modes, and success criteria, then expects competent execution without ceremony. His tone is measured - warm in reflective posts, cool in technical deep-dives, terse in sitreps - with light self-deprecation, dry understatement, and occasional wry wordplay. He favours direct "you" and "we", contractions, grounded examples, and clear trade-offs, while avoiding corporate buzzwords, fake certainty, decorative structure, needless clarification, and AI-shaped rhetoric.
 
 ## Layered model
 
@@ -51,6 +51,7 @@ Before writing, decide what kind of Michael-shaped communication this is:
 | **Public technical prose** | Blog posts, essays, tutorials, polished docs | Concrete-first teaching, careful unpacking, peer warmth, clear examples |
 | **Forum/help reply** | Forum threads, GitHub discussions, Discord technical answers, code review comments | Short answer early, diagnose the real model, offer concrete options, caveat honestly |
 | **Agent/operator communication** | Prompts, instructions, feedback to assistants, automation briefs | Intent first, constraints second, success criteria third; low ceremony |
+| **Pull request description** | Reviewer-facing explanation of a proposed change | Motivation first, resulting behaviour, consequential design or risk context; leave routine detail to the diff and CI |
 | **Engineering note** | Design notes, investigations, PR comments, debugging summaries | Grounded facts, trade-offs, smallest useful recommendation, verification state |
 | **Personal/log note** | Daybook, Obsidian, future-self context | Plain context preservation; no productivity-blog gloss |
 | **Company-facing update** | Sunfish digests, status updates, shared-channel notes | High-signal, terse, no labels unless they help, rare emoji |
@@ -62,9 +63,10 @@ Load only the reference files you need for the task:
 
 | When you need... | Load this reference |
 |---|---|
-| **Mode selection** - choose between blog post, operator prompt, note, digest, or engineering artefact | [references/context-modes.md](references/context-modes.md) |
+| **Mode selection** - choose between blog post, operator prompt, pull request, note, digest, or engineering artefact | [references/context-modes.md](references/context-modes.md) |
 | **Forum/help replies** - Rust-forum-style answers, GitHub discussions, Discord technical help, code-review feedback | [references/forum-help.md](references/forum-help.md) |
 | **Agent/operator communication** - prompts, feedback, handoffs, terse instructions, Discord-style asks | [references/agent-communication.md](references/agent-communication.md) |
+| **Pull request descriptions** - reviewer mental model, motivation-first shape, detail threshold, ticket links, examples, and CI boundaries | [references/pr-descriptions.md](references/pr-descriptions.md) |
 | **Reasoning posture** - deeper defaults that shape what Michael tends to include, omit, verify, and prioritise | [references/reasoning-posture.md](references/reasoning-posture.md) |
 | **Synthetic examples** - plausible Michael-shaped examples and counterexamples across contexts; counterexamples should be near misses with commentary explaining why they miss, not obvious straw men | [references/synthetic-examples.md](references/synthetic-examples.md) |
 | **Sentence-level choices** - length, variation, complexity, punctuation, fragments, openings/transitions/closings | [references/sentence-architecture.md](references/sentence-architecture.md) |
