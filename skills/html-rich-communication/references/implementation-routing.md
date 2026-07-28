@@ -39,6 +39,8 @@ bash <skill-root>/scripts/bundle-artifact.sh
 cp bundle.html ../final/bundle.html
 ```
 
+Run the real bundler, open the emitted `final/bundle.html`, and probe its runtime-relevant controls. When generated output is the delivery contract, source inspection is not verification.
+
 Do not use React just because the output is HTML.
 
 ## Custom editor

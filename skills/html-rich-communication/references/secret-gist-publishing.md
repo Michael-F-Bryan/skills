@@ -50,6 +50,18 @@ Give the user the **GistPreview URL** for rendered viewing, not only the raw gis
 
 Record gist id, raw URL, and preview URL in `_working/<topic>/README.md`.
 
+## If GistPreview differs from the local file
+
+Troubleshoot only when the hosted rendering is blank, stale, or incompatible:
+
+1. Confirm the raw gist contains the expected title or hero text.
+2. Confirm the API reports `public: false`.
+3. Confirm GistPreview is using the intended filename and latest gist revision.
+4. Check whether inline modules depend on a document-load event that has already fired.
+5. Check whether the host blocks a runtime dependency.
+
+Prefer repairing the file to adding another runtime layer. If the preview remains stale, create and verify a fresh secret gist, then delete the stale one. A successful normal publication does not require another hosted browser review.
+
 ## If a gist was accidentally created public
 
 GitHub/`gh` does not provide a reliable in-place toggle from public to secret. Use replacement workflow:

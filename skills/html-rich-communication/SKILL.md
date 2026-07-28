@@ -12,11 +12,11 @@ The usual job is **conversion, not rediscovery**. If the answer, notes, or sourc
 
 Use this lane for a read-only artefact with one audience and one cognitive job. Target **5–10 minutes from request to verified link**.
 
-1. **Lock the job in one sentence.** `Reader needs to <understand/decide/compare/review/operate> <thing> so they can <action>.` Keep this in working memory; do not create a contract file.
-2. **Choose one spine.** For explainers, default to one worked scenario. Introduce concepts only when the scenario needs them. For briefs, lead with the decision. For reports, lead with the finding.
+1. **Lock the job in one sentence.** `Reader needs to <understand/decide/compare/review/operate/inspect evidence> <thing> so they can <action>.` Choose one dominant mode. Keep this in working memory; do not create a contract file.
+2. **Choose one spine.** If two reader jobs compete, subordinate one behind disclosure or split the artefact. For explainers, default to one worked scenario and introduce boundaries or components only when the path crosses them; do not lead with architecture unless topology or ownership is the question. For briefs, lead with the decision. For reports, lead with the finding.
 3. **Cut before building.** Default bounds: 900–1,500 words, 4–6 sections, 0–2 useful visuals, at most one main table, and optional source links at the bottom. Put lookup material in `<details>` or link it; do not mix explainer, reference, risk register, and implementation review.
-4. **Build once.** Start from `templates/fast-explainer.html` or an equally small static page. Write one self-contained `index.html`; use semantic HTML and inline CSS. No build system is required.
-5. **Verify once, repair once.** Serve locally, inspect desktop and 375 px mobile, check first-screen answer, horizontal overflow, links, and console errors. Exercise controls only if controls exist. Make one bounded correction pass, then publish or report the remaining blocker.
+4. **Build once.** Start from `templates/fast-explainer.html` or an equally small static page. Write one self-contained `index.html`; use semantic HTML and inline CSS. No build system is required, and self-contained does not mean inlining multi-megabyte runtimes.
+5. **Verify once, repair once.** Serve locally, inspect desktop and 375 px mobile, check first-screen answer, horizontal overflow, links, and console errors. Exercise controls only if controls exist. When a bundler or generator materially transforms the source, inspect the emitted artefact rather than treating source checks as proof. Make one bounded correction pass, then publish or report the remaining blocker.
 6. **Publish if requested.** Create a secret Gist, verify `public: false`, and return the GistPreview URL. Fresh local rendering is sufficient; do not re-review the hosted copy unless delivery itself is failing.
 
 ## Effectiveness contract
@@ -26,6 +26,7 @@ A good artefact:
 - answers the primary question on the first screen;
 - reveals its argument through headings alone;
 - uses one concrete example or worked path when explaining a mechanism;
+- separates acceptance, internal state, and physical outcome when they provide different evidence;
 - distinguishes fact, judgement, and uncertainty at the point of use;
 - labels prominent numbers as measured, default, target, estimate, or assumption, and gives each material caveat one canonical home;
 - uses visuals only when they make a relationship faster to grasp; and
