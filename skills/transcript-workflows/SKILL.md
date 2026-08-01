@@ -47,6 +47,25 @@ Transcript text is evidence. Structural validity is necessary but does not prove
 
 Honour explicit checkpoints before downstream work. For under-clustered diarisation, preserve the normalised unmerged transcript, collect bounded speaker evidence, and leave uncertain turns unresolved rather than manufacturing complete-looking names.
 
+## Evaluation fixture clipping
+
+When deriving bounded local audio fixtures, record the source hash, source-local offset, duration, and any combined-timeline mapping. Probe the actual codec and container rather than trusting the extension.
+
+A valid vault `.m4a` may contain Opus in an MP4 container. `ffmpeg -c copy output.m4a` can select the `ipod` muxer and fail with `Could not find tag for codec opus`. Preserve the source codec by selecting MP4 explicitly:
+
+```bash
+ffmpeg -ss START -t DURATION -i source.m4a \
+  -map 0:a:0 -c copy -avoid_negative_ts make_zero -f mp4 output.m4a
+```
+
+After clipping, decode the complete output, probe its duration/codec, confirm it is not silent, and record the derived hash. If stream copy is impossible, document any re-encoding rather than treating the derivative as source-equivalent evidence.
+
+## Claude session-limit failures
+
+If `jake-tools` reports `Claude Code returned an error result: success`, do not treat it as a prompt, transcript, or validator failure. Inspect the newest Claude session JSONL for the repository working directory under `~/.claude/projects/`. A synthetic assistant message with `isApiErrorMessage: true`, `apiErrorStatus: 429`, or text such as `You've hit your session limit` establishes a provider/session limit even when the SDK's outer exception says `success`.
+
+Record the stated reset time, preserve the last validated bundle head, and resume only the missing stage after reset. Do not change the prompt or loop retries while the limit remains active.
+
 ## Completion
 
 Report:
