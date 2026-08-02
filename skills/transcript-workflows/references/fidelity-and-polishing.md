@@ -97,6 +97,8 @@ Do not convert the dominant or longest-spoken proposal into consensus. Generate 
 
 Proper-noun and ASR corrections require evidence and a ledger. Human corrections outrank machine inference. A post-render correction invalidates the render; regenerate and reverify rather than patching scattered prose globally.
 
+Use the CLI's guarded correction pack for factual repairs and reviewed utterance plan for semantic repartitioning. Both bind to exact revision and turn-set bytes and must fail closed when stale. Do not import bundle internals or edit revision/store records directly. A named-plus-unclear merge needs explicit evidence; a cross-named-speaker merge is always rejected.
+
 ## Final verification
 
 Before writing the canonical note, verify:
@@ -107,7 +109,9 @@ Before writing the canonical note, verify:
 - exact chapter and source-turn coverage;
 - no unlogged drops or cross-speaker merges;
 - early, middle, and late readability samples;
-- minutes preserve disagreement and decision status;
+- every material numeric claim and every proposed decision/action canary;
+- minutes preserve proposal, tentative, agreed, decided, action, and unresolved status;
+- an accepted product-review record bound to the exact revision, transcript, minutes, render bytes, and review policy;
 - source embeds, frontmatter, wikilinks, and protected sections remain;
 - required profile headings and note shape;
 - proposed and written generated sections match;

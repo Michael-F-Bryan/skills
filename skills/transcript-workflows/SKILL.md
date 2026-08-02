@@ -43,6 +43,16 @@ The source adapter ends at canonical transcript JSON. Raw VTT, captions, PDFs, r
 
 Transcript text is evidence. Structural validity is necessary but does not prove fidelity or readability. Human speaker corrections outrank machine inference, and corrected upstream artefacts invalidate affected downstream output.
 
+`present-validated` is mechanical capability proof only. It does not establish that the transcript is readable or that minutes preserve commitment modality. Before canonical apply, render a candidate, export its exact product-review pack with `transcript review product export`, inspect it, and record the accepted or rejected decision with `transcript review product decide`. `transcript apply` must remain blocked until that exact revision, transcript, minutes, render, and policy have accepted product review.
+
+Use supported repair seams rather than bundle surgery:
+
+- `transcript transform utterances export/apply` for reviewed exact-partition semantic reflow;
+- `transcript transform correction-pack export/apply` for evidence-backed one-turn text repairs;
+- regenerate chapters, minutes, and render after either changes canonical turns.
+
+If command JSON claims success but the process returns non-zero, stop and diagnose the command/runtime boundary. Neither signal may be discarded to force progression.
+
 ## Human checkpoints
 
 Honour explicit checkpoints before downstream work. For under-clustered diarisation, preserve the normalised unmerged transcript, collect bounded speaker evidence, and leave uncertain turns unresolved rather than manufacturing complete-looking names.
