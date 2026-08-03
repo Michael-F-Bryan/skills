@@ -1,6 +1,6 @@
 # Pull request descriptions (Michael)
 
-Use this reference when drafting or evaluating a pull request description in Michael's voice.
+**Scope:** drafting or evaluating a pull request description. For review comments on someone else's PR, use [team-communication.md](team-communication.md).
 
 ## Cognitive job
 
