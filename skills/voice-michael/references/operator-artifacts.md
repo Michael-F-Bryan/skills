@@ -91,7 +91,9 @@ Be direct about the system. Do not grandstand at people.
 
 ## Heading vocabulary
 
-Prefer useful headings:
+These headings are for substantial decision briefs, reports, handoffs, and architecture notes. Short review comments, Jira updates, and Discord messages should usually use natural sentences instead; load [reviewer-team-communication.md](reviewer-team-communication.md) for that mode.
+
+Prefer useful headings when the artefact is long enough to need them:
 
 - Current read
 - Recommendation

@@ -120,23 +120,27 @@ Why it misses:
 
 > This is a perfectly normal workplace instruction. It still tends to produce labelled status-report prose. Michael's version calls out the audience and failure modes: whole company, ten-second usefulness, no release-note shape, no decorative labels, rare emoji.
 
-## Engineering notes
+## Reviewer/team investigation updates
 
 Good:
 
-> Current read: the failure is probably in the transcript lookup step, not the note writer.
+> Bench testing:
 >
-> Evidence: the calendar event resolves, but the online meeting lookup returns nothing for two meetings with transcripts. Assumption: Teams is using a different meeting ID than the calendar event exposes.
+> - reconnect after BlueOS restart: passes
+> - stale sensor data expires after five seconds: passes
+> - router comes up after the extension: still fails; restarting the container recovers it
 >
-> Smallest next step: log both IDs before changing the import flow.
+> Next, I'll add a test for late network availability before changing the reconnect logic.
 
 Near miss:
 
-> The failure appears to be in transcript lookup rather than note writing. The next step is to compare the meeting identifiers and adjust the import flow if needed.
+> Current read: reconnect and stale-data handling are working, but startup ordering still fails when the router is unavailable.
+>
+> Smallest next step: add coverage for late network availability before changing the reconnect logic.
 
 Why it misses:
 
-> This is close enough that an agent may think it passes. It does not. It collapses evidence, assumption, and recommendation into one paragraph, and it moves too quickly to changing the flow. Michael-shaped engineering notes keep the current read, evidence, assumption, and smallest next step distinct.
+> The facts are broadly right, but the labels are unnatural for a short Jira update and the compression hides useful coverage. Michael's version uses bullets because the findings are parallel, then owns the next action directly instead of announcing an objectively smallest step.
 
 ## Public technical prose
 

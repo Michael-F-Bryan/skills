@@ -112,12 +112,12 @@ The Rust user forum corpus adds a more conversational advisory cluster. Use this
 
 ## Operator-artifact vocabulary
 
-Prefer on decision and technical artefacts:
+For substantial decision briefs, reports, handoffs, and technical artefacts—not short review comments or Jira updates—prefer terms such as:
 
 - recommendation, decision, trade-off, risk, assumption, constraint, evidence
 - failure mode, next move, current read, operational impact, known / unknown
 
-See [operator-artifacts.md](operator-artifacts.md) for structure patterns.
+For short teammate-facing communication, use natural sentences and load [reviewer-team-communication.md](reviewer-team-communication.md). See [operator-artifacts.md](operator-artifacts.md) for longer structure patterns.
 
 ---
 

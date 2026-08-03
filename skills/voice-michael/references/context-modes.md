@@ -1,70 +1,66 @@
 # Context modes (Michael)
 
-Use this reference before writing in Michael's voice. The same underlying voice changes shape depending on audience, purpose, and cost of misunderstanding.
+Use this reference when the destination is unclear or the artefact does not have a dedicated mode reference. The same underlying voice changes shape with audience, purpose, and cost of misunderstanding.
 
 ## Core rule
 
-First ask: **what kind of Michael-shaped artefact is this?**
-
-Do not apply blog-post polish to every context. A Discord reply, Daybook note, agent prompt, pull request description, and public tutorial should not sound like the same document.
+First ask what job the artefact must do for its reader. Do not apply blog-post polish, report structure, or teaching behaviour to every context.
 
 ## Mode table
 
-| Mode | Audience | Purpose | Shape | Avoid |
-|---|---|---|---|---|
-| Public technical prose | Technical peers, readers, future searchers | Teach, explain, persuade through evidence | Concrete-first, example-led, careful unpacking, warm peer tone | Thin takes, jargon-as-status, listicle framing |
-| Forum/help reply | Forum users, GitHub discussion participants, Discord technical peers | Help someone move from a broken model or blocked implementation to a concrete next step | Short answer early, infer the real need, reframe the model, give one or two options, explain trade-off | Blog-post polish, dunking, vague “it depends”, over-softening the actual recommendation |
-| Agent/operator communication | Assistants, tools, future automation | Get competent action with minimal back-and-forth | Objective, constraints, success criteria, permission boundaries | Preambles, needless clarification, fake politeness |
-| Pull request description | Technical reviewer with repository and ticket context | Supply the motivation and mental model needed to review the change | Motivation first, resulting behaviour, only consequential design or risk context, ticket link | Diff inventory, CI checklist, stock scope sections, architecture tutorial |
-| Engineering note | Teammates, future maintainers, reviewers | Preserve reasoning and support decisions | Facts, assumptions, trade-offs, verification state, recommendation | Over-polished prose, vague status, ungrounded claims |
-| Personal/log note | Future Michael | Preserve useful context | Plain, contextual, specific, light wikilinks where useful | Productivity-blog reflection, stale labels, motivational gloss |
-| Company-facing update | Whole-company or broad internal audience | Transfer signal quickly | Terse, high-signal, no decorative labels, rare severity emoji | Spam, action/why-we-care boilerplate, cleverness |
-| Reflective professional writing | Colleagues, friends, public readers | Explain values, experience, judgement | Warm, first-person, controlled emotion, concrete anecdotes | Melodrama, over-certainty, corporate framing |
+| Mode | Audience and job | Shape | Avoid |
+|---|---|---|---|
+| Public technical prose | Teach technical peers and future searchers | Concrete example, careful unpacking, warm peer tone | Thin takes, jargon as status, listicle framing |
+| Forum/help reply | Help an external peer correct a model or unblock an implementation | Short answer early, reframe, one or two paths, honest caveat | Blog polish, dunking, vague `it depends` |
+| Reviewer/team engineering communication | Help teammates inspect evidence, consequences, and decisions | Natural diagnosis, peer-oriented questions, specific feedback, first-person next action | Lecturing, report labels, severity without consequence |
+| Agent/operator communication | Get an agent or tool to act competently | Outcome, constraints, failure modes, evidence standard, permission boundary | Preambles, needless clarification, fake politeness |
+| Pull request description | Give a repository-aware reviewer the missing motivation and mental model | Motivation, resulting behaviour, consequential design/risk/boundary, useful feature evidence | Diff inventory, CI checklist, stock sections, architecture tutorial |
+| Engineering note | Preserve reasoning and decision state for teammates or maintainers | Facts, assumptions, trade-offs, uncertainty, verification state | Over-polish, vague status, ungrounded conclusions |
+| Personal/log note | Preserve useful context for future Michael | Plain context, changed assumption, useful wikilinks | Productivity-blog reflection, stale labels, motivational gloss |
+| Company-facing update | Transfer material state, risk, or next steps quickly | Terse, high-signal, structure only where it helps scanning | Release-note boilerplate, decorative labels, cleverness |
+| Reflective professional writing | Explain experience, values, or judgement | Warm first person, concrete anecdotes, controlled emotion | Melodrama, corporate framing, universal life advice |
 
 ## Mode-specific defaults
 
 ### Public technical prose
 
-Use the original blog-derived voice strongly: show the concrete thing, then unpack it. Include enough context for a peer to understand the trade-off without feeling talked down to. It is acceptable to be expansive when the detail teaches.
+Show the concrete thing, then unpack it. Include enough context for a peer to understand the trade-off without feeling talked down to. Detail earns its place when it teaches.
 
 ### Forum/help replies
 
-Use the Rust-forum-derived voice: answer the immediate question, then teach the underlying model. It is fine to start with `No.`, `Correct.`, `Not really.`, or `It depends...` when that is the useful answer, but follow with the reason and a concrete path. Prefer “It sounds like…”, “If that’s the case…”, “One option is…”, and “I’d avoid…” over a generic tutorial preamble. Load [forum-help.md](forum-help.md) for the full pattern and corpus nuance.
+Answer the immediate question, then teach the underlying model. Direct verdicts such as `No.`, `Correct.`, or `It depends...` are fine when followed by a reason and concrete path. Load [forum-help.md](forum-help.md).
+
+### Reviewer/team engineering communication
+
+Treat the teammate as a peer. Preserve diagnostic evidence, connect review findings to concrete consequences, ask rather than instruct when author context may matter, and use specific praise when approving. Short comments should sound spoken rather than templated. Load [reviewer-team-communication.md](reviewer-team-communication.md).
 
 ### Agent/operator communication
 
-Prefer compact briefs. A good shape is:
-
-1. outcome;
-2. constraints and known failure modes;
-3. evaluation criteria;
-4. permission boundaries or explicit non-goals.
-
-Example shape:
-
-> Check the repo state first. If the branch is dirty, tell me what changed before doing anything else. I'm trying to understand whether this is safe to rebase, not asking you to clean it up yet.
+Include the parts that prevent wasted work: outcome, constraints, known failure modes, evaluation criteria, and permission boundaries. Not every brief needs all five. Load [agent-communication.md](agent-communication.md).
 
 ### Pull request descriptions
 
-Respect the reviewer's existing context and attention. Lead with why the change exists, then explain the resulting behaviour and only the supporting work that materially changes design or risk. Leave routine plumbing, generated code, file counts, and CI-owned verification to the diff and checks. Use compact paragraphs and helpful Markdown, link the originating ticket, and include brief usage evidence only when significant functionality benefits from it. Load [pr-descriptions.md](pr-descriptions.md) for the full contract and examples.
+Give the reviewer what the diff, ticket, and CI do not communicate quickly. Lead with the immediate defect or reason, then resulting behaviour and only consequential design, risk, or scope context. Load [pr-descriptions.md](pr-descriptions.md).
 
 ### Engineering notes
 
-Lead with what changed or what was discovered. Separate fact from assumption. Include what was verified and what remains uncertain. Finish with the smallest useful recommendation if a decision is needed.
+Lead with what changed or was discovered. Separate fact from assumption when the distinction matters. Preserve verification state and unresolved uncertainty. Use headings for a substantial artefact, not because every thought needs a label.
 
 ### Personal/log notes
 
-Write for future context retrieval, not public performance. Keep the real-world hook: who, what, why it mattered, and what assumption changed. Use plain language and useful wikilinks; avoid turning ordinary context into a life lesson.
+Write for retrieval, not public performance. Preserve who, what, why it mattered, and which assumption changed. Keep it plain and use useful wikilinks.
 
 ### Company-facing updates
 
-Respect attention. Include only what materially helps people understand state, risk, or next steps. Use labels only when they carry information. Avoid repetitive templates that make every update look equally important.
+Respect attention. Include only what materially changes people's understanding of state, risk, or next steps. Labels and bullets are useful when they improve scanning, not as a fixed template.
+
+### Reflective professional writing
+
+Use controlled warmth and first-person ownership. Ground the reflection in real experience rather than converting it into universal advice.
 
 ## Quick mode check
 
-Before finalising, ask:
-
-- Would this artefact be weirdly over-polished for its destination?
-- Did I use structure because it helps, or because it looks tidy?
-- Is the reader a public learner, reviewer, teammate, future maintainer, future Michael, or an agent expected to act?
-- Does the level of warmth, detail, and ceremony match that reader?
+- What does the reader need to do with this?
+- What context do they already have or can inspect?
+- Did I accidentally write a report, tutorial, or blog post for a short-message destination?
+- Does the level of warmth, detail, and structure match the relationship?

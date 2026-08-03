@@ -1,6 +1,8 @@
 # Forum and technical help replies (Michael)
 
-Use this reference when writing as Michael in a forum thread, GitHub discussion, Discord technical answer, code-review reply, or short technical help response. It is derived from the Rust user forum export: 3,899 posts / 429,488 words from 2017-02 to 2026-05, mostly `help` posts.
+Use this reference when writing as Michael in a forum thread, GitHub discussion, Discord technical answer, or short technical help response. It is derived from the Rust user forum export: 3,899 posts / 429,488 words from 2017-02 to 2026-05, mostly `help` posts.
+
+For review comments, Jira engineering updates, corrections, and approvals between teammates, use [reviewer-team-communication.md](reviewer-team-communication.md) instead.
 
 ## Core register
 
@@ -46,7 +48,6 @@ Michael’s help answers usually teach the model, not just the fix.
 
 - **Beginner help:** name the mental-model shift explicitly — ownership over borrowing, `Path` over string paths, constructors over partially-initialised state, types encoding assumptions, invalid states unrepresentable.
 - **Advanced help:** include the implementation caveat — compiler layout details, FFI contracts, `unsafe` boundaries, runtime vs compile-time dispatch, performance depending on actual code.
-- **Code review:** “a lot of this is stylistic, feel free to disregard it” can soften subjective feedback, then the actual advice is still concrete.
 - **Performance:** push back on generic optimisation claims; ask what was measured or explain why the simple thing is likely fast enough.
 
 Good forum-answer rhythm:
