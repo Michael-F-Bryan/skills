@@ -1,363 +1,93 @@
 ---
 name: adaptive-decision-interviews
-description: Use when the user wants the agent to conduct a structured interview that elicits and preserves their judgement before a decision artefact is drafted. Do not use for ordinary chat, job-interview practice, brainstorming, advice, one-off clarification, fact gathering, or execution after direction is already clear.
+description: Use when the user wants the agent to conduct a structured interview that elicits and preserves their judgement before a decision artefact is drafted. Do not use for ordinary chat, job-interview practice, advice, brainstorming, fact gathering, one-off clarification, or execution after direction is already clear.
 ---
 
 # Adaptive Decision Interviews
 
-## Core principle
+## Purpose and boundary
 
-The human directs the decision. The agent reduces the effort required to express judgement, preserves the reasoning trail, and asks only questions whose answers could change the authorised artefact.
+Use this skill to elicit and preserve human judgement before an authorised decision artefact is drafted. The human owns the decision; the agent reduces expression cost, exposes consequences, and keeps evidence separate from interpretation.
 
-Research may inform the choices offered. It does not authorise the agent to settle the decision.
+An interview is not research, drafting, planning, or implementation. It does not authorise a proposal or downstream artefact unless the user explicitly names that output. If the trigger is doubtful, communicate normally.
 
-## When to use this skill
+## Before Q1: source-first decision contract
 
-Use this skill when at least one of these is true:
+Read the available source pack first: tickets, research, prior decisions, code, logs, and existing artefacts. Recover facts yourself. Ask the human only for judgement sources cannot establish: outcomes, trade-offs, ownership, authority, acceptable manual work, practical failure behaviour, confidence, disagreement, or validation responsibility.
 
-- the user explicitly asks for an interview;
-- the user asks to be questioned iteratively before a decision artefact, proposal, experiment, brief, or recommendation is drafted;
-- an approved workflow requires a structured, durable record of human judgement.
+Before asking the first substantive question, state one compact contract and invite correction:
 
-Do **not** use it for:
+- **Decision horizon:** the ultimate adoption, investment, product, or policy decision the work must support—not merely the example or first milestone.
+- **Orientation target:** value-leading use case, first shared capability, and validation context, kept as separate axes from the horizon.
+- **Authorised output:** interview record, calibrated summary, or a named decision artefact; also name the intended reader.
+- **Current phase and stopping gate:** what this interview may decide, and what would make further questions no longer decision-useful.
+- **Evidence boundary:** sources reviewed, facts relied upon, and judgements that remain human-owned.
 
-- ordinary conversation, advice, or exploratory brainstorming;
-- a single clarification before otherwise authorised work;
-- questions answerable from tickets, documents, source code, telemetry, or other available evidence;
-- requirements gathering that does not need a preserved reasoning trail;
-- work where the user has already made the decision and asked for drafting or execution.
+Record the contract and its provenance before classification. If an axis remains unclear, make it Q1 rather than asking for ceremonial approval and then starting the real interview. Do not proceed to domain questions until the contract is accepted or corrected. If acceptance is only assent to an assistant-framed contract, treat that framing as `assistant-proposed`, not as load-bearing human evidence; use the next substantive question to obtain a consequence, episode, criterion, or independent source. Do not ask consecutive confirmation questions.
 
-If the trigger is doubtful, communicate normally. Do not invent a lightweight interview mode.
+Do not collapse the decision horizon, value-leading use case, first shared capability, and validation context into one exclusive choice. A concrete example may orient the interview without shrinking its horizon. If the true horizon emerges later, record the correction, update the contract, and re-evaluate the frontier rather than defending the old line.
 
-## Interview contract
+If the user asks what the interview, ticket, or exercise is actually trying to achieve, treat that as a contract-control signal: pause the pending question, preserve the challenge, state the current purpose as agent interpretation, and wait for correction or renewed authorisation.
 
-A proper adaptive decision interview has one workflow:
+## Phase state and record layers
 
-1. Read available evidence before asking the human to supply context.
-2. Establish the decision horizon and current phase boundary.
-3. Create the interview record and its cumulative registers.
-4. Ask one high-leverage question.
-5. Record the answer verbatim before interpreting it.
-6. Update the current decision state.
-7. Let that answer determine the next question.
-8. Stop when further answers would not materially change the authorised artefact.
-9. Produce only the interview outcome the user authorised.
+Create or use the user-specified record location. If no writable location exists, keep the structure in chat and say it is not durable. Seed it with status/timezone, phase, source basis, contract, authorised output, current projection, unresolved/deferred decisions, and the next-question marker.
 
-## Before the first question
+The record has two logical layers:
 
-### Read sources first
+1. **Chronological evidence:** additive, immutable entries containing questions, complete verbatim answers, amendments, provenance, interpretation, effects, and phase changes.
+2. **Current projection:** a concise living view of the active contract, calibrated direction, scope/ownership/authority boundaries, open judgements, deferred questions, and next evidence gate.
 
-Inspect the available source pack: tickets, research, prior decisions, code, logs, and existing artefacts. Ask the human for judgement that sources cannot reliably provide:
+The projection is not a replacement for evidence and must point to the entries or source refs supporting consequential claims. Trigger `productivity:evidence-log-curation` when the record exceeds about 20 substantive entries or 300 lines, reaches a phase boundary, adds external review, or becomes difficult to scan. Preserve evidence before compressing it; keep archive/JSONL/hash mechanics in that skill, not here.
 
-- desired outcomes and acceptable failure;
-- tacit priorities and trade-offs;
-- ownership, authority, and organisational boundaries;
-- acceptable manual work or existing-tool fallbacks;
-- practical behaviour under pressure;
-- confidence, disagreement, and who must validate an assumption.
+Use these states exactly:
 
-Do not make the interviewee repeat facts the agent can recover directly.
+- **Active:** a named phase is authorised, unresolved human judgement remains, and one next question is selected.
+- **Paused:** the user has stopped questioning; no pending question exists; unresolved decisions are preserved; do not continue until explicit resume.
+- **Complete enough for <artefact>:** the named artefact can be produced without another interview question, while other decisions may remain open or deferred.
+- **Complete:** the authorised interview phase is closed, its projection is current, no pending question remains, no unresolved human judgement remains inside that phase, and deferred items have an owner, trigger, or evidence gate.
 
-### Confirm the phase boundary
+Every pivot into reflection, review, readiness, or drafting updates the status first. A pivot pauses or closes scripted questioning; it does not silently resolve judgement.
 
-State internally what the user has authorised: interview only, interview plus calibrated summary, or interview followed by a named artefact. Research, interviewing, drafting, planning, and execution are separate phases.
+## The adaptive loop
 
-An interview request does not authorise a proposal. A request for research does not authorise an interview. A completed interview does not authorise implementation.
+For each turn:
 
-### Establish the decision horizon
+1. Recompute the current decision frontier from the projection and latest evidence.
+2. Choose one unresolved judgement with the highest decision value.
+3. Ask one substantive question in ordinary chat; permit rough bullets, examples, “none”, and “I don’t know”.
+4. Record the answer verbatim before interpretation, with provenance and confidence.
+5. Apply corrections or scope pivots immediately, update registers and status, then select the next question only while the phase remains **Active**.
+6. Stop when no unresolved human judgement can materially change the authorised output.
 
-Distinguish the ultimate decision from any concrete orientation target.
+A question passes the decision-value test only if it is **material** (different answers change the artefact or its authority), **human-only** (not recoverable from sources), **current** (not a later implementation detail), and **low burden**. Prefer questions that resolve outcome, scope, ownership, authority, fallback, failure threshold, persistence, data authority, validation, or stopping.
 
-For example, a named MVP may make an investigation tangible while the real decision is whether to adopt a technology for the foreseeable future. Questions and stopping criteria must serve the confirmed decision horizon rather than accidentally shrinking it to the example.
+Do not ask a question whose answer is already present. Once alternatives are stated, ask for the consequence, criterion, or operational episode that would discriminate between them. Recognition is useful: offer two to four bounded interpretations with consequences and an escape hatch, then test the candidate against a concrete operational job before recording detailed semantics. A correction or rejection is evidence about the framing, not confirmation of it.
 
-Do not collapse the decision horizon, the use case likely to create value first, the first shared capability, and the context that will validate it into one apparently exclusive choice. One user group can benefit sooner while a shared foundation remains the first milestone. If an answer mixes these axes, separate them and ask one orthogonal follow-up before treating the milestone as resolved.
+Use a concrete episode when abstractions hide actors, timing, hand-offs, or failure consequences. The episode discovers decisions; it does not turn every detail into scope. A bad-day question is allowed only when its answer can change the current artefact’s ownership, representation, persistence, or authority boundary. If the discussion requires combined-fault precedence, timeout matrices, regulator thresholds, qualification evidence, or a formal FMEA, preserve the invariant and defer the entire analysis family.
 
-For this distinction, outcome-to-interface allocation, architecture choices, and derived products, read `references/decision-separation-and-implementation-semantics.md`.
+Establish required semantics before mechanisms. Resolve the durable hand-off, failure/retry responsibility, processing granularity, and genuine boundary before asking about a tool, provider, framework, or component. For a required derived product, resolve source authority, correction/provenance, minimum fidelity, claim semantics, hidden acquisition, lifecycle, and validation owner. See `references/decision-separation-and-implementation-semantics.md`.
 
-### Start the record
+## Evidence, corrections, and closure
 
-Use the user-provided location. Otherwise, place the record near the work it governs—normally a repository working folder—without committing it unless requested. If no writable workspace exists, keep the structure in the conversation and say plainly that it is not a durable file.
+Each entry keeps these separate: exact question and complete answer as block quotes; why the answer matters; source/evidence basis; provenance class; confidence; corroboration or missing corroboration; interpretation; effect on the authorised output; register updates; and next-question purpose. Redact secrets as `[REDACTED]` and note the redaction. The answer is evidence; the interpretation is not. Apply the rules in `references/evidence-and-elicitation-provenance.md`.
 
-Seed the record with:
+When the user corrects the topic, level, horizon, or prior answer:
 
-- status and timezone;
-- current phase, including whether it is active, paused, or complete;
-- source basis: paths, URLs, or evidence reviewed before the interview, plus the relevant facts relied on;
-- interview purpose and decision horizon;
-- authorised output and phase boundary;
-- current calibrated direction, initially empty—a compact statement of what the interview has established, never a recommendation or downstream draft;
-- cumulative assumptions, constraints, unknowns, learnings, and deferred decisions;
-- the first pending question and why it matters.
+1. preserve the correction verbatim with a timestamp;
+2. record candidate provenance before classifying it;
+3. mark the abandoned line deferred or out of scope;
+4. update the contract, projection, frontier, and affected registers;
+5. ask the next high-value question at the corrected level.
 
-## Select the next question
+Never rewrite history. If one reply amends an earlier answer and answers the current question, record two atomic items. A statement such as “I want to direct this” is a control boundary: stop synthesising unapproved decisions.
 
-Choose the unresolved judgement with the highest **decision value**.
+Do not force uncertainty into a choice. Record what remains open, why it matters, who or what can resolve it, and the trigger. Once deferred to a named owner/evidence gate, remove it from the current frontier instead of asking the same question again.
 
-A high-value answer could change one or more of:
+Stop when the authorised output has enough direction about its decision horizon, material scope, ownership/authority, consequential failure or fallback behaviour, and validation or deliberate deferral. Not every category is required; the marginal-value test governs. On closure, remove the pending-question marker, update the state, write the concise projection, list unresolved/deferred items, and explain why questioning stopped.
 
-- the outcome or decision rule;
-- required, optional, deferred, or excluded scope;
-- ownership or allocation boundaries;
-- authority to request, approve, execute, cancel, or override;
-- acceptable manual work and fallback paths;
-- failure thresholds and recovery behaviour;
-- lifecycle, persistence, or reset boundaries;
-- trusted data sources, semantics, or provenance;
-- validation evidence or the person who must supply it;
-- whether the interview should stop.
+A **publishable interview record** is an auditable account of the interview. A **decision artefact informed by the interview** is a separate downstream output: it uses the current projection and evidence references, not interview chronology as its narrative spine. Do not draft either one, or cross the phase boundary, without the user’s authorisation. For exact pause/resume, readiness, amendment, and phase rules, see `references/phase-transitions-and-readiness.md`.
 
-Prefer questions that are:
+## Quick self-check
 
-1. **Material** — different answers lead to meaningfully different artefacts.
-2. **Human-only** — the answer is judgement, not recoverable information.
-3. **Low burden** — the interviewee can answer without preparing a report.
-4. **Timely** — the answer resolves the current decision frontier rather than a later implementation detail.
-
-### Advance past the stated decision surface
-
-Do not ask the interviewee to repeat alternatives or uncertainty they have already stated. Once the decision surface is clear, ask for the consequence, criterion, or operational episode that would discriminate between the options.
-
-For example, if the user has already said the choice is between platform-owned releases and application-owned paved roads, asking “which model are you choosing?” merely restates the unresolved decision. A higher-value question asks who must be accountable for diagnosis, rollback, and incident response when a release harms production. That answer supplies evidence for the choice.
-
-## Design low-friction questions
-
-### Ask one substantive question per turn
-
-A short preface may explain why the question matters, but it must not smuggle in several additional questions. If an answer would require addressing unrelated dimensions, split the question.
-
-### Prefer recognition and correction
-
-When evidence supports plausible alternatives, offer a short inferred workflow or two to four bounded choices. Make the consequences of each choice clear.
-
-Always leave room to:
-
-- select several choices;
-- qualify an answer;
-- reject the framing; or
-- answer in the interviewee's own words.
-
-Do not use multiple choice when the options would create false certainty or anchor an answer that needs a concrete story.
-
-### Ask for episodes when abstractions conceal the work
-
-A concrete episode often reveals actors, timing, hand-offs, tools, and failure consequences better than an abstract feature list:
-
-> The preferred network has just disappeared during an operation. Who notices first, what do they try, and where must recovery stop if that fails?
-
-Use the episode to discover decisions. Do not silently turn every detail in the story into a requirement.
-
-### Keep the answer small
-
-Explicitly permit rough bullets, option letters, examples, “none”, and “I don't know”. The logged interpretation may be detailed; the human's required response should not be.
-
-### Use the conversational channel
-
-Ask in ordinary chat unless the user requests a form or specialised question interface. Single-select controls often prevent combinations and contextual corrections—the parts of the answer that carry the most judgement.
-
-## Useful interview lenses
-
-Pick one lens by default: the one that best resolves the current frontier.
-
-| Lens | What it reveals |
-| --- | --- |
-| Outcome | What must become true, and what decision the artefact must enable |
-| Concrete episode | Actual actors, sequence, timing, tools, and hand-offs |
-| Scope cut | Required, useful if cheap, later, excluded, or unknown |
-| Boundary | What belongs in the product, another tool, a manual process, or a later phase |
-| Authority | Who may request, approve, execute, cancel, or override behaviour |
-| Bad day | Offline, stale, rebooting, busy-operator, conflicting-state, and recovery behaviour |
-| Lifecycle | What persists, accumulates, may be edited, resets, or survives restarts |
-| Data authority | Trusted source, exact semantics, corrections, provenance, and minimum fidelity |
-| Validation | Direct experience, team agreement, assumption, field evidence, or another owner |
-
-### Establish semantics before mechanisms
-
-In implementation-direction interviews, establish the required contract before asking the user to choose a queue, worker, workflow engine, service split, model, provider, or framework. Resolve durable hand-off, failure and retry guarantees, processing granularity, and genuine deployment boundaries first. Mechanisms should follow those semantics rather than laundering architectural taste into a requirement.
-
-When a required map, dashboard, score, or other derived product appears, continue below the screen label: establish its trusted source, correction and provenance rules, minimum fidelity, exact semantics, hidden acquisition requirements, lifecycle, and validation owner.
-
-## Record each answer atomically
-
-Before asking the next question:
-
-1. Timestamp receipt, including timezone.
-2. Preserve the complete answer verbatim as a block quote.
-3. Redact credentials and secrets as `[REDACTED]`; note that a redaction occurred.
-4. Write the interpretation separately.
-5. Record how the answer changes the artefact or follow-up path.
-6. Update assumptions, constraints, unknowns, learnings, and deferred decisions.
-7. Resolve or narrow superseded entries rather than leaving stale registers.
-8. Choose and record the next question and its purpose.
-9. Only then ask it in chat.
-
-Use this entry shape:
-
-```markdown
-### QN — Short topic
-
-**Asked:** YYYY-MM-DDTHH:MM:SS+ZZZZ (TZ)
-
-**Question:** <exact question>
-
-**What this is trying to decide:** <material consequence of the answer>
-
-**Evidence basis:** <source paths, register IDs, or known facts that shaped the question; “human judgement only” if none>
-
-**Answer received:** YYYY-MM-DDTHH:MM:SS+ZZZZ (TZ)
-
-**Answer:**
-
-> <complete verbatim answer>
-
-**Interpretation:** <inference, kept separate from evidence>
-
-**Effect:** <change to scope, ownership, direction, artefact, or next question>
-
-**Register updates:** <IDs added, changed, resolved, or deferred>
-```
-
-The quote is evidence. Do not tidy it, complete it, or replace it with a polished paraphrase.
-
-## Maintain cumulative decision state
-
-Keep concise registers near the top of the record so the current state can be understood without rereading the full transcript.
-
-### Assumptions
-
-Record the claim, source, confidence, validation owner or method, and status. Do not promote a plausible inference into a constraint.
-
-### Constraints
-
-Record the boundary, its source, and its consequence for the authorised artefact.
-
-### Unknowns
-
-Record why the unknown matters, who or what can resolve it, and whether it is open, narrowed, deferred, or resolved.
-
-### Learnings
-
-Record the durable implication and its evidence. Keep this compact; the full answer remains in the chronological record.
-
-### Deferred decisions
-
-Record the trigger for revisiting the decision, the evidence needed, and the future owner. “Not sure yet” is a valid result, not an invitation to invent a fallback answer.
-
-## Follow the answer
-
-After each answer, briefly state what changed if that helps orientation; do not recap the entire interview. Follow any more consequential exception, ownership boundary, or unknown the answer exposes, and remove planned questions it already resolved.
-
-When an answer represents somebody else's needs, distinguish:
-
-- direct experience;
-- established team agreement;
-- the interviewee's informed judgement; and
-- a best guess requiring validation.
-
-This prevents confident prose from laundering an assumption into a decision.
-
-## Honour pivots, corrections, and amendments
-
-When the user says the interview is too deep, at the wrong level, or aimed at the wrong topic:
-
-1. Record the correction verbatim.
-2. Mark the abandoned line as deferred or out of scope.
-3. Update the decision frontier.
-4. Ask the next question at the requested level immediately.
-
-Do not defend the old line, finish its questionnaire, or explain why the detail might eventually matter.
-
-Treat corrections after an interview as timestamped amendments. Preserve the original answer, append the amendment verbatim, and update the calibrated direction and affected registers. Do not rewrite history to make the conversation appear consistent.
-
-If one reply both amends an earlier answer and answers the current question, record two atomic items: the amendment under the earlier question, then the current answer under its own question number.
-
-A statement such as “I want to direct this” is a control boundary. Stop synthesising unapproved decisions and return control through the next high-value question.
-
-### Pause, resume, and continue into another phase
-
-A pause is not completion. Record the pause direction verbatim, mark the phase **Paused**, remove the pending question, preserve unresolved decisions, and do not choose another question until the user explicitly resumes.
-
-If the user continues a completed interview into architecture, implementation, operations, or another decision class, preserve the earlier phase as complete and record the new authorisation as a distinct phase. Mark the overall interview active again, continue the numbering and registers, and do not silently broaden the outputs the user has authorised.
-
-When the user asks whether there is enough direction to start, distinguish unresolved human judgement from ordinary implementation discovery. Library choices, exact schemas, benchmarks, and provider details are not blockers unless they could materially redirect the outcome, trust model, authority boundary, architecture boundary, or acceptance criterion.
-
-For exact state transitions, readiness synthesis, amendments, and reader-facing records, read `references/phase-transitions-and-readiness.md`.
-
-## Preserve uncertainty
-
-Uncertainty is often the most useful finding in the interview. When the user is unsure:
-
-- identify what decision remains open;
-- record why it matters;
-- name the evidence or event that would make the decision timely;
-- identify the future decision owner where possible; and
-- continue only if another current question could narrow the uncertainty honestly.
-
-Do not force a speculative choice merely to complete a register or produce a tidy summary.
-
-Once a decision has been deferred to a named owner, evidence source, and future trigger, remove it from the current interview frontier. Do not immediately ask the interviewee to decide the same uncertainty in different words. Move to another current judgement that can be answered honestly, or stop.
-
-## Stop deliberately
-
-After each answer, ask internally:
-
-> Can any unresolved human judgement still materially change the authorised artefact?
-
-If no, stop. Do not ask ceremonial questions to make the interview feel comprehensive.
-
-The interview is normally complete when the current decision has enough clarity about:
-
-- outcome and decision horizon;
-- material scope boundaries;
-- ownership or authority;
-- fallback and consequential failure behaviour;
-- validation owners or deliberately deferred unknowns.
-
-Not every interview needs every category. The marginal-value test is authoritative.
-
-At completion:
-
-1. mark the record complete and remove any pending-question marker;
-2. write a concise **Calibrated direction** above the chronological entries: the current state of the interview—established boundaries, material rationale, and open decisions—not a recommendation or downstream artefact;
-3. list unresolved and deferred decisions without smoothing them away;
-4. tell the user why the interview can stop; and
-5. do not automatically draft a spec, recommendation, plan, or implementation.
-
-Cross the next phase boundary only when the user asks.
-
-## Worked first turn
-
-User:
-
-> I want an experiment that tells us whether this technology is mature enough for adoption. Interview me before writing the plan.
-
-Poor responses either draft the experiment or ask a batch about architecture, metrics, schedule, UI, and testing.
-
-A useful first turn identifies the decision horizon:
-
-> At the end of this experiment, which decision must the evidence let you make?
->
-> **A.** Adopt or reject the technology for the foreseeable future
->
-> **B.** Choose among integration methods while adoption remains assumed
->
-> **C.** Estimate migration effort and the largest unknowns
->
-> **D.** A combination, or something else
->
-> Multiple selections and context are welcome.
-
-The next question depends on the answer. It is not selected in advance.
-
-## Failure patterns
-
-- **Premature authorship:** converting research or a vivid answer into an unapproved plan. Return to the authorised phase.
-- **Questionnaire batches:** optimising for coverage rather than decision value. Ask one material question.
-- **Leading recognition:** offering choices that encode the agent's preferred answer. Contrast consequences and keep an escape hatch.
-- **Feature-list gravity:** treating every plausible capability or episode detail as required scope. Ask for an explicit scope cut.
-- **Depth creep:** building a complete domain model after the decision boundary is already clear. Defer implementation detail.
-- **False closure:** turning uncertainty into a decision because the document wants an answer. Record a deferred decision.
-- **Deferred-decision loop:** naming a future owner and evidence, then asking the current interviewee to decide it anyway. Remove it from the current frontier.
-- **History laundering:** silently rewriting an earlier answer after a correction. Append an amendment.
-- **Collapsed decisions:** treating the value-leading use case, shared milestone, validation context, and decision horizon as one exclusive choice. Separate the axes.
-- **Mechanism-first interviewing:** asking the user to select infrastructure before establishing the required durability, failure, processing, and deployment semantics.
-- **False completion on pause:** marking an interview complete or retaining a stale pending question when the user has paused it.
+Before each question: *Could different answers materially change the authorised output, and is this judgement unavailable in the sources?* If not, do not ask it. Before completion: *Is the state accurate, is the projection supported by evidence refs, and has the downstream author been explicitly authorised?*
