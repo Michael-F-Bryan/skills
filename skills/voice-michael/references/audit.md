@@ -24,15 +24,17 @@ Read the entire artefact before changing it. Identify the specific passages that
 
 Base each edit on the diagnosis. Prefer restrained local changes, preserve passages that already feel natural, and separate meaning-bearing corrections from style changes.
 
-## Over-distillation
+## Over-distillation in public and long-form prose
 
-A draft can pass the Michael Test and still feel like an over-distilled simulation: unusually clean, symmetrical, and efficient at making every paragraph serve the argument. Judge accumulation across the artefact rather than treating any single construction as forbidden.
+Use this section for public technical prose, reflective professional writing, and other long-form narrative. In compact answer-first, reviewer, PR, agent, and team modes, the destination mode's cognitive job overrides it; do not restore chronology or texture when that would obscure evidence, judgement, or the next action.
+
+A long-form draft can pass the Michael Test and still feel like an over-distilled simulation: unusually clean, symmetrical, and efficient at making every paragraph serve the argument. Judge accumulation across the artefact rather than treating any single construction as forbidden.
 
 Look for:
 
 - paragraphs that each perform exactly one rhetorical function;
 - matched pairs, numbered taxonomies, and repeated `first`/`second` structures that make messy material look pre-classified;
-- transitions that explicitly close one conceptual loop before opening the next;
+- transitions that recap one conceptual loop merely to announce the next when the next move is already clear;
 - examples or technical details followed by an unnecessary sentence stating their lesson;
 - implementation narratives that make the final design feel inevitable in hindsight;
 - universal principles that would be more truthful as owned experience or judgement;
