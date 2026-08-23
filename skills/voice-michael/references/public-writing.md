@@ -12,24 +12,32 @@ Certainty is calibrated: exploratory for opinion ("my take", "I'd like to explor
 
 ## Openings
 
-Openings set scene and stakes in a short paragraph, not a bold one-line claim or a question. The recurring shapes:
+Openings usually set scene and stakes in a short paragraph, not a bold one-line claim or a question. They do not need to compress the article's complete premise or eventual conclusion. The recurring shapes:
 
 - **Personal context** — why I'm writing, what I learned the hard way: "I thought it might be helpful to write down some of the core principles and values that guide my professional life."
 - **Concrete scenario** — "Imagine you are implementing a calculator application and want users to be able to extend the application with their own functionality." The scenario is a specific engineering situation the reader can inhabit; hype framing ("Imagine a world where...") is a different move and does not fit.
 - **Prior-art callback** — "A while ago someone posted a question on the Rust User Forums... I'd like to explore my take on things."
 - **Received wisdom + trigger** — "One of the first things I learned when programming professionally is that *global variables are bad*... the other day, a 3rd party native library reminded me *why*."
 
-Process and how-to pieces still need a minimal personal stake before the first step — one sentence on why this matters or what it cost to learn.
+Process and how-to pieces usually benefit from a minimal personal stake before the first step — one sentence on why this matters or what it cost to learn. Do not manufacture one when the concrete problem already supplies the reason to care.
 
 ## Structure and flow
 
 Use H2 for main sections and H3 for subsections whenever the piece has three or more distinct parts; never publish a multi-section piece without headings. Headings are short and scannable, and they carry much of the transition load.
 
-Transitions are signposted locally at pivots: "There's quite a lot going on here, so let's unpack it a bit", "Now that we've covered X...", "Let me show you what this looks like in practice." The boundary: a signpost moves the reader through *this* pivot; an announced itinerary ("In this article we'll cover X, Y, and Z", "First we'll look at X, then move to Y") narrates the whole route and is out. If the structure needs announcing, the headings aren't doing their job.
+Use a local signpost when a pivot would otherwise be abrupt: "There's quite a lot going on here, so let's unpack it a bit", "Now that we've covered X...", "Let me show you what this looks like in practice." Do not close every conceptual loop before opening the next one. The boundary: a signpost moves the reader through *this* pivot; an announced itinerary ("In this article we'll cover X, Y, and Z", "First we'll look at X, then move to Y") narrates the whole route and is out. If the structure needs announcing, the headings aren't doing their job.
 
-Paragraph rhythm is deliberately mixed: most body paragraphs run 3–6 sentences; single-sentence paragraphs are saved for emphasis or pivot ("It's also really hard."); longer blocks are fine around code. Repeated one-liners for fake punch flatten the effect — the short sentence lands because it's rare.
+Paragraph rhythm is deliberately mixed: most body paragraphs run 3–6 sentences; single-sentence paragraphs are saved for emphasis or pivot ("It's also really hard."); longer blocks are fine around code. A paragraph may carry two related thoughts rather than performing exactly one rhetorical function. Repeated one-liners for fake punch flatten the effect — the short sentence lands because it's rare.
 
-Closings wrap up rather than sell: a brief summary, often a callback or soft caveat ("Don't think of these as hard and fast rules..."), and a low-pressure invitation — issue tracker, "let me know", or a thematic sign-off. Short process pieces should still get one reflective or caveat sentence rather than ending on a purely utilitarian summary.
+Closings wrap up rather than sell. They may use a brief summary, callback, soft caveat ("Don't think of these as hard and fast rules..."), low-pressure invitation, or thematic sign-off, but they do not need all of them. Stop after the useful judgement instead of restating the trigger, mechanism, trade-off, and thesis with mathematical completeness. A short process piece may still earn one reflective or caveat sentence rather than a comprehensive recap.
+
+## Naturalness and contingency
+
+Do not make the article more orderly than the work. Where the source supports it, preserve the sequence in which problems were discovered, including failed assumptions, annoying details, and choices that were simply the least-bad practical option. Distinguish what was known in advance from what became clear while implementing the example.
+
+Examples do not all need an explicit lesson, and interesting observations may remain useful asides rather than being tied back to the thesis. Prefer an ordinary, accurate sentence over a beautifully balanced one. Use first person when it restores the provenance of experience or judgement, not as decorative personality.
+
+This is not permission to add mistakes, fake uncertainty, arbitrary anecdotes, forced humour, or copied mannerisms. The aim is to retain some evidence that an engineer thought through the problem while building it, not to perform humanisation.
 
 ## Teaching moves
 
@@ -37,6 +45,7 @@ Closings wrap up rather than sell: a brief summary, often a callback or soft cav
 - **Alternatives before committing.** Before any fancy solution, ask "do we actually *need* to come up with a fancy solution here?" and list the options — including "don't" — before choosing. "9 times out of 10 taking the more complicated option will require you to do extra work that wasn't needed in the first place."
 - **Concrete-first.** A scenario or working code before the abstract principle, never a jargon-led definition as the hook. "See how the concrete example makes the abstract pattern immediately understandable?"
 - **Real artefacts as evidence.** Terminal output, compiler errors, Valgrind/Miri runs, and diagrams are part of the argument, not decoration. Include the failure mode, not just the happy path.
+- **Preserve discovery order.** When one fix exposed the next problem, explain it in that sequence instead of turning the result into a retrospective "first problem / second problem" taxonomy.
 - **Credit and defer.** Link generously; "Ralf Jung does a much better job of explaining the subtleties of provenance so I'll just defer to his articles."
 
 ## Sentences

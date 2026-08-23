@@ -18,6 +18,32 @@ Revise if any answer is no:
 8. **Low-pressure close** — Any call to action is "let me know" grade, never "Subscribe!"
 9. **Australian English** — `behaviour`, `optimise`, `artefact`, `while`, `among`; never `utilise`.
 
+## Diagnostic pass before edits
+
+Read the entire artefact before changing it. Identify the specific passages that materially miss the target and explain why; for a long article, report 5–10 high-leverage locations when that many are material rather than inventorying every sentence. Complete and report this diagnostic pass before touching the text. If the user asked only for evaluation, stop there.
+
+Base each edit on the diagnosis. Prefer restrained local changes, preserve passages that already feel natural, and separate meaning-bearing corrections from style changes.
+
+## Over-distillation
+
+A draft can pass the Michael Test and still feel like an over-distilled simulation: unusually clean, symmetrical, and efficient at making every paragraph serve the argument. Judge accumulation across the artefact rather than treating any single construction as forbidden.
+
+Look for:
+
+- paragraphs that each perform exactly one rhetorical function;
+- matched pairs, numbered taxonomies, and repeated `first`/`second` structures that make messy material look pre-classified;
+- transitions that explicitly close one conceptual loop before opening the next;
+- examples or technical details followed by an unnecessary sentence stating their lesson;
+- implementation narratives that make the final design feel inevitable in hindsight;
+- universal principles that would be more truthful as owned experience or judgement;
+- introductions that state the whole argument with suspicious efficiency;
+- conclusions that comprehensively restate the trigger, mechanism, trade-off, caveat, and thesis; and
+- unusually uniform paragraph lengths or rhetorical cadence.
+
+When the source supports it, restore contingency: preserve discovery order, failed assumptions, surprising details, practical compromises, and the distinction between what was known beforehand and learned while building. A useful aside may remain an aside. Prefer ordinary clarity over a balanced or aphoristic sentence.
+
+Do not compensate with intentional mistakes, random fragments, fake uncertainty, forced jokes, arbitrary anecdotes, or copied signature phrases. The aim is less optimisation, not more noise.
+
 ## Boundary calls
 
 These pairs look contradictory unless the function is checked:

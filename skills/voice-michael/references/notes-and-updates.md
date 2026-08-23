@@ -20,6 +20,7 @@ Avoid: over-polish, vague status, ungrounded conclusions.
 - Write for retrieval: who, what, why it mattered, and which assumption changed.
 - Keep it plain and add useful wikilinks.
 - Preserve existing vault conventions instead of inventing a fresh format.
+- For meeting minutes, follow the course of the meeting: top-level bullets are topics in approximate discussion order, with related facts, proposals, decisions, risks, questions, and actions nested beneath the topic where they arose. Do not reorganise the note into global `Decisions`, `Actions`, `Risks`, `Working assumptions`, or `Open questions` buckets.
 
 Avoid: productivity-blog reflection, stale labels, motivational gloss, "lessons learned" framing that pushes the note toward polished performance.
 

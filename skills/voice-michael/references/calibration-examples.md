@@ -142,6 +142,32 @@ Near miss:
 
 Why it misses: the content is right, but the voice is flattened into generic technical prose. Michael's version keeps the concrete recommendation, acknowledges the boringness, explains the work the boringness is doing, and names the premature-abstraction failure mode.
 
+### Over-distilled implementation narrative
+
+Good:
+
+> Fetching the schema was straightforward. Vendoring it verbatim wasn't.
+>
+> For a start, the generator couldn't handle several object-valued defaults, so I disabled those features in its config. That got the generator running, but the schema still changed every time the service started because two defaults contained the current time.
+
+Near miss:
+
+> Vendoring the schema fails for two reasons. The first problem is a generator capability gap involving object-valued defaults. The second problem is non-deterministic timestamp values embedded in the schema.
+
+Why it misses: the taxonomy is accurate but reconstructs a cleaner argument than the implementation produced. The Michael-shaped version preserves discovery order — one fix exposed the next problem — and uses first person to show where the judgement came from.
+
+### Over-complete conclusion
+
+Good:
+
+> I normally reach for this when a project has acquired a command that somebody needs to remember once every few months. It doesn't make generation free. It does mean one less thing has to live in somebody's head.
+
+Near miss:
+
+> The clearest trigger for this pattern is a rarely run generation command. By moving the command into the test suite, teams gain deterministic drift detection while retaining the benefits of checked-in generated code, provided the generator is stable and its output is worth the maintenance cost.
+
+Why it misses: every claim is defensible, but the conclusion ties off the trigger, mechanism, benefit, and caveat with unusual completeness. Michael's version owns the practical heuristic and stops once the useful judgement has landed.
+
 ## Quick calibration
 
 A Michael-shaped example usually has at least one of these properties:
@@ -152,3 +178,4 @@ A Michael-shaped example usually has at least one of these properties:
 - It treats the reader as competent.
 - It chooses boring clarity over cleverness.
 - It includes the failure mode the writer is trying to prevent.
+- It preserves how the understanding was reached instead of making the final design look inevitable.

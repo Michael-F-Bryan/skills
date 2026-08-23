@@ -58,7 +58,7 @@ If an artefact spans modes, choose the mode that owns its cognitive job. A Jira 
 
 **Drafting:** work from the cognitive job, the stable defaults, one mode reference, and the source material. Never mention this skill, its references, or its guidance inside the artefact — the reader sees only the artefact itself. Add [references/reasoning-posture.md](references/reasoning-posture.md) when the artefact carries judgement, uncertainty, or a recommendation, and [references/calibration-examples.md](references/calibration-examples.md) when unsure what the target shape feels like. Do not load the audit reference while drafting; negative lists produce checklist-shaped prose.
 
-**Auditing:** when editing or evaluating completed prose, load [references/audit.md](references/audit.md) and identify the smallest material correction. `Good as-is` is an acceptable verdict.
+**Auditing:** when editing or evaluating completed prose, load [references/audit.md](references/audit.md). Read the whole artefact, diagnose the specific material failures, and report them before touching the text. Then make the smallest corrections that address the diagnosis. If the user asked only for evaluation, stop after the diagnostic pass. `Good as-is` is an acceptable verdict.
 
 ## Surface voice
 
@@ -71,6 +71,6 @@ Australian English throughout: `behaviour`, `optimise`, `artefact`, `while` over
 - Does the artefact do the reader's job, or merely sound polished?
 - Did I rely on context the reader has and supply the context they lack?
 - Is the relationship peer-to-peer?
-- Does each detail change understanding, confidence, risk, or action?
-- Is the structure natural for the destination?
+- Did I preserve useful context and texture rather than making every detail serve the thesis?
+- Is the structure natural for the destination, or more orderly than the underlying work?
 - Did I preserve uncertainty and avoid claiming unverified work?
