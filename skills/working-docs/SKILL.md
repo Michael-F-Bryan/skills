@@ -15,15 +15,15 @@ Working docs serve the requested task. They do not enlarge its scope, create ext
 
 ## Activation gate
 
-Use working docs when the user explicitly asks for a working folder. Otherwise, use them when at least two of these hold:
+Use working docs when the user explicitly asks for a working folder or when one strong persistence need exists:
 
-- the task spans multiple phases, sources, files, or systems;
-- findings may change the plan later;
 - interruption, compaction, or handoff is likely;
 - another agent or process needs named intermediate artefacts;
 - conclusions must remain auditable after the session.
 
-Do not use them for one-shot answers, tiny edits, or work where no intermediate state matters after the next tool call. Reassess this gate even when the skill was preloaded.
+Otherwise, use them only when both the task spans multiple phases, sources, files, or systems **and** findings may change later decisions.
+
+Without an explicit request or persistence need, do not use working docs for one-shot answers, tiny edits, or work where no intermediate state matters after the next tool call. Reassess this gate even when the skill was preloaded.
 
 ## Location
 
@@ -43,7 +43,7 @@ Keep `_working/` out of commits unless the user wants it tracked. Check effectiv
 git check-ignore -q _working/
 ```
 
-If it is not ignored, add `_working/` to `.git/info/exclude`. Change the tracked `.gitignore` only when the user explicitly wants repository-wide policy. Outside a repository, use the working directory without creating Git configuration.
+Ignoring the folder is optional local hygiene, not a prerequisite. If it is not ignored, add `_working/` to `.git/info/exclude` only when local repository housekeeping is within the task's authority and the untracked noise would hinder the work. Otherwise leave repository configuration unchanged. Change the tracked `.gitignore` only when the user explicitly wants repository-wide policy. Outside a repository, use the working directory without creating Git configuration.
 
 ## What to preserve
 
@@ -75,14 +75,14 @@ When another agent or process needs the working folder:
 - require source paths or evidence for material claims;
 - read the named output before relying on it.
 
-A summary saying a file was written is not evidence that it exists. If the expected file is absent or unreadable, report the missing artefact rather than treating the delegated task as complete.
+A summary saying a file was written is not evidence that it exists. Read every named or required handoff artefact before relying on it. If an expected file is absent or unreadable, report the missing artefact rather than treating the delegated task as complete.
 
 ## Bounded verification
 
 Verify claims about working docs with the smallest direct check:
 
 1. list the relevant folder;
-2. read back `README.md` and each artefact whose existence or contents you will claim;
+2. read back `README.md`, every named or required artefact, and anything else whose existence or contents you will claim;
 3. confirm blockers and next steps are current enough for the handoff or final response.
 
 This verifies the working substrate only. Product behaviour, code, deployment, or hardware claims require evidence from the owning task; working docs do not trigger unrelated tests, full suites, reviews, or live operations.
