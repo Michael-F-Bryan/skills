@@ -1,89 +1,88 @@
 ---
 name: working-docs
-description: Use when a task has multiple phases, evidence sources, handoff risk, interruption risk, or intermediate findings that must affect later work. Update `_working/<topic>/` continuously as you go so users see live progress and another agent can continue if the session ends. Sometimes referred to as the "working folder" or `_working/<topic>/`.
+description: Use when a task has multiple phases, evidence sources, handoff or interruption risk, or intermediate findings that must change later decisions. Also applies when the user asks for a working folder or `_working` directory.
 ---
 
 # Working Docs
 
 ## Core principle
 
-`_working/<topic>/` is the task's external memory: notes, evidence, and intermediate artefacts that must outlive a single context window.
+`_working/<topic>/` is external task memory: preserve only the notes, evidence, and intermediate artefacts that later work will actually use.
 
-A note earns its place only if **deleting it would change a later action**. If the task could finish identically with the folder erased, you are doing ceremony, not working memory. Capture what you will reuse; skip what you will not.
+A file earns its place only if deleting it would change a later action, decision, handoff, or audit. If the task could finish identically without the folder, skip it.
 
-## When to use
+Working docs serve the requested task. They do not enlarge its scope, create extra review or testing obligations, or turn a quick task into a documented project.
 
-Use when at least two of these hold:
+## Activation gate
 
-- multiple phases, sources, files, or systems
-- findings that may change the plan later
-- interruption, compaction, handoff, or sub-agents are likely
-- claims must be auditable later (investigations, benchmarks, source-grounded synthesis)
+Use working docs when the user explicitly asks for a working folder. Otherwise, use them when at least two of these hold:
 
-Do **not** use for one-shot answers, tiny edits, or work where no intermediate state matters after the next tool call.
+- the task spans multiple phases, sources, files, or systems;
+- findings may change the plan later;
+- interruption, compaction, or handoff is likely;
+- another agent or process needs named intermediate artefacts;
+- conclusions must remain auditable after the session.
 
-## Where it goes
+Do not use them for one-shot answers, tiny edits, or work where no intermediate state matters after the next tool call. Reassess this gate even when the skill was preloaded.
 
-Put `_working/` as close to the files it refers to as possible — normally the **root of the git repository** you are working in. One stable folder per task, unless the user gives a path:
+## Location
+
+Put one stable folder close to the work, normally at the repository root unless the user gives another path:
 
 ```text
 <repo-root>/_working/<topic-slug>/
-  README.md         # the entry point: what this is, where things stand
-  <other files>     # evidence, drafts, sub-agent prompts, the final artefact, etc.
+  README.md         # current state and entry point
+  <other files>     # only evidence, drafts, prompts, or outputs later work needs
 ```
 
-`README.md` is the entry point — the first thing you or another agent reads on resuming. Add further files only when they pull their weight.
+`README.md` should let a fresh agent resume: the underlying need, material constraints, current state, decisions, blockers, next step, and which files to read.
 
-Persist the **work products** you generate — plans, prompts you write for sub-agents, drafts, the final report — as files in this folder **when you create them**, not at the end of the session. If a later step or another agent must use an artefact, it belongs on disk, not only in your reply or context.
-
-Keep `_working/` out of commits unless the user wants the artefacts tracked. From the repository root, check Git's **effective** ignore rules before creating files:
+Keep `_working/` out of commits unless the user wants it tracked. Check effective ignore rules from the repository root:
 
 ```bash
 git check-ignore -q _working/
 ```
 
-This checks repository `.gitignore` files, `.git/info/exclude`, and the user's global excludes file. If `_working/` is already ignored, make no ignore-related changes. If it is not ignored, add `_working/` to `.git/info/exclude` for local working state. Edit the tracked `.gitignore` only when the user explicitly wants a repository-wide policy change — never create a tracked diff merely to support working docs.
+If it is not ignored, add `_working/` to `.git/info/exclude`. Change the tracked `.gitignore` only when the user explicitly wants repository-wide policy. Outside a repository, use the working directory without creating Git configuration.
 
-If there is no enclosing repo, use the working directory root without setting up Git ignores.
+## What to preserve
 
-## What to capture
+Capture only information with downstream value:
 
-There is no required format. Write what this task actually needs, in whatever shape serves recall and handoff. Choose from the following as the work warrants — a short task may need only the first two:
+- decisions and the evidence or constraint behind them;
+- failed approaches that should not be repeated;
+- paths, IDs, versions, exact inputs, and source references that affect conclusions;
+- user corrections and how they changed the plan;
+- unresolved questions, blockers, recovery information, and the next step;
+- plans, prompts, drafts, or reports that another phase, process, or person will consume.
 
-- **The underlying need** — the real goal or problem behind the literal request, so later decisions serve the intent and not just the wording.
-- **Principles and values to honour** — constraints, preferences, and trade-offs to keep in mind when you must use initiative or decide something the user didn't spell out.
-- **Definition of done** and the current plan or phases.
-- **Decisions and the evidence behind them** — and, for claims that must be auditable, the source path/URL/command, the relevant fact, and any caveat.
-- **Failed attempts** and what they ruled out, so you don't repeat them.
-- **Paths, IDs, versions, and exact inputs** that affect conclusions.
-- **Open questions, blockers, and the next step**, plus any user corrections and how they changed the plan.
+Do not dump raw output that is not itself evidence, duplicate the final response, maintain vague activity logs, or write a file merely because a template suggests one.
 
-Avoid dumping raw output that isn't itself the evidence, duplicating the final answer, vague lines like "looked at files", and stale TODOs left unreconciled.
+## Working-memory loop
 
-## The loop
+1. **Seed before deep work.** Create `README.md` with the need, material constraints, current state, and next step.
+2. **Update on meaningful change.** Record a decision, reusable finding, changed direction, durable blocker, or produced artefact when it occurs—not after every tool call.
+3. **Read when the record is authoritative.** Read `README.md` after interruption or compaction, before handoff, after agents return, or before a decision that depends on captured evidence. Do not repeatedly reread unchanged files as ceremony.
+4. **Keep the entry point current.** When the plan or state changes materially, update `README.md` so it points to the authoritative artefacts.
+5. **Stop when the substrate is sufficient.** Once later work can resume and all claimed artefacts are grounded, do not add recap files or polish that no downstream action needs.
 
-- **Seed** `README.md` before deep work with the underlying need, principles to honour, and definition of done — these anchor every later judgement call.
-- **Write as you go** — after each meaningful unit of progress (a decision, a finding, a phase completed, a failed attempt), update `_working/<topic>/` immediately. The working directory is the **live record**: users read it to see progress; if the session crashes, compacts, or hands off, nothing important should exist only in context.
-- **Keep `README.md` current** — treat it as a running status line: what's done, what's in progress, what's next, which files to read first. Refresh it whenever that changes.
-- **Read back** before each phase change (drafting, changing direction, after a failed command, after sub-agents return, before the final response). When a captured fact settles a decision, **cite it instead of re-deriving from memory** — that citation is the proof the note mattered.
-- **Resume** from `README.md` after any pause. The next agent (or you, post-compaction) should be able to continue from the folder alone.
+## Delegation and handoff
 
-## Write as you go
+When another agent or process needs the working folder:
 
-Do not batch working-directory updates for the end of the session. **Update `_working/<topic>/` continuously as you work.**
+- provide the exact `_working/<topic>/` path;
+- name the input files it must read and the output file it must produce;
+- require source paths or evidence for material claims;
+- read the named output before relying on it.
 
-After each meaningful step, persist to disk:
+A summary saying a file was written is not evidence that it exists. If the expected file is absent or unreadable, report the missing artefact rather than treating the delegated task as complete.
 
-- decisions and the evidence behind them
-- artefacts you produced (drafts, reports, prompts, evidence files)
-- changes to the plan, blockers, or next step
+## Bounded verification
 
-Keep `README.md` current so a user glancing at the folder — or another agent stepping in mid-task — knows where things stand without reading chat history. Do not rely on chat history or context for handoff; the working directory is the handoff surface.
+Verify claims about working docs with the smallest direct check:
 
-## Verifying and handing off
+1. list the relevant folder;
+2. read back `README.md` and each artefact whose existence or contents you will claim;
+3. confirm blockers and next steps are current enough for the handoff or final response.
 
-Working docs are a substrate, not a substitute for verification. Before claiming completion, **REQUIRED SUB-SKILL:** `verification-before-completion` — list the folder, read back `README.md` and the artefact, and confirm files exist at the stated paths.
-
-When delegating, give sub-agents the `_working/<topic>/` path, require a named output file, and read that file back yourself before trusting any summary. **REQUIRED SUB-SKILL:** `subagent-driven-development`. A missing file means the result is unverified, regardless of what the sub-agent reports.
-
-For multi-agent work where roles hand off across the same `_working/` substrate, **RELATED SKILL:** `handoff-iteration-loop`.
+This verifies the working substrate only. Product behaviour, code, deployment, or hardware claims require evidence from the owning task; working docs do not trigger unrelated tests, full suites, reviews, or live operations.
