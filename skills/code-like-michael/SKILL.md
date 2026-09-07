@@ -1,20 +1,20 @@
 ---
 name: code-like-michael
-description: "Use when writing, changing, reviewing, testing, refactoring, or architecting code, including greenfield apps, CLIs, bug fixes, and PR reviews. Applies Michael's default coding style: typed boundaries, thin entrypoints, concrete-first design, anti-ceremony abstractions, real behaviour tests, and operator-shaped interfaces."
+description: "Use when writing, changing, reviewing, testing, verifying, refactoring, or architecting code, including greenfield apps, CLIs, bug fixes, and PR reviews. Applies Michael's default coding style: typed boundaries, thin entrypoints, concrete-first design, anti-ceremony abstractions, proportionate evidence, and operator-shaped interfaces."
 ---
 
 # Code Like Michael
 
 ## Default activation (read this first)
 
-**If you are about to write, change, review, or architect code — including greenfield projects, bug fixes, refactors, tests, or CLI tools — read and apply this skill now.** The user does not need to mention it. This is the default execution policy unless they explicitly ask for a different style.
+**If you are about to write, change, review, verify, or architect code — including greenfield projects, bug fixes, refactors, tests, or CLI tools — read and apply this skill now.** The user does not need to mention it. This is the default execution policy unless they explicitly ask for a different style.
 
 Before your first line of code:
 
 1. **Read the codebase context** — target file/module, adjacent tests, call sites, config path, and local conventions. Find the smallest seam to change. Do not hallucinate a greenfield-shaped solution into an existing repo.
 2. **Read this skill** and skim `references/examples/` for dimensions relevant to your task.
 3. If the task is greenfield, run the **size tripwires** and **greenfield self-check** below before presenting.
-4. **No test, no done.** If you change behaviour — fix a bug, add a feature or flag — you write a test for it in the same change. Before finishing, list each behaviour you changed and **name the test function that covers it**; if you cannot name one, write it now. Manual smoke checks and re-running old tests that never exercised your change do not count. Never defer this ("I can add tests if you want"); write the tests now, even if you cannot execute them in your environment.
+4. **Plan proportionate verification.** Identify the changed behaviour and consumer boundary, then choose the smallest check that can disprove each material claim. For ordinary code, this is normally a focused regression plus the owning package or suite; use direct browser, device, runtime, or real-consumer evidence when that is the acceptance boundary.
 5. **Repair what you touch.** Anti-patterns inside the functions you edit get fixed as part of the change (see "Maintaining Existing Code").
 6. Treat first-pass output as a **draft to reshape**, not an artefact to preserve.
 
@@ -68,7 +68,7 @@ Reject: interfaces with one implementation, `Manager`/`Service`/`Repository` pas
 - **No opt-in core workflows**: do not make essential behaviour depend on a flag users (or tests) will forget to pass. Optional flags are fine for rendering, filtering, verbosity, dry-run, and output format.
 - **Return typed outcomes**: do not require callers to inspect mutable post-call state (`last_result`, `error` fields, hidden accumulators). Internal caches are fine when invalidation is clear and correctness does not depend on callers clearing/reading them.
 - **Don't canonise nearby bad code**: inspect existing code for useful patterns, but harden bad seams you touch — do not copy `utils` dumps, scattered env reads, or placeholder layers just because they are local.
-- **Higher bar for AI-generated code**: generated code needs *more* verification, not less — run checks, test observable behaviour, reshape before presenting.
+- **Higher bar for generated code**: use structural or drift checks plus the real consumer or render path where that is the acceptance boundary. More generated files do not justify indiscriminate test breadth.
 - **Delete scaffolding before claiming done**: remove unused files, exports, placeholder TODOs, speculative flags, empty barrels, and dead tests that only assert wiring.
 
 ### Greenfield self-check (include before presenting)
@@ -133,11 +133,25 @@ Unless the user explicitly asks otherwise, treat these as MUST-level defaults:
    - Prefer real implementations where cheap, then fakes/in-memory adapters, then local services or testcontainers, then spies, and only narrow mocks for genuinely awkward external boundaries.
    - Heavy monkeypatching is usually design feedback: push side effects to the edges, inject dependencies explicitly, and keep the core behaviour real.
    - Do not patch the code under test just to make a test pass. Test the public behaviour and observable outcome instead.
-7. **Changed behaviour gets a test.**
-   - Every bug fix normally includes a regression test that fails before the fix and passes after.
-   - Every new feature or flag normally includes a behaviour test covering the user-visible contract.
-   - If a test is genuinely impractical, say why, perform the closest available verification, and do not claim the work is covered.
-   - Tests are not ceremony, but if you change observable behaviour you owe the repo a guardrail. "Existing tests still pass" is not evidence for behaviour those tests never exercised.
+7. **Changed behaviour gets proportionate evidence.**
+   - A bug fix normally includes a focused regression that fails before the fix and passes after, followed by the owning package or suite.
+   - A new feature or flag normally includes a behaviour test covering the user-visible contract.
+   - When the actual boundary is a browser, device, runtime, protocol peer, generated consumer, or renderer, exercise that boundary directly as well as any useful structural check.
+   - If an automated regression is genuinely impractical, say why, perform the closest direct verification, and do not claim the work is covered.
+   - "Existing tests still pass" is not evidence for behaviour those tests never exercised.
+
+## Proportionate Verification
+
+This skill owns implementation verification. Independent review cadence belongs to `risk-calibrated-agent-reviews`; review is not a substitute for evidence.
+
+1. **Name the claim and boundary.** Identify the changed behaviour, the consumer that relies on it, and the failure that would disprove the material claim.
+2. **Start with the smallest useful check.** For ordinary changes, run the focused regression and the owning package or suite. Do not begin with the full repository merely because it exists.
+3. **Exercise the real acceptance boundary.** Use browser, device, runtime, protocol-peer, or other real-consumer evidence when that is where correctness becomes observable.
+4. **Treat generated artefacts as a producer-consumer pair.** Run the repository's structural or drift check, then exercise the generated output through its real consumer or renderer.
+5. **Broaden only for a reason.** Wider integration, race, compatibility, or repository-wide checks are warranted by material blast radius, safety-sensitive behaviour, protocols, generated contracts, or an explicit repository gate.
+6. **Reuse still-valid evidence.** Do not rerun a check while the relevant tree, artefact, dependencies, and environment are unchanged. Rerun only the evidence invalidated by a correction or state change.
+7. **Do not wait for routine CI.** Wait only when CI is an acceptance gate for the requested outcome. A push does not itself invalidate equivalent local evidence.
+8. **Stop when the claims are covered.** Once each material claim has adequate evidence at its owning boundary, further suites, repeated review, and CI watching are churn rather than assurance.
 
 ## Testing and Mocking Defaults
 
@@ -173,10 +187,10 @@ Maintenance and feature work on an existing codebase has its own discipline, whe
    - Code you are not touching stays untouched unless the requested change cannot be made safely without it. Legacy code often has accidental behaviours that broad cleanup will break.
 4. **Match conventions when the codebase is healthy.**
    - If the repo already has typed models, a config loader, and seams, new code flows through them. Do not bolt special cases onto the entrypoint when a domain type or existing seam is the obvious home.
-5. **Changed behaviour gets a test (non-negotiable 7 applies doubly here).**
-   - A maintenance change with zero new tests is almost always incomplete. Regression test for the bug, behaviour test for the feature, in the existing suite's style.
-   - Your summary must include a `New tests:` line naming the test functions you added, mapped to the behaviours they cover. A manual smoke check is corroboration, not a substitute.
-   - If the existing suite is mock-theatre, do not imitate it for your new tests — write behaviour-shaped tests (real files via tmp dirs, real entrypoint invocation) and leave the old tests alone.
+5. **Verify the changed behaviour at the owning boundary.**
+   - Normally add a focused regression for a bug or behaviour test for a feature, then run the owning package or suite.
+   - If the boundary cannot be represented adequately in an automated test, use the closest real consumer, browser, device, or runtime evidence and state the remaining limitation.
+   - If the existing suite is mock-theatre, do not imitate it for new tests — write behaviour-shaped tests (real files via tmp dirs, real entrypoint invocation) and leave the old tests alone.
 6. **Report verification status honestly.**
    - Lead your summary with what you ran and the result. If you could not run the checks, say **UNVERIFIED** prominently — do not bury it. A failing test is a blocker to report, never a footnote to leave behind.
 
@@ -333,7 +347,7 @@ Before returning code, verify:
 - Is the repo/module shape moving toward cohesive responsibility boundaries?
 - For greenfield work: are file count and LOC within the size tripwires?
 - Did every new abstraction pass the pressure gate (≥2 call sites, unstable boundary, domain invariant, or ownership need)?
-- Does every behaviour change (bug fix, feature, flag) have a test that exercises it?
+- Does every material claim have proportionate evidence at its owning consumer boundary, with a focused regression where practical?
 - Do any tests monkeypatch module globals where an injection seam exists (including seams you just built)?
 - Did you run the checks, and does your summary state the result honestly (or UNVERIFIED)?
 
