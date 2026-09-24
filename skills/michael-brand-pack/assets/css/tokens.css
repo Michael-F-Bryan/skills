@@ -1,88 +1,113 @@
+/*
+ * Michael F. Bryan design tokens.
+ *
+ * Source of truth: src/app/globals.css in
+ * https://github.com/Michael-F-Bryan/tools.michaelfbryan.com
+ *
+ * Crisp near-white, dark ink, a single cool-blue accent, strong readable
+ * type, monospace utility labels, fine rules, and useful whitespace.
+ * Surfaces are square; rounded corners are reserved for small badges and
+ * form controls.
+ *
+ * Token names match the site so markup and CSS port in both directions.
+ * Values marked "extension" are not on the site yet; they fill gaps the
+ * site has not needed (warning/success signals, a dark theme).
+ */
 :root {
-  /* Identity */
-  --on-name: "Michael F. Bryan";
+  color-scheme: light;
 
-  /* Light theme */
-  --on-bg: #f7f4ec;
-  --on-surface: #fffcf4;
-  --on-surface-alt: #ece6d8;
-  --on-text: #171717;
-  --on-text-secondary: #414853;
-  --on-text-muted: #5f6b7a;
-  --on-border: #b8b0a2;
-  --on-border-subtle: #d6cec0;
-  --on-accent: #245c7a;
-  --on-accent-strong: #007a8a;
-  --on-warning: #9a6700;
-  --on-error: #a33a2b;
-  --on-success: #3f6b46;
-  --on-info-bg: #e8f2f5;
-  --on-warning-bg: #fff1ce;
-  --on-error-bg: #f8dfda;
-  --on-success-bg: #e4f0e4;
+  /* Palette (site) */
+  --paper: #f9fafb;          /* page background */
+  --surface: #ffffff;        /* raised band, hovered row, input field */
+  --panel: #f1f3f6;          /* recessed block, figure ground, read-only field */
+  --ink: #17191d;            /* headings, primary text */
+  --text-secondary: #3f4956; /* running prose */
+  --text-muted: #586372;     /* captions, metadata, muted labels */
+  --rule: #848d98;           /* structural rules and borders */
+  --rule-subtle: #c7ccd2;    /* inner dividers */
+  --accent: #164dcc;         /* links, kickers, selected state, focus */
+  --error: #b42318;
 
-  /* Typography */
-  --on-font-sans: Atkinson Hyperlegible, Inter, IBM Plex Sans, Source Sans 3, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --on-font-mono: JetBrains Mono, IBM Plex Mono, Cascadia Code, Roboto Mono, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  /* Signals (extension) */
+  --warning: #8a4b00;
+  --success: #16693a;
 
-  --on-text-xs: 0.875rem;     /* 14px */
-  --on-text-sm: 0.9375rem;    /* 15px */
-  --on-text-md: 1rem;         /* 16px */
-  --on-text-body: 1.0625rem;  /* 17px */
-  --on-text-lg: 1.125rem;     /* 18px */
-  --on-text-xl: 1.3125rem;    /* 21px */
-  --on-text-2xl: 1.625rem;    /* 26px */
-  --on-text-3xl: 2.25rem;     /* 36px */
-  --on-text-4xl: 2.75rem;     /* 44px */
+  /* Typography (site) */
+  --font-sans: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "IBM Plex Mono", "Cascadia Code", monospace;
 
-  --on-line-tight: 1.25;
-  --on-line-normal: 1.55;
-  --on-line-loose: 1.7;
+  /* Tailwind default type scale, as used by the site */
+  --text-xs: 0.75rem;   /* 12px: mono labels only */
+  --text-sm: 0.875rem;  /* 14px: captions, dense UI, nav */
+  --text-base: 1rem;    /* 16px: supporting prose */
+  --text-lg: 1.125rem;  /* 18px: running prose */
+  --text-xl: 1.25rem;   /* 20px: standfirst, catalogue titles */
+  --text-3xl: 1.875rem; /* 30px: section title (mobile) */
+  --text-4xl: 2.25rem;  /* 36px: section title (sm+), page title (mobile) */
+  --text-5xl: 3rem;     /* 48px: workspace page title (sm+) */
+  --text-6xl: 3.75rem;  /* 60px: page title (sm+) */
 
-  /* Spacing */
-  --on-space-1: 0.25rem;
-  --on-space-2: 0.5rem;
-  --on-space-3: 0.75rem;
-  --on-space-4: 1rem;
-  --on-space-5: 1.5rem;
-  --on-space-6: 2rem;
-  --on-space-7: 3rem;
-  --on-space-8: 4rem;
+  /* Letter-spacing: tighter as type gets larger, wide for labels */
+  --tracking-display: -0.035em;
+  --tracking-heading: -0.03em;
+  --tracking-title: -0.015em;
+  --tracking-label: 0.14em;
 
-  /* Layout */
-  --on-width-prose: 820px;
-  --on-width-briefing: 1120px;
-  --on-width-wide: 1360px;
+  --leading-display: 1.08; /* page titles */
+  --leading-tight: 1.25;   /* section titles */
 
-  /* Radius */
-  --on-radius-sm: 4px;
-  --on-radius-md: 8px;
-  --on-radius-lg: 12px;
+  /* Content widths: page frame, article column, prose measure */
+  --container-page: 70rem;    /* 1120px */
+  --container-article: 52rem; /* 832px */
+  --container-measure: 44rem; /* 704px */
 
-  /* Borders */
-  --on-border-width: 1px;
-  --on-border-width-strong: 2px;
+  /* Page gutters */
+  --gutter: 1.25rem;          /* 20px; 32px from 640px up */
 
-  /* Shadows */
-  --on-shadow-popover: 0 16px 48px rgba(23, 23, 23, 0.18);
+  /* Radius: badges and controls only; surfaces stay square */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
 }
 
-[data-theme="dark"] {
-  --on-bg: #111418;
-  --on-surface: #181d23;
-  --on-surface-alt: #202832;
-  --on-text: #f2efe7;
-  --on-text-secondary: #c9c2b6;
-  --on-text-muted: #9aa6b2;
-  --on-border: #5c6570;
-  --on-border-subtle: #343c46;
-  --on-accent: #62c6d6;
-  --on-accent-strong: #8fdde8;
-  --on-warning: #e0a93a;
-  --on-error: #e06b5f;
-  --on-success: #81c784;
-  --on-info-bg: #16313a;
-  --on-warning-bg: #3a2b0d;
-  --on-error-bg: #391c19;
-  --on-success-bg: #1f3525;
+@media (min-width: 640px) {
+  :root { --gutter: 2rem; }
+}
+
+/* Dark theme (extension). The site is light-only; this keeps the same
+ * structure and single accent for surfaces that must support dark mode.
+ * Applies automatically unless data-theme="light", or explicitly with
+ * data-theme="dark" on <html>. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #111317;
+    --surface: #171a1f;
+    --panel: #1f232a;
+    --ink: #eef0f3;
+    --text-secondary: #c3c9d1;
+    --text-muted: #9ba4af;
+    --rule: #6f7884;
+    --rule-subtle: #343a43;
+    --accent: #86a8ff;
+    --error: #ff8a7a;
+    --warning: #f0b35a;
+    --success: #6fcf8f;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #111317;
+  --surface: #171a1f;
+  --panel: #1f232a;
+  --ink: #eef0f3;
+  --text-secondary: #c3c9d1;
+  --text-muted: #9ba4af;
+  --rule: #6f7884;
+  --rule-subtle: #343a43;
+  --accent: #86a8ff;
+  --error: #ff8a7a;
+  --warning: #f0b35a;
+  --success: #6fcf8f;
 }

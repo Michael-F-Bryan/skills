@@ -3,114 +3,153 @@
 ## Table of contents
 
 - [Source of truth](#source-of-truth)
-- [Light theme colours](#light-theme-colours)
-- [Dark theme colours](#dark-theme-colours)
-- [Typography scale](#typography-scale)
-- [Spacing](#spacing)
-- [Layout widths](#layout-widths)
-- [Radius and borders](#radius-and-borders)
-- [Email-safe fonts](#email-safe-fonts)
-- [Usage](#usage)
+- [Palette](#palette)
+- [Signal extensions](#signal-extensions)
+- [Dark theme](#dark-theme)
+- [Typography](#typography)
+- [Type roles](#type-roles)
+- [Spacing and rhythm](#spacing-and-rhythm)
+- [Widths](#widths)
+- [Rules, radius, focus](#rules-radius-focus)
+- [Tailwind v4 mapping](#tailwind-v4-mapping)
+- [Email-safe values](#email-safe-values)
 
 ## Source of truth
 
-CSS variables live in [assets/css/tokens.css](../assets/css/tokens.css). Import before [assets/css/web-base.css](../assets/css/web-base.css).
+The canonical tokens live in `src/app/globals.css` of [tools.michaelfbryan.com](https://github.com/Michael-F-Bryan/tools.michaelfbryan.com). [assets/css/tokens.css](../assets/css/tokens.css) mirrors them with the same names, so markup and CSS port both ways. If the site changes, update `tokens.css` and this file to match; do not drift.
 
-## Light theme colours
+Anything marked **extension** is not on the site yet. Use it only when the surface needs it, and keep it visually quieter than the accent.
+
+## Palette
 
 | Token | Hex | Use |
 |---|---|---|
-| `--on-bg` | `#f7f4ec` | Page background |
-| `--on-surface` | `#fffcf4` | Cards, panels |
-| `--on-surface-alt` | `#ece6d8` | Code blocks, alt rows |
-| `--on-text` | `#171717` | Primary text |
-| `--on-text-secondary` | `#414853` | Secondary text |
-| `--on-text-muted` | `#5f6b7a` | Metadata (still readable) |
-| `--on-border` | `#b8b0a2` | Structural borders |
-| `--on-border-subtle` | `#d6cec0` | Inner dividers |
-| `--on-accent` | `#245c7a` | Links, primary accent |
-| `--on-accent-strong` | `#007a8a` | Hover, emphasis |
-| `--on-warning` | `#9a6700` | Caution |
-| `--on-error` | `#a33a2b` | Blockers |
-| `--on-success` | `#3f6b46` | Confirmed/done |
-| `--on-info-bg` | `#e8f2f5` | Info callouts |
-| `--on-warning-bg` | `#fff1ce` | Warning callouts |
-| `--on-error-bg` | `#f8dfda` | Error callouts |
-| `--on-success-bg` | `#e4f0e4` | Success callouts |
+| `--paper` | `#f9fafb` | Page background |
+| `--surface` | `#ffffff` | Raised band, hovered row, input field |
+| `--panel` | `#f1f3f6` | Recessed block, figure ground, read-only field |
+| `--ink` | `#17191d` | Headings, primary text, strong emphasis |
+| `--text-secondary` | `#3f4956` | Running prose (the default body colour) |
+| `--text-muted` | `#586372` | Captions, metadata, muted labels, step bodies |
+| `--rule` | `#848d98` | Structural rules and borders (3:1+ on all surfaces) |
+| `--rule-subtle` | `#c7ccd2` | Inner dividers between rows inside a ruled block |
+| `--accent` | `#164dcc` | Links, kickers, step numbers, selected state, focus ring, key diagram strokes |
+| `--error` | `#b42318` | Validation errors, blockers |
 
-## Dark theme colours
+The palette has one accent. Tints come from `color-mix(in srgb, var(--accent) 10%, transparent)` rather than new tokens. Text selection uses the accent at 22%.
 
-Apply with `data-theme="dark"` on `<body>` or root container. See `tokens.css` `[data-theme="dark"]` block for full values.
+Contrast on `--paper`: ink 16.8:1, secondary 8.7:1, muted 5.8:1, accent 6.8:1, error 6.3:1, rule 3.2:1.
 
-Key shifts: background `#111418`, text `#f2efe7`, accent `#62c6d6`.
+## Signal extensions
 
-## Typography scale
+| Token | Light | Dark | Use |
+|---|---|---|---|
+| `--warning` | `#8a4b00` | `#f0b35a` | Risk, caution, unverified |
+| `--success` | `#16693a` | `#6fcf8f` | Confirmed, done, passing |
 
-| Token | rem | px | Use |
-|---|---:|---:|---|
-| `--on-text-xs` | 0.875 | 14 | Labels, compact metadata |
-| `--on-text-sm` | 0.9375 | 15 | Dense UI minimum |
-| `--on-text-md` | 1 | 16 | Compact body |
-| `--on-text-body` | 1.0625 | 17 | Long-form default |
-| `--on-text-lg` | 1.125 | 18 | Lead paragraphs |
-| `--on-text-xl` | 1.3125 | 21 | h3 scale |
-| `--on-text-2xl` | 1.625 | 26 | h2 scale |
-| `--on-text-3xl` | 2.25 | 36 | Large display |
-| `--on-text-4xl` | 2.75 | 44 | h1 cap |
+Show signals as a coloured left rule or label text plus a written label ("Risk:", "Confirmed"). Do not add tinted callout backgrounds for every status.
 
-Line heights: `--on-line-tight` 1.25, `--on-line-normal` 1.55, `--on-line-loose` 1.7.
+## Dark theme
 
-Font stacks:
+**Extension.** The site is light-only. `tokens.css` switches automatically under `prefers-color-scheme: dark` (unless `<html data-theme="light">`) and on `<html data-theme="dark">`. The structure stays the same: one accent, fine rules, square surfaces.
+
+| Token | Dark |
+|---|---|
+| `--paper` | `#111317` |
+| `--surface` | `#171a1f` |
+| `--panel` | `#1f232a` |
+| `--ink` | `#eef0f3` |
+| `--text-secondary` | `#c3c9d1` |
+| `--text-muted` | `#9ba4af` |
+| `--rule` | `#6f7884` |
+| `--rule-subtle` | `#343a43` |
+| `--accent` | `#86a8ff` |
+| `--error` | `#ff8a7a` |
+
+## Typography
 
 ```css
---on-font-sans: Atkinson Hyperlegible, Inter, IBM Plex Sans, Source Sans 3, system-ui, …;
---on-font-mono: JetBrains Mono, IBM Plex Mono, Cascadia Code, Roboto Mono, …;
+--font-sans: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+--font-mono: "JetBrains Mono", "IBM Plex Mono", "Cascadia Code", monospace;
 ```
 
-## Spacing
+Atkinson Hyperlegible at weights 400 and 700 only. There is no medium or semibold, so emphasis is either regular or bold. Monospace is for labels, step numbers, term names in definition rows, numeric fields, and code. Never use it for body text.
 
-| Token | rem |
-|---|---:|
-| `--on-space-1` | 0.25 |
-| `--on-space-2` | 0.5 |
-| `--on-space-3` | 0.75 |
-| `--on-space-4` | 1 |
-| `--on-space-5` | 1.5 |
-| `--on-space-6` | 2 |
-| `--on-space-7` | 3 |
-| `--on-space-8` | 4 |
+Google Fonts: `https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap`
 
-## Layout widths
+Letter-spacing gets tighter as type gets larger:
 
-| Token | px | Use |
-|---|---:|---|
-| `--on-width-prose` | 820 | Long-form column |
-| `--on-width-briefing` | 1120 | Default page shell |
-| `--on-width-wide` | 1360 | Explainer / wide layouts |
+| Token | Value | Use |
+|---|---|---|
+| `--tracking-display` | `-0.035em` | Page title |
+| `--tracking-heading` | `-0.03em` | Section title |
+| `--tracking-title` | `-0.015em` | Site mark, catalogue titles, h3 |
+| `--tracking-label` | `0.14em` | Uppercase mono labels |
 
-## Radius and borders
+## Type roles
 
-| Token | Value |
+The site uses Tailwind's default scale. These are the roles actually in use:
+
+| Role | Size / line-height | Weight | Colour | Notes |
+|---|---|---|---|---|
+| Page title | 36px → 60px (sm+) / 1.08 | 700 | ink | `text-wrap: balance`; keep words unbroken |
+| Workspace page title | 30px → 48px (sm+) / 1.08 | 700 | ink | Tools, so the tool starts on screen one |
+| Section title | 30px → 36px (sm+) / 1.25 | 700 | ink | Balanced |
+| Item title / h3 | 20px | 700 | ink | `--tracking-title` |
+| Standfirst (`prose--xl`) | 20px / 36px | 400 | secondary | Opening or closing passage |
+| Running prose (`prose`) | 18px / 32px | 400 | secondary | Default reading size |
+| Supporting prose (`prose--base`) | 16px / 28px | 400 | secondary | Caveats, follow-on notes |
+| Caption, nav, dense UI, step body | 14px / 24px | 400 | muted or secondary | Floor for sentences |
+| Label / kicker | 12px mono, uppercase, 0.14em | 700 | accent or muted | Short labels only, never sentences |
+
+## Spacing and rhythm
+
+Spacing uses the 4px scale (Tailwind defaults). There are no separate spacing tokens; the rhythm lives in the components:
+
+| Gap | Value |
 |---|---|
-| `--on-radius-sm` | 4px |
-| `--on-radius-md` | 8px |
-| `--on-radius-lg` | 12px |
-| `--on-border-width` | 1px |
-| `--on-border-width-strong` | 2px |
+| Kicker → section title | 16px |
+| Section title → body | 28px |
+| Between paragraphs | 24px |
+| Between sections | 64px → 96px (sm+) |
+| Body → list, figure, or table inside a section | 40px |
+| Figure → caption | 20px |
+| Row padding in ruled lists | 16–24px vertical |
+| Page padding (entry) | 48px → 64px (sm+) top and bottom |
+| Page padding (workspace) | 32px → 40px (sm+) |
+| Side gutter | 20px → 32px (sm+) |
 
-## Email-safe fonts
+## Widths
 
-For HTML email and signatures, prefer web-safe stacks with brand colours inline:
+| Token | Value | Use |
+|---|---|---|
+| `--container-page` | 70rem (1120px) | Page frame |
+| `--container-article` | 52rem (832px) | Article column |
+| `--container-measure` | 44rem (704px) | Running prose, captions, descriptions |
 
-- Sans: `Arial, Helvetica, sans-serif` (map accent `#245c7a`, text `#171717`, bg `#f7f4ec`)
-- Avoid `@import`, custom woff2, and CSS variables — paste hex values directly.
+The on-this-page rail is 14rem with a 4rem gap, to the right of the article from 1024px.
 
-## Usage
+## Rules, radius, focus
 
-**Web:** link `tokens.css` then `web-base.css`.
+- Rules are 1px `--rule`. Inner dividers use `--rule-subtle`. Emphasis rules are 2px accent (aside note) or a solid accent bar (catalogue marker).
+- Surfaces are square: bands, panels, figures, tables, inputs, and segmented controls have no radius. `--radius-sm` (4px) is for small badges; `--radius-md` (8px) is only for third-party controls that expect `--radius`.
+- No shadows.
+- Focus: `outline: 2px solid var(--accent); outline-offset: 4px`.
+- Touch targets: 44px minimum height below 640px; compact from 640px up.
 
-**Dark UI:** `<body data-theme="dark">`.
+## Tailwind v4 mapping
 
-**Print:** light theme preferred; see `web-base.css` print block.
+In a Tailwind v4 or shadcn project, copy the `@theme inline` block and `:root` values from the site's `globals.css` rather than `tokens.css`. Utility names: `bg-paper`, `bg-surface`, `bg-panel`, `text-ink`, `text-secondary`, `text-muted`, `border-rule`, `border-rule-subtle`, `text-accent`, `text-error`, `tracking-display|heading|title|label`, `leading-display`, `max-w-page|article|measure`. shadcn aliases map onto the same palette (`primary` = accent, `border` = rule, `destructive` = error).
 
-**Rich HTML artefacts:** pair with html-rich-communication; see [html.md](html.md).
+## Email-safe values
+
+Email clients strip variables and web fonts. Paste hex values:
+
+| Role | Hex |
+|---|---|
+| Text | `#17191d` |
+| Secondary | `#3f4956` |
+| Muted | `#586372` |
+| Link / accent | `#164dcc` |
+| Rule | `#c7ccd2` |
+
+Font stack: `"Atkinson Hyperlegible", Arial, Helvetica, sans-serif`.

@@ -1,8 +1,8 @@
 # Email signatures and HTML email
 
-Email clients strip `@import`, variables, and many modern CSS features. Inline hex values from [tokens.md](tokens.md).
+Email clients strip `@import`, variables, and web fonts. Inline hex values from [tokens.md](tokens.md#email-safe-values).
 
-## Signature block (plain text + minimal HTML)
+## Signature block
 
 **Plain text:**
 
@@ -14,30 +14,35 @@ Michael-F-Bryan · www.michaelfbryan.com
 **HTML (inline styles only):**
 
 ```html
-<div style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5; color: #171717;">
-  <strong style="color: #171717;">Michael F. Bryan</strong><br />
-  <span style="color: #414853;">Michael-F-Bryan · </span>
-  <a href="https://www.michaelfbryan.com" style="color: #245c7a; text-decoration: underline;">www.michaelfbryan.com</a>
+<div style="font-family: 'Atkinson Hyperlegible', Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5; color: #17191d;">
+  <strong style="color: #17191d; letter-spacing: -0.01em;">Michael F. Bryan</strong><br />
+  <span style="color: #586372;">Michael-F-Bryan <span style="color: #164dcc;">/</span> </span>
+  <a href="https://www.michaelfbryan.com" style="color: #164dcc; text-decoration: underline;">www.michaelfbryan.com</a>
 </div>
 ```
+
+The accent slash echoes the site mark. Drop it if the client mangles nested spans.
 
 ## Colour mapping
 
 | Role | Hex |
 |---|---|
-| Primary text | `#171717` |
-| Secondary | `#414853` |
-| Link / accent | `#245c7a` |
-| Background (if used) | `#f7f4ec` |
+| Primary text | `#17191d` |
+| Secondary text | `#3f4956` |
+| Muted / metadata | `#586372` |
+| Link / accent | `#164dcc` |
+| Rule | `#c7ccd2` |
+| Background (if used) | `#f9fafb` or white |
 
 ## HTML email constraints
 
-- Use tables for layout if needed — not CSS grid/flex in critical structure.
-- Minimum 14px body; 15–16px preferred for readability.
-- Every link gets underline or obvious colour — do not rely on hover.
+- Use tables for layout if needed, not CSS grid/flex in critical structure.
+- Minimum 14px body; 16px preferred for longer emails.
+- Separate sections with a 1px `#c7ccd2` top border, not boxes or background fills.
+- Every link gets an underline; do not rely on hover.
 - Status colours must include text labels, not colour dots alone.
-- Test in plain-text fallback; include meaningful link URLs.
+- Include a plain-text fallback with meaningful link URLs.
 
 ## Fonts
 
-Stick to Arial, Helvetica, Georgia, or system sans. Do not embed custom woff2 in signatures.
+Name Atkinson Hyperlegible first so recipients who have it installed see it, with Arial/Helvetica as the real fallback. Do not embed woff2 files in signatures. Monospace labels are not worth the risk in email; use bold sans instead.

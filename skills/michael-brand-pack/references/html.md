@@ -20,18 +20,19 @@ The page should expose decisions, risks, owners, labels, units, relationships, a
 
 ## Defaults
 
-- Use warm light document styling for reports, decision briefs, design reviews, explainers, and print-friendly artefacts.
-- Use dark styling for tools, dashboards, demos, prototypes, long-running screen work, or when the user explicitly accepts the trade-off.
+- Build on the tools.michaelfbryan.com look: crisp near-white paper, ink headings, secondary-grey prose at a measure, mono accent kickers, fine rules, square surfaces.
+- Light theme for everything, tools included. Support dark mode through the `tokens.css` extension when the host expects it; do not make dark the default.
+- Explainers, reports, and briefs use the entry layout. Interactive tools and dashboards use the workspace layout.
 - Domain motifs are accents, not the governing system, unless the artefact is a demo/marketing surface.
 
-For Sunfish/ocean/robotics work, avoid defaulting to dark glowing cyberpunk. Use marine cues sparingly: boundary lines, muted blues/greens, small map/field-note motifs, or diagrams. Keep review documents readable at 100% zoom.
+For Sunfish/ocean/robotics work, avoid defaulting to dark glowing cyberpunk. Carry domain cues in diagrams and labels, not in the palette. Keep review documents readable at 100% zoom.
 
 ## Templates
 
 | Template | Use when | Notes |
 |---|---|---|
-| `../templates/rich-html-document.html` | Warm light document, report, explainer, review artefact | Pair with `html-rich-communication`; remove unused sections |
-| `../templates/dark-tool.html` | Tool, dashboard, sandbox, demo, long-running screen work | Must include labels, focus states, export if stateful |
+| `../templates/rich-html-document.html` | Document, report, explainer, review artefact | Entry layout; pair with `html-rich-communication`; remove unused sections |
+| `../templates/tool-workspace.html` | Tool, dashboard, sandbox, demo, long-running screen work | Workspace layout; must include labels, focus states, export if stateful |
 | `../templates/style-calibration.md` | Requested mood conflicts with defaults | Use before polish; produce a quick proof/tile |
 
 ## Style-conflict calibration
@@ -55,12 +56,12 @@ Do not silently override the user's requested mood. Do not silently obey it eith
 
 For dense reports, decision artefacts, evidence packs, and design reviews:
 
-- Put document navigation to the left of the body on desktop when the page has more than a few sections.
-- Include a rough reading-progress indicator in that rail when the artefact is long enough to skim over multiple sittings.
-- Collapse navigation behind a hamburger/details control on phone-sized viewports.
+- Put an "On this page" rail to the right of the article from 1024px when the page has more than a few sections: 14rem wide, sticky, with a 1px left rule and a muted mono label.
+- Below 1024px the rail sits between the header and the article as a two-column list bounded by top and bottom rules.
+- A rough reading-progress indicator in that rail is optional for artefacts long enough to read over several sittings.
 - Keep the hero for orientation and the first reader question; do not duplicate the table of contents there when a persistent nav exists.
 - Put the source index at the bottom so auditability is available without interrupting the argument.
-- Use evidence-strength, provenance, freshness, risk, and confidence labels as quiet structural aids, not decorative badges.
+- Use evidence-strength, provenance, freshness, risk, and confidence labels as quiet structural aids: muted mono labels or definition rows, not coloured pill badges.
 
 ## Correction-proof phrasing
 
@@ -92,7 +93,7 @@ Do not use the brand system to make a weak artefact look done. If the communicat
 
 ## Density rule
 
-High density is welcome when grouping, spacing, and hierarchy preserve scanability. Dense does not mean tiny or faint. Body text generally stays 17–18px for long-form and not below 15px for dense UI.
+High density is welcome when grouping, spacing, and hierarchy preserve scanability. Dense does not mean tiny or faint. Running prose is 18px, supporting prose 16px, dense UI and captions 14px; only short mono labels go down to 12px.
 
 ## Decoration rule
 
@@ -105,4 +106,4 @@ When implementing branded web surfaces, copy or import:
 - `../assets/css/tokens.css`
 - `../assets/css/web-base.css`
 
-Use html-rich component CSS/patterns for document structure.
+`web-base.css` includes plain-CSS versions of the site's components (`.label`, `.section-title`, `.prose`, `.steps`, `.rows`, `.band`, `.note`, `.figure`). Prefer them to html-rich component styles when both would do the same job, so the artefact matches the site.

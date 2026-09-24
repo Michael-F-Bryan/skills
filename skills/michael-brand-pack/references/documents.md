@@ -1,47 +1,56 @@
 # Word and Google Docs templates
 
-Map [tokens.md](tokens.md) to document styles. Docs apps do not load CSS variables — apply named styles with these targets.
+Map [tokens.md](tokens.md) to document styles. Docs apps do not load CSS variables, so apply named styles with these targets. Atkinson Hyperlegible is on Google Fonts and free to install; fall back to Arial.
 
 ## Document defaults
 
 | Style | Font | Size | Colour | Notes |
 |---|---|---:|---|---|
-| Normal / Body | Atkinson Hyperlegible or Arial | 11pt (~17px equivalent) | `#171717` | Line spacing 1.15–1.3 |
-| Heading 1 | Same sans | 22–26pt | `#171717` | Bold, tight spacing below |
-| Heading 2 | Same sans | 16–18pt | `#171717` | Bold; optional bottom border `#b8b0a2` |
-| Heading 3 | Same sans | 13–14pt | `#171717` | Bold |
-| Caption / metadata | Same sans | 10–11pt | `#414853` | Must stay readable |
-| Hyperlink | Same sans | inherit | `#245c7a` | Underlined |
+| Normal / Body | Atkinson Hyperlegible | 11pt | `#3f4956` | Line spacing 1.5; 12pt after paragraphs |
+| Title | Atkinson Hyperlegible Bold | 30–36pt | `#17191d` | Line spacing 1.0; tight character spacing (-0.5pt) if the app allows |
+| Heading 1 | Atkinson Hyperlegible Bold | 22pt | `#17191d` | 24pt before, 12pt after |
+| Heading 2 | Atkinson Hyperlegible Bold | 15pt | `#17191d` | |
+| Kicker / Label | JetBrains Mono Bold (or Consolas) | 8pt, all caps, expanded 1.5pt | `#164dcc` | Paragraph above a heading; keep with next |
+| Caption / metadata | Atkinson Hyperlegible | 9–10pt | `#586372` | Must stay readable |
+| Hyperlink | inherit | inherit | `#164dcc` | Underlined |
+| Code | JetBrains Mono (or Consolas) | 9.5pt | `#17191d` | Shading `#f1f3f6` |
+
+Headings in ink, body in the secondary grey: the contrast between them carries the hierarchy.
 
 ## Page and margins
 
-- Background white or `#f7f4ec` for cover pages only.
-- Margins: 2–2.5 cm standard; wider side margins for briefings if printing.
-- Max line length ~80 characters in body styles where the app allows.
+- White background. No page colour or cover gradients.
+- Margins: 2–2.5 cm; body text column around 16 cm or less.
+- Header: `Michael F. Bryan / <area>` at 9pt, with the slash in `#164dcc` and a 0.5pt `#848d98` bottom border.
 
-## Status and callout blocks
+## Callouts and status
 
-Use paragraph styles with left border (Word: border-left 3–5pt `#245c7a`) and light fill:
+Use a paragraph style with a 1.5pt left border and no fill:
 
-| Callout | Left border | Fill |
+| Callout | Left border | Label |
 |---|---|---|
-| Info / read | `#245c7a` | `#e8f2f5` |
-| Recommendation | `#007a8a` | `#e8f2f5` |
-| Warning / risk | `#9a6700` | `#fff1ce` |
-| Error | `#a33a2b` | `#f8dfda` |
+| Note / recommendation | `#164dcc` | **Recommendation:** / **Note:** |
+| Risk / warning | `#8a4b00` | **Risk:** |
+| Error / blocker | `#b42318` | **Blocker:** |
+| Confirmed | `#16693a` | **Confirmed:** |
 
-Always include a text label (e.g. **Recommendation:**) — not colour alone.
+Always include the text label, never colour alone.
 
 ## Tables
 
-Header row background `#ece6d8`, text `#171717`, borders `#b8b0a2`. Cell padding equivalent to 8–12px.
+- No vertical borders and no zebra fills.
+- Top border 0.5pt `#848d98`; header row bottom border 0.5pt `#848d98`; body row borders 0.5pt `#c7ccd2`.
+- Header cells: 8pt mono (or bold sans) all caps, `#586372`.
+- Numbers right-aligned in mono.
 
 ## Print / PDF export
 
-Prefer light theme. Ensure heading styles survive PDF export — verify h1/h2 are visually distinct from body at 100% zoom.
+Keep the light palette. Check that heading styles survive export and that the title, headings, and body are visually distinct at 100% zoom.
 
-## Slides (brief)
+## Slides
 
-- Title: 28–36pt, `#171717` on `#f7f4ec` or white.
-- Body: 18–22pt minimum on slides; never below 16pt.
-- One accent colour `#245c7a` for links and key highlights; avoid gradient backgrounds.
+- White or `#f9fafb` background; no gradients or photos behind text.
+- Mono accent kicker above each slide title.
+- Title 32–40pt bold ink with tight tracking; body 18–24pt in `#3f4956`, never below 16pt.
+- Separate items with thin `#848d98` rules instead of boxes.
+- One accent `#164dcc`, used for the kicker and the one thing to look at on each slide.

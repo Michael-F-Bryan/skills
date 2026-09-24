@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><!-- Tool title --></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="../assets/css/web-base.css" />
+  <style>
+    /* Tool layout is local to the tool: controls beside output from 1024px. */
+    .workspace { display: grid; border-block: 1px solid var(--rule); }
+    .workspace > * { min-width: 0; padding: 1.25rem 1rem; }
+    .workspace > * + * { border-top: 1px solid var(--rule); }
+    .control { display: grid; gap: 0.5rem; }
+    .control + .control { margin-top: 1.25rem; }
+    .control .field { width: 100%; }
+    .output-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
+    .output { margin-top: 1rem; min-height: 12rem; white-space: pre-wrap; }
+    @media (min-width: 640px) { .workspace > * { padding-inline: 1.5rem; } }
+    @media (min-width: 1024px) {
+      .workspace { grid-template-columns: minmax(18rem, 2fr) minmax(0, 3fr); }
+      .workspace > * + * { border-top: 0; border-left: 1px solid var(--rule); }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="site-mark" href="https://tools.michaelfbryan.com">Michael F. Bryan <span class="slash">/</span> <span class="area">Tools</span></a>
+    </div>
+  </header>
+
+  <main class="entry entry--workspace">
+    <div class="container entry-grid">
+      <header class="entry-header">
+        <span class="label label--muted">Tool</span>
+        <h1 class="page-title"><!-- What the user can do here --></h1>
+        <div class="prose prose--base">
+          <p><!-- Scope, fidelity, and export contract in one or two sentences. --></p>
+        </div>
+      </header>
+
+      <article class="entry-article">
+        <div class="workspace">
+          <section aria-labelledby="controls-title">
+            <span class="label" id="controls-title">Inputs</span>
+            <div class="control" style="margin-top: 1rem">
+              <label for="input-one"><!-- Control label --></label>
+              <input class="field field--numeric" id="input-one" inputmode="decimal" value="" />
+            </div>
+            <div class="control">
+              <span id="mode-label">Mode</span>
+              <div class="segmented" role="group" aria-labelledby="mode-label">
+                <button type="button" aria-pressed="true" data-mode="a">A</button>
+                <button type="button" aria-pressed="false" data-mode="b">B</button>
+              </div>
+            </div>
+            <div class="control">
+              <label for="notes">Notes</label>
+              <textarea class="field" id="notes" rows="6" style="padding-block: 0.5rem"></textarea>
+            </div>
+          </section>
+
+          <section aria-labelledby="output-title">
+            <div class="output-head">
+              <span class="label" id="output-title">Output</span>
+              <button class="link-button" type="button" id="copy-output">Copy output</button>
+            </div>
+            <pre class="output" id="output">Change the inputs, then copy the result.</pre>
+            <p class="alert" role="alert" id="error" hidden></p>
+          </section>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <script>
+    const input = document.getElementById('input-one');
+    const notes = document.getElementById('notes');
+    const output = document.getElementById('output');
+    const error = document.getElementById('error');
+    const modes = document.querySelectorAll('[data-mode]');
+    let mode = 'a';
+
+    function render() {
+      const value = input.value.trim() === '' ? null : Number(input.value);
+      error.hidden = value === null || Number.isFinite(value);
+      error.textContent = error.hidden ? '' : 'Enter a number.';
+      output.textContent = JSON.stringify({ mode, value, notes: notes.value }, null, 2);
+    }
+
+    modes.forEach((button) => button.addEventListener('click', () => {
+      mode = button.dataset.mode;
+      modes.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+      render();
+    }));
+    input.addEventListener('input', render);
+    notes.addEventListener('input', render);
+    document.getElementById('copy-output').addEventListener('click', async () => {
+      await navigator.clipboard.writeText(output.textContent);
+    });
+    render();
+  </script>
+</body>
+</html>
