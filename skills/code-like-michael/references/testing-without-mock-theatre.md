@@ -8,13 +8,9 @@ Test real behaviour, not mocked choreography.
 
 The thing under test should mostly stay real. Replace only true external boundaries, and prefer replacements that still behave honestly.
 
-## Preferred replacement hierarchy
+## Choosing a replacement
 
-1. Real implementation when cheap and deterministic.
-2. In-memory fake when replacing an external boundary.
-3. Local service or testcontainer when behaviour matters.
-4. Spy when you need to observe that a boundary was used.
-5. Mock only when the dependency is genuinely awkward, slow, nondeterministic, or external.
+Use the real implementation when cheap and deterministic. For an external boundary, an in-memory implementation, local service, or testcontainer can make the relevant behaviour observable; a narrow mock or spy can be useful where the real dependency is awkward. Choose by the claim the test needs to prove, not by a fixed hierarchy.
 
 Mocks are a narrow tool, not a design style.
 
@@ -34,13 +30,13 @@ Smell:
 monkeypatch.setattr(module, "repo", fake_repo)
 ```
 
-Heavy monkeypatching usually means the production code was not designed with honest seams. The normal fix is better design: push side effects to the edges, pass dependencies explicitly, and keep the core logic pure or close to pure.
+Heavy monkeypatching can reveal a hidden dependency, but not every instance justifies a production refactor. Keep the change proportional to the consumer risk and the scope of the task.
 
-## Hard rules
+## Testing traps
 
-### Never patch the code under test
+### Avoid patching the behaviour under test
 
-Do not patch internals of the subject under test. That turns the test into an implementation lock-in exercise.
+Patching the behaviour being asserted makes a test circular. Patching a narrow external call reached by the subject may be appropriate when it leaves the actual logic under test intact; prefer an honest seam when one is useful outside the test.
 
 ### Test outcomes, not choreography
 
@@ -68,7 +64,7 @@ Avoid:
 - hidden global knobs
 - patching imports halfway through a test
 
-If testing needs these, treat that as design feedback.
+If testing needs these, ask whether the production contract needs a better seam; do not add test-only hooks just to satisfy a test.
 
 ## Determinism rules
 
@@ -95,4 +91,4 @@ When a test needs heavy mocking or monkeypatching, read it as evidence of one or
 - implementation coupled to runtime or environment
 - design optimised for convenience rather than maintainability
 
-The ideal test gives real confidence, is boring to read, and would still pass after a sensible refactor.
+The ideal test gives real confidence and would still pass after a sensible refactor. Compiler pipelines can warrant full-pipeline disk fixtures; functional transformations can warrant golden snapshots. Review a changed snapshot against the expected behaviour rather than accepting it mechanically. Test setup cost can be intrinsic to a complex domain, not necessarily a design defect.

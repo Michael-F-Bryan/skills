@@ -1,6 +1,6 @@
 # Calibration note: Greenfield size discipline
 
-Dimension reminder: tendency to keep greenfield work compact and domain-shaped versus architecture theatre that inflates file count and LOC without proportional complexity.
+Dimension reminder: tendency to keep greenfield work compact and domain-shaped versus architecture theatre that inflates file count and LOC without proportional complexity. These counts describe hypothetical examples, not limits or target shapes for new work.
 
 See also: dimension-07 (abstraction threshold), dimension-15 (entry points), dimension-16 (repo topology).
 
@@ -16,7 +16,7 @@ See also: dimension-07 (abstraction threshold), dimension-15 (entry points), dim
 - Confidence (`low|medium|high`): high
 - Evidence:
   - Thin CLI, typed row models at boundary, pure transform, IO at edge
-  - Four files each with one reason to change
+  - Each file owns a distinct responsibility in this hypothetical tool; another coherent layout could also work
   - No Manager/Service/Repository vocabulary
 
 ---
@@ -39,7 +39,7 @@ See also: dimension-07 (abstraction threshold), dimension-15 (entry points), dim
 - Confidence (`low|medium|high`): high
 - Evidence:
   - Architecture nouns outnumber domain nouns; every layer is a pass-through for a task that fits in one pipeline function
-  - Interfaces with one implementation; classic path to unnecessary LOC growth
+  - Here the interfaces merely forward calls; a single-implementation interface can be useful at a real external boundary
 
 ---
 
@@ -53,8 +53,8 @@ See also: dimension-07 (abstraction threshold), dimension-15 (entry points), dim
 - Score (1-5): 4
 - Confidence (`low|medium|high`): medium
 - Evidence:
-  - Two or three modules max at this size
-  - Split follows domain concerns, not pattern vocabulary
+  - The split follows distinct responsibilities rather than pattern vocabulary
+  - The IO module is conditional on actual reuse, not required by the example's size
 
 ---
 
@@ -67,5 +67,5 @@ See also: dimension-07 (abstraction threshold), dimension-15 (entry points), dim
 - Score (1-5): 2
 - Confidence (`low|medium|high`): medium
 - Evidence:
-  - `dates.py` and `text.py` are single-function files with no reuse pressure
-  - Extraction policy should wait for complexity; inline or merge until then
+  - In this example `dates.py` and `text.py` merely relocate trivial call-site code; their names don't identify coherent responsibilities
+  - A single-use helper can still earn its place if it encapsulates real complexity or makes the caller clearer

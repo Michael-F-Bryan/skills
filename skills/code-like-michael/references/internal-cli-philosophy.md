@@ -35,7 +35,7 @@ Keep command shells boring. Put real behaviour in domain or application modules.
 
 Group commands by operator task, not by source tree layout or package names.
 
-Good command paths are guessable from the work someone is trying to do. If a shell snippet keeps getting copied around, that usually means the behaviour wants a first-class subcommand.
+Good command paths are guessable from the work someone is trying to do. Repeated shell snippets are one signal for a first-class subcommand; a new but essential operator task may also deserve one.
 
 ### 3. Small reusable CLI seams
 
@@ -46,7 +46,7 @@ Extract repeated boundary concerns into small composition pieces:
 - config loading,
 - output formatting,
 - auth,
-- retries,
+- retries when a consumer needs and can understand them,
 - telemetry/bootstrap hooks.
 
 Do not invent broad abstractions for domain logic unless they clearly earn their keep.
@@ -63,16 +63,16 @@ Parse loose inputs early into typed objects:
 
 The boundary should do the awkward validation so downstream code can stay simpler.
 
-### 5. Thin command handlers
+### 5. Coherent command handlers
 
-A command handler should mostly:
+A command handler often:
 
 1. validate inputs,
 2. assemble dependencies,
 3. call the real operation,
 4. render the result.
 
-If the command file contains the system's main understanding, the boundary is too fat.
+Presentation-specific transformations may belong here. If the command file contains the system's core business decisions, the boundary may be too fat; do not extract merely to make a handler short.
 
 ## Help text is part of the interface
 
@@ -106,7 +106,7 @@ Assume each command will be used:
 2. by an agent,
 3. in a script or pipeline.
 
-Prefer:
+Where those consumers exist, prefer:
 
 - sensible human-readable defaults,
 - stable JSON or machine-readable output where automation needs it,
@@ -117,8 +117,8 @@ Prefer:
 
 Before adding or reshaping a command, answer:
 
-1. What repeated operator task does this command name?
-2. Why does it deserve a first-class command instead of a note or shell snippet?
+1. What real operator task does this command name, and who needs it?
+2. Would a discoverable command make that task safer or easier than a note or shell snippet?
 3. What invariants or failure modes matter?
 4. Which shared seam should it reuse for config, logging, output, auth, or retries?
 5. What should stdout look like for a human?
@@ -131,6 +131,7 @@ Before adding or reshaping a command, answer:
 Reject these by default:
 
 - giant entrypoints that contain the real logic,
+- opaque auto-repair that can worsen inconsistent state instead of reporting the failure,
 - command trees shaped around internal package names,
 - hidden environment-variable behaviour with no help text,
 - raw protocol or API leakage where the CLI could normalise it,
