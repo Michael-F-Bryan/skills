@@ -7,6 +7,8 @@ Use this file to navigate the code-like-michael fingerprint resources.
 - `dimensions.md`: historical 20-dimension taxonomy (micro/meso/macro); prompts, not targets
 - `annotations-rubric.md`: scoring anchors for interpreting old labels, not coding requirements
 - `testing-without-mock-theatre.md`: testing and mocking philosophy, seams, and anti-patterns
+- `architecture-review.md`: architectural friction and deepening candidates; scope, caller burden, dependency-aware verification and alternative designs
+- `architecture-sources.md`: attribution and licence for the upstream material adapted in `architecture-review.md`
 - `examples/`: labelled snippets with task-specific context; direct interview corrections and repository constraints outrank them
 
 ## Ground-Truth Example Files by Dimension
