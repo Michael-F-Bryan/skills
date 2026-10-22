@@ -7,6 +7,10 @@ description: Use when designing, coding, testing, or reviewing code.
 
 Use this as a decision aid for code Michael would be willing to own, not a scorecard for making code look like his past projects. Apply it to coding, architecture, tests, verification, and review by default; explicit user instructions and the repository's real constraints take precedence. Start with a working simple design unless a known hard constraint already rules it out. Do not reproduce private interview examples in public code, docs, or this skill.
 
+## Worktree location
+
+When Michael requests work in a Git worktree, create it only under `<repository-root>/.worktrees/<name>`, never beside the repository or elsewhere. Verify `.worktrees/` is locally ignored; add it to the repository's local Git exclude if needed rather than changing tracked ignore policy. The directory may remain after the work.
+
 ## Before changing code
 
 Read the relevant implementation, consumers, tests, configuration, and repository instructions. For an existing codebase, find the smallest **coherent** change; nearby conventions are evidence, not permission to copy a bad seam. Identify the behaviour to change, its consumer, and what observation would disprove success. Skim a relevant labelled example only when a specific choice is uncertain; examples illustrate trade-offs rather than dictate structure.
