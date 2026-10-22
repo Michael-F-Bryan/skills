@@ -1,39 +1,10 @@
-# Reference Router
+# Engineering references
 
-Use this file to navigate the code-like-michael fingerprint resources.
+Read only the reference relevant to a live decision:
 
-## Core References
+- [Testing without mock theatre](testing-without-mock-theatre.md)
+- [Architecture review](architecture-review.md)
+- [Internal CLI philosophy](internal-cli-philosophy.md)
+- [Architecture sources and licence](architecture-sources.md)
 
-- `dimensions.md`: historical 20-dimension taxonomy (micro/meso/macro); prompts, not targets
-- `annotations-rubric.md`: scoring anchors for interpreting old labels, not coding requirements
-- `testing-without-mock-theatre.md`: testing and mocking philosophy, seams, and anti-patterns
-- `architecture-review.md`: architectural friction and deepening candidates; scope, caller burden, dependency-aware verification and alternative designs
-- `architecture-sources.md`: attribution and licence for the upstream material adapted in `architecture-review.md`
-- `examples/`: labelled snippets with task-specific context; direct interview corrections and repository constraints outrank them
-
-## Ground-Truth Example Files by Dimension
-
-- `examples/dimension-01-transformation-style.md`
-- `examples/dimension-02-control-flow-shape.md`
-- `examples/dimension-03-mutation-budget.md`
-- `examples/dimension-04-error-semantics-explicitness.md`
-- `examples/dimension-05-contract-strictness-at-boundaries.md`
-- `examples/dimension-06-naming-semantics-density.md`
-- `examples/dimension-07-local-abstraction-threshold.md`
-- `examples/dimension-08-commenting-philosophy.md`
-- `examples/dimension-09-module-cohesion.md`
-- `examples/dimension-10-dependency-directionality-discipline.md`
-- `examples/dimension-11-boundary-surface-area.md`
-- `examples/dimension-12-cross-cutting-concern-placement.md`
-- `examples/dimension-13-testability-by-construction.md`
-- `examples/dimension-14-concurrency-model-discipline.md`
-- `examples/dimension-15-entry-point-architecture.md`
-- `examples/dimension-16-repository-topology-style.md`
-- `examples/dimension-17-configuration-and-environment-strategy.md`
-- `examples/dimension-18-data-boundary-and-io-isolation.md`
-- `examples/dimension-19-build-tooling-contract.md`
-- `examples/dimension-20-evolution-posture.md`
-
-## Additional calibration examples
-
-- `examples/greenfield-size-discipline.md`
+Historical dimensions, scoring rubric and labelled examples live in [evaluation calibration](../../../evals/code-like-michael/calibration/). They are not an execution checklist or design target.

@@ -1,18 +1,10 @@
 # code-like-michael evaluation suite
 
-Probes that proved useful during the 10x improvement loop. Re-run after skill edits to check activation and adherence.
+Existing behavioural probes. Re-run after skill edits to compare activation and adherence; historical labels do not establish current outcomes.
 
 ## Prerequisites
 
-- Skill symlinked: `skills/code-like-michael` → global agents folder
-- Sub-agents need `available_skills` context to test activation fairly (plain Task sub-agents may not inherit skill discovery)
-
-**Verify the deployed skill before every run.** Agents read the skill through `~/.claude/skills/` / `~/.agents/skills/`; if that path holds a stale copy instead of a symlink, every run silently evaluates an old skill. This burned five re-runs on 2026-07-04. Check first:
-
-```bash
-readlink ~/.agents/skills/code-like-michael   # must point into this repo
-diff -r ~/.claude/skills/code-like-michael/SKILL.md skills/code-like-michael/SKILL.md && echo OK
-```
+Verify the exact skill content supplied to the test agent. Do not assume a deployed profile follows this checkout or modify a global install just to run an eval. Supplying current skill text explicitly tests adherence, not automatic discovery; activation comparisons need an actual discovery environment and recorded loaded paths.
 
 ## Challenges
 

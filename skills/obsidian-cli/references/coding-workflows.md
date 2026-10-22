@@ -1,6 +1,6 @@
 # Coding Workflows For Obsidian CLI
 
-Use this file when the task is not just "edit a note", but "use the vault to support coding work with the right note in the right way".
+Use only after the user has chosen an Obsidian CLI operation during coding. This reference does not trigger vault discovery or progress capture for ordinary coding tasks.
 
 ## Core principle
 
@@ -84,7 +84,7 @@ Do not use it for:
 
 ## Default workflows
 
-### Resume non-trivial coding work
+### Resume explicitly requested vault context
 
 1. Confirm the vault.
 2. Search for the project, subsystem, or ticket identifier.

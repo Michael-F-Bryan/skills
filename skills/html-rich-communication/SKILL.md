@@ -1,55 +1,39 @@
 ---
 name: html-rich-communication
-description: >-
-  Use when creating a shareable HTML explainer, brief, report, review aid, evidence pack, or other rich communication artefact for a human reader.
+description: Build readable HTML explanations for human recipients.
 ---
 
 # HTML Rich Communication
 
-## Default: the ten-minute lane
+Own explanatory structure, rendering and the recipient’s reading experience. `voice-michael` owns prose voice; a publishing skill/package owns publication mechanics. Use `michael-brand-pack` only for personal sites/tools or explicit Michael branding, not ordinary HTML.
 
-The usual job is **conversion, not rediscovery**. If the answer, notes, or source material already exists, preserve its claims and turn it into a clearer reading experience. Do not reopen research unless a required claim is missing or stale.
+## Shape the explanation
 
-Use this lane for a read-only artefact with one audience and one cognitive job. Target **5–10 minutes from request to verified link**.
+1. Identify the reader, their existing context and the question or decision this page should help with. Ask only if a missing audience, privacy boundary or purpose would materially change the result.
+2. Reuse established source material; research again only for missing or stale claims. Choose a spine: a worked scenario for a mechanism, a decision for a brief, a finding for a report. Introduce components when the scenario reaches them rather than opening every explainer with architecture.
+3. Put the answer and orientation early. Use headings that expose the argument. Keep useful detail; disclose or link lookup material when it interrupts reading. Word counts, section counts and elapsed time are heuristics, not acceptance gates.
+4. Distinguish facts, judgement and uncertainty at the point of use. Label prominent numbers as measured, default, target, estimate or assumption, with source and material caveat. A polished layout must not make an unvalidated default look measured.
 
-1. **Lock the job in one sentence.** `Reader needs to <understand/decide/compare/review/operate/inspect evidence> <thing> so they can <action>.` Choose one dominant mode. Keep this in working memory; do not create a contract file.
-2. **Choose one spine.** If two reader jobs compete, subordinate one behind disclosure or split the artefact. For explainers, default to one worked scenario and introduce boundaries or components only when the path crosses them; do not lead with architecture unless topology or ownership is the question. For briefs, lead with the decision. For reports, lead with the finding.
-3. **Cut before building.** Default bounds: 900–1,500 words, 4–6 sections, 0–2 useful visuals, at most one main table, and optional source links at the bottom. Put lookup material in `<details>` or link it; do not mix explainer, reference, risk register, and implementation review.
-4. **Build once.** Start from `templates/fast-explainer.html` or an equally small static page. Write one self-contained `index.html`; use semantic HTML and inline CSS. No build system is required, and self-contained does not mean inlining multi-megabyte runtimes.
-5. **Verify once, repair once.** Serve locally, inspect desktop and 375 px mobile, check first-screen answer, horizontal overflow, links, and console errors. Exercise controls only if controls exist. When a bundler or generator materially transforms the source, inspect the emitted artefact rather than treating source checks as proof. Make one bounded correction pass, then publish or report the remaining blocker.
-6. **Publish if requested.** Create a secret Gist, verify `public: false`, and return the GistPreview URL. Fresh local rendering is sufficient; do not re-review the hosted copy unless delivery itself is failing.
+## Render the smallest useful surface
 
-## Effectiveness contract
+Static semantic HTML with inline CSS, SVG and small JavaScript is normally enough. Start from [fast-explainer.html](templates/fast-explainer.html) if useful; remove empty sections. Use native disclosure where it helps, not a dashboard frame for every document.
 
-A good artefact:
+Label units and caveats near the thing they qualify. Preserve meaningful reading order, contrast, keyboard focus, text alternatives and non-colour status labels. Make phone-width reading deliberate rather than shrinking a desktop table. Respect the destination’s existing identity.
 
-- answers the primary question on the first screen;
-- reveals its argument through headings alone;
-- uses one concrete example or worked path when explaining a mechanism;
-- separates acceptance, internal state, and physical outcome when they provide different evidence;
-- distinguishes fact, judgement, and uncertainty at the point of use;
-- labels prominent numbers as measured, default, target, estimate, or assumption, and gives each material caveat one canonical home;
-- uses visuals only when they make a relationship faster to grasp; and
-- treats mobile as a deliberate single-column reading surface.
+For stateful interfaces, define export fields, selection, ordering and whether material filter/sort/tag state is included. Inspect the actual export against the visible interface. Use [implementation routing](references/implementation-routing.md) only when state or dependencies justify more machinery; [chart routing](references/chart-routing.md) when a visual is useful.
 
-## Fast-lane prohibitions
+## Verify the deliverable
 
-Do not add broad rediscovery, working documents, subagents, React, package installation, bespoke audit scripts, runtime Mermaid, screenshot matrices, or repeated review loops to an ordinary artefact run.
+Serve locally and inspect desktop and phone-width rendering. Check the opening answer, reading order, overflow, links, console errors and controls. Exercise keyboard use and copy/export where present. Inspect emitted HTML when a bundler transforms the source. Verify print if needed. Repair material failures and recheck the affected surface; do not limit repair to an arbitrary pass count.
 
-Prefer HTML/CSS or inline SVG. Use Mermaid only when `mmdc` is already available, then render static SVG.
+Recipient accessibility includes access to sources and the delivered page, not only local screenshots. See [review and verification](references/review-and-verification.md) for richer packs. Use [content disposition](references/content-disposition.md) and [design decisions](references/design-decisions.md) only when useful; no mandatory ledgers.
 
-## Extended lane
+## Publication boundary
 
-Load heavier references only when an observable condition requires them:
+Claude Artifacts is Michael’s default sharing destination. Use the current publisher skill/package (for example `claude-artifact-publishing`) and verify the exact published target and recipient access before claiming delivery. Do not copy publishing mechanics here.
 
-- a missing reader, decision, or safety/privacy boundary would materially change the answer and cannot be inferred → ask at most one focused question; use `references/first-feedback-loop.md` only if the answer creates genuinely different artefact shapes;
-- large evidence corpus or decision pack → preserve a source-contribution map, trace clusters back to source families or notes, label freshness when time matters, expose decision tensions and blind spots, and include a source index; recommend only when requested; use `references/content-disposition.md`, `references/design-decisions.md`, and `references/review-and-verification.md` only where those checks apply;
-- stateful editor/dashboard/export → define the export shape first, including whether active filter/sort/tag state is serialised or deliberately omitted; then use `references/implementation-routing.md` and `references/review-and-verification.md`; verify that exported data and material view state match the visible interface;
-- justified React → use the React lane in `references/implementation-routing.md` and its bundled scripts;
-- publishing failure → use `references/secret-gist-publishing.md`.
+A blocked publisher is not permission to create a Gist, Cloudflare deployment or another host. Report the blocker and retain the local artefact; obtain explicit authorisation for another destination. Link-only hosting does not make private material safe.
 
-High stakes alone is not an extended-lane trigger. Polish, brand treatment, and an inferable audience are not extended-lane triggers either.
+## Stop
 
-## Stop rule
-
-Once the artefact answers the reader's question, works at desktop and phone width, has no material rendering error, and the requested link exists, stop. Extra process is not extra quality.
+Stop when the reader’s question is answered, the delivered surface is usable, material claims are grounded and requested delivery is verified. Report remaining access/rendering blockers honestly; a local file is not a verified shareable link.

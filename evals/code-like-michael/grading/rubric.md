@@ -1,6 +1,6 @@
 # Grading rubric
 
-Score each dimension with evidence. Use anchors from `skills/code-like-michael/references/annotations-rubric.md`.
+Score each dimension with evidence. Use anchors from `evals/code-like-michael/calibration/annotations-rubric.md`.
 
 ## Activation (binary + notes)
 

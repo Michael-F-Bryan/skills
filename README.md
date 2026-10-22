@@ -29,7 +29,7 @@ Inspect the installer’s target and resulting inventory. Source changes do not 
 
 ## Ownership and evaluation
 
-Jake-tools/Clockify guidance belongs to the owning package. The obsolete transcript executor and unvalidated coding-fingerprint wizard are removed; concise [fidelity lessons](docs/transcript-fidelity.md) remain, with transcript evals marked inactive. Note formatting is [opt-in local policy](docs/note-conventions.md), not standalone skills. See [migration](docs/migrations.md).
+Jake-tools/Clockify guidance belongs to the owning package’s MCP skill resources and live tool interfaces, not a package skill installer. The obsolete transcript executor and unvalidated coding-fingerprint wizard are removed; concise [fidelity lessons](docs/transcript-fidelity.md) remain, with transcript evals marked inactive. Note formatting is [opt-in local policy](docs/note-conventions.md), not standalone skills. See [migration](docs/migrations.md).
 
 Cases under `evals/` are behavioural probes, not a framework. Historical calibration is separate from execution guidance. See [validation status](docs/validation.md) for what actually ran.
 

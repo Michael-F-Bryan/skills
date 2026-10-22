@@ -45,6 +45,15 @@ git check-ignore -q _working/
 
 Ignoring the folder is optional local hygiene, not a prerequisite. If it is not ignored, add `_working/` to `.git/info/exclude` only when local repository housekeeping is within the task's authority and the untracked noise would hinder the work. Otherwise leave repository configuration unchanged. Change the tracked `.gitignore` only when the user explicitly wants repository-wide policy. Outside a repository, use the working directory without creating Git configuration.
 
+## Separate memory from deliverables
+
+- **Disposable task memory:** `_working/` or scratch supports resumption and can be discarded when no longer useful. Do not make durable notes depend on it.
+- **Test fixtures:** small, sanitised inputs and expected results used by repeatable tests belong with those tests and are tracked deliberately, not hidden in disposable memory. Preserve source/licence context where needed.
+- **Product documentation:** maintained API/user/operator guidance belongs near its consumer in the repository’s established docs, not only in a session log.
+- **Recipient-facing evidence:** retain the exact report, rendered output, source references or receipts needed to assess a delivered claim at a stable authorised destination. Promote only what the recipient needs; do not publish raw private task memory.
+
+Choose the destination by lifetime and consumer. A handoff README is not a substitute for product docs, a regression fixture or evidence the recipient can access.
+
 ## What to preserve
 
 Capture only information with downstream value:

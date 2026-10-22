@@ -39,3 +39,6 @@ A passing description:
 7. may mention the removed heartbeat only if its consequence is material to understanding the design or resulting product.
 
 The target is not a fixed template or word count. It is a concise, reviewer-useful explanation whose detail is earned by motivation, behaviour, design, or risk.
+## Curation smoke run
+
+One current-skill first draft was generated with Claude Haiku using this scenario and the current voice/PR guidance inline, without tools. It used compact paragraphs and covered motivation, stale presentation, shared event sources and the ticket. It also invented an exact five-second timeout and placed staleness policy in the UI, neither supplied by the scenario. **Factual-grounding failure; not a passing semantic outcome.** This adherence smoke run is not a baseline comparison or discovery test. Do not generalise from its output length or lack of headings.

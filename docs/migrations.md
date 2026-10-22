@@ -1,6 +1,6 @@
 # Ownership and migration
 
-Tool guidance for `jake-tools` and Clockify belongs with the jake-tools package, its live CLI/MCP interfaces and package tests—not independently installed skills that drift. Before removal, the complete `clockify-api` source was copied and byte-compared for the separate package worker. The local scratch handoff is ephemeral, not a runtime dependency; this repository does not certify that package migration.
+Tool guidance for `jake-tools` and Clockify belongs with the jake-tools package, its live CLI/MCP interfaces and package tests—not independently installed skills that drift. The package exposes skill content as MCP skill resources; packaged frontmatter descriptions become resource descriptions. Its skill-install command is being removed, not replaced by another installer. Before removal, the complete `clockify-api` source was copied and byte-compared for the separate package worker. The local scratch handoff is ephemeral, not a runtime dependency; this repository does not certify that package migration.
 
 The obsolete transcript executor skill and unvalidated heavy coding-fingerprint wizard were deleted. Useful [transcript fidelity lessons](transcript-fidelity.md) remain as a concise non-skill reference; old transcript evals are explicitly inactive. There is no archival skill tier.
 

@@ -25,6 +25,17 @@ Before drafting, determine:
 
 Write the missing context. Do not make every artefact self-contained when the reader already has the ticket, diff, repository, CI, or thread.
 
+## First-draft shapes
+
+Start with a sentence the reader can use, then earn the detail. These are sanitised illustrative shapes, not quotations or facts to copy:
+
+- **Peer investigation:** “The reconnect works after a service restart, but still fails when the network arrives late. I’ll cover that ordering case before changing the retry loop.” Observation, unresolved condition, owned next step.
+- **PR description:** “The dashboard now stops showing a reading once it goes stale. Adding this stream exposed a limitation in the old event plumbing, so this change also gives sources a shared broadcast path.” Motivation and mental model for a reviewer who has the diff.
+- **Explanation:** “The simplest version is a plain enum. The compiler can check every case, and we don’t need a plugin system before we’ve found a second implementation.” Concrete choice, then its useful consequence.
+- **Decision note:** “I’d keep the current adapter for this release. We haven’t exercised recovery against the real service yet, and that matters more here than reducing a little duplication.” Judgement tied to evidence and present pressure.
+
+Use the selected mode and source material to write a fresh first draft. These examples are starting relationships between evidence and prose, not mandatory phrases or a template to fill.
+
 ## Stable defaults
 
 - **Peer relationship:** Write to capable peers. Supply missing context without teaching what they probably know.

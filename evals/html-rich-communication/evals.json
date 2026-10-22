@@ -1,33 +1,20 @@
 {
   "skill_name": "html-rich-communication",
   "baseline_evidence": {
-    "fault_management_initial": {
-      "words": 4678,
-      "sections": 14,
-      "tables": 10,
-      "outcome": "rejected as verbose and poor on mobile"
-    },
-    "fault_management_revision": {
-      "words": 1154,
-      "sections": 5,
-      "outcome": "accepted direction after centring one worked example"
-    },
-    "mavlink_session": {
-      "messages": 170,
-      "elapsed_minutes": 57,
-      "outcome": "interrupted before delivery after multiple rebuild and verification loops"
-    }
+    "scope": "Sanitised historical failure shapes, not a controlled benchmark.",
+    "verbose_explainer": "An initial catalogue-heavy explainer was rejected for verbosity/mobile reading; a revision centred on one worked example had an accepted direction. Counts are not acceptance gates.",
+    "delivery_loop": "Repeated rebuilding and checking interrupted delivery before a recipient link existed."
   },
   "evals": [
     {
       "id": "convert-established-explanation",
-      "prompt": "Turn the MAVLink explanation you just wrote into a rich HTML communication artefact and give me the GistPreview link.",
-      "expected": "Use existing prose, one worked Coral Maker run, 900-1500 words, 4-6 sections, static HTML, one local desktop/mobile check, secret gist; no new broad research, context pack, dependency install, runtime Mermaid, custom audit harness, or hosted re-review."
+      "prompt": "Turn the established device-message explanation into a rich HTML artefact and share it using Michael\u2019s default destination.",
+      "expected": "Reuse the explanation, centre a worked device run, use a small static surface where sufficient, check desktop/mobile reading, and publish through the Claude Artifacts owner. Do not reopen broad research or choose another host without authorisation. No word/section/time gates."
     },
     {
       "id": "teach-method-mobile-first",
       "prompt": "Create a short mobile-first HTML explainer that teaches engineers practical fault management through one example.",
-      "expected": "Use one worked failure scenario and its source-of-truth analysis row; cut catalogues and architecture theory; no persistent navigation; finish in the ten-minute lane."
+      "expected": "Teach through one worked failure scenario and source-of-truth analysis. Remove catalogues that interrupt the explanation; navigation only if useful. Judge comprehension and phone reading, not section counts or elapsed time."
     },
     {
       "id": "large-evidence-pack",
@@ -42,12 +29,22 @@
     {
       "id": "inferable-audience-under-pressure",
       "prompt": "Turn the explanation you just gave our engineering team into polished HTML for tomorrow's review.",
-      "expected": "Infer the engineering audience and review purpose from the conversation, use the ten-minute lane, and do not create a first-feedback loop merely because the artefact matters or should be polished."
+      "expected": "Infer audience and purpose from the established context; produce a direct static draft without an interview or durable contract merely because it matters or needs polish."
     },
     {
       "id": "prominent-unvalidated-number",
       "prompt": "Explain the pump command path in HTML. The code defaults to a 1000 ms pulse, but it has not been physically validated.",
-      "expected": "Keep the explainer in the fast lane while labelling 1000 ms as an unvalidated code default and giving that caveat one clear canonical home."
+      "expected": "Label 1000 ms as an unvalidated code default near the relevant claim. Continue the explanation without treating uncertainty as a mandatory extended workflow."
+    },
+    {
+      "id": "publisher-blocked",
+      "prompt": "The normal Claude Artifacts publisher is unavailable. Finish the shareable explainer.",
+      "expected": "Keep the local artefact and state the publication blocker; ask for authorisation before any alternative host. Do not claim a verified recipient link."
+    },
+    {
+      "id": "company-html-not-personal-brand",
+      "prompt": "Convert this company engineering note into a readable HTML report using its existing visual identity.",
+      "expected": "Use HTML structure/rendering guidance and the destination identity; do not activate Michael personal branding merely because output is HTML."
     }
   ]
 }

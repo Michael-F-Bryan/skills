@@ -8,7 +8,7 @@ Rich HTML artefacts need two concerns kept separate:
 | Visual judgement, colours, typography, density, templates, motif handling | `michael-brand-pack` |
 | Writing voice and phrasing | `voice-michael` when attached |
 
-This reference adds Michael Brand Pack rules for rich artefacts. It does not replace the html-rich workflow.
+This reference adds visual rules only after personal-site work or explicit Michael branding activates the pack. Generic HTML and company engineering documents use their destination identity; they do not activate this reference. It does not replace the html-rich workflow.
 
 ## Promise
 
@@ -25,7 +25,7 @@ The page should expose decisions, risks, owners, labels, units, relationships, a
 - Explainers, reports, and briefs use the entry layout. Interactive tools and dashboards use the workspace layout.
 - Domain motifs are accents, not the governing system, unless the artefact is a demo/marketing surface.
 
-For Sunfish/ocean/robotics work, avoid defaulting to dark glowing cyberpunk. Carry domain cues in diagrams and labels, not in the palette. Keep review documents readable at 100% zoom.
+For explicitly Michael-branded domain work, carry domain cues in diagrams and labels without weakening the selected identity or legibility. Keep review documents readable at 100% zoom.
 
 ## Templates
 

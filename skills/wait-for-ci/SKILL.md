@@ -1,52 +1,28 @@
 ---
 name: wait-for-ci
-description: Wait for a GitHub Actions run to finish with minimal terminal output and a reliable exit code. Use when an agent must wait for CI to pass (e.g. after push, after opening a PR, or when verifying a specific run). Prefer gh run watch with --exit-status and --compact to avoid flooding context with poll output.
+description: Wait for exact-commit CI with quiet, reliable status.
 ---
 
-# Wait for CI (GitHub Actions)
+# Wait for CI
 
-When waiting for a GitHub Actions run to complete, use `gh run watch` with flags that minimise stdout and provide a checkable exit code. Do **not** run plain `gh run watch <run-id>`; it polls every 3 seconds and prints full pipeline status each time, which wastes context.
+Use when the task actually needs to wait for a GitHub Actions run, not after every push by habit. Requires Python 3 and an authenticated `gh` with read access.
 
-## Command
+## Select the exact run
 
-```bash
-gh run watch <run-id> --exit-status --compact
-```
+Get the full expected SHA from the intended revision (`git rev-parse HEAD` for the current checkout). List candidate runs with `gh run list --commit "$EXPECTED_SHA" --json databaseId,headSha,workflowName,status,conclusion`; select the intended workflow/run, not simply the newest row. Account for each required workflow separately. PR merge/test SHAs may differ from branch HEAD: establish which exact revision the task requires rather than silently accepting either.
 
-- **`--exit-status`**: Exits with non-zero status if the run fails. Use the command’s exit code to decide success/failure.
-- **`--compact`**: Shows only relevant or failed steps instead of every step, reducing output size.
+## Wait quietly
 
-## Optional: reduce poll frequency
-
-To cut down output further, increase the refresh interval (default 3 seconds):
+Through the terminal tool, run:
 
 ```bash
-gh run watch <run-id> --exit-status --compact --interval 10
+python3 <skill-root>/scripts/wait.py RUN_ID EXPECTED_FULL_SHA --repo OWNER/REPO
 ```
 
-## Checking the result
+The helper checks the run’s exact `headSha` before waiting, detects `--compact` from `gh run watch --help`, and uses `--exit-status --interval 10`. When compact output is unsupported, it captures polling chatter and emits only a bounded failure tail. It preserves a nonzero watch exit, including authentication/runtime failures, and reads the exact run again to require matching SHA, completed status and successful conclusion before returning zero. It does not turn failure into success with `|| echo` or a pipeline.
 
-After the command exits:
+A missing run is not success: report queue/trigger uncertainty or the absent required workflow. On failure inspect that run’s failed jobs/logs as needed; do not repeat full polling output.
 
-- **Exit code 0** → run succeeded.
-- **Non-zero exit code** → run failed or was cancelled.
+## Verification
 
-In shell scripts or when deciding next steps, rely on `$?` or the command in a conditional, e.g.:
-
-```bash
-gh run watch 12345 --exit-status --compact || echo "CI failed"
-```
-
-## Getting a run ID
-
-- From the URL of a run: `https://github.com/owner/repo/actions/runs/<run-id>`.
-- From the CLI after a push: `gh run list --limit 1` and use the run ID from the first row.
-- After `gh pr create` or `gh pr checks`: the run ID may be in the command output or from `gh run list`.
-
-## Repo in another repository
-
-Use `-R owner/repo` when the run is not in the current repo:
-
-```bash
-gh run watch <run-id> --exit-status --compact -R owner/repo
-```
+`python3 -m unittest discover -s tests/wait-for-ci -v` exercises the real helper through a tiny fake `gh` boundary, both flag capabilities, failure exits and wrong-SHA checks. These are command-contract tests, not live GitHub CI evidence.

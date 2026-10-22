@@ -80,7 +80,7 @@ Once material review concerns have been dispositioned and the changed claims hav
 
 ## References
 
-- `references/sf511-review-calibration.md` — measured review yield and correction shape.
+Historical observations live under [evaluation calibration](../../evals/risk-calibrated-agent-reviews/calibration/), not the normal review path.
 - `references/model-routing-by-semantic-phase.md` — model routing after a review is warranted.
 - `references/subtractive-prose-revision-reviews.md` — exact-revision probes for consequential prose review.
 - `references/destructive-git-cli-review.md` — safety probes for destructive Git tooling.
