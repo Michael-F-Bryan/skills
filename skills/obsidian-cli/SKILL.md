@@ -1,6 +1,6 @@
 ---
 name: obsidian-cli
-description: Interact with an Obsidian vault via the Obsidian CLI. Use when the user asks to read, search, create, update, or inspect notes, daily notes, links, tasks, tags, or other vault content from the terminal.
+description: Operate an Obsidian vault through its actual CLI.
 ---
 
 # Obsidian CLI
@@ -8,9 +8,9 @@ description: Interact with an Obsidian vault via the Obsidian CLI. Use when the 
 ## When to apply
 
 - The user asks to work with an Obsidian vault from the terminal.
-- The task mentions notes, markdown, daily notes, backlinks, tags, tasks, or vault search.
+- The requested operation needs Obsidian CLI commands or application-managed vault state. Mere mention of notes, Markdown, or coding is not a trigger.
 - The task is about using the Obsidian CLI rather than editing files directly.
-- The task is part of ongoing coding work and the vault may hold useful project context, decisions, progress notes, or handover state.
+- Do not activate for ordinary code changes, filesystem note edits, or generic working memory. Access the vault only when the task calls for it.
 
 ## Core workflow
 
@@ -32,7 +32,7 @@ description: Interact with an Obsidian vault via the Obsidian CLI. Use when the 
 
 ## Coding use
 
-- Treat the vault as external working memory for active coding work.
+- Only for an explicitly requested vault update during coding, use the vault as the chosen destination; do not create an automatic coding log.
 - Prefer updating an existing project, daily, or working note before creating a fresh note.
 - Read `references/coding-workflows.md` when the task is about note choice, coding context, or what kind of update to record.
 - Read `references/voice.md` only when you need help drafting the note text itself.

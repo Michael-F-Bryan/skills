@@ -36,5 +36,7 @@
       "prompt": "Record the transcript from this Gemini meeting-notes PDF in Obsidian.",
       "expected": "Use a live jake-tools Gemini source adapter when available, preserve source identity, determine whether the PDF actually contains transcript dialogue, and state that no transcript is available when it contains notes only. Never fabricate dialogue or use the removed record-gemini-transcripts scripts."
     }
-  ]
+  ],
+  "status": "inactive",
+  "scope": "Historical acceptance cases only; no active skill or supported executor is implied."
 }

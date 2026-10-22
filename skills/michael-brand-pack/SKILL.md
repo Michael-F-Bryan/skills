@@ -1,19 +1,15 @@
 ---
 name: michael-brand-pack
-description: >-
-  Applies Michael F. Bryan's visual design system, taken from
-  tools.michaelfbryan.com: crisp near-white paper, dark ink, a single cool-blue
-  accent, Atkinson Hyperlegible type, monospace utility labels, and fine rules.
-  Covers websites, tools, email signatures, Word/Google Doc templates, slides,
-  rich HTML artefacts, and any other branded surface. Use whenever the user
-  mentions Michael F. Bryan brand colours, personal site or tools-site theming,
-  email signatures, document templates, rich artefact styling, or "make it look
-  like Michael", even without naming this skill.
+description: Style explicitly Michael-branded personal surfaces.
 ---
 
 # Michael Brand Pack
 
 Michael F. Bryan visual design system. The reference implementation is [tools.michaelfbryan.com](https://github.com/Michael-F-Bryan/tools.michaelfbryan.com) (`src/app/globals.css` and `src/components/`); this skill mirrors its tokens and components. It owns look and visual judgement. It does not replace writing voice or rich-communication workflow. Do not use “Operator Notes” as the conceptual frame for all artefacts; treat it, if used at all, as one possible surface label rather than the governing abstraction.
+
+## Activation boundary
+
+Use only for Michael’s personal sites/tools or explicitly requested Michael branding. Ordinary HTML, company engineering reports, CSU notes, and generic diagrams do not activate this pack. Honour the destination’s existing visual identity.
 
 ## Quick start
 
